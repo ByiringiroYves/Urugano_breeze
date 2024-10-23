@@ -104,7 +104,7 @@
         float: left;
     }
     .header {
-        height: 84px;
+        height: 70px;
     }
     .carousel-item img {
         min-height: 570px;
@@ -155,13 +155,13 @@
     .navigation.navbar-dark .navbar-toggler {
         float: right;
         border: inherit;
-        margin-top: -61px;
+        margin-top: -41px;
     }
     .testimonial_box {
         padding: 0px 19px 40px 20px;
     }
     .navigation.navbar-dark .navbar-toggler-icon {
-        background: url(../images/menu_icon.png);
+        background: url(../assets/images/menu_icon.png);
         background-repeat: no-repeat;
     }
     .d_none {
