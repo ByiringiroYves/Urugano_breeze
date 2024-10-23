@@ -12,17 +12,17 @@
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="Yves Byiringiro" content="">
-      <link rel="icon" href="images/tablogo.png" type="image/png"/>
+      <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
       <!-- bootstrap css -->
-      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
       <!-- style css -->
-      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="../css/style.css">
       <!-- Responsive-->
-      <link rel="stylesheet" href="css/responsive.css">
+      <link rel="stylesheet" href="../css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
       <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
@@ -31,10 +31,10 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
    </head>
    <!-- body -->
-   <body class="main-layout">
+   <body class="main-layout inner_page">
       <!-- loader  -->
       <div class="loader_bg">
-         <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+         <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
       </div>
       <!-- end loader -->
       <!-- header -->
@@ -47,7 +47,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="../index.html"><img src="../assets/images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -60,15 +60,15 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item ">
-                                 <a class="nav-link" href="index.html">Home</a>
+                                 <a class="nav-link" href="../index.html">Home</a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link" href="about.html">About</a>
                               </li>
-                              <li class="nav-item active">
+                              <li class="nav-item">
                                  <a class="nav-link" href="apartments.html">Our Apartments</a>
                               </li>
-                              <li class="nav-item">
+                              <li class="nav-item active">
                                  <a class="nav-link" href="gallery.html">Gallery</a>
                               </li>
                               <li class="nav-item">
@@ -92,123 +92,82 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="title">
-                     <h2>Our Apartments</h2>
+                    <h2>gallery</h2>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <!-- Search box above the apartments section -->
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12">
-               <div class="search-box">
-                  <input type="text" id="searchInput" onkeyup="searchApartments(event)" placeholder="Search for apartments by name..." class="form-control">
-                  <p id="error-message" style="color: red; display: none;">Apartment not available</p>
-               </div>
-            </div>
-         </div>
-      </div>
-
-      <!-- our_room -->
-      <div class="our_room">
+      <!-- gallery -->
+      <div  class="gallery">
          <div class="container">
-            <div class="row" id="apartmentList">
-               <div class="col-md-4 col-sm-6 apartment-item" onclick="window.location.href='urugano_apartments.html'">
-                  <div id="serv_hover" class="room">
-                     <div class="room_img">
-                        <figure><img src="images/urugi.jpg" alt="Urugano Breeze Apartments"/></figure>
-                     </div>
-                     <div class="bed_room">
-                        <h3>Urugano Breeze Apartments</h3>
-                        <p>Kigali, Kicukiro, KK 3 st, Vvip apartments with special rooms</p>
-                     </div>
-                  </div>
-               </div>               
-               <div class="col-md-4 col-sm-6 apartment-item">
-                  <div id="serv_hover"  class="room">
-                     <div class="room_img">
-                        <figure><img src="images/savy.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="bed_room">
-                        <h3>Savvy Residential Hill</h3>
-                        <p>Located in Kigali, Savvy Residential Hill provides a private pool. This property offers access to a balcony and free private parking.</p>
-                     </div>
+           
+            <div class="row">
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/urugi.jpg" alt="#"/></figure>
                   </div>
                </div>
-               <div class="col-md-4 col-sm-6 apartment-item">
-                  <div id="serv_hover"  class="room">
-                     <div class="room_img">
-                        <figure><img src="images/oasis.avif" alt="#"/></figure>
-                     </div>
-                     <div class="bed_room">
-                        <h3>Oasis Park Apartments</h3>
-                        <p>Kigali4.3 km from centre</p>
-                        <p>Featuring air-conditioned accommodation with a balcony, Oasis Park Apartments is located in Kigali.</p>
-                     </div>
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/livingurug.jpeg" alt="#"/></figure>
                   </div>
                </div>
-               <div class="col-md-4 col-sm-6 apartment-item">
-                  <div id="serv_hover"  class="room">
-                     <div class="room_img">
-                        <figure><img src="images/sky.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="bed_room">
-                        <h3>Kigali sky villa</h3>
-                        <p>Kigali4.3 km from centre</p>
-                        <p>Boasting air-conditioned accommodation with a balcony, Kigali sky villa is situated in Kigali. This property offers access to a terrace, free private parking and free WiFi.</p>
-                     </div>
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/kitchenurug.jpg" alt="#"/></figure>
                   </div>
                </div>
-               <div class="col-md-4 col-sm-6 apartment-item">
-                  <div id="serv_hover"  class="room">
-                     <div class="room_img">
-                        <figure><img src="images/agasaro.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="bed_room">
-                        <h3>AGASARO LUXURY Apartement</h3>
-                        <p>Kigali4.6 km from centre</p>
-                        <p>Boasting air-conditioned accommodation with a private pool, AGASARO LUXURY Appartement is set in Kigali. This property offers access to a balcony, free private parking and free WiFi.</p>
-                     </div>
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/bathurugano.webp" alt="#"/></figure>
                   </div>
                </div>
-               <div class="col-md-4 col-sm-6 apartment-item">
-                  <div id="serv_hover"  class="room">
-                     <div class="room_img">
-                        <figure><img src="images/claire.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="bed_room">
-                        <h3>Claire Aparthotel</h3>
-                        <p>Kigali4.7 km from centre</p>
-                        <p>Boasting air-conditioned accommodation with a balcony, Claire Aparthotel is situated in Kigali. This property offers access to a terrace, free private parking and free WiFi.</p>
-                     </div>
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/curturug.jpg" alt="#"/></figure>
+                  </div>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/urugano1.webp" alt="#"/></figure>
+                  </div>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/bedurugano.avif" alt="#"/></figure>
+                  </div>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     <figure><img src="../assets/images/viewurugano.jpg" alt="#"/></figure>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <!-- end our_room -->
-     
+      <!-- end gallery -->
+    
       <!--  footer -->
       <footer>
          <div class="footer">
             <div class="container">
                <div class="row">
-                  <div class="col-md-4">
+                  <div class=" col-md-4">
                      <h3>Contact US</h3>
                      <ul class="conta">
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
                         <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
-                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
+                        <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
                      </ul>
                   </div>
                   <div class="col-md-4">
                      <h3>Menu Link</h3>
                      <ul class="link_menu">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="../index.html">Home</a></li>
                         <li><a href="about.html"> about</a></li>
-                        <li class="active"><a href="apartments.html">Our Apartments</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="apartments.html">Our Apartments</a></li>
+                        <li class="active"><a href="gallery.html">Gallery</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                      </ul>
@@ -241,11 +200,11 @@
       </footer>
       <!-- end footer -->
       <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
       <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="../js/custom.js"></script>
    </body>
 </html>
