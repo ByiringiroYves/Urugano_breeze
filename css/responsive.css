@@ -105,6 +105,81 @@
     
     }
     .logo img {
+        width: 50px;
+    }
+    .header {
+        height: auto;
+    }
+    .carousel-item img {
+        min-height: 570px;
+    }
+    .book_room h1 {
+        font-size: 20px;
+        line-height: 25px;
+        padding-bottom: 15px;
+    }
+    .book_now .online_book {
+        margin-bottom: 20px;
+    }
+    .book_btn {
+        padding: 5px 0;
+    }
+    .about .titlepage {
+        max-width: inherit;
+    }
+    .about_img {
+        margin-right: 0px;
+        margin-top: 30px;
+    }
+    .main_form .send_btn {
+        margin-bottom: 30px;
+    }
+    ul.link_menu {
+        margin-bottom: 20px;
+    }
+    .navigation.navbar {
+        float: right;
+        display: inherit !important;
+        padding: 0;
+        width: 100%;
+    }
+    .navigation .navbar-collapse {
+        background: #0f1521;
+        padding: 20px;
+       margin-top: -5px;
+        position: absolute;
+        width: 100%;
+        margin-right: 20px;
+        z-index: 999;
+    }
+    .navigation.navbar-dark .navbar-nav .nav-link {
+        padding: 10px 0;
+        color: #fff;
+    }
+    .navigation.navbar-dark .navbar-toggler {
+        float: right;
+        border: inherit;
+        margin-top: -11px;
+    }
+    .testimonial_box {
+        padding: 0px 19px 40px 20px;
+    }
+    .navigation.navbar-dark .navbar-toggler-icon {
+        background: url(../assets/images/menu_icon.png);
+        background-repeat: no-repeat;
+    }
+    .d_none {
+        display: none;
+    }
+}
+@media (max-width: 720px){
+    .logo {
+        text-align: center !important;
+        padding-bottom: 0px;
+        float: left;
+    
+    }
+    .logo img {
         width: 340px;
     }
     .header {
