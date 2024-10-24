@@ -115,10 +115,10 @@
     
     }
     .logo img {
-        width: 50px;
+        width: 180px;
     }
     .header {
-        height: auto;
+        height: 65px;
     }
     .carousel-item img {
         min-height: 570px;
