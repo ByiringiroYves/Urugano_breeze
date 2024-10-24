@@ -97,14 +97,18 @@
     }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 720px){
     .logo {
         text-align: center !important;
         padding-bottom: 0px;
         float: left;
+    
+    }
+    .logo img {
+        width: 340px;
     }
     .header {
-        height: 70px;
+        height: auto;
     }
     .carousel-item img {
         min-height: 570px;
@@ -155,7 +159,7 @@
     .navigation.navbar-dark .navbar-toggler {
         float: right;
         border: inherit;
-        margin-top: -41px;
+        margin-top: -11px;
     }
     .testimonial_box {
         padding: 0px 19px 40px 20px;
