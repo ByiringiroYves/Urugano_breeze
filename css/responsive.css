@@ -394,6 +394,32 @@
     font-size: 16px;
     margin-top: -20px;
    } 
+   
+   .hero-section h2 {
+    font-size: 25px;
+    height: 300px; 
+   }
+   .hero-section {
+    height: 20px; 
+   }
+
+
+   .back-btn {
+    visibility: hidden;
+   }
+    
+   .hero-section {
+    background: url('images/hero-bg.jpg') no-repeat center;
+    background-size: cover;
+    color: white;
+    padding: 5px 0;
+    height: 6px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+
+
+
     .d_none {
         display: none;
     }

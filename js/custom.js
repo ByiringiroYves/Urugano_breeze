@@ -116,3 +116,38 @@ function searchApartments(event) {
         }
     }
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	const observerOptions = {
+		root: null,
+		rootMargin: '0px',
+		threshold: 0.3
+	};
+
+	const observer = new IntersectionObserver((entries, observer) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('active');
+				observer.unobserve(entry.target);
+			}
+		});
+	}, observerOptions);
+
+	// Add slide-in class to elements and observe them
+	const elements = document.querySelectorAll('.about_img, .about .titlepage');
+	elements.forEach(el => {
+		el.classList.add('slide-in');
+		observer.observe(el);
+	});
+});
+
+$(document).ready(function(){
+	// Initialize the carousel
+	$('#myCarousel').carousel({
+		interval: 3000,  // Change slides every 3 seconds
+		ride: 'carousel',
+		wrap: true
+	});
+});
