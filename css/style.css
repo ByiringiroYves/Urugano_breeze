@@ -1875,6 +1875,9 @@ line-height: 35px;
      padding-bottom: 40px;
 }
 
+.testimonials h2 {
+     text-align: center;
+}
 
 .testimonial-image img {
      width: 100%;
@@ -1943,7 +1946,9 @@ line-height: 35px;
      opacity: 1;
  }
  
- 
+ .abou-cont{
+     font-family: 'Arial', 'Helvetica', sans-serif;
+ }
 
  
  
