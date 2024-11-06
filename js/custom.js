@@ -1,5 +1,9 @@
 /*---------------------------------------------------------------------
-    File Name: custom.js
+ 
+
+
+
+File Name: custom.js
 ---------------------------------------------------------------------*/
 
 $(function () {
@@ -387,3 +391,43 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+//
+document.getElementById('listViewBtn').addEventListener('click', function () {
+    document.getElementById('apartmentList').classList.add('list-view');
+    document.getElementById('apartmentList').classList.remove('grid-view');
+    this.classList.add('active');
+    document.getElementById('gridViewBtn').classList.remove('active');
+});
+
+document.getElementById('gridViewBtn').addEventListener('click', function () {
+    document.getElementById('apartmentList').classList.add('grid-view');
+    document.getElementById('apartmentList').classList.remove('list-view');
+    this.classList.add('active');
+    document.getElementById('listViewBtn').classList.remove('active');
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr(".date-picker", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        showMonths: 2, // Display two months at a time
+        static: true // Keep the calendar visible in the same position
+    });
+});
+
+flatpickr("#checkin", {
+    mode: "range",
+    dateFormat: "Y-m-d",
+    minDate: "today",
+    showMonths: 2 // To show two months side by side like in the screenshot
+});
+
+
+//Slide
+
+ 
+
+  
