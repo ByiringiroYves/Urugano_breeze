@@ -1040,6 +1040,68 @@
         width: 8px;
         height: 8px;
     }  
+
+
+    /*KHALIDI RESPONSIVE*/
+.d-flex {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+h1 {
+    font-size: 1.5rem; /* Reduce font size for the heading */
+    margin: 1.5rem 0; /* Adjust margin for smaller screens */
+    text-align: center; /* Center align the heading text */
+    width: 100%; /* Full width for heading */
+}
+/*KHALIDI RESPONSIVE*/
+.d-flex {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+h1 {
+    font-size: 1.5rem; /* Reduce font size for the heading */
+    margin: 1.5rem 0; /* Adjust margin for smaller screens */
+    text-align: center; /* Center align the heading text */
+    width: 100%; /* Full width for heading */
+}
+
+.price-box {
+    margin-bottom: 1rem; /* Add space below price box */
+    width: 100%; /* Full width for price box */
+    text-align: center; /* Center the text within the box */
+}
+
+.btn {
+    width: 100%; /* Make buttons full width */
+    margin: 0; /* Remove margin */
+}
+
+
+.price-box {
+    margin-bottom: 1rem; /* Add space below price box */
+    width: 100%; /* Full width for price box */
+    text-align: center; /* Center the text within the box */
+}
+
+.btn {
+    width: 100%; /* Make buttons full width */
+    margin: 0; /* Remove margin */
+}
+    .admin-container {
+        padding: 30px 20px;
+    }
+    
+    .admin-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .admin-container label, .admin-container button {
+        font-size: 0.9rem;
+    }
+
+
 }
 
 

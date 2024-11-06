@@ -15,8 +15,6 @@
       <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
       <!-- bootstrap css -->
       <link rel="stylesheet" href="../css/bootstrap.min.css">
-      <!-- Optional: Font Awesome for icons -->
-      <link rel="stylesheet" href="../css/font-awesome.min.css">
       <!-- style css -->
       <link rel="stylesheet" href="../css/style.css">
       <!-- Responsive-->
@@ -27,36 +25,12 @@
       <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>      
-      
-      
-      <!-- jQuery Library -->
-      <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-      <script src="../js/jquery.min.js"></script>
-      <!--<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>-->
-      
-      <!-- DataTables -->
-      <script src="../js/datatables.min.js"></script>
-      <script src="../js/datatables.js"></script>  
-
-      <!-- Emoji Picker CSS -->
-      <link rel="stylesheet" href="../assets/emoji-picker-main/lib/css/emoji.css">
-
-      <!-- Emoji Picker JavaScript -->
-      <script src="../assets/emoji-picker-main/lib/js/config.js"></script> 
-      <script src="../assets/emoji-picker-main/lib/js/util.js"></script>
-      <script src="../assets/emoji-picker-main/lib/js/jquery.emojiarea.js"></script>
-      <script src="../assets/emoji-picker-main/lib/js/emoji-picker.js"></script>
-
-      
-      <script src="../js/custom.js"></script>
-
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
       <!--[if lt IE 9]>
          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->  
-   </head> 
+      <![endif]-->   
+   </head>
    <!-- body -->
    <body class="main-layout">
       <!-- loader  -->
@@ -85,24 +59,24 @@
                         <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarsExample04">
-                           <ul class="navbar-nav mr-auto">
-                              <li class="nav-item ">
-                                <a class="nav-link" href="../index.html">Home</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="people.html">Advertise</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="booking.html">Booking</a>
-                               </li>
-                               <li class="nav-item">
-                                 <a class="nav-link" href="testimonial-admin.html">Testimonial</a>
-                               </li>
-                           </ul>
-                         </div>
-                      </nav>
-                   </div>
-                </div>
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item ">
+                                  <a class="nav-link" href="../index.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="people.html">Advertise</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="booking.html">Booking</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="testimonial-admin.html">Testimonial</a>
+                                  </li>
+                            </ul>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
             </div>
          </div>
       </header>
@@ -113,42 +87,34 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="title">
-                     <h2>Homes & Apartment Advertisement</h2>
+                     <h2>Administrator section</h2>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <!-- Search box above the apartments section -->
-    <!-- our_room -->
-      <div class="adv  location">
-         <div class="container">
-            <div class="row" id="apartmentList">
-               <main>
-                  <section class="advert-form-section">
-                      <div class="container">
-                          <div class="card shadow-lg p-4">
-                              <h2 class="text-center mb-4">Create Your Advertisement</h2>
-                              <form class="advert-form" id="ad-form">
-                                 <div class="input-group">
-                                    <label for="ad-text">Advertisement Text</label>
-                                    <textarea id="ad-text" name="ad_text" required class="ad-texto"></textarea>
-                                    <div id="pickerContainer"></div> <!-- Picker container -->
-                                </div>                                                                 
-                                  <div class="form-group">
-                                      <label for="ad-image">Upload Image</label>
-                                      <input type="file" id="ad-image" name="ad_image" accept="image/*" class="form-control-file" required>
-                                  </div>
-                                  <button type="submit" class="btn btn-primary btn-block">Send</button>
-                              </form>
-                          </div>
-                      </div>
-                  </section>
-              </main>              
-         </div>
-      </div>
-      <!-- end our_room -->
-     
+        <!--admin containe-->
+        <div class="test-ad">
+        <div class="admin-container">
+              <h2>Add New Testimonial</h2>
+              <form id="testimonialForm" enctype="multipart/form-data">
+                  <label for="clientPhoto">Client Photo:</label>
+                  <input type="file" id="clientPhoto" accept="image/*" required>
+      
+                  <label for="clientName">Client Name:</label>
+                  <input type="text" id="clientName" placeholder="Enter client's name" required>
+      
+                  <label for="testimonialContent">Testimonial Content:</label>
+                  <textarea id="testimonialContent" placeholder="Enter testimonial content" required></textarea>
+      
+                  <label for="clientOccupation">Client Occupation:</label>
+                  <input type="text" id="clientOccupation" placeholder="Enter client's occupation" required>
+      
+                  <button type="submit">Post Testimonial</button>
+              </form>
+          </div>
+        </div>  
+         <!--end of admin containe-->  
       <!--  footer -->
       <footer>
          <div class="footer">
@@ -167,7 +133,7 @@
                      <ul class="link_menu">
                         <li><a href="../index.html">Home</a></li>
                         <li><a href="about.html"> about</a></li>
-                        <li class="active"><a href="apartments.html">Our Apartments</a></li>
+                        <li><a href="apartments.html">Our Apartments</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="testimonial.html">testimonial</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
@@ -201,7 +167,51 @@
       </footer>
       <!-- end footer -->
       <!-- Javascript files-->
+      <script src="../js/jquery.min.js"></script>
       <script src="../js/bootstrap.bundle.min.js"></script>
-      <script src="../js/jquery.dataTables.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <!-- sidebar -->
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="../js/custom.js"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const testimonialForm = document.getElementById("testimonialForm");
+        
+            testimonialForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+        
+                // Simulate image upload and save path (in a real setup, you'd handle this on the server)
+                const imageInput = document.getElementById("clientPhoto");
+                const imageName = imageInput.files[0].name;
+                const imagePath = `../assets/images/${imageName}`;
+        
+                // Get other form data
+                const name = document.getElementById("clientName").value;
+                const content = document.getElementById("testimonialContent").value;
+                const occupation = document.getElementById("clientOccupation").value;
+        
+                // Create a testimonial object
+                const newTestimonial = {
+                    imagePath,
+                    name,
+                    content,
+                    occupation
+                };
+        
+                // Save testimonial data to localStorage (simulating a database push)
+                saveTestimonial(newTestimonial);
+        
+                // Clear form
+                testimonialForm.reset();
+                alert("Testimonial posted successfully!");
+            });
+        
+            function saveTestimonial(testimonial) {
+                const testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
+                testimonials.push(testimonial);
+                localStorage.setItem("testimonials", JSON.stringify(testimonials));
+            }
+        });        
+      </script>
    </body>
 </html>

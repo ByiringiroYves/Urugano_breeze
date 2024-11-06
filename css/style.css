@@ -1625,6 +1625,14 @@ line-height: 35px;
  }
 
 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  .search-bar {
      display: flex;
      justify-content: space-between;
@@ -1891,6 +1899,7 @@ line-height: 35px;
      font-weight: bolder;
      margin-top: 30px;
  }
+
  
  .testimonial-content p {
      font-size: 1rem;
@@ -1950,7 +1959,193 @@ line-height: 35px;
      font-family: 'Arial', 'Helvetica', sans-serif;
  }
 
+ .price-box{
+     margin-top: 10px;
+     margin-right: 5px;
+ }
+
+
+
+ /*Payment form*/
+ .payment {
+     align-content: center;
+     justify-items: center;
+     justify-content: center;
+     align-items: center;
+ }
+ .payment form {
+     width: 700px;
+     padding: 20px;
+     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+     margin-left: 230px;
+ }
  
+ .container form .row {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 15px;
+ }
+ 
+ .container form .row .col {
+     flex: 1 1 250px;
+ }
+ 
+ .col .title {
+     font-size: 20px;
+     color: rgb(237, 55, 23);
+     padding-bottom: 5px;
+ }
+ 
+ .col .inputBox {
+     margin: 15px 0;
+ }
+ 
+ .col .inputBox label {
+     margin-bottom: 10px;
+     display: block;
+ }
+ 
+ .col .inputBox input,
+ .col .inputBox select {
+     width: 100%;
+     border: 1px solid #ccc;
+     padding: 10px 15px;
+     font-size: 15px;
+ }
+
+ .col .inputBox input:focus,
+ .col .inputBox select:focus {
+     border: 1px solid #000;
+ }
+ 
+ .col .flex {
+     display: flex;
+     gap: 15px;
+ }
+ 
+ .col .flex .inputBox {
+     flex: 1 1;
+     margin-top: 5px;
+ }
+ 
+ .col .inputBox img {
+     height: 34px;
+     margin-top: 5px;
+ }
+ 
+ .container form .submit_btn {
+     width: 100%;
+     padding: 12px;
+     font-size: 17px;
+     background-color: #ca1818;
+     color: #fff;
+     margin-top: 5px;
+     cursor: pointer;
+     letter-spacing: 1px;
+     border:  #ca1818;
+ }
+ 
+ .container form .submit_btn:hover {
+     background: #ff0000;
+ }
+ 
+ input::-webkit-inner-spin-button,
+ input::-webkit-outer-spin-button {
+     display: none;
+ } 
+
+
+/*testimonial admin section*/
+/* Admin Testimonial Form Styles */
+.test-ad {
+     font-family: Arial, sans-serif;
+     color: #333;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     min-height: 100vh;
+     margin-top: 50px;
+     margin-bottom: 50px;
+ }
+ 
+ .admin-container {
+     background-color: #ffffff;
+     padding: 40px;
+     border-radius: 10px;
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+     max-width: 500px;
+     width: 90%;
+ }
+ 
+ .admin-container h2 {
+     font-size: 1.8rem;
+     color: #0f1521; /* Dark background color for header text */
+     text-align: center;
+     margin-bottom: 30px;
+     font-weight: bold;
+ }
+ 
+ .admin-container label {
+     display: block;
+     font-size: 1rem;
+     font-weight: bold;
+     color: #333;
+     margin-bottom: 8px;
+     margin-top: 15px;
+ }
+ 
+ .admin-container input[type="text"],
+ .admin-container input[type="file"],
+ .admin-container textarea {
+     width: 100%;
+     padding: 12px;
+     font-size: 1rem;
+     color: #333;
+     background-color: #f5f5f5;
+     border: 2px solid #ddd;
+     border-radius: 8px;
+     box-sizing: border-box;
+     transition: border-color 0.3s ease;
+ }
+ 
+ .admin-container input[type="text"]:focus,
+ .admin-container textarea:focus {
+     border-color: #0f1521;
+     outline: none;
+ }
+ 
+ .admin-container textarea {
+     resize: vertical;
+     min-height: 80px;
+ }
+ 
+ .admin-container button {
+     width: 100%;
+     padding: 12px;
+     font-size: 1rem;
+     font-weight: bold;
+     color: #ffffff;
+     background-color: #0f1521; /* Dark button color */
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     margin-top: 20px;
+     transition: background-color 0.3s ease;
+ }
+ 
+ .admin-container button:hover {
+     background-color: #333;
+ }
+ 
+ .admin-container button:active {
+     background-color: #222;
+ }
+ 
+ /* Additional small screen adjustments */
+ 
+ 
+
+
  
 
 

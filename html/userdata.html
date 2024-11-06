@@ -100,80 +100,156 @@
 </div>
 <!-- gallery -->
 <div  class="Payment">
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-center my-4">
-         <a href="javascript:history.back()" class="back-btn btn btn-secondary">Back</a>
-      </div>
-      
+    <div class="container payment">
         
       <div class="d-flex justify-content-between align-items-center my-4">
-         <!-- Title Display Box -->
-         <div class="price-box" style="background-color: #000e1b; color: white; border-radius: 5px; padding: 10px; text-align: center; flex-grow: 1;">
-             <span>Book an Apartment</span>
-         </div>
+         
      </div>
-     
-     
-       
-       <form action="booking-confirmation.html" method="post" autocomplete="on">
-          <div class="form-group">
-             <label for="fullName">Full Name</label>
-             <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Enter your full name" required>
+     <form action="#">
+
+      <div class="row">
+
+          <div class="col">
+              <h3 class="title">
+                  Billing Address
+              </h3>
+
+              <div class="inputBox">
+                  <label for="name">
+                        Full Name:
+                    </label>
+                  <input type="text" id="name" 
+                         placeholder="Enter your full name" 
+                         required>
+              </div>
+
+              <div class="inputBox">
+                  <label for="email">
+                        Email:
+                    </label>
+                  <input type="text" id="email" 
+                         placeholder="Enter email address" 
+                         required>
+              </div>
+              <div class="inputBox">
+               <label for="email">
+                     Mobile Number:
+                 </label>
+               <input type="text" id="email" 
+                      placeholder="+45 40 64 10 02" 
+                      required>
+           </div>
+
+              <div class="inputBox">
+                  <label for="address">
+                        Address:
+                    </label>
+                  <input type="text" id="address" 
+                         placeholder="Enter address" 
+                         required>
+              </div>
+
+              <div class="inputBox">
+                  <label for="city">
+                        City:
+                    </label>
+                  <input type="text" id="city" 
+                         placeholder="Enter city" 
+                         required>
+              </div>
+
+              
+
           </div>
-          <div class="form-group">
-             <label for="email">Email Address</label>
-             <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
-          </div>
-          
-          <!-- Phone Number with Country Code Selection -->
-          <div class="form-group">
-             <label for="phone">Phone Number</label>
-             <div class="input-group">
-                 <select name="countryCode" class="form-control" style="max-width: 120px;" required aria-label="Country Code">
-                    <option value="+1">+1 (US)</option>
-                    <option value="+44">+44 (UK)</option>
-                    <option value="+91">+91 (India)</option>
-                    <option value="+250">+250 (Rwanda)</option>
-                    <option value="+81">+81 (Japan)</option>
-                    <!-- Add more country codes as needed -->
-                 </select>
-                 <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" pattern="\d{10,15}" required>
-             </div>
-             <small class="form-text text-muted">Include area code without spaces or special characters.</small>
-          </div>
-          
-          <div class="form-group">
-             <label for="specialRequests">Special Requests</label>
-             <textarea id="specialRequests" name="specialRequests" class="form-control" rows="4" placeholder="Any special requests?"></textarea>
+          <div class="col">
+              <h3 class="title">Payment</h3>
+
+              <div class="inputBox">
+                  <label for="name">
+                        Card Accepted:
+                    </label>
+                  <img src="../assets/images/card.png" 
+                       alt="credit/debit card image">
+              </div>
+
+              <div class="inputBox">
+                  <label for="cardName">
+                        Name On Card:
+                    </label>
+                  <input type="text" id="cardName" 
+                         placeholder="Enter card name" 
+                         required>
+              </div>
+
+              <div class="inputBox">
+                  <label for="cardNum">
+                        Credit Card Number:
+                    </label>
+                  <input type="text" id="cardNum" 
+                         placeholder="1111-2222-3333-4444" 
+                         maxlength="19" required>
+              </div>
+
+              <div class="inputBox">
+                  <label for="">Exp Month:</label>
+                  <select name="" id="">
+                      <option value="">Choose month</option>
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August">August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+                  </select>
+              </div>
+
+
+              <div class="flex">
+                  <div class="inputBox">
+                      <label for="">Exp Year:</label>
+                      <select name="" id="">
+                          <option value="">Choose Year</option>
+                          <option value="2023">2023</option>
+                          <option value="2024">2024</option>
+                          <option value="2025">2025</option>
+                          <option value="2026">2026</option>
+                          <option value="2027">2027</option>
+                          <option value="2027">2028</option>
+                          <option value="2027">2029</option>
+                          <option value="2027">2030</option>
+                          <option value="2027">2031</option>
+                          <option value="2027">2032</option>
+                          <option value="2027">2033</option>
+                          <option value="2027">2034</option>
+                          <option value="2027">2035</option>
+                          <option value="2027">2036</option>
+                          <option value="2027">2037</option>
+                          <option value="2027">2038</option>
+                          <option value="2027">2039</option>
+                          <option value="2027">2040</option>
+                      </select>
+                  </div>
+
+                  <div class="inputBox">
+                      <label for="cvv">CVV</label>
+                      <input type="number" id="cvv" 
+                             placeholder="1234" required>
+                  </div>
+              </div>
+
           </div>
 
-          <!-- Payment Section -->
-          <h3 class="mt-4">Payment Information</h3>
-          <div class="form-group">
-             <label for="cardName">Cardholder Name</label>
-             <input type="text" id="cardName" name="cardName" class="form-control" placeholder="Name on card" required>
-          </div>
-          <div class="form-group">
-             <label for="cardNumber">Card Number</label>
-             <input type="text" id="cardNumber" name="cardNumber" class="form-control" pattern="\d{16}" placeholder="1234 5678 9123 4567" required>
-             <small class="form-text text-muted">16-digit card number with no spaces.</small>
-          </div>
-          <div class="form-row">
-             <div class="form-group col-md-6">
-                <label for="expiryDate">Expiration Date</label>
-                <input type="month" id="expiryDate" name="expiryDate" class="form-control" required>
-             </div>
-             <div class="form-group col-md-6">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" class="form-control" pattern="\d{3,4}" placeholder="123" required>
-                <small class="form-text text-muted">3 or 4-digit code on the back of your card.</small>
-             </div>
-          </div>
-          <!-- End Payment Section -->
+      </div>
 
-          <!-- Red "Book Now" Button -->
-          <button type="submit" class="btn btn-primary btn-red btn-block mt-4">Book Now</button>
-       </form>
+      <input type="submit" value="Proceed to Checkout" 
+             class="submit_btn">
+  </form>
     </div>
 </section>
 <!-- End Booking Section -->
@@ -239,5 +315,20 @@
      <!-- sidebar -->
      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
      <script src="../js/custom.js"></script>
+     <script>
+      let cardNumInput = 
+      document.querySelector('#cardNum')
+  
+  cardNumInput.addEventListener('keyup', () => {
+      let cNumber = cardNumInput.value
+      cNumber = cNumber.replace(/\s/g, "")
+  
+      if (Number(cNumber)) {
+          cNumber = cNumber.match(/.{1,4}/g)
+          cNumber = cNumber.join(" ")
+          cardNumInput.value = cNumber
+      }
+  })
+     </script>
   </body>
 </html>
