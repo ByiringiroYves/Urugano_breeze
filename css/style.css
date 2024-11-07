@@ -11,7 +11,9 @@
 /*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
  2) font-family: 'Poppins', sans-serif;
  ----------------------------------------*****/
-
+ @import url(default_them.css);
+ @import url(preloader.css);
+ 
 
 /*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
 
@@ -522,7 +524,7 @@ button {
 /** our_room section **/
 
 .our_room {
-     background: linear-gradient(135deg, #f4ccc5 0%, #ffede9 100%);
+    
      padding-top: 0 !important;
      margin-top: 0 !important;
      margin-block-start: 0 !important;
@@ -539,11 +541,13 @@ button {
  }
  
  .our_room .room {
-     background-color: #fff;
+     background-color: #d8d8d83a;
      margin-top: 20px !important; /* Adjust this if needed */
      margin-bottom: 30px;
      transition: ease-in all 0.5s;
+     box-shadow: #000000;
  }
+ 
  
  .our_room .room .room_img {
      overflow: hidden;
@@ -1473,8 +1477,14 @@ line-height: 35px;
  
  .card {
      border-radius: 12px;
-     background-color: #ffffff;
-     border: none;
+     border: 1px;
+     background: white;
+     font-size: 15px;
+        border: 0;
+       border-radius: var(--border-radius);
+       -webkit-box-shadow:0px 0px 6px var(--rayal-white-borders);
+       -moz-box-shadow:0px 0px 6px var(--rayal-white-borders);
+       cursor: pointer;
  }
  
  .btn-primary {
@@ -1678,22 +1688,25 @@ line-height: 35px;
    }
 
 
-
-
-
-
 /*CHDJHV*/
 .card {
      border-radius: 10px;
      overflow: hidden;
      margin-bottom: 15px;
-     background-color: #fff;
-     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+     box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+      font-size: 15px;
+	border: 0;
+    border-radius: var(--border-radius);
+    -webkit-box-shadow:0px 0px 6px var(--rayal-white-borders);
+    -moz-box-shadow:0px 0px 6px var(--rayal-white-borders);
+    cursor: pointer;
    }
    
+
+   
    .card-header .recommended {
-     background-color: rgb(235, 157, 157);
-     color: #333;
+     background-color: #0f1521af;
+     color: #ffffff;
      font-size: 12px;
      padding: 5px 10px;
      border-radius: 3px;
@@ -1709,7 +1722,7 @@ line-height: 35px;
    
    .card-title {
      font-weight: bold;
-     color: #ca1818;
+     color: #0f1521;
    }
    
    .ratings {
@@ -1719,7 +1732,7 @@ line-height: 35px;
    
 
   .badge-primary {
-     background-color: #ca1818; /* Change the background to red */
+     background-color: #0f1521;; /* Change the background to red */
      color: white; /* Make sure the text is readable */
    }
 
@@ -1737,7 +1750,7 @@ line-height: 35px;
    }
    .card-location {
      margin-top: 10px;
-     color: #ca1818; 
+     color: #0f1521;
      font-family: 'Arial', 'Helvetica', sans-serif;
      
      
@@ -1787,7 +1800,7 @@ line-height: 35px;
    }
    
    .btn-primary {
-     background-color: #ca1818;
+     background-color: #0f1521;
      border: none;
      padding: 10px 20px;
      border-radius: 5px;
@@ -1799,7 +1812,7 @@ line-height: 35px;
    }
    
    .btn-primary:hover {
-     background-color: #ff0000;
+     background-color: #05070c;
    }
 
    .nights{
