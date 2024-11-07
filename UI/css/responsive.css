@@ -19,6 +19,75 @@
     }
 }
 
+@media (max-width: 1020px) {
+    /* Container adjustments */
+    .container {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    /* General text adjustments */
+    body, p, .footer h3, .advert-form-section h2 {
+        font-size: 14px;
+    }
+    
+    h1, h2, .titlepage h2 {
+        font-size: 20px;
+    }
+
+    /* Header and navigation */
+    .header {
+        height: auto;
+        padding: 10px;
+    }
+
+    .navigation.navbar-dark .navbar-nav .nav-link {
+        font-size: 10px;
+        padding: 5px;
+        margin: 0 5px;
+    }
+
+    /* Buttons */
+    .filter-buttons, .submit-btn, .login-btn, .book_btn, .sub_btn {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Table responsiveness */
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    #bookingsTable th, #bookingsTable td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 20px 10px;
+    }
+
+    /* Specific section adjustments */
+    .search-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 5px;
+    }
+
+    .advert-form-section, .login-container {
+        padding: 20px;
+        width: 90%;
+        margin: auto;
+    }
+
+    /* Reduce image sizes */
+    .about_img figure img, .gallery .gallery_img figure img {
+        max-width: 100%;
+    }
+}
+
+
 @media (min-width: 768px) and (max-width: 991px) {
     .navigation.navbar-dark .navbar-nav .nav-link {
         margin: 0 10px;
@@ -41,8 +110,18 @@
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
+    .logo {
+        text-align: center !important;
+        padding-bottom: 0px;
+        float: left;
+    }
+
     .header {
         height: 76px;
+    }
+
+    .logo img {
+        width: 50px;
     }
     .carousel-item img {
         min-height: 570px;
@@ -97,19 +176,18 @@
     }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 720px){
     .logo {
         text-align: center !important;
         padding-bottom: 0px;
         float: left;
+    
     }
     .logo img {
-        max-width: 50%; /* Reduce logo size */
-        height: 20%; /* Maintain aspect ratio */
+        width: 180px;
     }
-
     .header {
-        height: 70px;
+        height: 65px;
     }
     .carousel-item img {
         min-height: 570px;
@@ -147,10 +225,10 @@
     .navigation .navbar-collapse {
         background: #0f1521;
         padding: 20px;
-       margin-top: -5px;
+       margin-top: 45px;
         position: absolute;
         width: 100%;
-        margin-right: 20px;
+        margin-right: 10px;
         z-index: 999;
     }
     .navigation.navbar-dark .navbar-nav .nav-link {
@@ -160,9 +238,8 @@
     .navigation.navbar-dark .navbar-toggler {
         float: right;
         border: inherit;
-        margin-top: -41px;
+        margin-top: -8px;
     }
-   
     .testimonial_box {
         padding: 0px 19px 40px 20px;
     }
@@ -170,7 +247,861 @@
         background: url(../assets/images/menu_icon.png);
         background-repeat: no-repeat;
     }
+   
+    .search-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #bookingsTable th,
+    #bookingsTable td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .search-container button {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
     .d_none {
         display: none;
     }
 }
+
+@media (max-width: 320px){
+    .logo {
+        text-align: center !important;
+        padding-bottom: 0px;
+        float: left;
+    
+    }
+    .logo img {
+        margin-top: -15px;
+        width: 120px;
+    }
+    .header {
+        height: 45px;
+    }
+    .carousel-item img {
+        min-height: 570px;
+    }
+    .book_room h1 {
+        font-size: 20px;
+        line-height: 25px;
+        padding-bottom: 15px;
+    }
+    .book_now .online_book {
+        margin-bottom: 20px;
+    }
+    .book_btn {
+        padding: 5px 0;
+    }
+    .about .titlepage {
+        max-width: inherit;
+    }
+    .about_img {
+        margin-right: 0px;
+        margin-top: 30px;
+    }
+    .main_form .send_btn {
+        margin-bottom: 30px;
+    }
+    ul.link_menu {
+        margin-bottom: 20px;
+    }
+    .navigation.navbar {
+        float: right;
+        display: inherit !important;
+        padding: 0;
+        width: 100%;
+    }
+    .navigation .navbar-collapse {
+        background: #0f1521;
+        padding: 20px;
+       margin-top: -10px;
+        position: absolute;
+        width: 100%;
+        margin-right: -10px;
+        z-index: 999;
+        font-size: 50px;
+    }
+    .navigation.navbar-dark .navbar-nav .nav-link {
+        padding: 10px 0;
+        color: #fff;
+    }
+    .navigation.navbar-dark .navbar-toggler {
+        float: right;
+        border: inherit;
+        margin-top: -50px;
+        margin-right: -20px;
+    }
+    .testimonial_box {
+        padding: 0px 19px 40px 20px;
+    }
+    .navigation.navbar-dark .navbar-toggler-icon {
+        background: url(../assets/images/menu_icon.png);
+        background-repeat: no-repeat;
+        height: 20px;
+        width: 20px;
+    }
+    .d_none {
+        display: none;
+    }
+}
+
+@media (max-width: 430px){
+    .logo {
+        text-align: center !important;
+        padding-bottom: 0px;
+        float: left;
+    
+    }
+    .logo img {
+        margin-top: -15px;
+        width: 120px;
+        height: 20px;
+        margin-left: 4px;
+    }
+    .header {
+        height: 45px;
+    }
+    .carousel-item img {
+        min-height: 570px;
+    }
+    .book_room h1 {
+        font-size: 20px;
+        line-height: 25px;
+        padding-bottom: 15px;
+    }
+    .book_now .online_book {
+        margin-bottom: 20px;
+    }
+    .book_btn {
+        padding: 5px 0;
+    }
+    .about .titlepage {
+        max-width: inherit;
+    }
+    .about_img {
+        margin-right: 0px;
+        margin-top: 30px;
+    }
+    .main_form .send_btn {
+        margin-bottom: 30px;
+    }
+    ul.link_menu {
+        margin-bottom: 20px;
+    }
+    .navigation.navbar {
+        float: right;
+        display: inherit !important;
+        padding: 0;
+        width: 100%;
+    }
+    .navigation .navbar-collapse {
+        background: #0f1521;
+        padding: 20px;
+       margin-top: -10px;
+        position: absolute;
+        width: 100%;
+        margin-right: -40px;
+        z-index: 999;
+        font-size: 50px;
+    }
+    .navigation.navbar-dark .navbar-nav .nav-link {
+        padding: 10px 0;
+        color: #fff;
+    }
+    .navigation.navbar-dark .navbar-toggler {
+        float: right;
+        border: inherit;
+        margin-top: -47px;
+        margin-right: -17px;
+    }
+    .testimonial_box {
+        padding: 0px 19px 40px 20px;
+    }
+    .navigation.navbar-dark .navbar-toggler-icon {
+        background: url(../assets/images/menu_icon.png);
+        background-repeat: no-repeat;
+        height: 20px;
+        width: 20px;
+    }
+    .back_re {
+        height: 50px;
+    }
+    .back_re .title h2 {
+        font-size: 20px;
+        padding: 10px 0
+
+    }
+    .back_re .title {
+        text-align: left;
+        margin-left: 4px;
+   }
+   .our_room {
+    background-color: #f4f5f7;
+    padding: 8px 0 5px 0;
+    margin-top: 45px;
+}
+
+   .about h2 {
+    font-size: 25px;
+   } 
+   .our_room h2 {
+    font-size: 25px;
+   } 
+   .gallery h2 {
+    font-size: 25px;
+   } 
+   .blog h2 {
+    font-size: 25px;
+   } 
+   .contact h2 {
+    font-size: 25px;
+   } 
+   
+   .main_form .contactus {
+    height: 40px;
+    font-size: 13px;
+   }
+   .main_form .textarea {
+    font-size: 13px;
+   } 
+   .main_form .send_btn {
+    margin-top: -10px !important;
+    padding: -10px 0px;
+    width: 100%;
+    max-width: 120px;
+    font-weight: 400;
+    font-size: 15px;
+   }
+   .about .titlepage p {
+    font-size: 16px;
+    margin-top: -20px;
+   } 
+   
+   .hero-section h2 {
+    font-size: 25px;
+    height: 300px; 
+   }
+   .hero-section {
+    height: 20px; 
+    margin-bottom: 60px;
+   }
+
+
+   .back-btn {
+    visibility: hidden;
+   }
+    
+   .hero-section {
+    background: url('images/hero-bg.jpg') no-repeat center;
+    background-size: cover;
+    color: white;
+    padding: 5px 0;
+    height: 6px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.center-desk {
+    margin-top: 5px; /* Adjust as needed */
+    margin-left: -10px; /* Adjust as needed */
+}
+
+
+
+   /* Adjust main container */
+   .advert-form-section {
+    padding: 20px; /* Less padding for tighter fit */
+    margin: 20px auto;
+    max-width: 100%; /* Full-width to utilize screen space */
+    border-radius: 8px; /* Slightly smaller border-radius */
+}
+
+/* Heading */
+.advert-form-section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.2; /* Better readability for smaller screens */
+}
+
+/* Form Inputs */
+.advert-form .input-group {
+    margin-bottom: 15px;
+}
+
+.advert-form .input-group label {
+    font-size: 14px; /* Smaller label text */
+    margin-bottom: 6px;
+    color: #333; /* Darker color for better contrast on mobile */
+    letter-spacing: 0.5px;
+}
+
+.advert-form textarea,
+.advert-form input[type="file"] {
+    padding: 12px; /* Compact padding for easier touch accessibility */
+    font-size: 14px;
+    border-radius: 8px; /* Smaller radius for a sleek mobile look */
+}
+
+.advert-form textarea {
+    min-height: 150px; /* Reduce height for smaller screens */
+}
+
+/* Submit Button */
+.submit-btn {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+/* Input Focus State for Better Mobile Feedback */
+.advert-form textarea:focus,
+.advert-form input[type="file"]:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.3); /* Softer shadow for mobile */
+    outline: none;
+}
+
+/* Optional: Add Spacing Adjustments */
+.advert-form {
+    gap: 10px; /* Adds consistent gap between form elements */
+}
+
+/* Improve Button Click Feedback */
+.submit-btn:active {
+    transform: scale(0.98); /* Slight shrink effect for tap feedback */
+    background-color: #d83434;
+}
+
+/* Full-width Button Styling */
+.submit-btn {
+    display: block;
+    width: 100%; /* Full width on mobile */
+    text-align: center;
+}
+
+
+/* Admin section */
+.login-section {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    min-height: 70vh;
+}
+
+.login-container {
+    padding: 30px 20px;
+    width: 90%;
+}
+
+.login-container h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    padding: 12px;
+    font-size: 14px;
+}
+
+.login-btn {
+    padding: 12px;
+    font-size: 16px;
+}
+
+.footer h3 {
+    font-size: 18px;
+}
+
+.copyright p {
+    font-size: 14px;
+}
+
+    .d_none {
+        display: none;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .search-filters {
+        padding: 1rem;
+    }
+
+    .booking-results {
+        padding: 1rem;
+    }
+
+    .search-container label,
+    .search-container select,
+    .search-container input[type="text"] {
+        font-size: 0.9rem;
+    }
+
+    #bookingsTable th,
+    #bookingsTable td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+
+      /* Background container styling */
+      .back_re .container, .adv .container {
+        padding: 0 10px;
+    }
+
+    /* Title styling */
+    .title h2 {
+        font-size: 1.4rem;
+        text-align: center;
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    /* Card styling */
+    .advert-form-section .card {
+        padding: 1.2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+
+    /* Form layout adjustments */
+    .advert-form {
+        padding: 0;
+    }
+
+    /* Input group styling for vertical stacking */
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    /* Textarea styling for readability and scrolling */
+    .ad-texto {
+        width: 100%;
+        height: 100px;
+        resize: none;
+        overflow-y: auto;
+        font-size: 0.95rem;
+        padding: 10px;
+        border: 1px solid #dcdcdc;
+        border-radius: 5px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Emoji picker icon styling */
+    .emoji-picker-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 8px;
+    }
+
+    /* Emoji picker adjustments */
+    .emoji-menu {
+        width: calc(100% - 20px); /* Ensures the picker fits within the mobile screen */
+        position: absolute;
+        left: auto;
+        top: 88%;
+        margin-right:-15px;
+        transform: translateX(0);
+        z-index: 999;
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        background-color: #ffffff;
+    }
+
+    /* Form labels */
+    label {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    /* Image upload styling */
+    .form-control-file {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 8px;
+        border: 1px solid #dcdcdc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    /* Submit button */
+    .btn {
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 12px;
+        border-radius: 5px;
+        background-color: #ff5e5e;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+        transition: background-color 0.3s;
+    }
+    .btn:hover {
+        background-color: #e04b4b;
+    }
+
+    .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+    background: #0f1521;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-item {
+    margin-right: 0;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  .search-item input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+
+  .search-item input:focus {
+    border-color: #ff0000;
+    outline: none;
+  }
+
+  #search-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #ca1818;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  #search-btn:hover {
+    background-color: #ff0000;
+  }
+
+  #search-btn:active {
+    background-color: #d01717;
+    transform: scale(0.98);
+  }
+
+  .search-item input::placeholder {
+    color: #cccccc;
+    opacity: 0.8;
+  }
+
+  .search-bar .icon {
+    margin-right: 10px;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  
+  /* General searchbox*/ 
+
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+    background: #0f1521;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-item {
+    margin-right: 0;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  .search-item input {
+    width: 100%;
+    padding: 12px;
+    font-si  .testimonials {
+        padding: 30px 10px;
+      }
+   
+      .testimonial-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+      }
+      
+      .testimonial {
+        flex-direction: column;
+        padding: 15px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .testimonial-image {
+        margin: 0 auto 15px auto;
+        flex: 0 0 100px;
+      }
+      
+      .testimonial-image img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid white;
+      }
+      
+      .testimonial-content {
+        text-align: center;
+      }
+      
+      .testimonial-text {
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+      
+      .testimonial p {
+        font-size: 0.9rem;
+      }
+   
+      .extra-info {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+      }ze: 16px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+
+  .search-item input:focus {
+    border-color: #ff0000;
+    outline: none;
+  }
+
+  #search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 50px;
+    font-size: 1.1rem;
+    background-color: #ca1818;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+}
+
+
+  #search-btn:hover {
+    background-color: #ff0000;
+  }
+
+  #search-btn:active {
+    background-color: #d01717;
+    transform: scale(0.98);
+  }
+
+  .search-item input::placeholder {
+    color: #cccccc;
+    opacity: 0.8;
+  }
+
+  .search-bar .icon {
+    margin-right: 10px;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+
+
+  .testimonials {
+    padding: 30px 10px;
+  }
+
+  .testimonial-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .testimonial {
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .testimonial-image {
+    margin: 0 auto 15px auto;
+    flex: 0 0 100px;
+  }
+  
+  .testimonial-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid white;
+  }
+  
+  .testimonial-content {
+    text-align: center;
+  }
+  
+  .testimonial-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .testimonial p {
+    font-size: 0.9rem;
+  }
+
+  .extra-info {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+
+  /* testimonial*/
+   .container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .testimonials .swiper-slide {
+        width: 100%; /* Adjust slide to take full width */
+        margin-top: 50px;
+    }
+
+    .testimonial {
+        width: 280px;
+        padding: 15px;
+        margin: 0 5px;
+    }
+
+    .testimonial-image {
+        width: 100px;
+        height: 100px;
+        top: -50px; /* Adjust position of the image */
+    }
+
+    .testimonial-content h3 {
+        font-size: 1.1rem;
+        margin-top: 25px;
+    }
+
+    .testimonial-content p {
+        font-size: 0.85rem;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+        top: 15%;
+    }
+
+    .swiper-button-prev {
+        left: -20px;
+    }
+
+    .swiper-button-next {
+        right: -20px;
+    }
+
+    .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+    }  
+
+
+    /*KHALIDI RESPONSIVE*/
+.d-flex {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+h1 {
+    font-size: 1.5rem; /* Reduce font size for the heading */
+    margin: 1.5rem 0; /* Adjust margin for smaller screens */
+    text-align: center; /* Center align the heading text */
+    width: 100%; /* Full width for heading */
+}
+/*KHALIDI RESPONSIVE*/
+.d-flex {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+h1 {
+    font-size: 1.5rem; /* Reduce font size for the heading */
+    margin: 1.5rem 0; /* Adjust margin for smaller screens */
+    text-align: center; /* Center align the heading text */
+    width: 100%; /* Full width for heading */
+}
+
+.price-box {
+    margin-bottom: 1rem; /* Add space below price box */
+    width: 100%; /* Full width for price box */
+    text-align: center; /* Center the text within the box */
+}
+
+.btn {
+    width: 100%; /* Make buttons full width */
+    margin: 0; /* Remove margin */
+}
+
+
+.price-box {
+    margin-bottom: 1rem; /* Add space below price box */
+    width: 100%; /* Full width for price box */
+    text-align: center; /* Center the text within the box */
+}
+
+.btn {
+    width: 100%; /* Make buttons full width */
+    margin: 0; /* Remove margin */
+}
+    .admin-container {
+        padding: 30px 20px;
+    }
+    
+    .admin-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .admin-container label, .admin-container button {
+        font-size: 0.9rem;
+    }
+
+
+}
+
+

@@ -11,7 +11,9 @@
 /*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
  2) font-family: 'Poppins', sans-serif;
  ----------------------------------------*****/
-
+ @import url(default_them.css);
+ @import url(preloader.css);
+ 
 
 /*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
 
@@ -265,7 +267,7 @@ button {
      padding: 7px 0px 27px 0px;
      margin: 0 22px;
      color: #010101;
-     font-size: 16px;
+     font-size: 12px;
      line-height: 20px;
      font-weight: 500;
      text-transform: uppercase;
@@ -365,6 +367,21 @@ button {
      background-repeat: no-repeat;
      right: 30px;
 }
+
+.av-btn{
+     background-color: #fe0000;
+     max-width: 189px;
+     text-align: center;
+     width: 100%;
+     margin: 0 auto;
+     padding: 10px 0;
+     color: #fff;
+     font-size: 14px;
+     transition: ease-in 0.5s;
+     display: block;  
+}
+
+
 
 .book_btn {
      background-color: #fe0000;
@@ -507,64 +524,69 @@ button {
 /** our_room section **/
 
 .our_room {
-     background-color: #f4f5f7;
-     padding: 30px 0 5px 0;
-     margin-top: 90px;
-}
-
-.our_room .titlepage {
+    
+     padding-top: 0 !important;
+     margin-top: 0 !important;
+     margin-block-start: 0 !important;
+ }
+ 
+ .our_room .titlepage {
      text-align: center;
-}
-
-.our_room .titlepage p {
+ }
+ 
+ .our_room .titlepage p {
      color: #121212;
      font-size: 17px;
      margin-top: 20px;
-}
-
-.our_room .room {
-     text-align: center;
-     background-color: #fff;
+ }
+ 
+ .our_room .room {
+     background-color: #d8d8d83a;
+     margin-top: 20px !important; /* Adjust this if needed */
      margin-bottom: 30px;
      transition: ease-in all 0.5s;
-}
-
-.our_room .room .room_img {
+     box-shadow: #000000;
+ }
+ 
+ 
+ .our_room .room .room_img {
      overflow: hidden;
-}
-
-.our_room .room .room_img figure {
+ }
+ 
+ .our_room .room .room_img figure {
      margin: 0;
-}
-
-.our_room .room .room_img figure img {
+ }
+ 
+ .our_room .room .room_img figure img {
      width: 100%;
-     transition: all .5s;
-}
-
-.our_room .room .room_img figure img:hover {
-     transform: scale(1.2);
-}
-
-.our_room .room .bed_room {
+     transition: all 0.5s;
+ }
+ 
+ .our_room .room .room_img figure img:hover {
+     transform: scale(1.5);
+ }
+ 
+ .our_room .room .bed_room {
      padding: 33px 30px;
-}
-
-.our_room .room .bed_room h3 {
+ }
+ 
+ .our_room .room .bed_room h3 {
      color: #121212;
      font-size: 25px;
      line-height: 20px;
      font-weight: 500;
      transition: ease-in all 0.5s;
      margin: auto;
-}
-
-#serv_hover:hover.room {
+ }
+ 
+ #serv_hover:hover.room {
      cursor: pointer;
      box-shadow: 0px 0px 30px rgba(255, 9, 9, 0.15);
      transition: ease-in all 0.5s;
-}
+     border: #0056b3;
 
+
+ } 
 
 /** end our_room section **/
 
@@ -695,10 +717,14 @@ button {
      width: 100%;
      height: 58px;
      background: #fff;
-     color: #000000;
+     color: #8a8787;
      font-size: 18px;
      font-weight: normal;
      box-shadow: 2px 0px 6px rgba(255, 9, 9, 0.20);
+}
+
+.main_form input{
+     color: #8a8787;
 }
 
 .main_form .textarea {
@@ -757,7 +783,7 @@ button {
 .footer {
      background: #0f1521;
      margin-top: 90px;
-     padding-top: 60px;
+     padding-top: 70px;
      text-align: center;
 }
 
@@ -889,8 +915,9 @@ ul.social_icon li a:hover {
 .copyright {
      margin-top: 60px;
      padding-bottom: 20px;
+     margin-bottom: -35px;
      background-color: #fff;
-     border: #ff0909 solid 3px;
+     border: #f1f1f1 solid 3px;
      border-right: inherit;
      border-left: inherit;
 }
@@ -920,14 +947,16 @@ ul.social_icon li a:hover {
 /**  inner page css **/
 .back_re {
      background-color: #0f1521;
+     height: 70px;
 }
 .back_re .title {
      text-align: center;
 }
+
 .back_re .title h2 {
 color:#fff;
-font-size: 40px;
-padding: 40px 0;
+font-size: 30px;
+padding: 20px 0;
 font-weight: 600;
 text-transform: uppercase;
 line-height: 35px;
@@ -944,15 +973,31 @@ line-height: 35px;
      margin-top: 90px;
 }
 
+.center-desk{
+     margin-top: 13px;
+     margin-left: -40px;
+}
 
 .logo img[src='images/logo.png'] {
-     margin-left: 5px;
+     margin-left: 100px;
      margin-top: 5px;
      height: 50px;
  }
+ .search{
+     background: linear-gradient(135deg, #f4ccc5 0%, #ffede9 100%);
+     margin-bottom: 0px;
+ } 
+
+ .container {
+     margin-bottom: 0;
+     padding-bottom: 0;
+ }
 
  .search-box {
-     margin-bottom: 20px;
+     margin-top: 10px; 
+     margin-bottom: 30px;
+     margin-left: 0px;
+     border: #010101;
   }
   
   #searchInput {
@@ -972,9 +1017,1158 @@ line-height: 35px;
      width: 100%; /* Makes the image take the full width of the container */
      height: auto; /* Keeps the aspect ratio */
  }
+
+ .back-btn {
+     position: fixed;
+     top: 20px;
+     left: 20px;
+     background-color: rgba(0, 0, 0, 0.7);
+     color: white;
+     padding: 10px 15px;
+     border-radius: 30px;
+     text-align: center;
+     text-decoration: none;
+     font-weight: bold;
+     z-index: 1000;
+ }
+ .image-gallery {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 15px;
+ }
+ .image-gallery img {
+     max-width: 300px;
+     border-radius: 10px;
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+ }
+ .description {
+     text-align: center;
+     margin-top: 20px;
+ }
+
+ .back-btn {
+     position: fixed;
+     top: 20px;
+     left: 20px;
+     background-color: rgba(0, 0, 0, 0.7);
+     color: white;
+     padding: 10px 15px;
+     border-radius: 30px;
+     text-align: center;
+     text-decoration: none;
+     font-weight: bold;
+     z-index: 1000;
+ }
+ .image-gallery {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 15px;
+ }
+ .image-gallery img {
+     max-width: 300px;
+     border-radius: 10px;
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+ }
+ .description {
+     text-align: center;
+     margin-top: 20px;
+ }
+  /* Custom styling for fixed back button */
+  .back-btn {
+     position: fixed;
+     top: 80px; /* Positioning below the header */
+     left: 20px;
+     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent */
+     color: white;
+     padding: 10px 15px;
+     border-radius: 30px;
+     text-align: center;
+     text-decoration: none;
+     font-weight: bold;
+     font-size: 16px;
+     z-index: 1000;
+     transition: background-color 0.3s;
+ }
+ .back-btn:hover {
+     background-color: rgba(0, 0, 0, 0.85);
+ }
+
+ .hero-section {
+     background: url('images/hero-bg.jpg') no-repeat center;
+     background-size: cover;
+     color: white;
+     padding: 30px 0;
+     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+ }
+
+ .our-room .card {
+     transition: transform 0.3s;
+ }
+ .our-room .serv_hover:hover {
+     transform: scale(1.05);
+ }
+ .social_icon a {
+     margin: 0 10px;
+     color: #fff;
+ }
+ .footer {
+     background: #333;
+     color: #fff;
+     padding: 30px 0;
+ }
+ .footer h3 {
+     margin-bottom: 20px;
+ }
+
+
+ /** Advertisment section **/
+/* Main Container Styling */
+/* Main Container */
+.advert-form-section {
+     background-color: #ffffff;
+     padding: 40px 30px;
+     border-radius: 8px;
+     max-width: 700px;
+     margin: 40px auto;
+     font-family: 'Arial', sans-serif;
+ }
+ 
+ .advert-form-section h2 {
+     font-size: 28px;
+     color: #333333;
+     margin-bottom: 25px;
+     text-align: center;
+     font-weight: 700;
+     letter-spacing: 1px;
+ }
+ 
+ /* Form Styling */
+ .advert-form .input-group {
+     margin-bottom: 25px;
+ }
+ 
+ .advert-form .input-group label {
+     display: block;
+     font-size: 16px;
+     font-weight: 600;
+     color: #555555;
+     margin-bottom: 8px;
+ }
+ 
+ .advert-form textarea,
+ .advert-form input[type="file"] {
+     width: 100%;
+     padding: 15px;
+     border: 2px solid #cccccc;
+     border-radius: 6px;
+     transition: border-color 0.3s, box-shadow 0.3s;
+     font-size: 15px;
+     color: #333;
+     background-color: #f9f9f9;
+ }
+ 
+ .advert-form textarea:focus,
+ .advert-form input[type="file"]:focus {
+     border-color: #5c85d6;
+     box-shadow: 0 0 8px rgba(92, 133, 214, 0.2);
+     outline: none;
+ }
+ 
+ .advert-form textarea {
+     resize: vertical;
+     min-height: 180px;
+     width: 580px;
+     font-family: 'Arial', sans-serif;
+ }
+ /* Submit Button */
+ .submit-btn {
+     display: block;
+     width: 100%;
+     padding: 15px;
+     background-color: #ff5a5a;
+     color: #ffffff;
+     border: none;
+     border-radius: 6px;
+     font-size: 18px;
+     font-weight: 600;
+     cursor: pointer;
+     text-transform: uppercase;
+     transition: background-color 0.3s, transform 0.2s;
+ }
+ 
+ .submit-btn:hover {
+     background-color: #ff3333;
+     transform: translateY(-2px);
+ }
+ 
+ .submit-btn:active {
+     background-color: #d94a4a;
+     transform: translateY(0);
+ }  
+
+ html, body {
+     height: 100%;
+     margin: 0;
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .main-layout {
+     flex: 1; /* Ensures the main content takes up the remaining space */
+ }
+ 
+ .footer {
+     background: #0f1521;
+     margin-top: 20px;
+     padding-top: 70px;
+     text-align: center;
+     color: white;
+ }
+ 
+ 
+ .adv {
+     background: linear-gradient(135deg, #f4ccc5 0%, #ffede9 100%);
+     padding-top: 0 !important;
+     margin-top: 0 !important;
+     margin-block-start: 0 !important;
+ }
+
+ .adv .container {
+     display: grid;
+     place-items: center; /* Centers the child both horizontally and vertically */ 
+ }
+
+
+ 
+ /** Admin log-in section **/
+ /* Login Section Styling */
+.login-section {
+     margin-top: 60px;
+     margin-bottom: 200px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 60vh;
+     background-color: transparent;
+ }
+ 
+ /* Container Styling */
+ .login-container {
+     background-color: #ffffff;
+     padding: 50px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+     border-radius: 8px;
+     width: 500px;
+     text-align: center;
+     font-family: Arial, sans-serif;
+ }
+ 
+ /* Header */
+ .login-container h2 {
+     font-size: 24px;
+     color: #2d3436;
+     font-weight: bold;
+     margin-bottom: 30px;
+ }
+ 
+ /* Input Fields */
+ .input-group input {
+     width: 100%;
+     padding: 15px;
+     margin-bottom: 20px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     font-size: 16px;
+     background-color: #f9f9f9;
+     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+ }
+ 
+ .input-group input:focus {
+     border-color: #2980b9;
+     box-shadow: 0 0 5px rgba(41, 128, 185, 0.3);
+     outline: none;
+ }
+ 
+ /* Login Button */
+ .login-btn {
+     width: 100%;
+     padding: 15px;
+     background-color: #e63d3d;
+     color: #fff;
+     font-size: 18px;
+     font-weight: bold;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease, transform 0.2s ease;
+ }
+ 
+ .login-btn:hover {
+     background-color: #fa0808;
+     transform: translateY(-3px);
+ }
+ 
+ .login-btn:active {
+     background-color: #c0392b;
+     transform: translateY(0);
+ }
+
+ /** my booking section **/
+/* Search Filters Styling */
+.search-filters {
+     background-color: #f4ccc5;
+     padding: 10px;
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+ }
+ 
+ .search-filters select,
+ .search-filters input,
+ .search-filters button {
+     padding: 10px;
+     margin: 5px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+ }
+ 
+ /* Booking Table Styling */
+ #bookingsTable {
+     width: 100%;
+     margin: 0px auto;
+     border-collapse: collapse;
+ }
+ 
+ #bookingsTable th, #bookingsTable td {
+     padding: 10px;
+     text-align: left;
+     border-bottom: 1px solid #ddd;
+ }
+ 
+ #bookingsTable th {
+     background-color: #000e1d;
+     color: #fff;
+ }
+ 
+ .confirmed {
+     color: green;
+     font-weight: bold;
+ }
+ 
+ /* Pagination Controls */
+ .pagination-controls {
+     text-align: center;
+     margin-top: 15px;
+ }
+ 
+ .pagination-btn {
+     padding: 8px 12px;
+     margin: 0 5px;
+     cursor: pointer;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+ }
+ 
+ .pagination-btn.active {
+     background-color: #000c27;
+     color: #fff;
+     border-color: #000c27;
+ }
+ 
+ /* Flatpickr Date Picker Custom Styles */
+ .flatpickr-presets {
+     display: flex;
+     gap: 10px;
+     padding: 10px;
+ }
+ 
+ .preset-button {
+     background-color: #007bff;
+     color: #fff;
+     border: none;
+     padding: 5px 10px;
+     border-radius: 4px;
+     cursor: pointer;
+ }
+ 
+ .preset-button:hover {
+     background-color: #0056b3;
+ }
+
+ .table-wrapper {
+     overflow-x: auto;
+     width: 100%;
+ }
+ 
+ #bookingsTable {
+     width: 100%;
+     border-collapse: collapse;
+     min-width: 1200px; /* Adjust this as needed for a wider table */
+ }
+ 
+ #bookingsTable th, #bookingsTable td {
+     padding: 12px 15px;
+     text-align: left;
+     white-space: nowrap; /* Prevent text from wrapping within cells */
+ }
+ 
+ .pagination-controls {
+     margin-top: 10px;
+     display: flex;
+     justify-content: center;
+ }
+
+ .filter-buttons {
+     background-color: #d34032; /* Light red color */
+     color: #fff;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 5px;
+     font-size: 16px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+ 
+ .filter-buttons:hover {
+     background-color: #f50a02; /* Darker red for hover */
+ }
+ 
+ .booking-error {
+     color: red; 
+     display: none; 
+     font-weight: bold; 
+     font-size: 15px;
+     margin-left: 10px;
+ }
+ 
+ /**Status color control*/
+ .status {
+     font-weight: bold;
+ }
+ 
+ .status:contains("Pending") {
+     color: red;
+ }
+ 
+ .status:contains("Confirmed") {
+     color: green;
+ }
+ 
+ /* Add hover effect to table rows */
+#bookingsTable tbody tr:hover {
+     background-color: #b6b7ca; /* Light gray on hover */
+     cursor: pointer;
+     transition: background-color 0.3s ease; /* Smooth transition */
+ }
+ 
+ /* Optional: Adjust text color or styles for the hovered row */
+ #bookingsTable tbody tr:hover td {
+     color: #333; /* Darker text color on hover */
+ }
+ 
+ /*Emoji picking styles */
+ /* Custom Styles */
+ .advert-form-section {
+     background-color: transparent; /* Adjust background color */
+     
+ }
+ 
+ .card {
+     border-radius: 12px;
+     border: 1px;
+     background: white;
+     font-size: 15px;
+        border: 0;
+       border-radius: var(--border-radius);
+       -webkit-box-shadow:0px 0px 6px var(--rayal-white-borders);
+       -moz-box-shadow:0px 0px 6px var(--rayal-white-borders);
+       cursor: pointer;
+ }
+ 
+ .btn-primary {
+     background-color: #e63d3d; /* Your brand color */
+     border: none;
+ }
+ 
+ .btn-primary:hover {
+     background-color: #fa0808; /* Darker hover color */
+ }
+ 
+ /* Emoji Picker Container Styling */
+ /* Position the emoji picker relative to the emoji button */
+ .emoji-menu {
+     position: absolute;
+     top: 88%;
+     margin-right: 162px;
+     transform: translateX(10px); /* Add spacing between button and picker */
+     z-index: 999;
+     background-color: #fff;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     width: 600px; /* Adjust the width here */
+ }
+ 
+ 
+ /* Ensure the emoji icon is positioned relative for correct placement */
+ .emoji-picker-icon-container {
+     position: relative;
+ }
+
+
+ /* Optional: Style the emoji button to be consistent */
+ #emoji-trigger {
+     background: transparent;
+     border: none;
+     font-size: 1.5rem;
+     cursor: pointer;
+     transition: color 0.3s ease;
+ }
+ 
+ #emoji-trigger:hover {
+     color: #007bff; /* Blue on hover */
+ }
+ 
+ /* Position the picker relative to the emoji button (adjust if necessary) */
+ .input-group {
+     position: relative;
+ }
+ 
+ #pickerContainer {
+     top: 100%; /* Position below the emoji button */
+     left: 0;
+     margin-top: 5px; /* Small gap below the button */
+ }
+ 
+
+ /* Style and position the generated emoji picker icon */
+/* Position the generated emoji icon container below the textarea */
+.input-group .emoji-picker-icon {
+     display: inline-flex;
+     margin-top: -2px; /* Adjusts space between textarea and emoji icon */
+     margin-left: 10px;
+     font-size: 1.5rem; /* Adjust icon size */
+     cursor: pointer;
+     position: relative; /* Allows more control over position adjustments */
+ }
+ 
+ /* Optional: Center the icon within the input-group */
+ .input-group {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+ }
+ 
+ /* Style for the textarea */
+.ad-texto {
+     width: 400px; /* Make it responsive within the container */
+     max-width: 400px; /* Prevent overflow beyond container */
+     height: 150px; /* Set a fixed height */
+     max-height: 150px; /* Ensure height does not exceed this value */
+     resize: none; /* Disable manual resizing by the user */
+     overflow-y: auto; /* Show vertical scrollbar if text overflows */
+     padding: 10px; /* Add some padding for better readability */
+     border: 1px solid #ccc; /* Optional: border styling */
+     border-radius: 5px; /* Optional: rounded corners */
+     font-family: Arial, sans-serif; /* Optional: font style */
+     font-size: 14px; /* Optional: font size */
+     line-height: 1.5; /* Optional: line height for readability */
+ }
+
+ 
+
+
+
+
+ /* KHALIDI CHANGES : Styles for the red button */
+.btn-red {
+     background-color: rgb(204, 8, 8);
+     border-color: red;
+ }
+ 
+ .btn-red:hover {
+     background-color: darkred;
+     border-color: darkred;
+ }
+ 
+ 
+
+/*Gallery CSS*/
+ .gallery {
+     padding: 10px 0; /* Reduce vertical padding */
+     background-color: #f8f9fa; /* Light background for contrast */
+ }
+ 
+ .gallery-item {
+     position: relative;
+     overflow: hidden; /* Ensure that any enlarged images stay within bounds */
+     transition: transform 0.3s ease; /* Smooth scaling */
+     padding: 5px; /* Add padding to create space between items */
+ }
+ 
+ .gallery-item a {
+     display: block; /* Make the whole area clickable */
+ }
+ 
+ .gallery-item img {
+     width: 100%;
+     height: auto;
+     transition: transform 0.3s ease; /* Smooth transition on hover */
+ }
+ 
+ .gallery-item:hover {
+     transform: scale(1.05); /* Slightly enlarge on hover */
+ }
+ 
+ .gallery-item:hover img {
+     filter: brightness(90%); /* Darken image on hover */
+ }
+ 
+ /* Lightbox overlay styles */
+ .lb-outerContainer {
+     background-color: rgba(0, 0, 0, 0.9); /* Darker background for lightbox */
+ }
+ .lb-caption {
+     color: #ffffff; /* White text for captions */
+ }
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ .search-bar {
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: 20px;
+     background: #fff;
+     padding: 10px;
+     background-color: #0f1521;
+   }
+   
+   .search-item {
+     margin-right: 15px;
+   }
+   
+   .search-item input {
+     padding: 5px;
+     background-color: transparent;
+     border-color: white;
+     color: white;
+   }
+   
+   #search-btn {
+     background-color: #ca1818;
+     color: #fff;
+     border: none;
+     margin-top: 34px;
+     padding: 10px 20px;
+     cursor: pointer;
+     height: 40px;
+     border-top-right-radius: 10px;
+
+   }
+   
+   #search-btn:hover {
+     background-color: #ff0000;
+   }
+   
+   /** Additionals*/
+
+   .Price-range{
+     font-weight: bold;
+     font-size: 20px;
+     margin-bottom: 20px;
+   }
+
+
+/*CHDJHV*/
+.card {
+     border-radius: 10px;
+     overflow: hidden;
+     margin-bottom: 15px;
+     box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+      font-size: 15px;
+	border: 0;
+    border-radius: var(--border-radius);
+    -webkit-box-shadow:0px 0px 6px var(--rayal-white-borders);
+    -moz-box-shadow:0px 0px 6px var(--rayal-white-borders);
+    cursor: pointer;
+   }
+   
+
+   
+   .card-header .recommended {
+     background-color: #0f1521af;
+     color: #ffffff;
+     font-size: 12px;
+     padding: 5px 10px;
+     border-radius: 3px;
+     font-weight: bold;
+     margin-left: -21px;
+   }
+
+   .card-header {
+     text-align: left;
+     border-bottom: none;
+ }
+ 
+   
+   .card-title {
+     font-weight: bold;
+     color: #0f1521;
+   }
+   
+   .ratings {
+     display: flex;
+     align-items: center;
+   }
+   
+
+  .badge-primary {
+     background-color: #0f1521;; /* Change the background to red */
+     color: white; /* Make sure the text is readable */
+   }
+
+
+   .rating-score {
+     font-size: 14px;
+     padding: 5px;
+     border-radius: 5px;
+   }
+   
+   .rating-text {
+     font-size: 12px;
+     color: #444;
+     margin-left: 8px;
+   }
+   .card-location {
+     margin-top: 10px;
+     color: #0f1521;
+     font-family: 'Arial', 'Helvetica', sans-serif;
+     
+     
+   }
+   
+   .card-location u {
+     cursor: pointer;
+     font-size: 14px;
+   }
+   
+   .distance {
+     color: #666;
+     font-size: 12px;
+   }
+   
+   .description-title {
+     font-weight: bold;
+     color: #333;
+     font-size: 12px;
+   }
+   
+   .description-text {
+     color: #666;
+     font-size: 14px;
+     margin: 10px 0;
+     font-family: 'Arial', 'Helvetica', sans-serif;
+
+   }
+   
+   .price {
+     margin-top: 10px;
+     text-align: right;
+     font-family: 'Arial', 'Helvetica', sans-serif;
+     margin-bottom: 20px;
+   }
+   
+   .discounted-price {
+     text-decoration: line-through;
+     color: #777;
+     font-size: 12px;
+     
+   }
+   
+   .final-price {
+     color: #ca1818;
+     font-size: 1.5rem;
+   }
+   
+   .btn-primary {
+     background-color: #0f1521;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 5px;
+     font-size: 14px;
+     color: #fff;
+     cursor: pointer;
+     display: block; /* Make the button a block element */
+     margin: 0 auto; /* Center the block element horizontally */
+   }
+   
+   .btn-primary:hover {
+     background-color: #05070c;
+   }
+
+   .nights{
+     text-align: right;
+   }
+ 
+   .card img {
+     cursor: pointer;
+     transition: transform 0.3s ease-in-out;
+   }
+   
+   .card img:hover {
+     transform: scale(1.1); /* Zooms the image by 10% */
+   }
+
+
+
+/*test */
+.testimonials {
+     padding: 50px 0;
+     background-color: #f0f8ff;
+ }
+ 
+ .container {
+     max-width: 1200px;
+     margin: 0 auto;
+ }
+ 
+ .section-title {
+     font-size: 2.5rem;
+     margin-bottom: 20px;
+     color: black;
+ }
+ 
+ .swiper-container {
+     overflow: hidden;
+     padding-bottom: 50px;
+ }
+ 
+ .swiper-wrapper {
+     display: flex;
+ }
+
+ .testimonials .swiper-slide {
+     padding: 10px !important;
+     display: flex;
+     justify-content: center;
+     width: auto;  /* Ensure each slide is automatically adjusting */
+ }
+ 
+ 
+ .testimonials .swiper-slide {
+     padding: 10px !important;
+     display: flex;
+     justify-content: center;
+     margin-top: 70px;
+ }
+ 
+ .testimonial {
+     background-color: #0f1521;
+     border-radius: 10px;
+     padding: 30px;
+     text-align: center;
+     box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.1);
+     width: 350px;
+     margin: 0 15px;
+ }
+ 
+ /* Position the testimonial image at the top */
+.testimonial-image {
+     position: absolute;
+     top: -50px;
+     left: 50%;
+     transform: translateX(-50%);
+     background-color: #ffffff;
+     border: 5px solid #ffffff;
+     border-radius: 50%;
+     width: 120px;
+     height: 120px;
+     overflow: hidden;
+     padding-bottom: 40px;
+}
+
+.testimonials h2 {
+     text-align: center;
+}
+
+.testimonial-image img {
+     width: 100%;
+     height: auto;
+ }
+ 
+ .testimonial-content h3 {
+     font-size: 1.25rem;
+     margin-bottom: 10px;
+     color: white;
+     font-weight: bolder;
+     margin-top: 30px;
+ }
+
+ 
+ .testimonial-content p {
+     font-size: 1rem;
+     color: white;
+     font-family: 'Arial', 'Helvetica', sans-serif;
+ }
+ 
+ .swiper-button-prev, .swiper-button-next {
+     color: rgb(0, 0, 0) !important;
+     width: 20px;
+     height: 20px;
+     border-radius: 50%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 20px;
+     position: absolute;
+     top: 20%;
+     transform: translateY(-50%);
+ }
+ 
+ .swiper-button-prev {
+     left: -50px;
+ }
+ 
+ .swiper-button-next {
+     right: -50px;
+ }
+
+
+ /*Pagination*/
+ .swiper-pagination {
+     position: absolute;
+     text-align: center;
+     width: 100%;
+     bottom: 10px;
+     z-index: 10;
+ }
+ 
+ .swiper-pagination-bullet {
+     width: 12px;
+     height: 12px;
+     background-color: #999;
+     border-radius: 50%;
+     display: inline-block;
+     margin: 0 5px;
+     opacity: 0.5;
+     transition: opacity 0.3s ease;
+ }
+ 
+ .swiper-pagination-bullet-active {
+     background-color: #333;
+     opacity: 1;
+ }
+ 
+ .abou-cont{
+     font-family: 'Arial', 'Helvetica', sans-serif;
+ }
+
+ .price-box{
+     margin-top: 10px;
+     margin-right: 5px;
+ }
+
+
+
+ /*Payment form*/
+ .payment {
+     align-content: center;
+     justify-items: center;
+     justify-content: center;
+     align-items: center;
+ }
+ .payment form {
+     width: 700px;
+     padding: 20px;
+     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+     margin-left: 230px;
+ }
+ 
+ .container form .row {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 15px;
+ }
+ 
+ .container form .row .col {
+     flex: 1 1 250px;
+ }
+ 
+ .col .title {
+     font-size: 20px;
+     color: rgb(237, 55, 23);
+     padding-bottom: 5px;
+ }
+ 
+ .col .inputBox {
+     margin: 15px 0;
+ }
+ 
+ .col .inputBox label {
+     margin-bottom: 10px;
+     display: block;
+ }
+ 
+ .col .inputBox input,
+ .col .inputBox select {
+     width: 100%;
+     border: 1px solid #ccc;
+     padding: 10px 15px;
+     font-size: 15px;
+ }
+
+ .col .inputBox input:focus,
+ .col .inputBox select:focus {
+     border: 1px solid #000;
+ }
+ 
+ .col .flex {
+     display: flex;
+     gap: 15px;
+ }
+ 
+ .col .flex .inputBox {
+     flex: 1 1;
+     margin-top: 5px;
+ }
+ 
+ .col .inputBox img {
+     height: 34px;
+     margin-top: 5px;
+ }
+ 
+ .container form .submit_btn {
+     width: 100%;
+     padding: 12px;
+     font-size: 17px;
+     background-color: #ca1818;
+     color: #fff;
+     margin-top: 5px;
+     cursor: pointer;
+     letter-spacing: 1px;
+     border:  #ca1818;
+ }
+ 
+ .container form .submit_btn:hover {
+     background: #ff0000;
+ }
+ 
+ input::-webkit-inner-spin-button,
+ input::-webkit-outer-spin-button {
+     display: none;
+ } 
+
+
+/*testimonial admin section*/
+/* Admin Testimonial Form Styles */
+.test-ad {
+     font-family: Arial, sans-serif;
+     color: #333;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     min-height: 100vh;
+     margin-top: 50px;
+     margin-bottom: 50px;
+ }
+ 
+ .admin-container {
+     background-color: #ffffff;
+     padding: 40px;
+     border-radius: 10px;
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+     max-width: 500px;
+     width: 90%;
+ }
+ 
+ .admin-container h2 {
+     font-size: 1.8rem;
+     color: #0f1521; /* Dark background color for header text */
+     text-align: center;
+     margin-bottom: 30px;
+     font-weight: bold;
+ }
+ 
+ .admin-container label {
+     display: block;
+     font-size: 1rem;
+     font-weight: bold;
+     color: #333;
+     margin-bottom: 8px;
+     margin-top: 15px;
+ }
+ 
+ .admin-container input[type="text"],
+ .admin-container input[type="file"],
+ .admin-container textarea {
+     width: 100%;
+     padding: 12px;
+     font-size: 1rem;
+     color: #333;
+     background-color: #f5f5f5;
+     border: 2px solid #ddd;
+     border-radius: 8px;
+     box-sizing: border-box;
+     transition: border-color 0.3s ease;
+ }
+ 
+ .admin-container input[type="text"]:focus,
+ .admin-container textarea:focus {
+     border-color: #0f1521;
+     outline: none;
+ }
+ 
+ .admin-container textarea {
+     resize: vertical;
+     min-height: 80px;
+ }
+ 
+ .admin-container button {
+     width: 100%;
+     padding: 12px;
+     font-size: 1rem;
+     font-weight: bold;
+     color: #ffffff;
+     background-color: #0f1521; /* Dark button color */
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     margin-top: 20px;
+     transition: background-color 0.3s ease;
+ }
+ 
+ .admin-container button:hover {
+     background-color: #333;
+ }
+ 
+ .admin-container button:active {
+     background-color: #222;
+ }
+ 
+ /* Additional small screen adjustments */
  
  
 
 
+ 
 
 
+
+
+
+
+
+
+
+
+
+ 
