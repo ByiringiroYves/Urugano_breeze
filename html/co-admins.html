@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>GOGO Home & Apartment</title>
+      <title>Testimonials</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="Yves Byiringiro" content="">
@@ -59,26 +59,23 @@
                         <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarsExample04">
-                           <ul class="navbar-nav mr-auto">
-                              <li class="nav-item ">
-                                 <a class="nav-link" href="../index.html">Home</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="about.html">About</a>
-                              </li>
-                              <li class="nav-item active">
-                                 <a class="nav-link" href="apartments.html">Our Apartments</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="gallery.html">Gallery</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="blog.html">Blog</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="contact.html">Contact Us</a>
-                              </li>
-                           </ul>
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item ">
+                                  <a class="nav-link" href="../index.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="people.html">Advertise</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="booking.html">Booking</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="testimonial-admin.html">Testimonial</a>
+                                 </li>
+                                 <li class="nav-item active">
+                                    <a class="nav-link" href="co-admins.html">Accounts Manager</a>
+                                </li>  
+                            </ul>
                         </div>
                      </nav>
                   </div>
@@ -93,45 +90,36 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="title">
-                     <h2>Our Apartments</h2>
+                     <h2>Administrator section</h2>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <!-- Search box above the apartments section -->
-      <div class="search">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="search-box">
-                     <input type="text" id="searchInput" onkeyup="searchApartments(event)" placeholder="Search for apartments by name..." class="form-control">
-                     <p id="error-message" style="color: red; display: none;">Apartment not available</p>
-                  </div>
+        <!--admin containe-->                       
+        <div class="adv  location">
+            <div class="container">
+               <div class="row" id="apartmentList">
+                  <main>
+                     <section class="login-section">
+                         <div class="login-container">
+                             <h2>Create an Admin Accoung</h2>
+                             <form class="login-form" id="login-form">
+                                 <div class="input-group">
+                                     <input type="text" id="username" name="username" placeholder="Email" required>
+                                 </div>
+                                 <div class="input-group">
+                                     <input type="password" id="password" name="password" placeholder="Password" required>
+                                 </div>
+                                 <button type="submit" class="login-btn">Add an Account</button>
+                             </form>
+                         </div>
+                     </section>
+                 </main>                       
                </div>
             </div>
          </div>
-      </div>
-      <!-- our_room -->
-      <div class="our_room">
-         <div class="container">
-            <div class="row" id="apartmentList">
-               <div class="col-md-4 col-sm-6 apartment-item" onclick="window.location.href='urugano_apartments.html'">
-                  <div id="serv_hover" class="room">
-                     <div class="room_img">
-                        <figure><img src="../assets/images/urugi.jpg" alt="Urugano Breeze Apartments"/></figure>
-                     </div>
-                     <div class="bed_room">
-                        <h3>Urugano Breeze Apartments</h3>
-                        <p>Kigali, Kicukiro, KK 3 st, Vvip apartments with special rooms</p>
-                     </div>
-                  </div>
-               </div>               
-            </div>
-         </div>
-      </div>
-      <!-- end our_room -->
-     
+         <!--end of admin containe-->  
       <!--  footer -->
       <footer>
          <div class="footer">
@@ -150,9 +138,9 @@
                      <ul class="link_menu">
                         <li><a href="../index.html">Home</a></li>
                         <li><a href="about.html"> about</a></li>
-                        <li class="active"><a href="apartments.html">Our Apartments</a></li>
+                        <li><a href="apartments.html">Our Apartments</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="testimonial.html">testimonial</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                      </ul>
                   </div>

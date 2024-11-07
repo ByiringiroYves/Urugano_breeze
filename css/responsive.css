@@ -81,6 +81,10 @@
         margin: auto;
     }
 
+    .advert-form-section button {
+        background-color: #0f1521;
+    }
+
     /* Reduce image sizes */
     .about_img figure img, .gallery .gallery_img figure img {
         max-width: 100%;
@@ -516,7 +520,7 @@
    .advert-form-section {
     padding: 20px; /* Less padding for tighter fit */
     margin: 20px auto;
-    max-width: 100%; /* Full-width to utilize screen space */
+    width: auto; /* Full-width to utilize screen space */
     border-radius: 8px; /* Slightly smaller border-radius */
 }
 
@@ -574,7 +578,7 @@
 /* Improve Button Click Feedback */
 .submit-btn:active {
     transform: scale(0.98); /* Slight shrink effect for tap feedback */
-    background-color: #d83434;
+    background-color: #0f1521;
 }
 
 /* Full-width Button Styling */
@@ -594,7 +598,11 @@
 
 .login-container {
     padding: 30px 20px;
-    width: 90%;
+    width: auto;
+}
+
+.login-container .log{
+  width: 500px;
 }
 
 .login-container h2 {
@@ -742,7 +750,7 @@
         font-weight: 500;
         padding: 12px;
         border-radius: 5px;
-        background-color: #ff5e5e;
+        background-color: #0f1521;
         color: #fff;
         text-align: center;
         width: 100%;
@@ -783,12 +791,12 @@
     outline: none;
   }
 
-  #search-btn {
+  .search-btn {
     width: 100%;
     padding: 14px;
     font-size: 18px;
     font-weight: bold;
-    background-color: #ca1818;
+    background-color: #014adb;
     border-radius: 5px;
     margin-top: 10px;
     transition: background-color 0.3s ease;
@@ -903,7 +911,7 @@
     padding: 10px;
     height: 50px;
     font-size: 1.1rem;
-    background-color: #ca1818;
+    background-color: #014adb;
     color: white;
     font-weight: bold;
     width: 100%;
@@ -1079,7 +1087,94 @@ h1 {
 }
 
 
-.price-box {
+.price-box {.payment {
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}
+.payment form {
+    width: 700px;
+    padding: 20px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+    margin-left: 230px;
+    margin-bottom: 100px;
+}
+
+.container form .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.container form .row .col {
+    flex: 1 1 250px;
+}
+
+.col .title {
+    font-size: 20px;
+    color: #0f1521;
+    padding-bottom: 5px;
+}
+
+.col .inputBox {
+    margin: 15px 0;
+}
+
+.col .inputBox label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.col .inputBox input,
+.col .inputBox select {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 15px;
+}
+
+.col .inputBox input:focus,
+.col .inputBox select:focus {
+    border: 1px solid #000;
+}
+
+.col .flex {
+    display: flex;
+    gap: 15px;
+}
+
+.col .flex .inputBox {
+    flex: 1 1;
+    margin-top: 5px;
+}
+
+.col .inputBox img {
+    height: 34px;
+    margin-top: 5px;
+}
+
+.container form .submit_btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    background-color: #0f1521;
+    color: #fff;
+    margin-top: 5px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    border: #0f1521;
+}
+
+.container form .submit_btn:hover {
+   background-color: #002061;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    display: none;
+} 
+
     margin-bottom: 1rem; /* Add space below price box */
     width: 100%; /* Full width for price box */
     text-align: center; /* Center the text within the box */
@@ -1101,6 +1196,124 @@ h1 {
         font-size: 0.9rem;
     }
 
+
+
+
+    /*Payment form*/
+    .payment {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px; /* Add padding to avoid edges */
+    }
+
+    .payment form {
+        width: 100%; /* Full width on smaller screens */
+        padding: 15px; /* Reduce padding for mobile */
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3); /* Soften shadow */
+        margin: 0 auto 50px auto; /* Center align and reduce bottom space */
+    }
+
+    .container form .row {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 10px; /* Adjust gap to save space */
+    }
+
+    .container form .row .col {
+        flex: 1 1 100%; /* Full width for each column on mobile */
+    }
+
+    .col .title {
+        font-size: 18px; /* Slightly smaller font */
+        color: #0f1521;
+        padding-bottom: 5px;
+    }
+
+    .col .inputBox {
+        margin: 10px 0; /* Reduce margin for compactness */
+    }
+
+    .col .inputBox label {
+        font-size: 14px; /* Smaller label font */
+    }
+
+    .col .inputBox input,
+    .col .inputBox select {
+        width: 100%; /* Full width */
+        padding: 8px 12px; /* Reduce padding for mobile */
+        font-size: 14px; /* Adjust font for smaller screens */
+    }
+
+    .col .inputBox input:focus,
+    .col .inputBox select:focus {
+        border: 1px solid #000; /* Keep focus effect consistent */
+    }
+
+    .col .flex {
+        flex-direction: column; /* Stack items in `.flex` vertically */
+        gap: 10px; /* Space between stacked items */
+    }
+
+    .col .flex .inputBox {
+        margin-top: 5px; /* Small top margin */
+    }
+
+    .col .inputBox img {
+        height: 30px; /* Slightly smaller image for mobile */
+        margin-top: 5px;
+    }
+
+    .container form .submit_btn {
+        width: 100%; /* Full width submit button */
+        padding: 10px; /* Adjust padding */
+        font-size: 16px; /* Slightly smaller font size */
+        background-color: #0f1521;
+        color: #fff;
+        margin-top: 10px;
+    }
+
+    .container form .submit_btn:hover {
+        background-color: #002061;
+    }
+
+
+
+
+    /*Admin Testimonial*/
+    .test-ad {
+        padding: 10px; /* Adds padding around the form */
+    }
+    
+    .admin-container {
+        margin-top: -350px;
+        padding: 20px; /* Reduced padding for smaller screens */
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); /* Softer shadow */
+        margin-bottom: 0px;
+    }
+
+    .admin-container h2 {
+        font-size: 1.4rem; /* Smaller font size for the header */
+        margin-bottom: 15px; /* Less spacing */
+    }
+
+    .admin-container label {
+        font-size: 0.85rem; /* Smaller font size for labels */
+        margin-top: 8px; /* Reduced spacing for compact layout */
+    }
+
+    .admin-container input[type="text"],
+    .admin-container input[type="file"],
+    .admin-container textarea {
+        padding: 8px; /* Reduced padding for inputs */
+        font-size: 0.9rem; /* Slightly smaller font for inputs */
+    }
+
+    .admin-container button {
+        padding: 10px; /* Smaller padding on button */
+        font-size: 0.9rem; /* Adjusted font size */
+        margin-top: 15px;
+    }
 
 }
 

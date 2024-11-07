@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Urugano breeze</title>
+      <title>Testimonials</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="Yves Byiringiro" content="">
@@ -71,7 +71,10 @@
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="testimonial-admin.html">Testimonial</a>
-                                  </li>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="co-admins.html">Accounts Manager</a>
+                                </li>  
                             </ul>
                         </div>
                      </nav>
@@ -93,13 +96,13 @@
             </div>
          </div>
       </div>
-        <!--admin containe-->
+        <!--admin containe-->                       
         <div class="test-ad">
         <div class="admin-container">
               <h2>Add New Testimonial</h2>
               <form id="testimonialForm" enctype="multipart/form-data">
                   <label for="clientPhoto">Client Photo:</label>
-                  <input type="file" id="clientPhoto" accept="image/*" required>
+                  <input type="file" id="clientPhoto" accept="image/*">
       
                   <label for="clientName">Client Name:</label>
                   <input type="text" id="clientName" placeholder="Enter client's name" required>
@@ -173,45 +176,5 @@
       <!-- sidebar -->
       <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="../js/custom.js"></script>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const testimonialForm = document.getElementById("testimonialForm");
-        
-            testimonialForm.addEventListener("submit", function (e) {
-                e.preventDefault();
-        
-                // Simulate image upload and save path (in a real setup, you'd handle this on the server)
-                const imageInput = document.getElementById("clientPhoto");
-                const imageName = imageInput.files[0].name;
-                const imagePath = `../assets/images/${imageName}`;
-        
-                // Get other form data
-                const name = document.getElementById("clientName").value;
-                const content = document.getElementById("testimonialContent").value;
-                const occupation = document.getElementById("clientOccupation").value;
-        
-                // Create a testimonial object
-                const newTestimonial = {
-                    imagePath,
-                    name,
-                    content,
-                    occupation
-                };
-        
-                // Save testimonial data to localStorage (simulating a database push)
-                saveTestimonial(newTestimonial);
-        
-                // Clear form
-                testimonialForm.reset();
-                alert("Testimonial posted successfully!");
-            });
-        
-            function saveTestimonial(testimonial) {
-                const testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
-                testimonials.push(testimonial);
-                localStorage.setItem("testimonials", JSON.stringify(testimonials));
-            }
-        });        
-      </script>
    </body>
 </html>
