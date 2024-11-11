@@ -273,87 +273,6 @@
     }
 }
 
-@media (max-width: 320px){
-    .logo {
-        text-align: center !important;
-        padding-bottom: 0px;
-        float: left;
-    
-    }
-    .logo img {
-        margin-top: -15px;
-        width: 120px;
-    }
-    .header {
-        height: 45px;
-    }
-    .carousel-item img {
-        min-height: 570px;
-    }
-    .book_room h1 {
-        font-size: 20px;
-        line-height: 25px;
-        padding-bottom: 15px;
-    }
-    .book_now .online_book {
-        margin-bottom: 20px;
-    }
-    .book_btn {
-        padding: 5px 0;
-    }
-    .about .titlepage {
-        max-width: inherit;
-    }
-    .about_img {
-        margin-right: 0px;
-        margin-top: 30px;
-    }
-    .main_form .send_btn {
-        margin-bottom: 30px;
-    }
-    ul.link_menu {
-        margin-bottom: 20px;
-    }
-    .navigation.navbar {
-        float: right;
-        display: inherit !important;
-        padding: 0;
-        width: 100%;
-    }
-    .navigation .navbar-collapse {
-        background: #0f1521;
-        padding: 20px;
-       margin-top: -10px;
-        position: absolute;
-        width: 100%;
-        margin-right: -10px;
-        z-index: 999;
-        font-size: 50px;
-    }
-    .navigation.navbar-dark .navbar-nav .nav-link {
-        padding: 10px 0;
-        color: #fff;
-    }
-    .navigation.navbar-dark .navbar-toggler {
-        float: right;
-        border: inherit;
-        margin-top: -50px;
-        margin-right: -20px;
-    }
-    .testimonial_box {
-        padding: 0px 19px 40px 20px;
-    }
-    .navigation.navbar-dark .navbar-toggler-icon {
-        background: url(../assets/images/menu_icon.png);
-        background-repeat: no-repeat;
-        height: 20px;
-        width: 20px;
-    }
-    .d_none {
-        display: none;
-    }
-}
-
 @media (max-width: 430px){
     .logo {
         text-align: center !important;
@@ -760,92 +679,65 @@
         background-color: #e04b4b;
     }
 
-    .search-bar {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 15px;
-    background: #0f1521;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+  /* Search-bar section*/
+  .search-bar-wrapper {
+    padding: 10px 0;
+}
 
-  .search-item {
-    margin-right: 0;
-    margin-bottom: 12px;
-    width: 100%;
-  }
+.search-bar {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center;
+    gap: 3px;
+    padding: 5px;
+}
 
-  .search-item input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    background-color: transparent;
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    border-radius: 4px;
-    transition: border-color 0.3s ease;
-  }
+/* Make each search item smaller */
+.search-item {
+    padding: 5px 8px; /* Reduce padding */
+    height: 35px; /* Reduce height */
+    flex: 1 1 40%; /* Set a base width to allow wrapping in two columns */
+    max-width: 100%; /* Control width on small screens */
+}
 
-  .search-item input:focus {
-    border-color: #ff0000;
-    outline: none;
-  }
+.search-item.location {
+    max-width: 100%;
+}
+/* Special styles for date fields to keep them close together */
+.search-item.dates {
+    flex: 1 1 80%; /* Stretch across the full row */
+    max-width: 100%;
+}
+.search-item.guests {
+    max-width: 100%;
+}
+.search-item input {
+    padding: 5px; /* Smaller padding inside input */
+    font-size: 14px; /* Smaller font size */
+}
 
-  .search-btn {
-    width: 100%;
-    padding: 14px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #014adb;
-    border-radius: 5px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-  }
+.icon-location,
+.icon-calendar,
+.icon-user {
+    font-size: 14px; /* Smaller icon size */
+    margin-right: 5px;
+}
 
-  #search-btn:hover {
-    background-color: #ff0000;
-  }
+.search-item input::placeholder {
+    color: #000000;
+    text-align: center;
+}
 
-  #search-btn:active {
-    background-color: #d01717;
-    transform: scale(0.98);
-  }
+/* Adjust the height and padding for the Search button */
+#search-btn {
+    padding: 8px 14px;
+    font-size: 15px;
+    height: 35px;
+    flex: 1 1 100%; /* Make the button take the full row width */
+    max-width: 100%;
+} 
 
-  .search-item input::placeholder {
-    color: #cccccc;
-    opacity: 0.8;
-  }
-
-  .search-bar .icon {
-    margin-right: 10px;
-    font-size: 20px;
-    vertical-align: middle;
-  }
-  
-  /* General searchbox*/ 
-
-  .search-bar {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 15px;
-    background: #0f1521;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .search-item {
-    margin-right: 0;
-    margin-bottom: 12px;
-    width: 100%;
-  }
-
-  .search-item input {
-    width: 100%;
-    padding: 12px;
-    font-si  .testimonials {
-        padding: 30px 10px;
-      }
-   
+  /*End*/
       .testimonial-content h2 {
         font-size: 1.8rem;
         margin-bottom: 10px;
@@ -891,7 +783,7 @@
         display: block;
         margin-top: 10px;
         text-align: center;
-      }ze: 16px;
+      font-size: 16px;
     background-color: transparent;
     border: 2px solid #ffffff;
     color: #ffffff;
@@ -1315,6 +1207,166 @@ input::-webkit-outer-spin-button {
         margin-top: 15px;
     }
 
+
+    .d-flex{
+        margin-top: -40px;
+    }
+
+}
+
+
+@media (max-width: 360px){
+    .logo {
+        text-align: center !important;
+        padding-bottom: 0px;
+        float: left;
+    
+    }
+    .logo img {
+        margin-top: -15px;
+        width: 120px;
+    }
+    .header {
+        height: 45px;
+    }
+    .carousel-item img {
+        min-height: 570px;
+    }
+    .book_room h1 {
+        font-size: 20px;
+        line-height: 25px;
+        padding-bottom: 15px;
+    }
+    .book_now .online_book {
+        margin-bottom: 20px;
+    }
+    .book_btn {
+        padding: 5px 0;
+    }
+    .about .titlepage {
+        max-width: inherit;
+    }
+    .about_img {
+        margin-right: 0px;
+        margin-top: 30px;
+    }
+    .main_form .send_btn {
+        margin-bottom: 30px;
+    }
+    ul.link_menu {
+        margin-bottom: 20px;
+    }
+    .navigation.navbar {
+        float: right;
+        display: inherit !important;
+        padding: 0;
+        width: 100%;
+    }
+    .navigation .navbar-collapse {
+        background: #0f1521;
+        padding: 20px;
+       margin-top: -10px;
+        position: absolute;
+        width: 100%;
+        margin-right: -10px;
+        z-index: 999;
+        font-size: 50px;
+    }
+    .navigation.navbar-dark .navbar-nav .nav-link {
+        padding: 10px 0;
+        color: #fff;
+    }
+    .navigation.navbar-dark .navbar-toggler {
+        float: right;
+        border: inherit;
+        margin-top: -50px;
+        margin-right: -20px;
+    }
+    .testimonial_box {
+        padding: 0px 19px 40px 20px;
+    }
+    .navigation.navbar-dark .navbar-toggler-icon {
+        background: url(../assets/images/menu_icon.png);
+        background-repeat: no-repeat;
+        height: 20px;
+        width: 20px;
+    }
+    .d_none {
+        display: none;
+    }
+
+    .search-bar-wrapper {
+        padding: 10px 0;
+    }
+    
+    .search-bar {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+        gap: 2px;
+        padding: 2px;
+    }
+    
+    /* Make each search item smaller */
+    .search-item {
+        padding: 5px 8px; /* Reduce padding */
+        height: 25px; /* Reduce height */
+        flex: 1 1 40%; /* Set a base width to allow wrapping in two columns */
+        max-width: 100%; /* Control width on small screens */
+    }
+    
+    .search-item.location {
+        max-width: 100%;
+    }
+    /* Special styles for date fields to keep them close together */
+    .search-item.dates {
+        flex: 1 1 80%; /* Stretch across the full row */
+        max-width: 100%;
+    }
+
+    .search-item.dates input {
+        font-size: 10px; /* Reduce font size for smaller screens */
+        padding: 6px; /* Reduce padding to make fields more compact */
+        margin: 2px 0; /* Add small margin to separate check-in and check-out fields */
+    }
+
+    .search-item.guests {
+        max-width: 100%;
+    }
+    .search-item input {
+        padding: 5px; /* Smaller padding inside input */
+        font-size: 14px; /* Smaller font size */
+    }
+    
+    .icon-location,
+    .icon-calendar,
+    .icon-user {
+        font-size: 14px; /* Smaller icon size */
+        margin-right: 5px;
+    }
+    
+    .search-item input::placeholder {
+        color: #000000;
+        text-align: center;
+        font-size: 12px;
+    }
+    
+    /* Adjust the height and padding for the Search button */
+    #search-btn {
+        padding: 8px 14px;
+        font-size: 15px;
+        height: 35px;
+        flex: 1 1 100%; /* Make the button take the full row width */
+        max-width: 100%;
+    } 
+
+
+    /* additionals*/
+    .d-flex{
+        margin-top: -40px;
+    }
+    
+    /* End*/
 }
 
 
