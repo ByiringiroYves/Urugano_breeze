@@ -1,5 +1,5 @@
 
-
+@import url(style.css);
 /*--------------------------------------------------------------------- File Name: responsive.css ---------------------------------------------------------------------*/
 
 
@@ -1219,6 +1219,21 @@ input::-webkit-outer-spin-button {
         margin-top: -40px;
     }
 
+    /* see availability*/
+    .btn-primary:hover {
+        background-color: #05070c;
+        border-color: #05070c;
+      }
+
+      .btn-primary:focus {
+        background-color: #05070c;
+        border-color: #05070c;
+      }
+
+      .room{
+        border-radius: var(--border-radius);
+    }  
+
 }
 
 
@@ -1380,6 +1395,20 @@ input::-webkit-outer-spin-button {
         margin-top: -40px;
     }
     
+     /* see availability*/
+     .btn-primary:hover {
+        background-color: #05070c;
+        border-color: #05070c;
+      }
+
+      .btn-primary:focus {
+        background-color: #05070c;
+        border-color: #05070c;
+      }
+   
+      .room{
+        border-radius: var(--border-radius);
+    }
     /* End*/
 }
 

@@ -1608,15 +1608,6 @@ line-height: 35px;
     background-color: #001c53;
  }
  
- .btn-danger{
-    background-color: #0f1521;
-    border:#0f1521;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
- }
-
- .btn-danger :hover{
-    background-color: #00246b;
- }
  
 
 /*Gallery CSS*/
@@ -2251,12 +2242,21 @@ line-height: 35px;
     margin-top: 20px;
     margin-bottom: 10px;
  }
+ 
+ .btn.btn-danger{
+    background-color: #0f1521;
+    border:#0f1521;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+ }
 
- .btn-danger :hover{
-     background-color: #0f1521;
+ .btn.btn-danger :hover{
+    background-color: #0744c0;
+ }
+
+ .btn.btn-danger :focus{
+    background-color: #0744c0;
  }
  
-
  
 
 
