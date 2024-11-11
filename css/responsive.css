@@ -737,6 +737,13 @@
     max-width: 100%;
 } 
 
+#search-btn:hover {
+    background-color: #0056b3;
+}
+
+#search-btn:focus {
+    background-color: #0056b3;
+}
   /*End*/
       .testimonial-content h2 {
         font-size: 1.8rem;
@@ -1359,7 +1366,14 @@ input::-webkit-outer-spin-button {
         flex: 1 1 100%; /* Make the button take the full row width */
         max-width: 100%;
     } 
+    
+    #search-btn:hover {
+        background-color: #0056b3;
+    }
 
+    #search-btn:focus {
+        background-color: #0056b3;
+    }
 
     /* additionals*/
     .d-flex{
