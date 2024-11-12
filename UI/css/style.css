@@ -38,6 +38,9 @@
 .container {
      max-width: 1170px;
 }
+.apartments-container{
+    max-width: 1170px;
+}
 
 html {
      scroll-behavior: smooth;
@@ -157,6 +160,9 @@ a,
      transition: all .3s ease-in-out;
 }
 
+.btn :hover{
+    background-color: #001c53;
+}
 img {
      max-width: 100%;
      height: auto;
@@ -369,7 +375,7 @@ button {
 }
 
 .av-btn{
-     background-color: #fe0000;
+     background-color: #0f1521;
      max-width: 189px;
      text-align: center;
      width: 100%;
@@ -529,6 +535,12 @@ button {
      margin-top: 0 !important;
      margin-block-start: 0 !important;
  }
+
+.room {
+    box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.20);
+    border-radius: 10px;
+    transform: rotateY(-6px);
+} 
  
  .our_room .titlepage {
      text-align: center;
@@ -581,12 +593,14 @@ button {
  
  #serv_hover:hover.room {
      cursor: pointer;
-     box-shadow: 0px 0px 30px rgba(255, 9, 9, 0.15);
+     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
      transition: ease-in all 0.5s;
      border: #0056b3;
+     transform: translateY(-5px);
 
 
  } 
+
 
 /** end our_room section **/
 
@@ -756,7 +770,7 @@ button {
 }
 
 .main_form .send_btn:hover {
-     background-color: #ff0909;
+    background-color: #353232;
      transition: ease-in all 0.5s;
      color: #fff;
 }
@@ -946,7 +960,6 @@ ul.social_icon li a:hover {
 
 /**  inner page css **/
 .back_re {
-     background-color: #0f1521;
      height: 70px;
 }
 .back_re .title {
@@ -954,7 +967,7 @@ ul.social_icon li a:hover {
 }
 
 .back_re .title h2 {
-color:#fff;
+color: black;
 font-size: 30px;
 padding: 20px 0;
 font-weight: 600;
@@ -1103,7 +1116,7 @@ line-height: 35px;
      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
  }
 
- .our-room .card {
+ .our-room .room {
      transition: transform 0.3s;
  }
  .our-room .serv_hover:hover {
@@ -1134,6 +1147,10 @@ line-height: 35px;
      margin: 40px auto;
      font-family: 'Arial', sans-serif;
  }
+ 
+ .advert-container{
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+ } 
  
  .advert-form-section h2 {
      font-size: 28px;
@@ -1199,7 +1216,7 @@ line-height: 35px;
  }
  
  .submit-btn:hover {
-     background-color: #ff3333;
+    background-color: #001c53;
      transform: translateY(-2px);
  }
  
@@ -1229,7 +1246,6 @@ line-height: 35px;
  
  
  .adv {
-     background: linear-gradient(135deg, #f4ccc5 0%, #ffede9 100%);
      padding-top: 0 !important;
      margin-top: 0 !important;
      margin-block-start: 0 !important;
@@ -1258,7 +1274,7 @@ line-height: 35px;
  .login-container {
      background-color: #ffffff;
      padding: 50px;
-     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
      border-radius: 8px;
      width: 500px;
      text-align: center;
@@ -1295,7 +1311,7 @@ line-height: 35px;
  .login-btn {
      width: 100%;
      padding: 15px;
-     background-color: #e63d3d;
+     background: #0f1521;
      color: #fff;
      font-size: 18px;
      font-weight: bold;
@@ -1306,19 +1322,18 @@ line-height: 35px;
  }
  
  .login-btn:hover {
-     background-color: #fa0808;
+     background-color: #04085f;
      transform: translateY(-3px);
  }
  
  .login-btn:active {
-     background-color: #c0392b;
+     background-color: #041057;
      transform: translateY(0);
  }
 
  /** my booking section **/
 /* Search Filters Styling */
 .search-filters {
-     background-color: #f4ccc5;
      padding: 10px;
      display: flex;
      justify-content: space-around;
@@ -1421,7 +1436,7 @@ line-height: 35px;
  }
 
  .filter-buttons {
-     background-color: #d34032; /* Light red color */
+     background-color: #000e1d; /* Light red color */
      color: #fff;
      border: none;
      padding: 10px 20px;
@@ -1432,7 +1447,8 @@ line-height: 35px;
  }
  
  .filter-buttons:hover {
-     background-color: #f50a02; /* Darker red for hover */
+    background-color: #011f3f; /* Darker red for hover */
+    transform: translateY(-3px);
  }
  
  .booking-error {
@@ -1475,7 +1491,7 @@ line-height: 35px;
      
  }
  
- .card {
+ .room {
      border-radius: 12px;
      border: 1px;
      background: white;
@@ -1485,15 +1501,16 @@ line-height: 35px;
        -webkit-box-shadow:0px 0px 6px var(--rayal-white-borders);
        -moz-box-shadow:0px 0px 6px var(--rayal-white-borders);
        cursor: pointer;
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
  }
  
  .btn-primary {
-     background-color: #e63d3d; /* Your brand color */
+    background-color: #0f1521;/* Your brand color */
      border: none;
  }
  
  .btn-primary:hover {
-     background-color: #fa0808; /* Darker hover color */
+    background-color: #001d58; /* Darker hover color */
  }
  
  /* Emoji Picker Container Styling */
@@ -1584,13 +1601,11 @@ line-height: 35px;
 
  /* KHALIDI CHANGES : Styles for the red button */
 .btn-red {
-     background-color: rgb(204, 8, 8);
-     border-color: red;
+    background-color: #0f1521;
  }
  
  .btn-red:hover {
-     background-color: darkred;
-     border-color: darkred;
+    background-color: #001c53;
  }
  
  
@@ -1643,41 +1658,104 @@ line-height: 35px;
  
  
  
+ /* General Styles for the Search Bar */
+ /* General Styles for the Search Bar */
+.search-bar-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background-color: #ffffff;
+}
+ 
  .search-bar {
-     display: flex;
-     justify-content: space-between;
-     margin-bottom: 20px;
-     background: #fff;
-     padding: 10px;
-     background-color: #0f1521;
-   }
-   
-   .search-item {
-     margin-right: 15px;
-   }
-   
-   .search-item input {
-     padding: 5px;
-     background-color: transparent;
-     border-color: white;
-     color: white;
-   }
-   
-   #search-btn {
-     background-color: #ca1818;
-     color: #fff;
-     border: none;
-     margin-top: 34px;
-     padding: 10px 20px;
-     cursor: pointer;
-     height: 40px;
-     border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0f1521;
+    padding: 3px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 3px;
+    max-width: 93%;
+}
 
-   }
-   
-   #search-btn:hover {
-     background-color: #ff0000;
-   }
+
+/* Individual Search Items */
+.search-item {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 2px solid #e0e0e0;
+    flex: 1;
+    height: 50px;
+}
+
+.search-item .search-item .dates{
+    max-width: 50%;
+}
+
+.search-item.location,
+.search-item.guests {
+    max-width: 180px;
+}
+
+.search-item.dates {
+    flex: 2;
+    display: flex;
+    align-items: center;
+}
+
+.search-item input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    background: transparent;
+    color: #333;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+}
+
+.search-item input::placeholder {
+    color: #000000;
+    text-align: center;
+}
+
+/* Divider in Dates Section */
+.search-item.dates span {
+    color: #555;
+    font-size: 16px;
+    margin: 0 5px;
+}
+
+/* Icons for Input Fields */
+.icon-location,
+.icon-calendar,
+.icon-user {
+    margin-right: 8px;
+    font-size: 18px;
+    color: #000000;
+}
+
+/* Search Button */
+#search-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 50px;
+    transition: background-color 0.3s ease;
+}
+
+#search-btn:hover {
+    background-color: #0056b3;
+}
    
    /** Additionals*/
 
@@ -1689,7 +1767,7 @@ line-height: 35px;
 
 
 /*CHDJHV*/
-.card {
+.room {
      border-radius: 10px;
      overflow: hidden;
      margin-bottom: 15px;
@@ -1700,6 +1778,7 @@ line-height: 35px;
     -webkit-box-shadow:0px 0px 6px var(--rayal-white-borders);
     -moz-box-shadow:0px 0px 6px var(--rayal-white-borders);
     cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
    }
    
 
@@ -1819,12 +1898,12 @@ line-height: 35px;
      text-align: right;
    }
  
-   .card img {
+   .room img {
      cursor: pointer;
      transition: transform 0.3s ease-in-out;
    }
    
-   .card img:hover {
+   .room img:hover {
      transform: scale(1.1); /* Zooms the image by 10% */
    }
 
@@ -1833,7 +1912,6 @@ line-height: 35px;
 /*test */
 .testimonials {
      padding: 50px 0;
-     background-color: #f0f8ff;
  }
  
  .container {
@@ -1989,8 +2067,9 @@ line-height: 35px;
  .payment form {
      width: 700px;
      padding: 20px;
-     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
      margin-left: 230px;
+     margin-bottom: 100px;
  }
  
  .container form .row {
@@ -2005,7 +2084,7 @@ line-height: 35px;
  
  .col .title {
      font-size: 20px;
-     color: rgb(237, 55, 23);
+     color: #0f1521;
      padding-bottom: 5px;
  }
  
@@ -2042,7 +2121,7 @@ line-height: 35px;
  }
  
  .col .inputBox img {
-     height: 34px;
+     height: 22px;
      margin-top: 5px;
  }
  
@@ -2050,16 +2129,16 @@ line-height: 35px;
      width: 100%;
      padding: 12px;
      font-size: 17px;
-     background-color: #ca1818;
+     background-color: #0f1521;
      color: #fff;
      margin-top: 5px;
      cursor: pointer;
      letter-spacing: 1px;
-     border:  #ca1818;
+     border: #0f1521;
  }
  
  .container form .submit_btn:hover {
-     background: #ff0000;
+    background-color: #002061;
  }
  
  input::-webkit-inner-spin-button,
@@ -2079,13 +2158,14 @@ line-height: 35px;
      min-height: 100vh;
      margin-top: 50px;
      margin-bottom: 50px;
+
  }
  
  .admin-container {
      background-color: #ffffff;
      padding: 40px;
      border-radius: 10px;
-     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
      max-width: 500px;
      width: 90%;
  }
@@ -2154,11 +2234,29 @@ line-height: 35px;
      background-color: #222;
  }
  
- /* Additional small screen adjustments */
- 
- 
+ .raw{
+    text-align: center;
+ }
 
+ .raw .final-price{
+    margin-top: 20px;
+    margin-bottom: 10px;
+ }
+ 
+ .btn.btn-danger{
+    background-color: #0f1521;
+    border:#0f1521;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+ }
 
+ .btn.btn-danger :hover{
+    background-color: #0744c0;
+ }
+
+ .btn.btn-danger :focus{
+    background-color: #0744c0;
+ }
+ 
  
 
 
