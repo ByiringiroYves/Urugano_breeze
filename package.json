@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "a": "^3.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.1",
+    "morgan": "^1.10.0"
+  },
+  "scripts": {
+    "start": "node Server/server.js"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9"
+  }
+}
