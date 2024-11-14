@@ -2,11 +2,25 @@
 
 const mongoose = require('mongoose');
 
-const TestimonialSchema = new mongoose.Schema({
-    imagePath: { type: String },
-    name: { type: String, required: true },
-    content: { type: String, required: true },
-    occupation: { type: String }
-}, { timestamps: true });
+const testimonialSchema = new mongoose.Schema({
+    client_name: {
+        type: String,
+        required: true
+    },
+    client_photo: {
+        type: String // This will store the path or URL of the uploaded image
+    },
+    content: {
+        type: String,
+        required: true
+    },
+    client_occupation: {
+        type: String
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
+    }
+});
 
-module.exports = mongoose.model('Testimonial', TestimonialSchema);
+module.exports = mongoose.model('Testimonial', testimonialSchema);

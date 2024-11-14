@@ -70,7 +70,39 @@ const getApartmentsByCompound = async (req, res) => {
     }
 };
 
+// Update price per night for a specific apartment by name
+const updateApartmentPriceByName = async (req, res) => {
+    try {
+        const { apartmentName } = req.params;
+        const { price_per_night } = req.body;
+
+        // Find the apartment by name and update the price
+        const apartment = await Apartment.findOneAndUpdate(
+            { name: apartmentName },
+            { price_per_night },
+            { new: true } // Return the updated document
+        );
+
+        if (!apartment) {
+            return res.status(404).json({ error: 'Apartment not found.' });
+        }
+
+        // Update compound price based on new apartment prices
+        await updateCompoundPrice(apartment.compound);
+
+        res.status(200).json({
+            message: 'Apartment price updated successfully',
+            apartment,
+        });
+    } catch (error) {
+        console.error('Error updating apartment price:', error);
+        res.status(500).json({ error: 'An error occurred while updating the apartment price.' });
+    }
+};
+
+
 module.exports = {
     createApartment,
-    getApartmentsByCompound
+    getApartmentsByCompound,
+    updateApartmentPriceByName
 };
