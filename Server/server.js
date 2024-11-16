@@ -2,17 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const { MONGO_URI } = require('./connection/config');
 const routes = require('./routes'); // Import main routes file
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://urugano:2090@localhost:27017/urugano_db', {
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    authSource: "urugano_db"
-  }).then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+})
+    .then(() => console.log('MongoDB connected to Atlas'))
+    .catch(err => console.error('Error connecting to MongoDB:', err));
 
 
 // Middleware  

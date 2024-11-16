@@ -1,4 +1,7 @@
 // config.js
+require('dotenv').config(); // Load environment variables from .env file
+
 module.exports = {
-    MONGO_URI: 'mongodb://localhost:27017/urugano_db', // Replace with your database name
+    MONGO_URI: process.env.MONGO_URI, // Get MONGO_URI from .env file
 };
+

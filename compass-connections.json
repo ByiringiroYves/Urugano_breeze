@@ -1,0 +1,27 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "7e355652-8848-4bc6-ab60-fd5a2fd0cf32",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1731720686649"
+        }
+      },
+      "favorite": {
+        "name": "urugano_db",
+        "color": "color3"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb://urugano:2090@localhost:27017/urugano_db?authSource=urugano_db",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjowLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}
