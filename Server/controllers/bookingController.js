@@ -2,6 +2,7 @@
 const Booking = require('../models/Booking');
 const Counter = require('../models/Counter');
 const Apartment = require('../models/Apartment'); // Ensure Apartment model is imported to get price
+const People = require('../models/people');   // People model
 
 // Function to get next reservation_id
 const getNextReservationId = async () => {
@@ -45,15 +46,33 @@ const createBooking = async (req, res) => {
             nights,
             total_price
         });
-
+        
         // Save to database
+
         await booking.save();
+
+        const person = {
+          Clients_Name: guest,
+          Email: email,
+          Phones: phone,
+          City: city,
+          Country: country,
+      };
+
+      // Check for duplicate person by email
+      const existingPerson = await People.findOne({ Email: email });
+      if (!existingPerson) {
+          const newPerson = new People(person);
+          await newPerson.save();
+      }
+      
         res.status(201).json({ message: 'Booking created successfully', booking });
-    } catch (error) {
+      } catch (error) {
         console.error('Error creating booking:', error);
         res.status(500).json({ error: 'An error occurred while creating the booking.' });
     }
 };
+
 
 const cancelBooking = async (req, res) => {
     try {

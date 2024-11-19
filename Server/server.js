@@ -12,7 +12,7 @@ mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-    .then(() => console.log('MongoDB connected to Atlas'))
+    .then(() => console.log('MongoDB connected to Atlas Cloud'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
 
