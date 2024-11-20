@@ -127,23 +127,23 @@
                   <div class="col-md-5">
                      <div class="book_room">
                         <h1>Book an Apartement Online</h1>
-                        <form class="book_now">
+                        <form class="book_now" id="searchForm">
                            <div class="row">
                               <div class="col-md-12">
                                  <span>Arrival</span>
                                  <img class="date_cua" src="assets/images/date.png">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
+                                 <input class="online_book" id="arrivalDate" placeholder="dd/mm/yyyy" type="date" name="arrival" required>
                               </div>
                               <div class="col-md-12">
                                  <span>Departure</span>
                                  <img class="date_cua" src="assets/images/date.png">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
+                                 <input class="online_book" id="departureDate" placeholder="dd/mm/yyyy" type="date" name="departure" required>
                               </div>
                               <div class="col-md-12">
-                                 <a href="html/apartments.html" class="book_btn">Search</a>
-                               </div>                                                                                           
+                                 <button type="submit" class="book_btn">Search</button>
+                              </div>                                                                                           
                            </div>
-                        </form>
+                        </form>                        
                      </div>
                   </div>
                </div>
@@ -375,5 +375,6 @@
       <!-- sidebar -->
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
+      <script type="module" src="js/api.js"></script>
    </body>
 </html>
