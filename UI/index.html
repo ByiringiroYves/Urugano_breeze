@@ -132,18 +132,18 @@
                               <div class="col-md-12">
                                  <span>Arrival</span>
                                  <img class="date_cua" src="assets/images/date.png">
-                                 <input class="online_book" id="arrivalDate" placeholder="dd/mm/yyyy" type="date" name="arrival" required>
+                                 <input id="arrivalDate" class="online_book" placeholder="dd/mm/yyyy" type="date" required>
                               </div>
                               <div class="col-md-12">
                                  <span>Departure</span>
                                  <img class="date_cua" src="assets/images/date.png">
-                                 <input class="online_book" id="departureDate" placeholder="dd/mm/yyyy" type="date" name="departure" required>
+                                 <input id="departureDate" class="online_book" placeholder="dd/mm/yyyy" type="date" required>
                               </div>
                               <div class="col-md-12">
                                  <button type="submit" class="book_btn">Search</button>
-                              </div>                                                                                           
+                              </div>
                            </div>
-                        </form>                        
+                        </form>
                      </div>
                   </div>
                </div>
@@ -375,6 +375,22 @@
       <!-- sidebar -->
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
-      <script type="module" src="js/api.js"></script>
    </body>
+   <script>
+      document.getElementById('searchForm').addEventListener('submit', (event) => {
+         event.preventDefault(); // Prevent default form submission
+         
+         const arrivalDate = document.getElementById('arrivalDate').value;
+         const departureDate = document.getElementById('departureDate').value;
+      
+         if (!arrivalDate || !departureDate) {
+            alert("Please select both arrival and departure dates.");
+            return;
+         }
+      
+         // Redirect to apartments.html with query parameters
+         const url = `html/apartments.html?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
+         window.location.href = url;
+      });      
+   </script>
 </html>

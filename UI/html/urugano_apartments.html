@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+     <!-- Tweaks for older IEs-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body class="main-layout">
@@ -42,7 +46,7 @@
                                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                                     <li class="nav-item active"><a class="nav-link" href="apartments.html">Our Apartments</a></li>
                                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="testimonial.html">testimonial</a></li>
                                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                                 </ul>
                             </div>
@@ -53,86 +57,41 @@
         </div>
     </header>
 
-    <!-- Back Button -->
-    <a href="javascript:history.back()" class="back-btn">Back</a>
-
     <!-- Hero Section -->
     <div class="hero-section text-center">
-        <h2 class="display-4 font-weight-bold">Urugano Apartments</h2>
+        <h2 class="display-4 font-weight-bold">Urugano Breeze Apartments</h2>
     </div>
 
     <!-- Our Rooms Section -->
     <div class="our_room urugano">
+        <div class="search-bar-wrapper">
+            <div class="search-bar">
+                <div class="search-item location">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon-location" width="16" height="16">
+                        <path fill="currentColor" d="M192 0C86 0 0 86 0 192c0 77.1 27.6 99.6 172.8 306.7 10.1 14.2 32.3 14.2 42.4 0C356.4 291.6 384 269.1 384 192 384 86 298 0 192 0zm0 272c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"/>
+                    </svg>
+                    <input type="text" placeholder="Enter location">
+                </div>
+                <div class="search-item dates">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon-location" width="30px" height="30px">
+                        <path fill="currentColor" d="M152 64c0 13.3-10.7 24-24 24s-24-10.7-24-24V16c0-13.3 10.7-24 24-24s24 10.7 24 24v48zm192 0c0 13.3-10.7 24-24 24s-24-10.7-24-24V16c0-13.3 10.7-24 24-24s24 10.7 24 24v48zM0 80C0 53.5 21.5 32 48 32h48V16c0-8.84 7.2-16 16-16h32c8.8 0 16 7.16 16 16v16h128V16c0-8.84 7.2-16 16-16h32c8.8 0 16 7.16 16 16v16h48c26.5 0 48 21.5 48 48v48H0V80zm0 96v272c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V176H0zm128 80c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm0 128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm128-128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm0 128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm128-128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm0 128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48z"></path>
+                    </svg>
+                    <input type="date" id="checkin-date" placeholder="Check-in date">
+                    <span>-</span>
+                    <input type="date" id="checkout-date" placeholder="Check-out date">
+                </div>
+                <button id="search-btn">Search</button>
+            </div>
+        </div>
         <div class="container">
             <div class="titlepage text-center mb-5">
                 <p class="lead">Experience elegance and comfort in our luxurious apartments</p>
             </div>
-            <div class="row">
+            <div class="row" id="apartmentList">
                 <!-- Apartment Cards -->
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <a href="apartment-details.html" class="room card border-0 shadow-sm">
-                        <img src="../assets/images/room1.jpg" class="card-img-top" alt="4 Bedroom Apartment">
-                        <div class="card-body">
-                            <h3 class="card-title">4 Bedroom Apartment</h3>
-                            <p class="card-text">Discover a luxurious four-bedroom apartment that combines space and style...</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="room card border-0 shadow-sm">
-                        <img src="../assets/images/room2.jpg" class="card-img-top" alt="2 Bedroom Suite">
-                        <div class="card-body">
-                            <h3 class="card-title">2 Bedroom Suite</h3>
-                            <p class="card-text">Experience modern living in our beautifully designed 2-bedroom apartment, perfect for families or young professionals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="room card border-0 shadow-sm">
-                        <img src="../assets/images/room2.jpg" class="card-img-top" alt="2 Bedroom Suite">
-                        <div class="card-body">
-                            <h3 class="card-title">2 Bedroom Suite</h3>
-                            <p class="card-text">Experience modern living in our beautifully designed 2-bedroom apartment, perfect for families or young professionals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="room card border-0 shadow-sm">
-                        <img src="../assets/images/room2.jpg" class="card-img-top" alt="2 Bedroom Suite">
-                        <div class="card-body">
-                            <h3 class="card-title">2 Bedroom Suite</h3>
-                            <p class="card-text">Experience modern living in our beautifully designed 2-bedroom apartment, perfect for families or young professionals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="room card border-0 shadow-sm">
-                        <img src="../assets/images/room2.jpg" class="card-img-top" alt="2 Bedroom Suite">
-                        <div class="card-body">
-                            <h3 class="card-title">2 Bedroom Suite</h3>
-                            <p class="card-text">Experience modern living in our beautifully designed 2-bedroom apartment, perfect for families or young professionals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 mb-4">
-                  <a href="apartment-details1.html" class="room card border-0 shadow-sm">
-                      <img src="../assets/images/13.webp" class="card-img-top" alt="Party Space">
-                      <div class="card-body">
-                          <h3 class="card-title">Space for Partying</h3>
-                          <p class="card-text">Discover the perfect venue for your celebrations, whether it's a daytime gathering or an unforgettable night party. Our spacious area is designed for versatility and accommodates all types of events.</p>
-                      </div>
-                  </a>
-              </div>
-              
             </div>
         </div>
-    </div>
-
+    </div>    
     <!-- Footer -->
     <footer>
         <div class="footer">
@@ -153,7 +112,7 @@
                             <li><a href="about.html">About</a></li>
                             <li class="active"><a href="apartments.html">Our Apartments</a></li>
                             <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="testimonial.html">testimonial</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
                         </ul>
                     </div>
@@ -190,5 +149,7 @@
     <script src="../js/jquery-3.0.0.min.js"></script>
     <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="../js/custom.js"></script>
+    <script src="../js/flatpkr.js"></script>
+    <script src="../js/urugano-apartments-api-conect.js"></script>    
 </body>
 </html>

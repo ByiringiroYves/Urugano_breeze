@@ -104,28 +104,41 @@
       </div>
       <!-- Search box above the apartments section -->
     <!-- our_room -->
-      <div class="adv  location">
-         <div class="container">
-            <div class="row" id="apartmentList">
-               <main>
+    <div class="adv location">
+      <div class="container">
+          <div class="row" id="apartmentList">
+              <main>
                   <section class="login-section">
                       <div class="login-container log">
                           <h2>Admin Login</h2>
                           <form class="login-form" id="login-form">
                               <div class="input-group">
-                                  <input type="text" id="username" name="username" placeholder="Email" required>
+                                 <input type="email" id="email" name="email" placeholder="Email" required>
                               </div>
                               <div class="input-group">
                                   <input type="password" id="password" name="password" placeholder="Password" required>
                               </div>
-                              <button type="submit" class="login-btn" onclick="window.location.href='booking.html'">Log In</button>
+                              <button type="button" class="login-btn" id="login-btn">Log In</button>
                           </form>
                       </div>
                   </section>
-              </main>                       
-            </div>
-         </div>
+              </main>
+          </div>
       </div>
+  </div>
+  
+  <!-- Modal Structure -->
+  <div id="verification-modal" class="modal">
+      <div class="modal-content">
+          <h2>Verification Required</h2>
+          <p>Please enter the 6-digit code sent to your email.</p>
+          <div class="input-group">
+              <input type="text" id="verification-code" placeholder="Enter Verification Code" required>
+          </div>
+          <button type="button" class="confirm-btn" id="confirm-btn">Confirm</button>
+      </div>
+  </div>
+  
       <!-- end our_room -->
      
       <!--  footer -->
@@ -186,5 +199,9 @@
       <!-- sidebar -->
       <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="../js/custom.js"></script>
+      <script src="../js/modal.js"></script>
+      <script>
+         // Base URL of your API (adjust as needed)
+      </script>
    </body>
 </html>

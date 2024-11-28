@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const { MONGO_URI } = require('./connection/config');
 const routes = require('./routes'); // Import main routes file
+const path = require('path');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +25,9 @@ app.use(express.json());
 
 //routes
 app.use('/api', routes); // Any other routes
+
+//uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

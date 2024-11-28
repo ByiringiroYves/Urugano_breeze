@@ -1,14 +1,26 @@
-// routes/apartmentRoutes.js
-
 const express = require('express');
 const router = express.Router();
-const apartmentController = require('../controllers/apartmentController'); // Corrected path to apartmentController
-const { updateApartmentPriceByName } = require('../controllers/apartmentController');
+const { upload, setUploadType } = require('../middleware/upload');
+const {
+    createApartment,
+    getApartmentsByCompound,
+    updateApartmentDetailsByName,
+    getAvailableApartments,
+    getAvailableApartment,
+} = require('../controllers/apartmentController');
 
-// Routes for apartments
-router.post('/create', apartmentController.createApartment);
-router.get('/compound/:compound_id', apartmentController.getApartmentsByCompound);
-router.patch('/update-price-by-name/:apartmentName', updateApartmentPriceByName);
+// Route to create a new apartment (with image upload)
+router.post('/create', 
+    setUploadType('apartments'), // Specify 'compounds' folder
+    upload.single('image'), createApartment);
 
+// Route to get apartments in a specific compound (by compound_id)
+router.get('/compound/:compound_id', getApartmentsByCompound);
+
+// Route to update apartment details (with image upload)
+router.put('/update/:apartmentName', upload.single('image'), updateApartmentDetailsByName);
+
+router.post('/available-apartments', getAvailableApartments);
+router.post('/available-apartment', getAvailableApartment);
 
 module.exports = router;

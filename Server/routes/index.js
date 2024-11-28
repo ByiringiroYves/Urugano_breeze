@@ -1,7 +1,7 @@
 // routes/index.js
 
 const express = require('express');
-const adminRoutes = require('./admin');
+const adminRoutes = require('./adminRoutes');
 const apartmentRoutes = require('./apartmentRoutes');
 const compoundRoutes = require('./compoundRoutes');
 const bookingRoutes = require('./bookingRoutes');
