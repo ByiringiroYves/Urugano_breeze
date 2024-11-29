@@ -1,13 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const adminSchema = new mongoose.Schema(
-    {
-        email: { type: String, required: true, unique: true },
-        password: { type: String, required: true },
-        confirmationCode: { type: Number, default: null }, // 6-digit code
-        codeExpiresAt: { type: Date, default: null }, // Expiration time for the code
+const AdminSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    { timestamps: true }
-);
+    password: {
+        type: String,
+        required: true,
+    },
+});
 
-module.exports = mongoose.model('Admin', adminSchema);
+module.exports = mongoose.model("Admin", AdminSchema);

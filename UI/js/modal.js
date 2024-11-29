@@ -4,17 +4,21 @@ const API_BASE_URL = "http://localhost:5000/api/admin";
 document.getElementById('login-btn').addEventListener('click', async function (event) {
     event.preventDefault();
 
-    // Get values from the login form
-    const email = document.getElementById('email').value.trim(); // Corrected ID to 'email'
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
 
+    // Error message container for login
+    const loginErrorElement = document.querySelector(".login-form .admin-error-message");
+
+    // Clear any existing errors
+    loginErrorElement.textContent = "";
+
     if (!email || !password) {
-        alert("Please fill in both fields.");
+        loginErrorElement.textContent = "Email and password are required.";
         return;
     }
 
     try {
-        // Call the login API to authenticate and send the verification code
         const response = await fetch(`${API_BASE_URL}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -24,32 +28,36 @@ document.getElementById('login-btn').addEventListener('click', async function (e
         const data = await response.json();
 
         if (response.ok) {
-            alert(`Verification code sent to: ${email}`);
-            // Show the modal
+           // alert(`Verification code sent to: ${email}`);
             const modal = document.getElementById('verification-modal');
-            modal.style.display = 'block'; // Set display to 'block' to make the modal visible
+            modal.style.display = 'block'; // Show the modal
         } else {
-            alert(data.error || "Login failed. Please try again.");
+            loginErrorElement.textContent = data.error || "Login failed. Please try again.";
         }
     } catch (error) {
         console.error("Error during login:", error);
-        alert("An error occurred while logging in.");
+        loginErrorElement.textContent = "An error occurred while logging in.";
     }
 });
 
+
 // Confirm button functionality
 document.getElementById('confirm-btn').addEventListener('click', async function () {
-    // Get values from the modal form
     const verificationCode = document.getElementById('verification-code').value.trim();
-    const email = document.getElementById('email').value.trim(); // Ensure we retrieve the email
+    const email = document.getElementById('email').value.trim();
+
+    // Error message container for verification
+    const verificationErrorElement = document.querySelector("#verification-modal .admin-error-message");
+
+    // Clear any existing errors
+    verificationErrorElement.textContent = "";
 
     if (!email || !verificationCode) {
-        alert('Email and verification code are required.');
+        verificationErrorElement.textContent = "Email and verification code are required.";
         return;
     }
 
     try {
-        // Call the verify-code API
         const response = await fetch(`${API_BASE_URL}/verify-code`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -60,13 +68,32 @@ document.getElementById('confirm-btn').addEventListener('click', async function 
 
         if (response.ok) {
             alert('Verification successful!');
-            // Redirect to another page (e.g., booking.html or dashboard)
-            window.location.href = 'booking.html';
+            window.location.href = 'booking.html'; // Redirect to the dashboard or desired page
         } else {
-            alert(result.error || 'Invalid or expired verification code.');
+            verificationErrorElement.textContent = result.error || 'Invalid or expired verification code.';
         }
     } catch (error) {
-        console.error('Error verifying code:', error);
-        alert('An error occurred while verifying the code.');
+        console.error("Error verifying code:", error);
+        verificationErrorElement.textContent = "An error occurred while verifying the code.";
     }
 });
+
+/**
+ * Utility function to display error messages in the appropriate location
+ * @param {string} message - The error message to display
+ * @param {string} context - The context of the error ("login" or "verification")
+ */
+function displayError(message, context) {
+    let errorElement;
+
+    if (context === "login") {
+        errorElement = document.querySelector(".admin-error-message-login");
+    } else if (context === "verification") {
+        errorElement = document.querySelector(".admin-error-message");
+    }
+
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.color = "red"; // Make it visually distinct
+    }
+}

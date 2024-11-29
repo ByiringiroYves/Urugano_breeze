@@ -239,6 +239,18 @@ button {
      height: 100%;
 }
 
+.loader_bga{
+    position: fixed;
+     z-index: 9999999;
+     background: #fff;
+     justify-content: center;
+     align-self: center;
+     align-items: center;
+     width: 25%;
+     height: 25%;
+     margin-top: 350px;
+}
+
 .loader {
      height: 100%;
      width: 100%;
@@ -1464,13 +1476,18 @@ line-height: 35px;
      font-weight: bold;
  }
  
- .status:contains("Pending") {
-     color: red;
- }
- 
- .status:contains("Confirmed") {
-     color: green;
- }
+ /* Confirmed status: green */
+.status-confirmed {
+    color: green;
+    font-weight: bold;
+}
+
+/* Canceled status: red */
+.status-canceled {
+    color: red;
+    font-weight: bold;
+}
+
  
  /* Add hover effect to table rows */
 #bookingsTable tbody tr:hover {
@@ -2389,11 +2406,64 @@ p {
     color: #555;
 }
 
+.admin-error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.5rem; /* Adds spacing between input and message */
+    position: absolute;
+    bottom: -20px; /* Ensures it stays below the input field */
+}
 
 
 
 
 
+.input-group {
+    position: relative;
+    width: 100%;
+    
+}
+
+#password {
+    width: 100%;
+    padding-right: 40px; /* Space for the toggle button */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+    margin-top: 10px; /* Add some space above the password field */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* Adjust size of the icon */
+    padding: 5px;
+}
+
+.toggle-password:focus {
+    outline: none; /* Remove focus outline */
+}
+
+.toggle-password i {
+    color: #555; /* Default color for the icon */
+}
+
+.login-form {
+    margin-top: -10px; /* Move the form upwards slightly */
+}
+
+.login-btn {
+    margin-top: 20px; /* Add space between the inputs and the login button */
+}
 
 
- 
+.admin-error-message-1 {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+

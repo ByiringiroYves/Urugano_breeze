@@ -56,7 +56,7 @@ const sendVerificationEmail = async (email, verificationCode) => {
             };
 
         await transporter.sendMail(mailOptions);
-        console.log(`Verification email sent to ${email}`);
+      //  console.log(`Verification email sent to ${email}`);
     } catch (error) {
         console.error("Error sending email:", error);
         throw new Error("Failed to send verification email");
@@ -85,8 +85,8 @@ exports.createAdmin = async (req, res) => {
 
         // Validate password strength
         if (!isValidPassword(password)) {
-            return res.status(400).json({ 
-                error: "Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character." 
+            return res.status(400).json({
+                error: "Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
             });
         }
 
@@ -101,14 +101,14 @@ exports.createAdmin = async (req, res) => {
         const saltRounds = 10; // Number of salt rounds for bcrypt
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        // Create a new admin
+        // Create a new admin (excluding confirmpassword)
         const admin = new Admin({ email: normalizedEmail, password: hashedPassword });
         await admin.save();
 
-        res.status(201).json({ message: 'Admin created successfully', admin });
+        res.status(201).json({ message: "Admin created successfully", admin });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'An error occurred while creating the admin user' });
+        console.error("Error creating admin:", error);
+        res.status(500).json({ error: "An error occurred while creating the admin user" });
     }
 };
 
@@ -156,7 +156,7 @@ exports.verifyCode = (req, res) => {
     const normalizedEmail = email.toLowerCase();
     console.log(`Verifying code for email: ${normalizedEmail} with code: ${code}`);
 
-    const storedData = getVerificationCode(normalizedEmail);
+    const storedData = getVerificationCode(normalizedEmail); // Retrieve and decrypt code
     if (!storedData) {
         console.log('No stored data found or verification code expired.');
         return res.status(400).json({ error: 'Invalid or expired verification code.' });
