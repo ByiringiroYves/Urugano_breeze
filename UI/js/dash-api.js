@@ -167,10 +167,10 @@ function populateUserDetails(user) {
     if (user && user.fullName && user.email) {
         if (userAvatar) {
             userAvatar.innerText = user.fullName
-             //   .split(' ')
-                .slice(0, 2)
-                .map(name => name.charAt(0).toUpperCase())
-                .join('');
+            .split(' ')
+            .slice(0, 2) // Fetch first two words
+            .map(name => name.charAt(0).toUpperCase()) // Get the first letter and capitalize it
+            .join(''); // Combine the letters into a string
         } else {
             console.warn('User avatar element not found.');
         }

@@ -1,197 +1,317 @@
-      /* General styling for cards */
-      .card {
-        margin: 15px 0;
-        padding: 25px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-    /* Metric Card Customization */
-.card h3 {
-font-size: 12px;
-font-weight: bold;
-margin-bottom: 10px;
-color: white;
+@import url('../css/style.css');
+/* General styling for cards */
+.card-header {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0; /* Rounded corners for the top of the card */
 }
 
-.card .metric-value {
-font-size: 22px;
-font-weight: bold;
-color: WHITE;
-}
-
-.card i {
-margin-top: 10px;
-opacity: 0.8;
-}
-
-/* Table Customization */
-.table thead th {
-font-size: 16px;
-font-weight: bold;
-}
-
-.table tbody td {
-vertical-align: middle;
-}
-
-.badge {
-padding: 8px 12px;
-font-size: 14px;
-font-weight: bold;
-border-radius: 12px;
-}
-
-
-    .card p {
-        font-size: 18px;
-        font-weight: bold;
-        color: #007bff;
-    }
-
-    /* User profile dropdown */
-    .user-circle {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #007bff;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        position: relative;
-    }
-
-    .user-dropdown {
-        position: absolute;
-        right: 10px;
-        top: 70px;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        display: none;
-        z-index: 1000;
-        width: 200px;
-    }
-
-    .user-dropdown.active {
-        display: block;
-    }
-
-    .user-dropdown .dropdown-item {
-        padding: 10px 15px;
-        cursor: pointer;
-    }
-
-    .user-dropdown .dropdown-item:hover {
-        background-color: #f8f9fa;
-    }
-
-    .user-dropdown .dropdown-item strong {
-        display: block;
-        font-size: 14px;
-    }
-
-    /* Cards container */
-    .dashboard-metrics {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin: 20px 0;
-    }
-
-    .dashboard-metrics .card {
-        flex: 1;
-        min-width: 250px;
-    }
-
-    /* Recent bookings table */
-    .recent-bookings table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    .recent-bookings th, .recent-bookings td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .recent-bookings th {
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    .recent-bookings tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-
-    /* Card Styling */
 .card {
-padding: 20px;
-border-radius: 12px;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Professional shadow */
-transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 15px 0;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Professional shadow */
+    text-align: center;
+    background-color: #0f1521; /* Consistent dark background */
+    color: white; /* White text for contrast */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-transform: translateY(-5px); /* Lift the card slightly on hover */
-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px); /* Lift the card slightly on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
-/* Text and icon inside cards */
 .card h3 {
-font-size: 18px;
-margin-bottom: 10px;
-text-transform: uppercase;
-font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: white;
 }
 
 .card .metric-value {
-font-size: 22px;
-font-weight: bold;
-margin: 10px 0;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: white;
 }
 
 .card i {
-opacity: 0.8;
-margin-top: 10px;
+    margin-top: 10px;
+    font-size: 24px;
+    opacity: 0.9;
+    color: white; /* Icon color matches text */
 }
 
-/* Table styling */
-.table {
-margin-top: 20px;
+/* Cards container */
+.dashboard-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px 0;
 }
 
-.table thead th {
-background-color: #007bff;
-color: #fff;
+.dashboard-metrics .card {
+    flex: 1;
+    min-width: 250px;
 }
 
-.table tbody tr:hover {
-background-color: #f1f1f1;
+/* Recent bookings section */
+.recent-bookings {
+    margin-top: 40px;
+}
+
+.recent-bookings h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #0f1521; /* Dark background */
+    padding: 10px 15px;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+}
+
+.recent-bookings table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+}
+
+.recent-bookings th,
+.recent-bookings td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.recent-bookings th {
+    background-color: #0f1521; /* Dark background for table headers */
+    color: white;
+}
+
+.recent-bookings tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.recent-bookings tr:hover {
+    background-color: #f1f1f1;
 }
 
 /* Badges styling */
 .badge {
-padding: 8px 12px;
-font-size: 14px;
-font-weight: bold;
-border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 12px;
+    text-transform: uppercase;
 }
 
 .badge-success {
-background-color: #28a745;
-color: #fff;
+    background-color: #28a745;
+    color: white;
 }
 
 .badge-warning {
-background-color: #ffc107;
-color: #212529;
+    background-color: #ffc107;
+    color: #212529;
+}
+
+/* User profile dropdown */
+.user-circle {
+    width: 40px;
+    height: 40px;
+    font-weight: bolder;
+    border-radius: 50%;
+    background-color: #0f1521; /* Dark circle background */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    margin-right: -40px;
+}
+
+.user-dropdown {
+    position: absolute;
+    right: -40px;
+    top: 60px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+    width: 300px;
+}
+
+.user-dropdown.active {
+    display: block;
+}
+
+.user-dropdown .dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.user-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.user-dropdown .dropdown-item strong {
+    display: block;
+    font-size: 14px;
+}
+
+/* Table styling */
+.table {
+    margin-top: 20px;
+}
+
+.table thead th {
+    background-color: #0f1521; /* Dark table header background */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.table tbody td {
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.card-header {
+    background-color: #0f1521; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0; /* Rounded corners for the top of the card */
+}
+
+/* Responsive styles for max-width: 430px */
+/* Responsive styles for max-width: 430px */
+@media (max-width: 430px) {
+    /* Ensure dashboard metrics stack vertically */
+    .dashboard-metrics {
+        flex-direction: column;
+        gap: 15px; /* Add spacing between stacked cards */
+        align-items: center; /* Center-align cards */
+    }
+
+    .dashboard-metrics .card {
+        width: 90%; /* Reduce card width to fit the screen */
+    }
+
+    /* Reduce padding and font size in cards for smaller screens */
+    .card {
+        padding: 15px;
+        margin: 10px 0;
+    }
+
+    .card h3 {
+        font-size: 16px; /* Smaller title */
+    }
+
+    .card .metric-value {
+        font-size: 20px; /* Adjusted metric value size */
+    }
+
+    .card i {
+        font-size: 20px; /* Adjust icon size */
+    }
+
+    /* Adjust Recent Bookings section */
+    .recent-bookings h2 {
+        font-size: 18px;
+    }
+
+    .recent-bookings table {
+        font-size: 14px;
+    }
+
+    /* User profile adjustments */
+    .user-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 14px; /* Adjust font size for avatar */
+    }
+
+    .user-dropdown {
+        width: 250px; /* Adjust dropdown width */
+    }
+}
+
+/* Responsive styles for max-width: 360px */
+@media (max-width: 360px) {
+    /* Further reduce card and content sizes for very small screens */
+    .dashboard-metrics {
+        gap: 10px; /* Reduce spacing further */
+    }
+
+    .dashboard-metrics .card {
+        width: 95%; /* Ensure full-width cards on tiny screens */
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .card h3 {
+        font-size: 14px; /* Smaller title font */
+    }
+
+    .card .metric-value {
+        font-size: 18px; /* Further adjust font size */
+    }
+
+    .card i {
+        font-size: 18px; /* Adjust icon size */
+    }
+
+    /* Recent Bookings adjustments */
+    .recent-bookings h2 {
+        font-size: 16px;
+    }
+
+    .recent-bookings table {
+        font-size: 12px; /* Reduce table font size */
+    }
+
+    /* User profile adjustments */
+    .user-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 12px; /* Smaller font for avatar */
+    }
+
+    .user-dropdown {
+        width: 220px;
+    }
+
+    .user-dropdown .dropdown-item {
+        padding: 8px 10px;
+    }
+
+    /* Logo adjustments for smaller screens */
+    .logo img {
+        width: 100px; /* Resize logo */
+    }
+
+    /* Navigation adjustments for mobile */
+    .navbar-nav {
+        flex-direction: column; /* Stack navigation items */
+        align-items: center; /* Center align nav items */
+    }
+
+    .navbar-nav .nav-item {
+        margin: 5px 0; /* Add spacing between nav items */
+    }
 }

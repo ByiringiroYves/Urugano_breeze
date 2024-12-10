@@ -1255,6 +1255,67 @@ input::-webkit-outer-spin-button {
     button {
         grid-column: span 1;
       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     .dashboard-metrics {
+        flex-direction: column; /* Stack cards vertically */
+        gap: 10px; /* Reduce gap between cards */
+    }
+
+    .dashboard-metrics .card {
+        max-width: 100%; /* Full width of the container */
+        margin: 0 auto; /* Center align cards */
+    }
+
+    .card {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .card h3 {
+        font-size: 16px; /* Reduce heading size */
+    }
+
+    .card .metric-value {
+        font-size: 20px; /* Adjust font size for metrics */
+    }
+
+    .recent-bookings h2 {
+        font-size: 18px; /* Reduce heading size */
+    }
+
+    .recent-bookings table {
+        font-size: 14px; /* Adjust table font size */
+    }
+
+    .user-circle {
+        width: 35px; /* Reduce avatar size */
+        height: 35px;
+    }
+
+    .user-dropdown {
+        width: 250px; /* Adjust dropdown width */
+    }
+
+
+
+
     }
 
 

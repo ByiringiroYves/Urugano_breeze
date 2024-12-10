@@ -1,0 +1,117 @@
+@media (max-width: 430px) {
+    /* Ensure dashboard metrics stack vertically */
+    .dashboard-metrics {
+        flex-direction: column;
+        gap: 15px; /* Add spacing between stacked cards */
+        align-items: center; /* Center-align cards */
+    }
+
+    .dashboard-metrics .card {
+        width: 90%; /* Reduce card width to fit the screen */
+    }
+
+    /* Reduce padding and font size in cards for smaller screens */
+    .card {
+        padding: 15px;
+        margin: 10px 0;
+    }
+
+    .card h3 {
+        font-size: 16px; /* Smaller title */
+    }
+
+    .card .metric-value {
+        font-size: 20px; /* Adjusted metric value size */
+    }
+
+    .card i {
+        font-size: 20px; /* Adjust icon size */
+    }
+
+    /* Adjust Recent Bookings section */
+    .recent-bookings h2 {
+        font-size: 18px;
+    }
+
+    .recent-bookings table {
+        font-size: 14px;
+    }
+
+    /* User profile adjustments */
+    .user-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 14px; /* Adjust font size for avatar */
+    }
+
+    .user-dropdown {
+        width: 250px; /* Adjust dropdown width */
+    }
+}
+
+/* Responsive styles for max-width: 360px */
+@media (max-width: 360px) {
+    /* Further reduce card and content sizes for very small screens */
+    .dashboard-metrics {
+        gap: 10px; /* Reduce spacing further */
+    }
+
+    .dashboard-metrics .card {
+        width: 95%; /* Ensure full-width cards on tiny screens */
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .card h3 {
+        font-size: 14px; /* Smaller title font */
+    }
+
+    .card .metric-value {
+        font-size: 18px; /* Further adjust font size */
+    }
+
+    .card i {
+        font-size: 18px; /* Adjust icon size */
+    }
+
+    /* Recent Bookings adjustments */
+    .recent-bookings h2 {
+        font-size: 16px;
+    }
+
+    .recent-bookings table {
+        font-size: 12px; /* Reduce table font size */
+    }
+
+    /* User profile adjustments */
+    .user-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 12px; /* Smaller font for avatar */
+    }
+
+    .user-dropdown {
+        width: 220px;
+    }
+
+    .user-dropdown .dropdown-item {
+        padding: 8px 10px;
+    }
+
+    /* Logo adjustments for smaller screens */
+    .logo img {
+        width: 100px; /* Resize logo */
+    }
+
+    /* Navigation adjustments for mobile */
+    .navbar-nav {
+        flex-direction: column; /* Stack navigation items */
+        align-items: center; /* Center align nav items */
+    }
+
+    .navbar-nav .nav-item {
+        margin: 5px 0; /* Add spacing between nav items */
+    }
+}
