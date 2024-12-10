@@ -2,40 +2,52 @@
 const API_BASE_URL = "http://localhost:5000/api/admin";
 
 // Handle form submission for creating an admin account
-document.getElementById("createAdminForm").addEventListener("submit", async function (event) {
+document.getElementById('createAdminForm').addEventListener('submit', async function (event) {
     event.preventDefault();
 
-    // Get values from the form inputs
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const confirmPassword = document.getElementById("confirmPassword").value.trim();
-    const errorMessageElement = document.querySelector(".admin-error-message-1");
+    // Fetch values from form inputs
+    const fullname = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
 
-    errorMessageElement.textContent = ""; // Clear previous errors
+    // Error message container
+    const errorMessage = document.querySelector('.admin-error-message-1');
+
+    // Clear previous error messages
+    errorMessage.textContent = "";
 
     // Validate required fields
-    if (!email || !password || !confirmPassword) {
-        errorMessageElement.textContent = "All fields are required.";
+    if (!fullname || !email || !password || !confirmPassword) {
+        errorMessage.textContent = "All fields are required.";
+        return;
+    }
+
+    // Validate password match
+    if (password !== confirmPassword) {
+        errorMessage.textContent = "Passwords do not match.";
         return;
     }
 
     try {
+        // Send request to backend API
         const response = await fetch(`${API_BASE_URL}/create-admin`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password, confirmpassword: confirmPassword }),
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Fullname: fullname, email, password, confirmpassword: confirmPassword }),
         });
 
         const data = await response.json();
 
+        // Handle success or error response
         if (response.ok) {
-            alert("Admin account created successfully!");
-            document.getElementById("createAdminForm").reset();
+            alert("Admin created successfully!");
+            window.location.href = 'booking.html'; // Redirect to desired page
         } else {
-            errorMessageElement.textContent = data.error || "Failed to create admin account.";
+            errorMessage.textContent = data.error || "Failed to create admin.";
         }
     } catch (error) {
         console.error("Error creating admin:", error);
-        errorMessageElement.textContent = "An error occurred while creating the admin account.";
+        errorMessage.textContent = "An error occurred while creating the admin.";
     }
 });

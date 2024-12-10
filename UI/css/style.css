@@ -47,7 +47,7 @@ html {
 }
 
 body {
-     color: #666666;
+     color: #000000;
      font-size: 14px;
      font-family: 'Poppins', sans-serif;
      line-height: 1.80857;
@@ -807,7 +807,7 @@ button {
 /** footer **/
 
 .footer {
-     background: #0f1521;
+    background: #0f1521;
      margin-top: 90px;
      padding-top: 70px;
      text-align: center;
@@ -2465,5 +2465,176 @@ p {
     font-size: 14px;
     margin-top: 5px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.admin-contain {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 90%;
+}
+
+.admin-contain h2 {
+    font-size: 1.8rem;
+    color: #0f1521;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.admin-contain label {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+
+/* General form input styles */
+.admin-contain input[type="text"],
+.admin-contain input[type="number"],
+.admin-contain input[type="file"],
+.admin-contain select,
+.admin-contain textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    appearance: none; /* Remove default styling */
+}
+
+/* Focus state */
+.admin-contain input[type="text"]:focus,
+.admin-contain input[type="number"]:focus,
+.admin-contain select:focus,
+.admin-contain textarea:focus {
+    border-color: #0f1521;
+    outline: none;
+}
+
+/* Custom arrow for select dropdown */
+.admin-contain .form-group {
+    position: relative;
+}
+
+.admin-contain select {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    padding-right: 30px; /* Space for the arrow */
+}
+
+/* Remove default arrow in IE */
+.admin-contain select::-ms-expand {
+    display: none;
+}
+
+.admin-contain button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #0f1521;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-contain button:hover {
+    background-color: #333;
+}
+
+.admin-contain button:active {
+    background-color: #222;
+}
+
+option:hover {
+    box-shadow: inset 0 0 0 1000px #b10606; /* Desired hover color */
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.confirm-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.confirm-btn:hover {
+    background-color: #2980b9;
+}
+
+
+
+.nav-link i {
+    color: black; /* Set the icon color to black */
+    margin-right: 8px; /* Add spacing between icon and text */
+    font-size: 1rem; /* Adjust icon size if needed */
+    vertical-align: middle; /* Align icon with text */
+}
+
+.nav-item.active .nav-link i {
+    color: rgb(235, 8, 8); /* Keep the active icon black as well */
+}
+
+
+
 
 

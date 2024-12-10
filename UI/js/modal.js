@@ -1,16 +1,39 @@
 const API_BASE_URL = "http://localhost:5000/api/admin";
 
-// Handle Login Button Click
-document.getElementById('login-btn').addEventListener('click', async function (event) {
+/**
+ * Store JWT token in localStorage
+ * @param {string} token - The JWT token
+ */
+function setToken(token) {
+    localStorage.setItem("authToken", token);
+}
+
+/**
+ * Retrieve JWT token from localStorage
+ * @returns {string|null} The JWT token or null if not found
+ */
+function getToken() {
+    return localStorage.getItem("authToken");
+}
+
+/**
+ * Clear JWT token from localStorage
+ */
+function clearToken() {
+    localStorage.removeItem("authToken");
+}
+
+/**
+ * Handle Login Button Click
+ */
+document.getElementById("login-btn").addEventListener("click", async function (event) {
     event.preventDefault();
 
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-
-    // Error message container for login
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
     const loginErrorElement = document.querySelector(".login-form .admin-error-message");
 
-    // Clear any existing errors
+    // Clear existing errors
     loginErrorElement.textContent = "";
 
     if (!email || !password) {
@@ -28,9 +51,17 @@ document.getElementById('login-btn').addEventListener('click', async function (e
         const data = await response.json();
 
         if (response.ok) {
-           // alert(`Verification code sent to: ${email}`);
-            const modal = document.getElementById('verification-modal');
-            modal.style.display = 'block'; // Show the modal
+            console.log("Login response:", data);
+
+            if (data.token) {
+                setToken(data.token); // Store the JWT token
+                if (data.verificationCodeSent) {
+                    sessionStorage.setItem("verificationEmail", email);
+                    document.getElementById("verification-modal").style.display = "block";
+                } else {
+                    window.location.href = "admin-dashboard.html"; // Redirect to dashboard
+                }
+            }
         } else {
             loginErrorElement.textContent = data.error || "Login failed. Please try again.";
         }
@@ -40,16 +71,14 @@ document.getElementById('login-btn').addEventListener('click', async function (e
     }
 });
 
+/**
+ * Confirm Button Functionality for 2FA
+ */
+document.getElementById("confirm-btn").addEventListener("click", async function () {
+    const verificationCode = document.getElementById("verification-code").value.trim();
+    const email = sessionStorage.getItem("verificationEmail");
 
-// Confirm button functionality
-document.getElementById('confirm-btn').addEventListener('click', async function () {
-    const verificationCode = document.getElementById('verification-code').value.trim();
-    const email = document.getElementById('email').value.trim();
-
-    // Error message container for verification
     const verificationErrorElement = document.querySelector("#verification-modal .admin-error-message");
-
-    // Clear any existing errors
     verificationErrorElement.textContent = "";
 
     if (!email || !verificationCode) {
@@ -59,18 +88,22 @@ document.getElementById('confirm-btn').addEventListener('click', async function 
 
     try {
         const response = await fetch(`${API_BASE_URL}/verify-code`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getToken()}`, // Pass the JWT token
+            },
             body: JSON.stringify({ email, code: verificationCode }),
         });
 
         const result = await response.json();
 
         if (response.ok) {
-            alert('Verification successful!');
-            window.location.href = 'booking.html'; // Redirect to the dashboard or desired page
+            alert("Verification successful!");
+            sessionStorage.removeItem("verificationEmail");
+            window.location.href = "admin-dashboard.html";
         } else {
-            verificationErrorElement.textContent = result.error || 'Invalid or expired verification code.';
+            verificationErrorElement.textContent = result.error || "Invalid or expired verification code.";
         }
     } catch (error) {
         console.error("Error verifying code:", error);
@@ -79,21 +112,72 @@ document.getElementById('confirm-btn').addEventListener('click', async function 
 });
 
 /**
- * Utility function to display error messages in the appropriate location
- * @param {string} message - The error message to display
- * @param {string} context - The context of the error ("login" or "verification")
+ * Validate session on page load
  */
-function displayError(message, context) {
-    let errorElement;
+async function validateSession() {
+    const token = getToken();
 
-    if (context === "login") {
-        errorElement = document.querySelector(".admin-error-message-login");
-    } else if (context === "verification") {
-        errorElement = document.querySelector(".admin-error-message");
+    if (!token) {
+        alert("Your session has expired. Please log in again.");
+        window.location.href = "admin.html";
+        return;
     }
 
-    if (errorElement) {
-        errorElement.textContent = message;
-        errorElement.style.color = "red"; // Make it visually distinct
+    try {
+        const response = await fetch(`${API_BASE_URL}/profile`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`, // Pass the JWT token
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Session validation failed.");
+        }
+
+        const data = await response.json();
+        console.log("Session validated for:", data.fullName);
+    } catch (error) {
+        console.error("Error validating session:", error);
+        alert("Your session has expired. Please log in again.");
+        clearToken();
+        window.location.href = "admin.html";
     }
 }
+
+/**
+ * Logout function
+ */
+async function logout() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/logout`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${getToken()}`, // Pass the JWT token
+            },
+        });
+
+        if (response.ok) {
+            alert("Logged out successfully!");
+            clearToken(); // Clear the JWT token
+            window.location.href = "admin.html";
+        } else {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Logout failed.");
+        }
+    } catch (error) {
+        console.error("Error during logout:", error);
+        alert("An error occurred while logging out.");
+    }
+}
+
+/**
+ * Automatically validate session on specific pages
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const currentPath = window.location.pathname;
+
+    if (currentPath.endsWith("admin-dashboard.html")) {
+        validateSession();
+    }
+});

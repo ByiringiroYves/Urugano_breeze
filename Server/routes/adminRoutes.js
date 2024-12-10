@@ -1,10 +1,26 @@
 const express = require('express');
-const router = express.Router();
-const AdminController = require('../controllers/adminController'); // Correct path to your adminController.js
+const path = require('path');
+const AdminController = require('../controllers/adminController'); // Import the admin controller
+const { authenticateJWT } = require('../controllers/adminController'); // Import JWT middleware
 
-// Define the POST route for creating an admin
-router.post('/create-admin', AdminController.createAdmin);
-router.post('/login', AdminController.login); // Login route
+const router = express.Router();
+
+// Log the loaded AdminController for debugging
+console.log("AdminController loaded:", AdminController);
+
+// Public Routes
+router.post('/create-admin', AdminController.createAdmin); // Route to create an admin
+router.post('/login', AdminController.loginAdmin); // Login route
 router.post('/verify-code', AdminController.verifyCode); // Verify code route
 
+// Protected Routes (require JWT authentication middleware)
+router.get('/profile', authenticateJWT, AdminController.getProfile); // Fetch profile
+router.post('/logout', authenticateJWT, AdminController.logoutAdmin); // Logout route
+
+// Admin Feature Page (Protected Route)
+router.get('/admin-feature', authenticateJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, '../UI/admin-dashboard.html')); // Serve the admin dashboard page
+});
+
+// Export the router
 module.exports = router;

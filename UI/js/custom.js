@@ -426,7 +426,10 @@ flatpickr("#checkin", {
 });
 
 
-//Slide
+// button
+function scrollToForm() {
+    document.getElementById('reservationForm').scrollIntoView({ behavior: 'smooth' });
+}
 
  
 

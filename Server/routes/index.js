@@ -8,6 +8,7 @@ const bookingRoutes = require('./bookingRoutes');
 const testimonialRoutes = require('./testimonialRoutes');
 const peopleRoutes = require('./peopleRoutes'); // Import the people routes
 const advertisementRoutes = require('./advertisementRoutes');
+const dashboardRoutes = require('./dashboardRoutes');
 
 // Use the testimonial routes
 
@@ -23,6 +24,7 @@ router.use('/bookings', bookingRoutes);
 router.use('/testimonials', testimonialRoutes);
 router.use('/people', peopleRoutes); // Attach the people routes
 router.use('/advertisements', advertisementRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 
 module.exports = router;

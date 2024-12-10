@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>modify-Apartment</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="Yves Byiringiro" content="">
+      <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="../css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="../css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->   
+      <link rel="stylesheet" href="../css/admic-nav-bar.css">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
+      </div>
+      <!-- end loader -->
+      <!-- header -->
+      <header>
+         <!-- header inner -->
+         <div class="header">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo">
+                              <a href="../index.html"><img src="../assets/images/logo.png" alt="#" /></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../index.html">
+                                        <i class="fas fa-home"></i> Home
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="people.html">
+                                        <i class="fas fa-bullhorn"></i> Advertise
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="booking.html">
+                                        <i class="fas fa-calendar-alt"></i> Booking
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="testimonial-admin.html">
+                                        <i class="fas fa-comment-alt"></i> Testimonial
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="co-admins.html">
+                                        <i class="fas fa-users"></i> Accounts Manager
+                                    </a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="modify-Apartment.html">
+                                        <i class="fas fa-edit"></i> Modify Properties
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- end header inner -->
+      <!-- end header -->
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                     <h2></h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+        <!--admin containe-->                       
+        <div class="test-ad">
+            <div class="admin-contain">
+                <h2>Update Apartment Details</h2>
+                <form id="updateApartmentForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="apartmentName">Apartment Name:</label>
+                        <select id="apartmentName" name="apartmentName" required>
+                            <option value="">Select an apartment</option>
+                            <option value="Karisimbi Apartment">Karisimbi Apartment</option>
+                            <option value="Muhabura Apartment">Muhabura Apartment</option>
+                            <option value="Sabyinyo Apartment">Sabyinyo Apartment</option>
+                            <option value="Gahinga Apartment">Gahinga Apartment</option>
+                            <option value="Bisoke Apartment">Bisoke Apartment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price per Night:</label>
+                        <input type="number" id="price" name="price_per_night" placeholder="Enter price per night">
+                    </div>
+                    <div class="form-group">
+                        <label for="rooms">Number of Rooms:</label>
+                        <input type="number" id="rooms" name="rooms" placeholder="Enter number of rooms">
+                    </div>
+                    <div class="form-group">
+                        <label for="bathrooms">Number of Bathrooms:</label>
+                        <input type="number" id="bathrooms" name="bathrooms" placeholder="Enter number of bathrooms">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Upload Image:</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+                        <img id="imagePreview" src="#" alt="Image Preview" style="display:none;"/>
+                    </div>
+                    <p class="admin-error-message" style="color: red; display: none;"></p>
+                    <button type="submit">Update Apartment</button>
+                </form>
+                <div id="responseMessage"></div>
+            </div>                               
+        </div>  
+         <!--end of admin containe-->  
+      <!--  footer -->
+      <footer>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-4">
+                     <h3>Contact US</h3>
+                     <ul class="conta">
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
+                        <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
+                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-md-4">
+                     <h3>Menu Link</h3>
+                     <ul class="link_menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html"> about</a></li>
+                        <li><a href="apartments.html">Our Apartments</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="testimonial.html">testimonial</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-md-4">
+                     <h3>News letter</h3>
+                     <form class="bottom_form">
+                        <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                        <button class="sub_btn">subscribe</button>
+                     </form>
+                     <ul class="social_icon">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-10 offset-md-1">
+                        <p>© 2024 All Rights Reserved. Design by <a href="https://www.linkedin.com/in/byiringiro-yves/"> Byiringiro Yves</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+      <!-- Javascript files-->
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <!-- sidebar -->
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="../js/custom.js"></script>
+      <script>
+        document.getElementById('updateApartmentForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+        
+            const form = event.target;
+            const formData = new FormData(form);
+            const apartmentName = formData.get('apartmentName');
+        
+            try {
+                const response = await fetch(`http://localhost:5000/api/apartments/update/${encodeURIComponent(apartmentName)}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+        
+                const result = await response.json();
+        
+                if (response.ok) {
+                    document.getElementById('responseMessage').textContent = 'Apartment details updated successfully.';
+                    document.getElementById('responseMessage').style.color = 'green';
+                } else {
+                    throw new Error(result.error || 'An error occurred while updating the apartment details.');
+                }
+            } catch (error) {
+                document.querySelector('.admin-error-message').textContent = error.message;
+                document.querySelector('.admin-error-message').style.display = 'block';
+            }
+        });  
+      </script>
+   </body>
+</html>
