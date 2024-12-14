@@ -1258,23 +1258,7 @@ input::-webkit-outer-spin-button {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     .dashboard-metrics {
+    .dashboard-metrics {
         flex-direction: column; /* Stack cards vertically */
         gap: 10px; /* Reduce gap between cards */
     }

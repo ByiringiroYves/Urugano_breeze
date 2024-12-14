@@ -164,22 +164,49 @@ const verifyCode = (req, res) => {
 
 // Middleware to verify JWT
 const authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  try {
+    // Extract the Authorization header
+    const authHeader = req.headers.authorization;
 
-  if (!authHeader) {
-    return res.status(401).json({ error: "Authorization token required." });
-  }
-
-  const token = authHeader.split(" ")[1];
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).json({ error: "Invalid or expired token." });
+    // Check if the Authorization header is present
+    if (!authHeader) {
+      console.warn("Authorization header missing.");
+      return res.status(401).json({ error: "Authorization token required." });
     }
-    req.user = user;
-    next();
-  });
+
+    // Extract the token from the "Bearer <token>" format
+    const token = authHeader.split(" ")[1];
+    if (!token) {
+      console.warn("Token missing from Authorization header.");
+      return res.status(401).json({ error: "Invalid Authorization format." });
+    }
+
+    // Verify the token
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err) {
+        if (err.name === "TokenExpiredError") {
+          console.warn("Token has expired:", err.message);
+          return res.status(403).json({ error: "Token expired. Please log in again." });
+        } else if (err.name === "JsonWebTokenError") {
+          console.warn("Invalid token:", err.message);
+          return res.status(403).json({ error: "Invalid token. Please log in again." });
+        }
+        console.error("JWT verification error:", err.message);
+        return res.status(403).json({ error: "Authentication failed." });
+      }
+
+      // Attach user information to the request object
+      req.user = user;
+
+      // Proceed to the next middleware/route handler
+      next();
+    });
+  } catch (error) {
+    console.error("Unexpected error during authentication:", error);
+    return res.status(500).json({ error: "Internal server error." });
+  }
 };
+
 
 // Fetch Admin Profile
 const getProfile = async (req, res) => {

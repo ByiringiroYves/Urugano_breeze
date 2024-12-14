@@ -18,8 +18,29 @@ router.get('/profile', authenticateJWT, AdminController.getProfile); // Fetch pr
 router.post('/logout', authenticateJWT, AdminController.logoutAdmin); // Logout route
 
 // Admin Feature Page (Protected Route)
-router.get('/admin-feature', authenticateJWT, (req, res) => {
-    res.sendFile(path.join(__dirname, '../UI/admin-dashboard.html')); // Serve the admin dashboard page
+// Protect admin pages with authenticateJWT middleware
+router.get('/html/admin-dashboard.html', authenticateJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, '../UI/html/admin-dashboard.html'));
+});
+
+router.get('/html/co-admins.html', authenticateJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, '../UI/html/co-admins.html'));
+});
+
+router.get('/html/booking.html', authenticateJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, '../UI/html/booking.html'));
+});
+
+router.get('/html/modify-Apartment.html', authenticateJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, '../UI/html/modify-Apartment.html'));
+});
+
+router.get('/html/people.html', authenticateJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, '../UI/html/people.html'));
+});
+
+router.get('/html/testimonial-admin.html', authenticateJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, '../UI/html/testimonial-admin.html'));
 });
 
 // Export the router

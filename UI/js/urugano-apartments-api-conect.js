@@ -29,10 +29,17 @@ function renderApartments(apartments, arrivalDate, departureDate) {
 
         // Check if the apartment name is "Space for Partying" and use custom HTML for it
         if (apartment.name === "Space for Partying") {
+            // Special HTML for "Space for Partying"
             apartmentHTML = `
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="room">
-                    <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
+                    <div class="room_img">
+                        <figure>
+                            <a href="javascript:void(0);" onclick="redirectToApartment('${apartment.name}')">
+                                <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
+                            </a>
+                        </figure>
+                    </div>
                     <div class="card-body">
                         <h3 class="card-title">${apartment.name}</h3>
                         <div class="ratings">
@@ -46,7 +53,7 @@ function renderApartments(apartments, arrivalDate, departureDate) {
                             <span class="recommended">Recommended for your group</span>
                         </div>
                         <p class="description-title">Space for Partying and Celebration</p>
-                        <p class="description-text">A perfect space for Small parties like Kitchen party, bridal shower, birthdays with a bautiful view over the Lake</p>
+                        <p class="description-text">A perfect space for Small parties like Kitchen party, bridal shower, birthdays with a beautiful view over the Lake</p>
                         <p class="price"><span class="final-pric"> Only Booked at the property!</span></p>
                         <div class="bt-div">
                             <button class="btn btn-primary" onclick="redirectToApartment('${apartment.name}')">See Availability</button>
@@ -60,7 +67,13 @@ function renderApartments(apartments, arrivalDate, departureDate) {
             apartmentHTML = `
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="room">
-                    <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
+                    <div class="room_img">
+                        <figure>
+                            <a href="javascript:void(0);" onclick="redirectToApartment('${apartment.name}')">
+                                <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
+                            </a>
+                        </figure>
+                    </div>
                     <div class="card-body">
                         <h3 class="card-title">${apartment.name}</h3>
                         <div class="ratings">
@@ -86,7 +99,7 @@ function renderApartments(apartments, arrivalDate, departureDate) {
             `;
         }
     
-        // Append the generated HTML to the apartment list
+        // Append each apartment's HTML to the apartment list
         apartmentList.innerHTML += apartmentHTML;
     });
 }
@@ -137,7 +150,7 @@ document.getElementById('search-btn').addEventListener('click', () => {
         alert('Please select both check-in and check-out dates.');
         return;
     }
-    const newUrl = `urugano_apartment10.html?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
+    const newUrl = `urugano_apartments.html?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
     window.location.href = newUrl;
     // Fetch and display available apartments based on new dates
    // fetchAvailableApartments(compoundId, arrivalDate, departureDate);

@@ -1,5 +1,6 @@
 @import url('../css/style.css');
 /* General styling for cards */
+
 .card-header {
     background-color: #007bff; /* Blue background color */
     color: #fff; /* White text color */

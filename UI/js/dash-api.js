@@ -27,13 +27,16 @@ function clearToken() {
  */
 async function loadDashboardData() {
     try {
+        // Fetch dashboard data first
         await Promise.all([
             fetchAndSetTotalBookings(),
             fetchAndSetActiveAdmins(),
             fetchAndSetRecentBookings(),
             fetchAndSetTopApartments(),
         ]);
-        fetchAndSetUserProfile();
+
+        // Fetch user profile last to prevent interference
+        await fetchAndSetUserProfile();
     } catch (error) {
         console.error('Error loading dashboard data:', error);
         alert('Error loading data. Redirecting to login.');
@@ -77,26 +80,53 @@ async function fetchAndSetActiveAdmins() {
 async function fetchAndSetRecentBookings() {
     try {
         const data = await fetchWithToken(`${API_BASE_URL}/recent-bookings`);
-        populateRecentBookings(data.bookings);
+        if (data.bookings && data.bookings.length > 0) {
+            console.log('Fetched recent bookings:', data.bookings);
+            populateRecentBookings(data.bookings);
+        } else {
+            console.warn('No recent bookings found.');
+            populateRecentBookings([]); // Ensure the table is cleared
+        }
     } catch (error) {
         console.error('Error fetching recent bookings:', error.message);
     }
 }
 
 /**
- * Fetch top 3 apartments and update DOM
+ * Fetch top booked apartment and update DOM
  */
 async function fetchAndSetTopApartments() {
+    const topApartmentsElement = document.getElementById('topApartments');
+
+    // Check if the element exists in the DOM
+    if (!topApartmentsElement) {
+        console.error("Element with ID #topApartments is not found in the DOM.");
+        return; // Exit early to avoid further errors
+    }
+
+    // Set a loading state
+    topApartmentsElement.innerText = 'Loading...';
+
     try {
+        // Fetch data from the API
         const data = await fetchWithToken(`${API_BASE_URL}/top-apartments`);
-        const topApartmentsElement = document.getElementById('topApartments');
-        if (topApartmentsElement) {
-            topApartmentsElement.innerText = data.apartments.join(', ');
+        console.log("Fetched Top Apartment Data:", data);
+
+        // Handle the response and update DOM
+        if (data && data.apartment && data.apartment.name) {
+            topApartmentsElement.innerText = `${data.apartment.name} (${data.apartment.bookings} bookings)`;
+        } else {
+            topApartmentsElement.innerText = 'No top apartment found.';
+            console.warn("API returned null or empty apartment data.");
         }
     } catch (error) {
-        console.error('Error fetching top apartments:', error.message);
+        // Handle errors and update the UI accordingly
+        console.error("Error in fetchAndSetTopApartments:", error.message);
+        topApartmentsElement.innerText = 'Error loading top apartment.';
     }
 }
+
+
 
 /**
  * Fetch user profile and populate user details
@@ -114,28 +144,34 @@ async function fetchAndSetUserProfile() {
  * Centralized fetch function with JWT token validation
  */
 async function fetchWithToken(url) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication token is missing.');
+    const token = getToken(); // Retrieve JWT token
+    if (!token) {
+        console.error('No authentication token found.');
+        throw new Error('Authentication token missing.');
+    }
 
     const response = await fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // Include JWT token
         },
     });
 
     if (!response.ok) {
-        const errorData = await response.json();
+        console.error(`API request failed: ${response.status}`, await response.text());
+        const error = await response.json();
         if (response.status === 401) {
-            clearToken();
+            clearToken(); // Clear token and redirect if unauthorized
             alert('Session expired. Redirecting to login.');
             window.location.href = 'admin.html';
         }
-        throw new Error(errorData.error || 'Failed to fetch data.');
+        throw new Error(error.error || 'Failed to fetch data.');
     }
-    return response.json();
+
+    return response.json(); // Return parsed response
 }
+
 
 /**
  * Populate recent bookings table
@@ -143,19 +179,22 @@ async function fetchWithToken(url) {
 function populateRecentBookings(bookings) {
     const tbody = document.querySelector('.recent-bookings tbody');
     if (tbody) {
-        tbody.innerHTML = '';
+        tbody.innerHTML = ''; // Clear existing content
         bookings.forEach((booking) => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${booking.guest || 'N/A'}</td>
-                <td>${booking.apartment || 'N/A'}</td>
-                <td>${booking.bookDate ? new Date(booking.bookDate).toLocaleDateString() : 'Invalid Date'}</td>
+                <td>${booking.apartment_name || 'N/A'}</td>
+                <td>${booking.book_date ? new Date(booking.book_date).toLocaleDateString() : 'Invalid Date'}</td>
                 <td><span class="badge badge-${booking.status === 'Confirmed' ? 'success' : 'warning'}">${booking.status}</span></td>
             `;
             tbody.appendChild(row);
         });
+    } else {
+        console.warn('Recent bookings table not found.');
     }
 }
+
 
 /**
  * Populate user details (avatar and dropdown)
@@ -165,16 +204,18 @@ function populateUserDetails(user) {
     const userDropdown = document.getElementById('userDropdown');
 
     if (user && user.fullName && user.email) {
+        // Update user avatar
         if (userAvatar) {
             userAvatar.innerText = user.fullName
-            .split(' ')
-            .slice(0, 2) // Fetch first two words
-            .map(name => name.charAt(0).toUpperCase()) // Get the first letter and capitalize it
-            .join(''); // Combine the letters into a string
+                .split(' ')
+                .slice(0, 2)
+                .map(name => name.charAt(0).toUpperCase())
+                .join('');
         } else {
             console.warn('User avatar element not found.');
         }
-        
+
+        // Update user dropdown
         if (userDropdown) {
             userDropdown.innerHTML = `
                 <div class="dropdown-item">

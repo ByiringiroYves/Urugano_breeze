@@ -1,6 +1,7 @@
 const Booking = require('../models/Booking');
 const Admin = require('../models/Admin');
 const Apartment = require('../models/Apartment');
+const mongoose = require('mongoose');
 
 // Total bookings
 exports.getTotalBookings = async (req, res) => {
@@ -27,37 +28,86 @@ exports.getActiveAdmins = async (req, res) => {
 // Recent bookings
 exports.getRecentBookings = async (req, res) => {
     try {
-        const bookings = await Booking.find()
-            .sort({ bookDate: -1 })
-            .limit(5) // Fetch the 5 most recent bookings
-            .select('guest apartment bookDate status');
-        res.json({ bookings });
+        // Fetch the 6 most recent bookings by `book_date` in descending order
+        const recentBookings = await Booking.find()
+            .sort({ book_date: -1 }) // Sort by `book_date` field in descending order
+            .limit(6) // Limit to 6 records
+            .select('guest apartment_name book_date status'); // Select relevant fields
+
+        console.log('Fetched Bookings:', recentBookings); // Debugging: Log the fetched data
+
+        // Format the bookings for the frontend
+        const formattedBookings = recentBookings.map(booking => ({
+            guest: booking.guest || 'Unknown', // Fallback if guest is null
+            apartment_name: booking.apartment_name || 'Not Specified', // Correct field name
+            book_date: booking.book_date ? booking.book_date.toISOString().split('T')[0] : 'N/A', // Correct date formatting
+            status: booking.status || 'Pending', // Fallback for status
+        }));
+
+        console.log('Formatted Bookings:', formattedBookings); // Debugging: Log the formatted data
+
+        // Send the formatted response
+        res.json({ bookings: formattedBookings });
     } catch (error) {
         console.error('Error fetching recent bookings:', error);
         res.status(500).json({ error: 'Failed to fetch recent bookings' });
     }
 };
 
+
+
 // Top apartments by bookings
+
 exports.getTopApartments = async (req, res) => {
     try {
-        const topApartments = await Booking.aggregate([
+        const topApartment = await Booking.aggregate([
             {
                 $group: {
-                    _id: '$apartment',
-                    count: { $sum: 1 }
-                }
+                    _id: '$apartment_id', // Group by apartment_id
+                    count: { $sum: 1 },  // Count the number of bookings
+                },
             },
             { $sort: { count: -1 } }, // Sort by count in descending order
-            { $limit: 3 } // Get top 3 apartments
+            { $limit: 1 }, // Limit to top 1 apartment
+            {
+                $lookup: {
+                    from: 'apartments',        // Join with apartments collection
+                    localField: '_id',         // Match _id in bookings to _id in apartments
+                    foreignField: '_id',
+                    as: 'apartmentDetails',
+                },
+            },
+            { $unwind: '$apartmentDetails' }, // Flatten the apartment details array
+            {
+                $project: {
+                    _id: 0, // Exclude _id
+                    apartmentName: '$apartmentDetails.name',
+                    bookings: '$count', // Include the number of bookings
+                },
+            },
         ]);
-        const apartments = topApartments.map(apartment => apartment._id);
-        res.json({ apartments });
+
+        if (!topApartment.length) {
+            return res.json({ apartment: null });
+        }
+
+        // Remove the word "Apartment" from the name
+        const sanitizedApartmentName = topApartment[0].apartmentName.replace(/Apartment/i, '').trim();
+
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json({
+            apartment: {
+                name: sanitizedApartmentName,
+                bookings: topApartment[0].bookings,
+            },
+        });        
     } catch (error) {
-        console.error('Error fetching top apartments:', error);
-        res.status(500).json({ error: 'Failed to fetch top apartments' });
+        console.error('Error fetching top apartment:', error);
+        res.status(500).json({ error: 'Failed to fetch top apartment' });
     }
 };
+
+
 
 
 

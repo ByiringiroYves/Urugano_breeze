@@ -99,7 +99,7 @@ document.getElementById("confirm-btn").addEventListener("click", async function 
         const result = await response.json();
 
         if (response.ok) {
-            alert("Verification successful!");
+           // alert("Verification successful!");
             sessionStorage.removeItem("verificationEmail");
             window.location.href = "admin-dashboard.html";
         } else {

@@ -42,6 +42,9 @@ const createCompound = async (req, res) => {
 
     await compound.save();
 
+    // Update the compound price based on linked apartments
+    await updateCompoundPrice(compound._id);
+
     res.status(201).json({
       message: 'Compound created successfully',
       compound,
@@ -53,6 +56,7 @@ const createCompound = async (req, res) => {
 };
 
 
+
 // Search compounds with available apartments based on the selected dates
 // Search for available compounds based on arrival and departure dates
 
@@ -60,87 +64,114 @@ const createCompound = async (req, res) => {
 // Get compounds with available apartments
 const getAvailableCompounds = async (req, res) => {
   try {
-      const { arrival_date, departure_date } = req.body;
+    const { arrival_date, departure_date } = req.body;
 
-      if (!arrival_date || !departure_date) {
-          return res.status(400).json({ error: 'Both arrival_date and departure_date are required.' });
+    if (!arrival_date || !departure_date) {
+      return res
+        .status(400)
+        .json({ error: 'Both arrival_date and departure_date are required.' });
+    }
+
+    const arrivalDate = new Date(arrival_date);
+    const departureDate = new Date(departure_date);
+
+    // Step 1: Find booked apartments
+    const bookedApartmentIds = await Booking.find({
+      status: 'Confirmed',
+      $and: [
+        { arrival_date: { $lt: departureDate } },
+        { departure_date: { $gt: arrivalDate } },
+      ],
+    }).distinct('apartment_id'); // Use `distinct` to get only unique IDs
+
+    // Step 2: Find available apartments and their compounds in a single query
+    const availableApartments = await Apartment.find({
+      _id: { $nin: bookedApartmentIds },
+    }).populate('compound'); // Populate compounds directly
+
+    if (!availableApartments.length) {
+      return res.status(200).json({ compounds: [] });
+    }
+
+    // Step 3: Prepare compound data in a single iteration
+    const compoundsMap = new Map();
+    const compoundUpdates = new Set(); // To track which compounds need price updates
+
+    for (const apartment of availableApartments) {
+      const compound = apartment.compound;
+      const compoundId = compound._id.toString();
+
+      if (!compoundsMap.has(compoundId)) {
+        const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+        compoundsMap.set(compoundId, {
+          compound: {
+            _id: compound._id,
+            name: compound.name,
+            location: compound.location,
+            price_per_night: compound.price_per_night,
+            image: `${BASE_URL}${compound.image}`,
+            compound_id: compound.compound_id,
+          },
+          apartments: [],
+        });
+
+        // Mark this compound for a price update check
+        compoundUpdates.add(compoundId);
       }
 
-      const arrivalDate = new Date(arrival_date);
-      const departureDate = new Date(departure_date);
-
-      // Step 1: Find apartments that are already booked during the requested dates
-      const conflictingBookings = await Booking.find({
-          status: "Confirmed",
-          $and: [
-              { arrival_date: { $lt: departureDate } },
-              { departure_date: { $gt: arrivalDate } }
-          ]
-      }).select("apartment_id");
-
-      const bookedApartmentIds = conflictingBookings.map(booking => booking.apartment_id);
-
-      // Step 2: Find apartments that are not booked
-      const availableApartments = await Apartment.find({
-          _id: { $nin: bookedApartmentIds }
-      }).populate("compound"); // Populate compound for each apartment
-
-      // Step 3: Group apartments by compounds
-      const compoundsMap = new Map();
-
-      availableApartments.forEach((apartment) => {
-          const compoundId = apartment.compound._id.toString();
-
-          if (!compoundsMap.has(compoundId)) {
-            const BASE_URL = 'http://localhost:5000';
-              compoundsMap.set(compoundId, {
-                  compound: {
-                      _id: apartment.compound._id,
-                      name: apartment.compound.name,
-                      location: apartment.compound.location,
-                      price_per_night: apartment.compound.price_per_night,
-                      image: `${BASE_URL}${apartment.compound.image}`,
-                      compound_id: apartment.compound.compound_id,
-                  },
-                  apartments: []
-              });
-          }
-
-          // Add only necessary apartment fields
-          compoundsMap.get(compoundId).apartments.push({
-              _id: apartment._id,
-              apartment_id: apartment.apartment_id,
-              name: apartment.name,
-              price_per_night: apartment.price_per_night,
-              rooms: apartment.rooms,
-              bathrooms: apartment.bathrooms,
-              image: apartment.image,
-          });
+      // Add apartment details
+      compoundsMap.get(compoundId).apartments.push({
+        _id: apartment._id,
+        apartment_id: apartment.apartment_id,
+        name: apartment.name,
+        price_per_night: apartment.price_per_night,
+        rooms: apartment.rooms,
+        bathrooms: apartment.bathrooms,
+        image: apartment.image,
       });
+    }
 
-      // Convert the Map to an array for the response
-      const compounds = Array.from(compoundsMap.values());
+    // Step 4: Update compound prices in bulk
+    await Promise.all([...compoundUpdates].map(updateCompoundPrice));
 
-      res.status(200).json({ compounds });
+    // Step 5: Retrieve updated compounds
+    const updatedCompounds = Array.from(compoundsMap.values());
+
+    console.log('Available Compounds:', updatedCompounds);
+    res.status(200).json({ compounds: updatedCompounds });
   } catch (error) {
-      console.error('Error fetching available compounds:', error);
-      res.status(500).json({ error: 'An error occurred while fetching available compounds.' });
+    console.error('Error fetching available compounds:', error);
+    res
+      .status(500)
+      .json({ error: 'An error occurred while fetching available compounds.' });
   }
 };
 
-// Function to update compound price based on apartments
+// Optimized Function to update compound prices
 const updateCompoundPrice = async (compoundId) => {
-  const compound = await Compound.findById(compoundId).populate('apartments');
-  
-  if (compound.apartments.length > 0) {
-    const randomApartment = compound.apartments[Math.floor(Math.random() * compound.apartments.length)];
-    compound.price_per_night = randomApartment.price_per_night;
-  } else {
-    compound.price_per_night = 0;
-  }
+  try {
+    // Fetch apartments for the compound in a single query
+    const apartments = await Apartment.find({ compound: compoundId, price_per_night: { $gt: 0 } });
 
-  await compound.save();
+    if (apartments.length > 0) {
+      // Select a random apartment with a valid price
+      const randomApartment = apartments[Math.floor(Math.random() * apartments.length)];
+      console.log(`Selected Apartment for Compound ${compoundId}:`, randomApartment);
+
+      // Update the compound's price
+      await Compound.findByIdAndUpdate(compoundId, {
+        price_per_night: randomApartment.price_per_night,
+      });
+    } else {
+      console.warn(`No valid apartments with price > 0 for Compound ${compoundId}.`);
+      await Compound.findByIdAndUpdate(compoundId, { price_per_night: 0 });
+    }
+  } catch (error) {
+    console.error(`Error updating price for Compound ${compoundId}:`, error);
+  }
 };
+
+
 
 
 // Get all compounds with name and max price

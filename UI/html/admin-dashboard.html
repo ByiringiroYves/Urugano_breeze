@@ -163,72 +163,252 @@
     }
     
     
-    
-    
     /* Responsive styles for max-width: 360px */
     @media (max-width: 360px) {
-        /* Further reduce card and content sizes for very small screens */
-        .dashboard-metrics {
-            gap: 10px; /* Reduce spacing further */
+        /* Center-align the logo */
+        .logo {
+            text-align: left !important; /* Move logo to the left */
+            padding-bottom: 0px;
+            float: left;
+            margin-left: 20px; /* Adjust for smaller screen */
         }
     
-        .dashboard-metrics .card {
-            width: 95%; /* Ensure full-width cards on tiny screens */
+        .logo img {
+            margin-top: -10px;
+            width: 120px; /* Reduce logo size */
+            height: auto;
         }
     
-        .card {
-            padding: 10px;
+        .header {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px; /* Less padding for smaller screen */
         }
     
-        .card h3 {
-            font-size: 14px; /* Smaller title font */
+        /* Adjust navigation toggle button */
+        .navigation.navbar-dark .navbar-toggler {
+            border: none;
+            background-color: transparent;
+            position: absolute;
+            top: 5px;
+            right: 5px; /* Adjust position */
         }
     
-        .card .metric-value {
-            font-size: 18px; /* Further adjust font size */
+        .navigation.navbar-dark .navbar-toggler-icon {
+            background: url(../assets/images/menu_icon.png);
+            background-repeat: no-repeat;
+            height: 18px; /* Smaller icon */
+            width: 18px;
         }
     
-        .card i {
-            font-size: 18px; /* Adjust icon size */
+        /* Navigation Bar Adjustments */
+        .navigation.navbar {
+            float: none;
+            display: flex !important;
+            flex-direction: column;
+            padding: 0;
+            width: 100%;
         }
     
-        /* Recent Bookings adjustments */
-        .recent-bookings h2 {
-            font-size: 16px;
+        .navigation .navbar-collapse {
+            background: #ffffff;
+            padding: 15px; /* Reduce padding */
+            margin-top: -5px;
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            font-size: 12px; /* Smaller font size */
+            top: 0;
+            right: 0;
         }
     
-        .recent-bookings table {
-            font-size: 12px; /* Reduce table font size */
+        .navigation.navbar-dark .navbar-nav .nav-link {
+            padding: 8px 0; /* Adjust padding */
+            color: #000;
         }
     
         /* User profile adjustments */
         .user-circle {
-            width: 30px;
+            width: 30px; /* Reduce size */
             height: 30px;
-            font-size: 12px; /* Smaller font for avatar */
+            font-size: 12px; /* Smaller font size for avatar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: 5px; /* Less spacing */
         }
     
+        /* User dropdown styles */
         .user-dropdown {
-            width: 220px;
+            position: relative; /* Relative to stay inside navbar */
+            width: 100%; /* Extend dropdown to full navbar width */
+            margin-top: 5px; /* Space below avatar */
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px; /* Smaller border radius */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+            z-index: 998; /* Below navbar items */
+            padding: 10px; /* Reduce padding */
+        }
+    
+        .user-dropdown.active {
+            display: block; /* Show dropdown when avatar is clicked */
         }
     
         .user-dropdown .dropdown-item {
-            padding: 8px 10px;
+            padding: 8px 10px; /* Reduce padding */
+            cursor: pointer;
+            text-align: left; /* Align text to the left */
         }
     
-        /* Logo adjustments for smaller screens */
+        .user-dropdown .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+    
+        .user-dropdown .dropdown-item strong {
+            display: block;
+            font-size: 12px; /* Smaller font size */
+        }
+    
+        /* Adjust navigation and dropdown alignment */
+        .navigation .user-dropdown {
+            position: relative; /* Ensure it stays below the navbar */
+            top: auto;
+            right: auto;
+            margin: 0;
+            margin-top: 5px; /* Place dropdown below other content */
+        }
+    
+        .navbar-collapse {
+            position: relative;
+        }
+    }
+    
+    @media (max-width: 320px) {
+        /* Center-align the logo */
+        .logo {
+            text-align: left !important; /* Move logo to the left */
+            padding-bottom: 0px;
+            float: left;
+            margin-left: 15px; /* Reduce margin for smaller screens */
+        }
+    
         .logo img {
-            width: 100px; /* Resize logo */
+            margin-top: -8px; /* Adjust spacing above logo */
+            width: 120px; /* Reduce logo width */
+            height: auto;
         }
     
-        /* Navigation adjustments for mobile */
-        .navbar-nav {
-            flex-direction: column; /* Stack navigation items */
-            align-items: center; /* Center align nav items */
+        .header {
+            height: 45px; /* Reduce header height */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px; /* Reduce padding for smaller screens */
         }
     
-        .navbar-nav .nav-item {
-            margin: 5px 0; /* Add spacing between nav items */
+        /* Adjust navigation toggle button */
+        .navigation.navbar-dark .navbar-toggler {
+            border: none;
+            background-color: transparent;
+            position: absolute;
+            top: 8px; /* Adjust position */
+            right: 8px; /* Adjust position */
+        }
+    
+        .navigation.navbar-dark .navbar-toggler-icon {
+            background: url(../assets/images/menu_icon.png);
+            background-repeat: no-repeat;
+            height: 18px; /* Reduce icon size */
+            width: 18px;
+        }
+    
+        /* Navigation Bar Adjustments */
+        .navigation.navbar {
+            float: none;
+            display: flex !important;
+            flex-direction: column;
+            padding: 0;
+            width: 100%;
+        }
+    
+        .navigation .navbar-collapse {
+            background: #ffffff;
+            padding: 15px; /* Reduce padding for dropdown */
+            margin-top: -10px;
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            font-size: 12px; /* Reduce font size */
+            top: 0;
+            right: 0;
+        }
+    
+        .navigation.navbar-dark .navbar-nav .nav-link {
+            padding: 8px 0; /* Adjust padding */
+            color: #000;
+        }
+    
+        /* User profile adjustments */
+        .user-circle {
+            width: 30px; /* Reduce avatar size */
+            height: 30px;
+            font-size: 12px; /* Adjust font size for avatar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: 5px; /* Reduce spacing */
+        }
+    
+        /* User dropdown styles */
+        .user-dropdown {
+            position: relative; /* Relative to stay inside navbar */
+            width: 100%; /* Extend dropdown to full navbar width */
+            margin-top: 8px; /* Space below avatar */
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+            z-index: 998; /* Below navbar items */
+            padding: 10px; /* Reduce padding */
+        }
+    
+        .user-dropdown.active {
+            display: block; /* Show dropdown when avatar is clicked */
+        }
+    
+        .user-dropdown .dropdown-item {
+            padding: 8px 10px; /* Reduce padding */
+            cursor: pointer;
+            text-align: left; /* Align text to the left */
+        }
+    
+        .user-dropdown .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+    
+        .user-dropdown .dropdown-item strong {
+            display: block;
+            font-size: 12px; /* Reduce font size */
+        }
+    
+        /* Adjust navigation and dropdown alignment */
+        .navigation .user-dropdown {
+            position: relative; /* Ensure it stays below the navbar */
+            top: auto;
+            right: auto;
+            margin: 0;
+            margin-top: 8px; /* Place dropdown below other content */
+        }
+    
+        .navbar-collapse {
+            position: relative;
         }
     }
     
@@ -247,6 +427,12 @@
    
 </head>
 <body class="main-layout">
+
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
+     </div>
+     <!-- end loader -->
     <!-- Header -->
     <header>
         <div class="header">
@@ -310,7 +496,7 @@
     </header>
 
     <!-- Dashboard Content -->
-    <div class="dash-container">
+    <div class="container">
         <h1 class="text-center my-4">Dashboard</h1>
     
         <!-- Metrics Section -->
@@ -318,25 +504,25 @@
             <!-- Total Bookings -->
             <div class="card shadow text-center">
                 <h3>Total Bookings</h3>
-                <p id="totalBookings" class="metric-value">150</p>
+                <p id="totalBookings" class="metric-value"></p>
                 <i class="fas fa-calendar-alt"></i>
             </div>
             <!-- Active Admin Users -->
             <div class="card shadow text-center">
                 <h3>Active Admin Users</h3>
-                <p id="activeAdmins" class="metric-value">5</p>
+                <p id="activeAdmins" class="metric-value"></p>
                 <i class="fas fa-user-shield"></i>
             </div>
             <!-- Recent Bookings -->
             <div class="card shadow text-center">
                 <h3>Recent Bookings</h3>
-                <p id="recentBookings" class="metric-value">12</p>
+                <p id="recentBookings" class="metric-value">6</p>
                 <i class="fas fa-book"></i>
             </div>
             <!-- Top Apartments -->
             <div class="card shadow text-center">
-                <h3>Top 3 Apartments</h3>
-                <p id="topApartments" class="metric-value">Muhabura, Bisoke, Karisimbi</p>
+                <h3>Highly Booked Apartment</h3>
+                <p id="topApartments" class="metric-valuee" style="color: #ddd;">Loading...</p> <!-- Element for updates -->
                 <i class="fas fa-building"></i>
             </div>
         </div>        
@@ -351,25 +537,14 @@
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Guest</th>
-                                <th>Apartment</th>
-                                <th>Book Date</th>
+                                <th>Guest Names</th>
+                                <th>Apartment Name</th>
+                                <th>Booking Date</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Jane Doe</td>
-                                <td>Karisimbi</td>
-                                <td>2024-05-01</td>
-                                <td><span class="badge badge-success">Confirmed</span></td>
-                            </tr>
-                            <tr>
-                                <td>John Smith</td>
-                                <td>Muhabura</td>
-                                <td>2024-04-10</td>
-                                <td><span class="badge badge-warning">Pending</span></td>
-                            </tr>
+                            <!--recent bookings will drop here dynamically-->
                         </tbody>
                     </table>
                 </div>
