@@ -200,9 +200,72 @@ const getAllBookings = async (req, res) => {
     }
 };
 
+
+
+//Hide Apertmet 
+const hideApartment = async (req, res) => {
+    try {
+        const { apartment_name, arrival_date, departure_date } = req.body;
+
+        if (!apartment_name || !arrival_date || !departure_date) {
+            return res.status(400).json({ error: "Missing required fields: apartment_name, arrival_date, departure_date" });
+        }
+
+        const apartment = await Apartment.findOne({ name: apartment_name });
+        if (!apartment) {
+            return res.status(404).json({ error: `Apartment with name "${apartment_name}" not found.` });
+        }
+
+        apartment.calendar_blocks.push({
+            arrival_date: new Date(arrival_date),
+            departure_date: new Date(departure_date),
+        });
+
+        await apartment.save();
+        res.status(200).json({ message: `Apartment "${apartment_name}" successfully hidden for the specified period.` });
+    } catch (error) {
+        console.error("Error hiding apartment:", error);
+        res.status(500).json({ error: "An error occurred while hiding the apartment." });
+    }
+};
+
+
+//unhide
+const unhideApartment = async (req, res) => {
+    try {
+        const { apartment_name, arrival_date, departure_date } = req.body;
+
+        if (!apartment_name || !arrival_date || !departure_date) {
+            return res.status(400).json({ error: "Missing required fields: apartment_name, arrival_date, departure_date" });
+        }
+
+        const apartment = await Apartment.findOne({ name: apartment_name });
+        if (!apartment) {
+            return res.status(404).json({ error: `Apartment with name "${apartment_name}" not found.` });
+        }
+
+        apartment.calendar_blocks = apartment.calendar_blocks.filter(
+            (block) =>
+                !(new Date(block.arrival_date).getTime() === new Date(arrival_date).getTime() &&
+                  new Date(block.departure_date).getTime() === new Date(departure_date).getTime())
+        );
+
+        await apartment.save();
+        res.status(200).json({ message: `Apartment "${apartment_name}" successfully unhidden and available for booking.` });
+    } catch (error) {
+        console.error("Error unhiding apartment:", error);
+        res.status(500).json({ error: "An error occurred while unhiding the apartment." });
+    }
+};
+
+
+
+
 module.exports = {
     createBooking,
     getAllBookings,
     cancelBooking,
     searchAvailableCompounds,
+    hideApartment,
+    unhideApartment,
 };

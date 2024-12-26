@@ -178,7 +178,7 @@
    <div id="pagination" class="pagination-controls"></div>
    <div class="test-ad">
       <div class="admin-containo">
-         <h2>Add Reservation</h2>
+         <h2>Add Reservation Or Block & Unbock calendar</h2>
          <form id="reservationForm">
              <div class="form-group">
                  <label for="apartmentName">Apartment Name:</label>
@@ -212,16 +212,20 @@
                  <input type="text" id="city" name="city" placeholder="Enter Guest's city" required>
              </div>
              <div class="form-group">
-                 <label for="arrivalDate">Arrival Date:</label>
+                 <label for="arrivalDate">Arrival Date * </label>
                  <input type="date" id="arrivalDate" name="arrival_date" required>
              </div>
              <div class="form-group">
-                 <label for="departureDate">Departure Date:</label>
+                 <label for="departureDate">Departure Date * </label>
                  <input type="date" id="departureDate" name="departure_date" required>
              </div>
              <p class="admin-error-message" style="color: red; display: none;"></p>
-             <button type="submit">ADD</button>
-         </form>
+             <div class="addhide">
+               <button type="submit" id="addButton">ADD</button>
+               <button type="submit" id="hideButton" style="background-color: red;">HIDE</button>
+               <button type="submit" id="unhideButton" style="background-color: green;">UNHIDE</button>
+             </div>          
+            </form>
          <div id="responseMessage"></div>
      </div>                                   
   </div>
@@ -288,41 +292,84 @@
       <script>
          document.getElementById('reservationForm').addEventListener('submit', async function(event) {
              event.preventDefault(); // Prevent default form submission
-         
+     
              const form = event.target;
              const formData = new FormData(form);
-         
+     
              // Convert FormData to JSON
              const formDataJson = {};
              formData.forEach((value, key) => {
                  formDataJson[key] = value;
              });
-         
+     
+             // Determine which button was clicked
+             const buttonClicked = document.activeElement.textContent.trim().toUpperCase();
+     
              try {
-                 const response = await fetch('http://localhost:5000/api/bookings/create', {
-                     method: 'POST',
-                     headers: {
-                         'Content-Type': 'application/json',
-                     },
-                     body: JSON.stringify(formDataJson),
-                 });
-         
-                 const result = await response.json();
-         
-                 if (response.ok) {
-                     document.getElementById('responseMessage').innerText = 'Booking created successfully!';
-                     form.reset(); // Clear the form
-                 } else {
-                     document.querySelector('.admin-error-message').innerText = result.error || 'An error occurred.';
-                     document.querySelector('.admin-error-message').style.display = 'block';
+                 if (buttonClicked === 'ADD') {
+                     // ADD functionality
+                     const response = await fetch('http://localhost:5000/api/bookings/create', {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify(formDataJson),
+                     });
+     
+                     const result = await response.json();
+     
+                     if (response.ok) {
+                         document.getElementById('responseMessage').innerText = 'Booking created successfully!';
+                         form.reset(); // Clear the form
+                     } else {
+                         document.querySelector('.admin-error-message').innerText = result.error || 'An error occurred.';
+                         document.querySelector('.admin-error-message').style.display = 'block';
+                     }
+                 } else if (buttonClicked === 'HIDE') {
+                     // HIDE functionality
+                     const response = await fetch('http://localhost:5000/api/hide-apartment', {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify(formDataJson),
+                     });
+     
+                     const result = await response.json();
+     
+                     if (response.ok) {
+                         alert(result.message || 'Apartment hidden successfully!');
+                         form.reset(); // Clear the form
+                     } else {
+                         alert(result.error || 'Failed to hide the apartment.');
+                     }
+                 } else if (buttonClicked === 'UNHIDE') {
+                     // UNHIDE functionality
+                     const response = await fetch('http://localhost:5000/api/unhide-apartment', {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify(formDataJson),
+                     });
+     
+                     const result = await response.json();
+     
+                     if (response.ok) {
+                         alert(result.message || 'Apartment unhidden successfully!');
+                         form.reset(); // Clear the form
+                     } else {
+                         alert(result.error || 'Failed to unhide the apartment.');
+                     }
                  }
              } catch (error) {
                  console.error('Error:', error);
-                 document.querySelector('.admin-error-message').innerText = 'An error occurred while creating the booking.';
+                 document.querySelector('.admin-error-message').innerText = 'An error occurred. Please try again.';
                  document.querySelector('.admin-error-message').style.display = 'block';
              }
          });
-         </script>
+     </script>
+     
          
    </body>
 </html>

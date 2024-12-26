@@ -2642,3 +2642,12 @@ option:hover {
 .metric-valuee{
     color: white;
 }
+
+.addhide{
+    width: 800px;
+}
+
+.addhide button{
+    margin-right: 18px;
+    width: 228px;
+}
