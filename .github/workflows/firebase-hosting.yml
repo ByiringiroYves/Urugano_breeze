@@ -20,7 +20,7 @@ jobs:
     - name: Authenticate to GCP
       uses: google-github-actions/auth@v1
       with:
-        workload_identity_provider: "projects/432219336422/locations/global/workloadIdentityPools/github-action-pool/providers/PROVIDER_ID"
+        workload_identity_provider: "projects/432219336422/locations/global/workloadIdentityPools/github-action-pool/providers/github-action-pool"
         service_account: "github-action@gogo-445911.iam.gserviceaccount.com"
 
     - name: Install Firebase CLI
