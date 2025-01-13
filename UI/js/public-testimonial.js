@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api/testimonials/"; // Correct URL
+const API_BASE_URL = "https://gogovillas.com/api/testimonials/"; // Correct URL
 
 // Function to fetch testimonials and render them
 async function loadTestimonials() {

@@ -3,23 +3,20 @@ const People = require('../models/people');
 const path = require('path');
 const twilio = require('twilio');
 const cloudinary = require('cloudinary').v2;
+const axios = require('axios'); // For making HTTP requests
+const FormData = require('form-data');
+const fs = require('fs');
 
 // Twilio setup
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const fromWhatsAppNumber = process.env.TWILIO_WHATSAPP_FROM;
+
+// Validate Twilio environment variables
+if (!accountSid || !authToken || !fromWhatsAppNumber) {
+    console.error('Twilio configuration is missing. Ensure TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_WHATSAPP_FROM are set.');
+}
 const client = twilio(accountSid, authToken);
-const axios = require('axios'); // For making HTTP requests
-const FormData = require('form-data');
-const fs = require('fs');
-
-// Cloudinary setup (global configuration)
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 // Email setup
 const transporter = nodemailer.createTransport({
     service: 'gmail', // or your preferred service
@@ -67,72 +64,37 @@ const sendAdvertisement = async (req, res) => {
                     text: advertisementText,
                     attachments: imageUrl ? [{ filename: path.basename(imageUrl), path: imageUrl }] : [],
                 };
-                return transporter.sendMail(mailOptions);
+                return transporter.sendMail(mailOptions).catch((error) => {
+                    console.error(`Failed to send email to ${email}:`, error.message);
+                });
             }
             return Promise.resolve();
         });
 
-        // WhatsApp sending via Meta API
-// WhatsApp sending with Meta API
-// WhatsApp sending with Meta API
-const whatsappPromises = people.map(async (person) => {
-    const phone = person.Phones?.trim();
-    if (phone && /^\+\d+$/.test(phone)) {
-        const messageBody = `*Check updates on GOGO Homes & Apartments*\n\n${advertisementText}`;
+        // WhatsApp sending with Twilio API
+        const whatsappPromises = people.map(async (person) => {
+            const phone = person.Phones?.trim(); // The recipient's phone number
+            if (phone && /^\+\d+$/.test(phone)) { // Ensure the phone number is valid and includes a country code
+                const messageBody = `*Check updates on GOGO Homes & Apartments*\n\n${advertisementText}`;
 
-        try {
-            let mediaId = null;
+                try {
+                    // If there's an uploaded image, send the message with media
+                    const message = await client.messages.create({
+                        from: `whatsapp:${fromWhatsAppNumber}`, // Twilio WhatsApp sender number
+                        to: `whatsapp:${phone}`, // Recipient's phone number in WhatsApp format
+                        body: messageBody, // Text message
+                        mediaUrl: imageUrl ? [imageUrl] : undefined, // Attach the uploaded image URL
+                    });
 
-            // Upload the image to Meta's media endpoint if there is an uploaded file
-            if (uploadedFile) {
-                const formData = new FormData();
-                formData.append('file', fs.createReadStream(uploadedFile.path));
-                formData.append('type', 'image/jpeg'); // Adjust type if necessary
-
-                const mediaResponse = await axios.post(
-                    `https://graph.facebook.com/v16.0/${process.env.WHATSAPP_BUSINESS_PHONE_ID}/media`,
-                    formData,
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
-                            ...formData.getHeaders(), // Correctly set headers for multipart/form-data
-                        },
-                    }
-                );
-
-                mediaId = mediaResponse.data.id; // Retrieve media ID
-            }
-
-            // Send message with or without media
-            const payload = {
-                messaging_product: 'whatsapp',
-                to: phone,
-                type: mediaId ? 'image' : 'text',
-                text: mediaId ? undefined : { body: messageBody },
-                image: mediaId ? { id: mediaId, caption: messageBody } : undefined,
-            };
-
-            // Send message to Meta API
-            const response = await axios.post(
-                `https://graph.facebook.com/v16.0/${process.env.WHATSAPP_BUSINESS_PHONE_ID}/messages`,
-                payload,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
-                        'Content-Type': 'application/json',
-                    },
+                    console.log(`WhatsApp message sent to ${phone}:`, message.sid);
+                } catch (error) {
+                    console.error(`Failed to send WhatsApp message to ${phone}:`, error.message || error);
                 }
-            );
-
-            console.log(`Message sent to ${phone}:`, response.data);
-            return response.data;
-        } catch (error) {
-            console.error(`Error sending WhatsApp message to ${phone}:`, error.response?.data || error.message);
-            return Promise.resolve(); // Skip to the next person
-        }
-    }
-    return Promise.resolve(); // Skip invalid phone numbers
-});
+            } else {
+                console.warn(`Invalid phone number format for WhatsApp: ${phone}`);
+            }
+            return Promise.resolve(); // Skip invalid phone numbers
+        });
 
         // Wait for all promises
         await Promise.all([...emailPromises, ...whatsappPromises]);

@@ -1,5 +1,5 @@
 
-const API_BASE_URL = "http://localhost:5000/api/admin";
+const API_BASE_URL = "https://gogovillas.com/api/admin";
 
 // Handle form submission for creating an admin account
 document.getElementById('createAdminForm').addEventListener('submit', async function (event) {

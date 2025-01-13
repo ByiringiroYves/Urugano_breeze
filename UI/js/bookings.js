@@ -1,7 +1,7 @@
 // Function to fetch and display bookings
 async function fetchBookings() {
     try {
-        const response = await fetch("http://localhost:5000/api/bookings");
+        const response = await fetch("https://gogovillas.com/api/bookings");
         if (!response.ok) {
             throw new Error("Failed to fetch bookings.");
         }

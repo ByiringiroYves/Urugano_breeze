@@ -1,2 +1,6 @@
 # Ignore environment variables
 .env
+env.yaml
+app.yaml
+.dockerignore
+project-policy.json

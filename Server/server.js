@@ -8,36 +8,44 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 // MongoDB Connection
-mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(MONGO_URI, {})
     .then(() => console.log('MongoDB connected to Atlas Cloud'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your frontend's origin
-    credentials: true, // Allow sending cookies and credentials
+    origin: '*',
+    credentials: true,
 }));
 
-app.use(morgan('dev')); // For logging HTTP requests
+
+app.use(morgan('combined')); // Combined format is better for production logging
 app.use(express.json()); // For parsing JSON request bodies
 
-// Debug: Log incoming requests and cookies
-app.use((req, res, next) => {
-    console.log(`Incoming ${req.method} request to ${req.url}`);
-    console.log('Headers:', req.headers);
-    next();
+// Debug: Log incoming requests and cookies (for development only)
+if (process.env.NODE_ENV !== 'production') {
+    app.use((req, res, next) => {
+        console.log(`Incoming ${req.method} request to ${req.url}`);
+        console.log('Headers:', req.headers);
+        next();
+    });
+}
+
+app.use('/api', routes);
+
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Welcome to the API!' });
 });
 
 // Routes
-app.use('/api', routes); // Attach main routes
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
 
-// Serve Static Files
+// Serve Static Files for Uploaded Assets
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Error Handling Middleware

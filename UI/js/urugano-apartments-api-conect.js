@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://gogovillas.com/api/";
   // Utility function to get query parameters from the URL
   function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
@@ -107,7 +108,7 @@ function renderApartments(apartments, arrivalDate, departureDate) {
 // Function to fetch available apartments
 async function fetchAvailableApartments(compoundId, arrivalDate, departureDate) {
     try {
-        const response = await fetch('http://localhost:5000/api/apartments/available-apartments', {
+        const response = await fetch(`${API_BASE_URL}apartments/available-apartments`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ compoundId, arrival_date: arrivalDate, departure_date: departureDate })

@@ -220,7 +220,7 @@
             const apartmentName = formData.get('apartmentName');
         
             try {
-                const response = await fetch(`http://localhost:5000/api/apartments/update/${encodeURIComponent(apartmentName)}`, {
+                const response = await fetch(`https://gogovillas.com/api/apartments/update/${encodeURIComponent(apartmentName)}`, {
                     method: 'PUT',
                     body: formData
                 });

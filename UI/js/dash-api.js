@@ -1,5 +1,5 @@
-const API_BASE_URL = 'http://localhost:5000/api/dashboard'; // Backend URL for dashboard APIs
-const API_USER_URL = 'http://localhost:5000/api/admin'; // Backend URL for user-related APIs
+const API_BASE_URL = 'https://gogovillas.com/api/dashboard'; // Backend URL for dashboard APIs
+const API_USER_URL = 'https://gogovillas.com/api/admin'; // Backend URL for user-related APIs
 
 /**
  * Store JWT token in localStorage

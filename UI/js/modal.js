@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api/admin";
+const API_BASE_URL = "https://gogovillas.com/api/admin";
 
 /**
  * Store JWT token in localStorage

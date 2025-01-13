@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function to check apartment availability
 async function checkApartmentAvailability(apartmentName, arrivalDate, departureDate) {
     try {
-        const response = await fetch('http://localhost:5000/api/apartments/available-apartments', {
+        const response = await fetch('https://gogovillas.com/api/apartments/available-apartments', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ arrival_date: arrivalDate, departure_date: departureDate }),

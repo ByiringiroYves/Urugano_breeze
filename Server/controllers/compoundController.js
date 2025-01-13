@@ -82,41 +82,36 @@ const getAvailableCompounds = async (req, res) => {
         { arrival_date: { $lt: departureDate } },
         { departure_date: { $gt: arrivalDate } },
       ],
-    }).distinct('apartment_id'); // Use `distinct` to get only unique IDs
+    }).distinct('apartment_id');
 
-    // Step 2: Find available apartments and their compounds in a single query
+    // Step 2: Find available apartments and their compounds
     const availableApartments = await Apartment.find({
       _id: { $nin: bookedApartmentIds },
-    }).populate('compound'); // Populate compounds directly
+    }).populate('compound');
 
     if (!availableApartments.length) {
       return res.status(200).json({ compounds: [] });
     }
 
-    // Step 3: Prepare compound data in a single iteration
+    const BASE_URL = 'https://backend-service-432219336422.us-central1.run.app' || 'http://localhost:5000';
     const compoundsMap = new Map();
-    const compoundUpdates = new Set(); // To track which compounds need price updates
 
     for (const apartment of availableApartments) {
       const compound = apartment.compound;
       const compoundId = compound._id.toString();
 
       if (!compoundsMap.has(compoundId)) {
-        const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
         compoundsMap.set(compoundId, {
           compound: {
             _id: compound._id,
             name: compound.name,
             location: compound.location,
             price_per_night: compound.price_per_night,
-            image: `${BASE_URL}${compound.image}`,
+            image: compound.image ? `${BASE_URL}${compound.image}` : null,
             compound_id: compound.compound_id,
           },
           apartments: [],
         });
-
-        // Mark this compound for a price update check
-        compoundUpdates.add(compoundId);
       }
 
       // Add apartment details
@@ -131,13 +126,7 @@ const getAvailableCompounds = async (req, res) => {
       });
     }
 
-    // Step 4: Update compound prices in bulk
-    await Promise.all([...compoundUpdates].map(updateCompoundPrice));
-
-    // Step 5: Retrieve updated compounds
     const updatedCompounds = Array.from(compoundsMap.values());
-
-    console.log('Available Compounds:', updatedCompounds);
     res.status(200).json({ compounds: updatedCompounds });
   } catch (error) {
     console.error('Error fetching available compounds:', error);
