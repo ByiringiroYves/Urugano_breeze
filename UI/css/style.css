@@ -864,7 +864,7 @@ ul.link_menu li a:hover {
 }
 
 .bottom_form {
-     display: flex;
+     display: none;
      flex-wrap: wrap;
      margin-top: 32px;
 }

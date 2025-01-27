@@ -105,23 +105,26 @@
                <div class="col-md-6">
                   <form id="request" class="main_form">
                      <div class="row">
-                        <div class="col-md-12 ">
-                           <input class="contactus" placeholder="Name" type="type" name="Name"> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Email" type="type" name="Email"> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">                          
-                        </div>
-                        <div class="col-md-12">
-                           <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message</textarea>
-                        </div>
-                        <div class="col-md-12">
-                           <button class="send_btn">Send</button>
-                        </div>
+                       <div class="col-md-12">
+                         <input class="contactus" placeholder="Name" type="text" name="Name" />
+                       </div>
+                       <div class="col-md-12">
+                         <input class="contactus" placeholder="Email" type="email" name="Email" />
+                       </div>
+                       <div class="col-md-12">
+                         <input class="contactus" placeholder="Phone Number" type="text" name="Phone Number" />
+                       </div>
+                       <div class="col-md-12">
+                         <textarea class="textarea" placeholder="Message" name="Message"></textarea>
+                       </div>
+                       <div class="col-md-12">
+                         <p class="error-message" style="color: red;"></p>
+                       </div>
+                       <div class="col-md-12">
+                         <button type="submit" class="send_btn">Send</button>
+                       </div>
                      </div>
-                  </form>
+                   </form>                   
                </div>
                <div class="col-md-6">
                   <div class="map_main">
@@ -142,33 +145,32 @@
                   <div class=" col-md-4">
                      <h3>Contact US</h3>
                      <ul class="conta">
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
-                        <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
-                        <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> 255G+HXR, KK 24 Ave, Kigali</li>
+                        <li><i class="fa fa-mobile" aria-hidden="true"></i> +45 40641002</li>
+                        <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> sales@gogovillas.com</a></li>
                      </ul>
                   </div>
                   <div class="col-md-4">
                      <h3>Menu Link</h3>
                      <ul class="link_menu">
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="about.html"> about</a></li>
-                        <li><a href="apartments.html">Our Apartments</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="testimonial.html">testimonial</a></li>
-                        <li class="active"><a href="contact.html">Contact Us</a></li>
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="html/about.html"> about</a></li>
+                        <li><a href="html/apartments.html">Our Apartments</a></li>
+                        <li><a href="html/gallery.html">Gallery</a></li>
+                        <li><a href="html/testimonial.html">testimonial</a></li>
+                        <li><a href="html/contact.html">Contact Us</a></li>
                      </ul>
                   </div>
                   <div class="col-md-4">
-                     <h3>News letter</h3>
+                     <h3>Visit our instagram page</h3>
                      <form class="bottom_form">
                         <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
                         <button class="sub_btn">subscribe</button>
                      </form>
                      <ul class="social_icon">
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        
+                        <li><a href="https://www.instagram.com/urugano_breeze_apartment/profilecard/?igsh=b3IyZ2xvaXZlY3c3"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+
                      </ul>
                   </div>
                </div>
@@ -177,7 +179,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-10 offset-md-1">
-                        <p>© 2024 All Rights Reserved. Design by <a href="https://www.linkedin.com/in/byiringiro-yves/"> Byiringiro Yves</a></p>
+                        <p>© 2024 All Rights Reserved. Gogo Villas</p>
                      </div>
                   </div>
                </div>
@@ -192,5 +194,45 @@
       <!-- sidebar -->
       <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="../js/custom.js"></script>
+      <script>
+         const API_BASE_URL = "http://localhost:8080/api"; // Use the local backend URL
+
+         document.getElementById('request').addEventListener('submit', async function (event) {
+            event.preventDefault();
+          
+            const name = document.querySelector('input[name="Name"]').value.trim();
+            const email = document.querySelector('input[name="Email"]').value.trim();
+            const phoneNumber = document.querySelector('input[name="Phone Number"]').value.trim();
+            const message = document.querySelector('textarea[name="Message"]').value.trim();
+          
+            const errorMessage = document.querySelector('.error-message');
+            errorMessage.textContent = ''; // Clear previous error
+          
+            // Validate required fields
+            if (!name || !email || !phoneNumber || !message) {
+              errorMessage.textContent = 'All fields are required.';
+              return;
+            }
+
+            try {
+              const response = await fetch(`${API_BASE_URL}/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phoneNumber, message }),
+              });
+          
+              if (response.ok) {
+                alert('Your inquiry has been sent successfully!');
+                document.getElementById('request').reset(); // Reset form
+              } else {
+                const error = await response.json();
+                errorMessage.textContent = error.error || 'Failed to send inquiry.';
+              }
+            } catch (error) {
+              console.error('Error sending inquiry:', error);
+              errorMessage.textContent = 'An error occurred while sending the inquiry.';
+            }
+          });           
+      </script>
    </body>
 </html>
