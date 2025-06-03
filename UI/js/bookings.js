@@ -1,7 +1,14 @@
 // Function to fetch and display bookings
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+// Set the base URL accordingly
+const API_BASE_URL = isProduction
+    ? "https://backend-service-432219336422.us-central1.run.app/api/bookings" // Production Backend
+    : "http://localhost:8080/api/bookings"; 
+
 async function fetchBookings() {
     try {
-        const response = await fetch("https://gogovillas.com/api/bookings");
+        const response = await fetch(`${API_BASE_UR}`);
         if (!response.ok) {
             throw new Error("Failed to fetch bookings.");
         }

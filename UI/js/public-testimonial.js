@@ -1,4 +1,12 @@
-const API_BASE_URL = "https://gogovillas.com/api/testimonials/"; // Correct URL
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+// Set the base URL accordingly
+const API_BASE_URL = isProduction
+    ? "https://backend-service-432219336422.us-central1.run.app/api/testimonials/" // Production Backend
+    : "http://localhost:8080/api/testimonials/"; 
+
+
+//const API_BASE_URL = "https://backend-service-432219336422.us-central1.run.app/api/testimonials/"; // Correct URL
 
 // Function to fetch testimonials and render them
 async function loadTestimonials() {

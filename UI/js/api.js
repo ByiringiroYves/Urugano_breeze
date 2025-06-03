@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://gogovillas.com/api';
+const API_BASE_URL = 'https://backend-service-432219336422.us-central1.run.app/api';
 
 // Function to search for compounds
 async function searchCompounds(data) {

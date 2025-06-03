@@ -1,45 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!-- mobile metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
       <title>Payment</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="Yves Byiringiro" content="">
       <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
-      <!-- bootstrap css -->
       <link rel="stylesheet" href="../css/bootstrap.min.css">
-      <!-- style css -->
       <link rel="stylesheet" href="../css/style.css">
-      <!-- Responsive-->
       <link rel="stylesheet" href="../css/responsive.css">
-      <!-- fevicon -->
       <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
-      <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
-      <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-      <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-   </head>
-   <!-- body -->
+      </head>
    <body class="main-layout">
-      <!-- loader  -->
       <div class="loader_bg">
          <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
       </div>
-      <!-- end loader -->
-      <!-- header -->
       <header>
-         <!-- header inner -->
          <div class="header">
             <div class="container">
                <div class="row">
@@ -85,180 +68,147 @@
             </div>
          </div>
       </header>
-      <!-- end header inner -->
- <!-- end header -->
- <div class="back_re">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="title">
-              <h2>Payment</h2>
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                    <h2>Payment</h2>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
-   </div>
-</div>
-<!-- gallery -->
-<div  class="Payment">
-    <div class="container payment">
-        
-      <div class="d-flex justify-content-between align-items-center my-4">
-         
-     </div>
-     <form action="#">
 
-      <div class="row">
+      <div class="Payment">
+          <div class="container payment">
 
-          <div class="col">
-              <h3 class="title">
-                  Billing Address
-              </h3>
+            <div class="d-flex justify-content-between align-items-center my-4">
+               </div>
 
-              <div class="inputBox">
-                  <label for="name">
-                        Full Name:
-                    </label>
-                  <input type="text" id="name" 
-                         placeholder="Enter your full name" 
-                         required>
-              </div>
+           <form action="#" id="paymentForm" method="post" class="needs-validation" novalidate>
 
-              <div class="inputBox">
-                  <label for="email">
-                        Email:
-                    </label>
-                  <input type="text" id="email" 
-                         placeholder="Enter email address" 
-                         required>
-              </div>
-              <div class="inputBox">
-               <label for="email">
-                     Mobile Number:
-                 </label>
-               <input type="text" id="email" 
-                      placeholder="+45 40 64 10 02" 
-                      required>
-           </div>
+            <div class="row">
 
-              <div class="inputBox">
-                  <label for="address">
-                        Address:
-                    </label>
-                  <input type="text" id="address" 
-                         placeholder="Enter address" 
-                         required>
-              </div>
+                <div class="col">
+                    <h3 class="title">Billing Address</h3>
 
-              <div class="inputBox">
-                  <label for="city">
-                        City:
-                    </label>
-                  <input type="text" id="city" 
-                         placeholder="Enter city" 
-                         required>
-              </div>
+                    <div class="inputBox">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
 
-              
+                    <div class="inputBox">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="Enter email address" required> </div>
+                    <div class="inputBox">
+                     <label for="mobile">Mobile Number:</label> <input type="tel" id="mobile" placeholder="+45 40 64 10 02" required> </div>
 
-          </div>
-          <div class="col">
-              <h3 class="title">Payment</h3>
+                    <div class="inputBox">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" placeholder="Enter address" required>
+                    </div>
 
-              <div class="inputBox">
-                  <label for="name">
-                        Card Accepted:
-                    </label>
-                  <img src="../assets/images/card.png" 
-                       alt="credit/debit card image">
-              </div>
-
-              <div class="inputBox">
-                  <label for="cardName">
-                        Name On Card:
-                    </label>
-                  <input type="text" id="cardName" 
-                         placeholder="Enter card name" 
-                         required>
-              </div>
-
-              <div class="inputBox">
-                  <label for="cardNum">
-                        Credit Card Number:
-                    </label>
-                  <input type="text" id="cardNum" 
-                         placeholder="1111-2222-3333-4444" 
-                         maxlength="19" required>
-              </div>
-
-              <div class="inputBox">
-                  <label for="">Exp Month:</label>
-                  <select name="" id="">
-                      <option value="">Choose month</option>
-                      <option value="January">January</option>
-                      <option value="February">February</option>
-                      <option value="March">March</option>
-                      <option value="April">April</option>
-                      <option value="May">May</option>
-                      <option value="June">June</option>
-                      <option value="July">July</option>
-                      <option value="August">August</option>
-                      <option value="September">September</option>
-                      <option value="October">October</option>
-                      <option value="November">November</option>
-                      <option value="December">December</option>
-                  </select>
-              </div>
+                    <div class="inputBox">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" placeholder="Enter city" required>
+                    </div>
+                    <div class="inputBox">
+                     <label for="propertyName">Property Name:</label>
+                     <input type="text" id="propertyName" placeholder="" required> </div>
 
 
-              <div class="flex">
-                  <div class="inputBox">
-                      <label for="">Exp Year:</label>
-                      <select name="" id="">
-                          <option value="">Choose Year</option>
-                          <option value="2023">2023</option>
-                          <option value="2024">2024</option>
-                          <option value="2025">2025</option>
-                          <option value="2026">2026</option>
-                          <option value="2027">2027</option>
-                          <option value="2027">2028</option>
-                          <option value="2027">2029</option>
-                          <option value="2027">2030</option>
-                          <option value="2027">2031</option>
-                          <option value="2027">2032</option>
-                          <option value="2027">2033</option>
-                          <option value="2027">2034</option>
-                          <option value="2027">2035</option>
-                          <option value="2027">2036</option>
-                          <option value="2027">2037</option>
-                          <option value="2027">2038</option>
-                          <option value="2027">2039</option>
-                          <option value="2027">2040</option>
-                      </select>
-                  </div>
+                </div>
+                <div class="col">
+                    <h3 class="title">Payment</h3>
 
-                  <div class="inputBox">
-                      <label for="cvv">CVV</label>
-                      <input type="number" id="cvv" 
-                             placeholder="1234" required>
-                  </div>
-              </div>
+                    <div class="inputBox">
+                        <label for="cardAccepted">Card Accepted:</label> <img src="../assets/images/card.png" alt="credit/debit card image" id="cardAccepted">
+                    </div>
 
-          </div>
+                    <div class="inputBox">
+                        <label for="cardName">Name On Card:</label>
+                        <input type="text" id="cardName" placeholder="Enter card name" required>
+                    </div>
 
+                    <div class="inputBox">
+                        <label for="cardNum">Credit Card Number:</label>
+                        <input type="text" id="cardNum" placeholder="1111-2222-3333-4444" maxlength="19" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="expMonth">Exp Month:</label> <select name="expMonth" id="expMonth" required> <option value="">Choose month</option>
+                            <option value="01">January (01)</option>
+                            <option value="02">February (02)</option>
+                            <option value="03">March (03)</option>
+                            <option value="04">April (04)</option>
+                            <option value="05">May (05)</option>
+                            <option value="06">June (06)</option>
+                            <option value="07">July (07)</option>
+                            <option value="08">August (08)</option>
+                            <option value="09">September (09)</option>
+                            <option value="10">October (10)</option>
+                            <option value="11">November (11)</option>
+                            <option value="12">December (12)</option>
+                        </select>
+                    </div>
+
+
+                    <div class="flex">
+                        <div class="inputBox">
+                            <label for="expYear">Exp Year:</label> <select name="expYear" id="expYear" required> <option value="">Choose Year</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+                                <option value="2032">2032</option>
+                                <option value="2033">2033</option>
+                                <option value="2034">2034</option>
+                                <option value="2035">2035</option>
+                            </select>
+                        </div>
+
+                        <div class="inputBox">
+                            <label for="cvv">CVV</label>
+                            <input type="number" id="cvv" placeholder="123" maxlength="4" required> </div>
+                    </div>
+                    <div class="inputBox">
+                     <label for="TotalAmount">Total Amount To be paid at the property :</label>
+                     <input type="text" id="TotalAmount" placeholder="" required>
+                 </div>
+                </div>
+
+            </div>
+            <button type="button" value="Proceed to Checkout" class="submit_btn">Proceed to Checkout</button>
+
+           </form>
+         </div>
       </div>
-
-      <input type="submit" value="Proceed to Checkout" 
-             class="submit_btn">
-  </form>
-    </div>
-</section>
-<!-- End Booking Section -->
-
-
- 
-
-       <!--  footer -->
-       <footer>
+      <div class="modal fade" id="consentModal" tabindex="-1" role="dialog" aria-labelledby="consentModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered modal-xl" role="document"> <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="consentModalLabel">Confidential Information Consent</h5>
+               <button type="button" class="close" id="vanillaCloseBtn" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">
+               <p>You are about to share with us your credit/debit card info.</p>
+               <p>This info is automatically deleted on our system on your departure time.</p>
+               <p>Please confirm that you agree to proceed and that the details entered are correct.</p>
+               </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" id="vanillaCancelBtn">Cancel</button>
+               <button type="button" class="btn btn-primary" id="confirmSubmitBtn">Confirm and Proceed</button>
+             </div>
+           </div>
+         </div>
+       </div>
+      <footer>
          <div class="footer">
             <div class="container">
                <div class="row">
@@ -273,12 +223,11 @@
                   <div class="col-md-4">
                      <h3>Menu Link</h3>
                      <ul class="link_menu">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="html/about.html"> about</a></li>
-                        <li><a href="html/apartments.html">Our Apartments</a></li>
-                        <li><a href="html/gallery.html">Gallery</a></li>
-                        <li><a href="html/testimonial.html">testimonial</a></li>
-                        <li><a href="html/contact.html">Contact Us</a></li>
+                        <li><a href="../index.html">Home</a></li> <li><a href="about.html"> about</a></li>
+                        <li><a href="apartments.html">Our Apartments</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="testimonial.html">testimonial</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                      </ul>
                   </div>
                   <div class="col-md-4">
@@ -288,9 +237,7 @@
                         <button class="sub_btn">subscribe</button>
                      </form>
                      <ul class="social_icon">
-                        
                         <li><a href="https://www.instagram.com/urugano_breeze_apartment/profilecard/?igsh=b3IyZ2xvaXZlY3c3"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-
                      </ul>
                   </div>
                </div>
@@ -305,29 +252,120 @@
                </div>
             </div>
          </div>
-      </footer>
-     <!-- end footer -->
-     <!-- Javascript files-->
-     <script src="../js/jquery.min.js"></script>
-     <script src="../js/bootstrap.bundle.min.js"></script>
-     <script src="../js/jquery-3.0.0.min.js"></script>
-     <!-- sidebar -->
-     <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-     <script src="../js/custom.js"></script>
-     <script>
-      let cardNumInput = 
-      document.querySelector('#cardNum')
-  
-  cardNumInput.addEventListener('keyup', () => {
-      let cNumber = cardNumInput.value
-      cNumber = cNumber.replace(/\s/g, "")
-  
-      if (Number(cNumber)) {
-          cNumber = cNumber.match(/.{1,4}/g)
-          cNumber = cNumber.join(" ")
-          cardNumInput.value = cNumber
-      }
-  })
-     </script>
-  </body>
+       </footer>
+       
+       <script src="../js/jquery.min.js"></script>
+       <script src="../js/bootstrap.bundle.min.js"></script>
+       <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script> 
+       <script src="../js/custom.js"></script>
+
+       <script>
+           let cardNumInput = document.querySelector('#cardNum');
+           if(cardNumInput) {
+             cardNumInput.addEventListener('keyup', () => {
+                 let cNumber = cardNumInput.value.replace(/\s/g, "").replace(/\D/g,'');
+                 let formattedNumber = cNumber.match(/.{1,4}/g);
+                 if (formattedNumber) {
+                     cardNumInput.value = formattedNumber.join(" ");
+                 } else {
+                     cardNumInput.value = '';
+                 }
+                 if (cNumber.length > 16) {
+                   cardNumInput.value = cardNumInput.value.slice(0, 19);
+                }
+             });
+           }
+
+           let cvvInput = document.querySelector('#cvv');
+           if(cvvInput) {
+             cvvInput.addEventListener('input', () => {
+                 if (cvvInput.value.length > 4) {
+                     cvvInput.value = cvvInput.value.slice(0, 4);
+                 }
+             });
+           }
+       </script>
+
+       <script>
+           document.addEventListener('DOMContentLoaded', () => {
+               const params = new URLSearchParams(window.location.search);
+               const propertyNameValue = params.get('apartmentName');
+               const totalAmountValue = params.get('totalAmount');
+               const propertyInput = document.getElementById('propertyName');
+               const amountInput = document.getElementById('TotalAmount');
+
+               if (propertyInput && propertyNameValue) {
+                   propertyInput.value = decodeURIComponent(propertyNameValue);
+                   propertyInput.readOnly = true;
+                   propertyInput.style.backgroundColor = '#e9ecef';
+                   propertyInput.style.cursor = 'not-allowed';
+               }
+
+               if (amountInput && totalAmountValue) {
+                   amountInput.value = `US$${totalAmountValue}`;
+                   amountInput.readOnly = true;
+                   amountInput.style.backgroundColor = '#e9ecef';
+                   amountInput.style.cursor = 'not-allowed';
+               }
+           });
+       </script>
+       
+       <script>
+            function closeConsentModal() {
+                const consentModal = document.getElementById('consentModal');
+                const backdrop = document.querySelector('.modal-backdrop');
+
+                // 1. Remove the backdrop
+                if (backdrop) {
+                    backdrop.parentNode.removeChild(backdrop);
+                }
+
+                // 2. Hide modal by removing 'show' class and resetting style
+                consentModal.classList.remove('show');
+                consentModal.style.display = 'none';
+                
+                // 3. Restore body scrolling
+                document.body.classList.remove('modal-open');
+            }
+       </script>
+
+       <script>
+           $(document).ready(function() {
+               const paymentForm = $('#paymentForm');
+               const consentModal = $('#consentModal');
+               const confirmBtn = $('#confirmSubmitBtn');
+               const checkoutBtn = $('.submit_btn');
+
+                // jQuery to show the modal
+               checkoutBtn.on('click', function(event) {
+                   event.preventDefault(); 
+                   if (paymentForm[0].checkValidity() === false) {
+                       paymentForm.addClass('was-validated'); 
+                   } else {
+                       consentModal.modal('show');
+                   }
+               });
+
+                // jQuery to handle the CONFIRM button
+               confirmBtn.on('click', function() {
+                   // Call our new vanilla JS function to close the modal
+                   closeConsentModal();
+                   // Submit the form
+                   paymentForm[0].submit();
+               });
+
+               // --- Attaching event listeners with Vanilla JS ---
+               const vanillaCancel = document.getElementById('vanillaCancelBtn');
+               const vanillaClose = document.getElementById('vanillaCloseBtn');
+
+               if(vanillaCancel) {
+                  vanillaCancel.addEventListener('click', closeConsentModal);
+               }
+               if(vanillaClose) {
+                  vanillaClose.addEventListener('click', closeConsentModal);
+               }
+           });
+       </script>
+
+   </body>
 </html>

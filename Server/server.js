@@ -16,10 +16,34 @@ mongoose.connect(MONGO_URI, {})
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
 // Middleware
-app.use(cors({
-    origin: '*',
-    credentials: true,
-}));
+// Middleware
+
+// --- START CORRECTED CORS CONFIG ---
+// Read allowed origins from environment variables
+const allowedOrigins = [
+    process.env.FRONTEND_URL,  // Should be "https://gogovillas.com"
+    process.env.FRONTEND_WWW, 
+    process.env.LOCAL_TEST   // Should be "https://www.gogovillas.com"
+    // Add 'http://localhost:xxxx' if you need it for local testing
+].filter(Boolean); // Removes undefined entries if env vars aren't set
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl/Postman/mobile apps)
+    // OR allow requests from origins in the allowedOrigins list
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      // Block requests from other origins
+      console.error(`CORS blocked for origin: ${origin}`); // Log blocked origins
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true // Allow credentials (cookies, auth headers)
+};
+
+app.use(cors(corsOptions)); // Apply the corrected CORS middleware
+// --- END CORRECTED CORS CONFIG --
 
 
 app.use(morgan('combined')); // Combined format is better for production logging

@@ -1,5 +1,13 @@
-const API_BASE_URL = "https://gogovillas.com/api/";
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+// Set the base URL accordingly
+const API_BASE_URL = isProduction
+    ? "https://backend-service-432219336422.us-central1.run.app/api/" // Production Backend
+    : "http://localhost:8080/api/"; 
+
+   //const API_BASE_URL = "https://backend-service-432219336422.us-central1.run.app/api/";
   // Utility function to get query parameters from the URL
+  
   function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
     return {

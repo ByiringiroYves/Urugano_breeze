@@ -1,3 +1,11 @@
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+// Set the base URL accordingly
+const API_BASE_URL = isProduction
+    ? "https://backend-service-432219336422.us-central1.run.app/api/compounds/search" // Production Backend
+    : "http://localhost:8080/api/compounds/search";
+//const API_BASE_URL = "https://backend-service-432219336422.us-central1.run.app/api/compounds/search"; 
+
 // Utility function to get query parameters from the URL
 function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
@@ -11,7 +19,7 @@ function getQueryParams() {
 async function fetchAvailableCompounds(arrivalDate, departureDate) {
     try {
         // API call
-        const response = await fetch('https://gogovillas.com/api/compounds/search', {
+        const response = await fetch(`${API_BASE_URL}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ arrival_date: arrivalDate, departure_date: departureDate }),

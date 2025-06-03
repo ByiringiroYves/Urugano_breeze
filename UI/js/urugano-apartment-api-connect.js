@@ -1,3 +1,11 @@
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+// Set the base URL accordingly
+const API_BASE_URL = isProduction
+    ? "https://backend-service-432219336422.us-central1.run.app/api/" // Production Backend
+    : "http://localhost:8080/api/";
+
+
 // Function to get query parameters from the URL
 function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
@@ -33,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function to check apartment availability
 async function checkApartmentAvailability(apartmentName, arrivalDate, departureDate) {
     try {
-        const response = await fetch('https://gogovillas.com/api/apartments/available-apartments', {
+        const response = await fetch(`${API_BASE_URL}apartments/available-apartments`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ arrival_date: arrivalDate, departure_date: departureDate }),
@@ -54,6 +62,20 @@ async function checkApartmentAvailability(apartmentName, arrivalDate, departureD
 
             document.getElementById('final-price').textContent = `US$${totalPrice.toFixed(0)}`;
             document.querySelector('.nights').textContent = ` / ${nights} nights`;
+            
+            // Additioal codes 
+            const bookLink = document.getElementById('book-now-link');
+            if (bookLink) {
+                // Get current dates just in case they are needed for context on payment page
+                const currentArrivalDate = document.getElementById('checkin-date').value;
+                const currentDepartureDate = document.getElementById('checkout-date').value;
+
+                // Update the link's href with query parameters
+               // Corrected line:
+               // Corrected line:
+bookLink.href = `userdata.html?apartmentName=${encodeURIComponent(apartmentName)}&totalAmount=${totalPrice.toFixed(0)}&arrivalDate=${encodeURIComponent(currentArrivalDate)}&departureDate=${encodeURIComponent(currentDepartureDate)}`;
+            }
+
         } else {
             // Mark as unavailable and hide the booking button
             document.querySelector('.btn-danger').style.display = 'none'; 
@@ -65,7 +87,7 @@ async function checkApartmentAvailability(apartmentName, arrivalDate, departureD
         }
     } catch (error) {
         console.error('Error checking apartment availability:', error);
-        alert('An error occurred while checking availability.');
+        alert('An error occurred while checking availability.');2
     }
 }
 

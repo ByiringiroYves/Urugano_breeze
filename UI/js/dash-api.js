@@ -1,5 +1,15 @@
-const API_BASE_URL = 'https://gogovillas.com/api/dashboard'; // Backend URL for dashboard APIs
-const API_USER_URL = 'https://gogovillas.com/api/admin'; // Backend URL for user-related APIs
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+// Set the base URL accordingly
+const API_BASE_URL = isProduction
+    ? "https://backend-service-432219336422.us-central1.run.app/api/ashboard" // Production Backend
+    : "http://localhost:8080/api/ashboard";
+
+    const API_USER_URL = isProduction
+    ?'https://backend-service-432219336422.us-central1.run.app/api/admin' // Backend URL for user-related APIs
+    : "http://localhost:8080/api/admin";
+//const API_BASE_URL = 'https://backend-service-432219336422.us-central1.run.app/api/dashboard'; // Backend URL for dashboard APIs
+//const API_USER_URL = 'https://backend-service-432219336422.us-central1.run.app/api/admin'; // Backend URL for user-related APIs
 
 /**
  * Store JWT token in localStorage

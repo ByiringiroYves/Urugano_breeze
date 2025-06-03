@@ -1,5 +1,12 @@
 
-const API_BASE_URL = "https://gogovillas.com/api/admin";
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+// Set the base URL accordingly
+const API_BASE_URL = isProduction
+    ? "https://backend-service-432219336422.us-central1.run.app/api/admin" // Production Backend
+    : "http://localhost:8080/api/admin";  
+
+//const API_BASE_URL = "https://backend-service-432219336422.us-central1.run.app/api/admin";
 
 // Handle form submission for creating an admin account
 document.getElementById('createAdminForm').addEventListener('submit', async function (event) {
