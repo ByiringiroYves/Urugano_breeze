@@ -17,6 +17,188 @@
       <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <style>
+        /* Basic body styling (optional) */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        body.custom-modal-open {
+            overflow: hidden;
+        }
+
+        /* The Modal (background overlay) */
+        .custom-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.5); /* Black w/ opacity - this is the backdrop */
+        }
+
+        /* Modal Content Box */
+        .custom-modal-content {
+            background-color: #fefefe;
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 0;
+            border: 1px solid #888;
+            width: 60%; /* Could be more or less, or a fixed px value */
+            max-width: 500px; /* Max width for responsiveness */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        /* Add Animation (fade in from top) */
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1} /* This will be relative to its natural position from margin: 10% auto; */
+        }
+        /* Adjusting animation for margin: 10% auto centering */
+        @keyframes animatetopRealistic {
+            from {margin-top: -50px; opacity: 0} /* Start off-screen adjusted for margin */
+            to {margin-top: 10%; opacity: 1}
+        }
+        .custom-modal-content {
+             animation-name: animatetopRealistic; /* Using the more realistic animation */
+        }
+
+
+        /* Modal Header */
+        .custom-modal-header {
+            padding: 10px 16px;
+            background-color: #0f1521; /* Example color */
+            color: white;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .custom-modal-header h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        /* Modal Body */
+        .custom-modal-body {
+            padding: 15px 16px;
+            line-height: 1.6;
+        }
+
+        /* Modal Footer */
+        .custom-modal-footer {
+            padding: 10px 16px;
+            background-color: #f9f9f9; /* Example color */
+            text-align: right;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border-top: 1px solid #eee;
+        }
+        .custom-modal-footer button { /* Applied to custom-btn */
+            padding: 8px 12px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .custom-modal-footer .custom-btn-primary { /* Was .btn-primary */
+            background-color: #007bff;
+            color: white;
+        }
+        .custom-modal-footer .custom-btn-secondary { /* Was .btn-secondary */
+            background-color: #6c757d;
+            color: white;
+        }
+
+
+        /* The Close Button */
+        .custom-modal-close-btn {
+            color: white;
+            /* float: right; */ /* Removed float for flex alignment */
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1; 
+        }
+
+        .custom-modal-close-btn:hover,
+        .custom-modal-close-btn:focus {
+            color: #bbb; /* Lighter color on hover for dark background */
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .consentModalLabel{ /* Already existed, ensure it's used or removed if h2 covers it */
+         color: white;
+        }
+        /* Styling for the form's submit_btn (was #openModalBtn) */
+        .submit_btn { /* Changed from #openModalBtn to class */
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: fit-content;
+            margin: 20px auto 0; /* Center button */
+        }
+        /* Styles for API Message */
+        #apiMessage {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1em;
+            display: none; /* Hidden by default */
+        }
+        #apiMessage.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        #apiMessage.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        /* Basic styling for form validation states (if you use the 'form-validated' class from JS) */
+        .form-validated input:invalid {
+            border-color: red !important; /* Ensure it overrides other styles */
+        }
+        .form-validated select:invalid {
+            border-color: red !important;
+        }
+         /* Ensure form elements are visible and styled consistently */
+        .Payment .inputBox {
+            margin-bottom: 15px;
+        }
+        .Payment .inputBox label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333; /* Or your theme color */
+        }
+        .Payment .inputBox input,
+        .Payment .inputBox select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .Payment .flex {
+            display: flex;
+            gap: 15px; /* Spacing between flex items */
+        }
+        .Payment .flex .inputBox {
+            flex: 1; /* Allow items to grow and fill space */
+        }
+    </style>
       </head>
    <body class="main-layout">
       <div class="loader_bg">
@@ -81,133 +263,137 @@
       </div>
 
       <div class="Payment">
-          <div class="container payment">
-
-            <div class="d-flex justify-content-between align-items-center my-4">
-               </div>
-
-           <form action="#" id="paymentForm" method="post" class="needs-validation" novalidate>
-
-            <div class="row">
-
-                <div class="col">
-                    <h3 class="title">Billing Address</h3>
-
-                    <div class="inputBox">
-                        <label for="name">Full Name:</label>
-                        <input type="text" id="name" placeholder="Enter your full name" required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" placeholder="Enter email address" required> </div>
-                    <div class="inputBox">
-                     <label for="mobile">Mobile Number:</label> <input type="tel" id="mobile" placeholder="+45 40 64 10 02" required> </div>
-
-                    <div class="inputBox">
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" placeholder="Enter address" required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="city">City:</label>
-                        <input type="text" id="city" placeholder="Enter city" required>
-                    </div>
-                    <div class="inputBox">
-                     <label for="propertyName">Property Name:</label>
-                     <input type="text" id="propertyName" placeholder="" required> </div>
-
-
-                </div>
-                <div class="col">
-                    <h3 class="title">Payment</h3>
-
-                    <div class="inputBox">
-                        <label for="cardAccepted">Card Accepted:</label> <img src="../assets/images/card.png" alt="credit/debit card image" id="cardAccepted">
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="cardName">Name On Card:</label>
-                        <input type="text" id="cardName" placeholder="Enter card name" required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="cardNum">Credit Card Number:</label>
-                        <input type="text" id="cardNum" placeholder="1111-2222-3333-4444" maxlength="19" required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="expMonth">Exp Month:</label> <select name="expMonth" id="expMonth" required> <option value="">Choose month</option>
-                            <option value="01">January (01)</option>
-                            <option value="02">February (02)</option>
-                            <option value="03">March (03)</option>
-                            <option value="04">April (04)</option>
-                            <option value="05">May (05)</option>
-                            <option value="06">June (06)</option>
-                            <option value="07">July (07)</option>
-                            <option value="08">August (08)</option>
-                            <option value="09">September (09)</option>
-                            <option value="10">October (10)</option>
-                            <option value="11">November (11)</option>
-                            <option value="12">December (12)</option>
-                        </select>
-                    </div>
-
-
-                    <div class="flex">
-                        <div class="inputBox">
-                            <label for="expYear">Exp Year:</label> <select name="expYear" id="expYear" required> <option value="">Choose Year</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
-                                <option value="2028">2028</option>
-                                <option value="2029">2029</option>
-                                <option value="2030">2030</option>
-                                <option value="2031">2031</option>
-                                <option value="2032">2032</option>
-                                <option value="2033">2033</option>
-                                <option value="2034">2034</option>
-                                <option value="2035">2035</option>
-                            </select>
-                        </div>
-
-                        <div class="inputBox">
-                            <label for="cvv">CVV</label>
-                            <input type="number" id="cvv" placeholder="123" maxlength="4" required> </div>
-                    </div>
-                    <div class="inputBox">
-                     <label for="TotalAmount">Total Amount To be paid at the property :</label>
-                     <input type="text" id="TotalAmount" placeholder="" required>
+         <div class="container payment">
+     
+             <div class="d-flex justify-content-between align-items-center my-4">
                  </div>
-                </div>
-
-            </div>
-            <button type="button" value="Proceed to Checkout" class="submit_btn">Proceed to Checkout</button>
-
-           </form>
+     
+             <form action="#" id="paymentForm" method="post"> <div class="row">
+                     <div class="col">
+                         <h3 class="title">Billing Address</h3>
+                         <div class="inputBox">
+                             <label for="name">Full Name:</label>
+                             <input type="text" id="name" placeholder="Enter your full name" required>
+                         </div>
+                         <div class="inputBox">
+                             <label for="email">Email:</label>
+                             <input type="email" id="email" placeholder="Enter email address" required>
+                         </div>
+                         <div class="inputBox">
+                             <label for="mobile">Mobile Number:</label>
+                             <input type="tel" id="mobile" placeholder="+250 7XX XXX XXX" required> <!-- Example Rwandan format -->
+                         </div>
+                         <div class="inputBox">
+                             <label for="address">Street Address:</label> <!-- Changed label for clarity -->
+                             <input type="text" id="address" placeholder="Enter street address" required>
+                         </div>
+                         <div class="inputBox">
+                             <label for="city">City:</label>
+                             <input type="text" id="city" placeholder="Enter city" required>
+                         </div>
+                         <!-- Consider adding a Country field if it can vary -->
+                         <!-- <div class="inputBox">
+                             <label for="country">Country:</label>
+                             <input type="text" id="country" placeholder="Enter country" value="Rwanda" required>
+                         </div> -->
+                         <div class="inputBox">
+                             <label for="propertyName">Property Name:</label>
+                             <input type="text" id="propertyName" placeholder="" required>
+                         </div>
+                     </div>
+     
+                     <div class="col">
+                         <h3 class="title">Payment Card Details</h3> <!-- Clarified title -->
+                         <div class="inputBox">
+                             <label for="cardAccepted">Card Accepted:</label>
+                             <img src="../assets/images/card.png" alt="credit/debit card image" id="cardAccepted" style="height: 25px;">
+                         </div>
+                         <div class="inputBox">
+                             <label for="cardName">Name On Card:</label>
+                             <input type="text" id="cardName" placeholder="Enter card name" required>
+                         </div>
+                         <div class="inputBox">
+                             <label for="cardNum">Credit Card Number:</label>
+                             <input type="text" id="cardNum" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+                         </div>
+                         <div class="inputBox">
+                             <label for="expMonth">Exp Month:</label>
+                             <select name="expMonth" id="expMonth" required>
+                                 <option value="">MM</option>
+                                 <option value="01">01 (Jan)</option>
+                                 <option value="02">02 (Feb)</option>
+                                 <option value="03">03 (Mar)</option>
+                                 <option value="04">04 (Apr)</option>
+                                 <option value="05">05 (May)</option>
+                                 <option value="06">06 (Jun)</option>
+                                 <option value="07">07 (Jul)</option>
+                                 <option value="08">08 (Aug)</option>
+                                 <option value="09">09 (Sep)</option>
+                                 <option value="10">10 (Oct)</option>
+                                 <option value="11">11 (Nov)</option>
+                                 <option value="12">12 (Dec)</option>
+                             </select>
+                         </div>
+                         <div class="flex">
+                             <div class="inputBox">
+                                 <label for="expYear">Exp Year:</label>
+                                 <select name="expYear" id="expYear" required>
+                                     <option value="">YYYY</option>
+                                     <!-- Dynamically populate years or list relevant ones -->
+                                     <option value="2024">2024</option>
+                                     <option value="2025">2025</option>
+                                     <option value="2026">2026</option>
+                                     <option value="2027">2027</option>
+                                     <option value="2028">2028</option>
+                                     <option value="2029">2029</option>
+                                     <option value="2030">2030</option>
+                                     <option value="2031">2031</option>
+                                     <option value="2032">2032</option>
+                                     <option value="2033">2033</option>
+                                     <option value="2034">2034</option>
+                                     <option value="2035">2035</option>
+                                 </select>
+                             </div>
+                             <div class="inputBox">
+                                 <label for="cvv">CVV</label>
+                                 <input type="password" id="cvv" placeholder="XXX" maxlength="4" required autocomplete="off"> <!-- Changed to password type -->
+                             </div>
+                         </div>
+                         <div class="inputBox">
+                             <label for="TotalAmount">Total Amount (Pay at Property):</label> <!-- Clarified label -->
+                             <input type="text" id="TotalAmount" placeholder="" required>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- The button that triggers the modal -->
+                 <button type="button" value="Proceed to Checkout" class="submit_btn">Proceed to Checkout</button>
+             </form>
          </div>
-      </div>
-      <div class="modal fade" id="consentModal" tabindex="-1" role="dialog" aria-labelledby="consentModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered modal-xl" role="document"> <div class="modal-content">
-             <div class="modal-header">
-               <h5 class="modal-title" id="consentModalLabel">Confidential Information Consent</h5>
-               <button type="button" class="close" id="vanillaCloseBtn" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
-               </button>
+     </div>
+     
+     <!-- The Custom Modal -->
+     <div id="consentModal" class="custom-modal"> 
+         <div class="custom-modal-content">
+             <div class="custom-modal-header">
+                 <h2 id="consentModalLabel">Confidential Information Consent</h2> <!-- Removed class from h2, relying on .custom-modal-header h2 -->
+                 <span id="vanillaCloseBtn" class="custom-modal-close-btn">&times;</span> 
              </div>
-             <div class="modal-body">
-               <p>You are about to share with us your credit/debit card info.</p>
-               <p>This info is automatically deleted on our system on your departure time.</p>
-               <p>Please confirm that you agree to proceed and that the details entered are correct.</p>
-               </div>
-             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" id="vanillaCancelBtn">Cancel</button>
-               <button type="button" class="btn btn-primary" id="confirmSubmitBtn">Confirm and Proceed</button>
+             <div class="custom-modal-body">
+                 <p>You are about to share with us your credit/debit card information for booking guarantee purposes.</p>
+                 <p>This information may be used to charge applicable fees in case of late cancellation or no-show, as per our booking policy.</p>
+                 <p>Please confirm that you agree to proceed and that the details entered are correct.</p>
              </div>
-           </div>
+             <div class="custom-modal-footer">
+                 <button type="button" id="vanillaCancelBtn" class="custom-btn custom-btn-secondary">Cancel</button>
+                 <button type="button" id="confirmSubmitBtn" class="custom-btn custom-btn-primary">Confirm and Proceed</button>
+             </div>
          </div>
-       </div>
+     </div>
+
+    <div class="container">
+        <div id="apiMessage"></div> <!-- Message div for API responses -->
+    </div>
+
       <footer>
          <div class="footer">
             <div class="container">
@@ -260,25 +446,29 @@
        <script src="../js/custom.js"></script>
 
        <script>
+           // Card Number Formatting
            let cardNumInput = document.querySelector('#cardNum');
            if(cardNumInput) {
-             cardNumInput.addEventListener('keyup', () => {
+             cardNumInput.addEventListener('input', () => { // Changed to 'input' for better responsiveness
                  let cNumber = cardNumInput.value.replace(/\s/g, "").replace(/\D/g,'');
                  let formattedNumber = cNumber.match(/.{1,4}/g);
                  if (formattedNumber) {
                      cardNumInput.value = formattedNumber.join(" ");
                  } else {
-                     cardNumInput.value = '';
+                     cardNumInput.value = cNumber; // Handle case where input is less than 4 digits
                  }
-                 if (cNumber.length > 16) {
+                 // Limit length after formatting (16 digits + 3 spaces = 19 chars)
+                 if (cardNumInput.value.length > 19) { 
                    cardNumInput.value = cardNumInput.value.slice(0, 19);
                 }
              });
            }
 
+           // CVV Length Limiting
            let cvvInput = document.querySelector('#cvv');
            if(cvvInput) {
              cvvInput.addEventListener('input', () => {
+                 cvvInput.value = cvvInput.value.replace(/\D/g,''); // Allow only digits
                  if (cvvInput.value.length > 4) {
                      cvvInput.value = cvvInput.value.slice(0, 4);
                  }
@@ -287,85 +477,166 @@
        </script>
 
        <script>
+           // Determine API Base URL for creating bookings
+           const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+           const CREATE_BOOKING_API_URL = isProduction
+               ? "https://backend-service-432219336422.us-central1.run.app/api/bookings/create" // Production Backend for creating
+               : "http://localhost:8080/api/bookings/create"; // Development Backend for creating
+
            document.addEventListener('DOMContentLoaded', () => {
                const params = new URLSearchParams(window.location.search);
                const propertyNameValue = params.get('apartmentName');
                const totalAmountValue = params.get('totalAmount');
+               // Retrieve arrival and departure dates from URL params
+               const arrivalDateValue = params.get('arrivalDate');
+               const departureDateValue = params.get('departureDate');
+
                const propertyInput = document.getElementById('propertyName');
                const amountInput = document.getElementById('TotalAmount');
+               const apiMessageDiv = document.getElementById('apiMessage');
+
 
                if (propertyInput && propertyNameValue) {
                    propertyInput.value = decodeURIComponent(propertyNameValue);
                    propertyInput.readOnly = true;
                    propertyInput.style.backgroundColor = '#e9ecef';
-                   propertyInput.style.cursor = 'not-allowed';
+                   // propertyInput.style.cursor = 'not-allowed'; // Optional: keep if you want visual cue
                }
 
                if (amountInput && totalAmountValue) {
-                   amountInput.value = `US$${totalAmountValue}`;
+                   amountInput.value = `RWF ${parseFloat(totalAmountValue).toLocaleString()}`; // Assuming RWF and formatting
                    amountInput.readOnly = true;
                    amountInput.style.backgroundColor = '#e9ecef';
-                   amountInput.style.cursor = 'not-allowed';
+                   // amountInput.style.cursor = 'not-allowed';
                }
-           });
-       </script>
-       
-       <script>
-            function closeConsentModal() {
-                const consentModal = document.getElementById('consentModal');
-                const backdrop = document.querySelector('.modal-backdrop');
 
-                // 1. Remove the backdrop
-                if (backdrop) {
-                    backdrop.parentNode.removeChild(backdrop);
-                }
+               // Modal elements
+               const modal = document.getElementById("consentModal");
+               const openBtn = document.querySelector(".submit_btn"); // This is your "Proceed to Checkout" button
+               const closeBtn = document.getElementById("vanillaCloseBtn");
+               const cancelBtn = document.getElementById("vanillaCancelBtn");
+               const confirmBtn = document.getElementById("confirmSubmitBtn");
+               const paymentForm = document.getElementById("paymentForm");
 
-                // 2. Hide modal by removing 'show' class and resetting style
-                consentModal.classList.remove('show');
-                consentModal.style.display = 'none';
-                
-                // 3. Restore body scrolling
-                document.body.classList.remove('modal-open');
-            }
-       </script>
-
-       <script>
-           $(document).ready(function() {
-               const paymentForm = $('#paymentForm');
-               const consentModal = $('#consentModal');
-               const confirmBtn = $('#confirmSubmitBtn');
-               const checkoutBtn = $('.submit_btn');
-
-                // jQuery to show the modal
-               checkoutBtn.on('click', function(event) {
-                   event.preventDefault(); 
-                   if (paymentForm[0].checkValidity() === false) {
-                       paymentForm.addClass('was-validated'); 
-                   } else {
-                       consentModal.modal('show');
+               function showApiMessage(message, type) {
+                   if (apiMessageDiv) {
+                       apiMessageDiv.textContent = message;
+                       apiMessageDiv.className = type; // 'success' or 'error'
+                       apiMessageDiv.style.display = 'block';
                    }
-               });
-
-                // jQuery to handle the CONFIRM button
-               confirmBtn.on('click', function() {
-                   // Call our new vanilla JS function to close the modal
-                   closeConsentModal();
-                   // Submit the form
-                   paymentForm[0].submit();
-               });
-
-               // --- Attaching event listeners with Vanilla JS ---
-               const vanillaCancel = document.getElementById('vanillaCancelBtn');
-               const vanillaClose = document.getElementById('vanillaCloseBtn');
-
-               if(vanillaCancel) {
-                  vanillaCancel.addEventListener('click', closeConsentModal);
                }
-               if(vanillaClose) {
-                  vanillaClose.addEventListener('click', closeConsentModal);
+
+               function showModal() {
+                   if (modal) {
+                       modal.style.display = "block";
+                       document.body.classList.add("custom-modal-open");
+                   }
+               }
+
+               function hideModal() {
+                   if (modal) {
+                       modal.style.display = "none";
+                       document.body.classList.remove("custom-modal-open");
+                   }
+               }
+
+               if (openBtn) {
+                   openBtn.addEventListener('click', function(event) {
+                       event.preventDefault();
+                       if (paymentForm && typeof paymentForm.checkValidity === 'function') {
+                           if (!paymentForm.checkValidity()) {
+                               paymentForm.classList.add('form-validated');
+                               const firstInvalidField = paymentForm.querySelector(':invalid');
+                               if (firstInvalidField && typeof firstInvalidField.focus === 'function') {
+                                   firstInvalidField.focus();
+                               }
+                               if (typeof paymentForm.reportValidity === 'function') {
+                                   paymentForm.reportValidity();
+                               }
+                               return;
+                           }
+                           paymentForm.classList.remove('form-validated');
+                       }
+                       showModal();
+                   });
+               }
+
+               if (closeBtn) {
+                   closeBtn.addEventListener('click', hideModal);
+               }
+               if (cancelBtn) {
+                   cancelBtn.addEventListener('click', hideModal);
+               }
+
+               if (confirmBtn) {
+                   confirmBtn.addEventListener('click', async function() {
+                       // Disable button to prevent multiple submissions
+                       confirmBtn.disabled = true;
+                       confirmBtn.textContent = 'Processing...';
+                       showApiMessage('Processing your booking...', 'info'); // Optional info class
+
+                       try {
+                           const formData = {
+                               apartment_name: document.getElementById('propertyName').value,
+                               guest: document.getElementById('name').value,
+                               email: document.getElementById('email').value,
+                               phone: document.getElementById('mobile').value,
+                               country: "Rwanda", // Placeholder, consider adding a form field
+                               city: document.getElementById('city').value,
+                               street_address: document.getElementById('address').value,
+                               arrival_date: arrivalDateValue, // From URL param
+                               departure_date: departureDateValue, // From URL param
+                               cardName: document.getElementById('cardName').value,
+                               cardNum: document.getElementById('cardNum').value.replace(/\s/g, ''), // Remove spaces
+                               expMonth: document.getElementById('expMonth').value,
+                               expYear: document.getElementById('expYear').value,
+                               cvv: document.getElementById('cvv').value
+                           };
+
+                           // Validate that arrival and departure dates were found
+                           if (!formData.arrival_date || !formData.departure_date) {
+                               throw new Error("Booking dates are missing. Please go back and select your dates.");
+                           }
+                           
+                           const response = await fetch(CREATE_BOOKING_API_URL, { // Use the specific URL for creating
+                               method: 'POST',
+                               headers: {
+                                   'Content-Type': 'application/json',
+                               },
+                               body: JSON.stringify(formData),
+                           });
+
+                           const result = await response.json();
+
+                           if (response.ok) { // Typically 200-299 status codes
+                               showApiMessage(`Booking successful! Reservation ID: ${result.booking.reservation_id}. You will receive a confirmation email.`, 'success');
+                               paymentForm.reset(); // Clear the form
+                               // Optionally, redirect to a success page after a delay
+                               // setTimeout(() => { window.location.href = '/booking-success.html'; }, 3000);
+                           } else {
+                               throw new Error(result.error || `Request failed with status ${response.status}`);
+                           }
+
+                       } catch (error) {
+                           console.error('Error submitting booking:', error);
+                           showApiMessage(`Booking failed: ${error.message}`, 'error');
+                       } finally {
+                           hideModal(); // Hide modal regardless of outcome
+                           // Re-enable button
+                           confirmBtn.disabled = false;
+                           confirmBtn.textContent = 'Confirm and Proceed';
+                       }
+                   });
+               }
+
+               if (modal) {
+                   window.addEventListener('click', function(event) {
+                       if (event.target === modal) {
+                           hideModal();
+                       }
+                   });
                }
            });
        </script>
-
    </body>
 </html>

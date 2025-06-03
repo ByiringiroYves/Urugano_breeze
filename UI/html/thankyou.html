@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <title>Thank You! - GOGO Home & Apartment</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="Yves Byiringiro" content="">
+      <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <link rel="stylesheet" href="../css/font-awesome.min.css">
+      <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="../css/responsive.css">
+      <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
+      <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>      
+      
+      
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/datatables.min.js"></script>
+      <script src="../js/datatables.js"></script>  
+
+      <link rel="stylesheet" href="../assets/emoji-picker-main/lib/css/emoji.css">
+
+      <script src="../assets/emoji-picker-main/lib/js/config.js"></script> 
+      <script src="../assets/emoji-picker-main/lib/js/util.js"></script>
+      <script src="../assets/emoji-picker-main/lib/js/jquery.emojiarea.js"></script>
+      <script src="../assets/emoji-picker-main/lib/js/emoji-picker.js"></script>
+
+      
+      <script src="../js/custom.js"></script>
+
+      <link rel="stylesheet" href="../css/admic-nav-bar.css">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+      <style>
+        body {
+           background-color: #f7f9f7; /* Light background for the main body */
+           font-family: 'Arial', sans-serif;
+           margin: 0;
+           padding: 0;
+           display: flex;
+           flex-direction: column;
+           min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        /* Specific styles for the Thank You content */
+        .thank-you-container {
+           flex-grow: 1; /* Allows content to take up available space */
+           position: relative;
+           background-color: #f7f9f7; /* Keep the central content light */
+           padding: 50px 20px;
+           text-align: center;
+           overflow: hidden; /* To contain the angled backgrounds */
+           display: flex;
+           flex-direction: column;
+           justify-content: center; /* Center vertically */
+           align-items: center; /* Center horizontally */
+        }
+
+        /* Angled background elements */
+        .thank-you-container::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 50%;
+           height: 100%;
+           background-color: #0f1521;/* Yellow */
+           transform: skewX(-20deg) translateX(-20%);
+           transform-origin: top left;
+           z-index: 0;
+        }
+
+        .thank-you-container::after {
+           content: '';
+           position: absolute;
+           top: 0;
+           right: 0;
+           width: 50%;
+           height: 100%;
+           background-color: rgb(182, 42, 42);; /* Green */
+           transform: skewX(20deg) translateX(20%);
+           transform-origin: top right;
+           z-index: 0;
+        }
+
+        .thank-you-content {
+           position: relative;
+           z-index: 1; /* Bring content to front */
+           background-color: #ffffff; /* White background for the central box */
+           padding: 40px;
+           border-radius: 10px;
+           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+           max-width: 700px; /* Limit width of content box */
+           margin: auto; /* Center the box */
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+        }
+
+        .thank-you-icon {
+           color:#020c41; /* Green color for checkmark */
+           font-size: 4em;
+           margin-bottom: 20px;
+           border: 3px solid #020c41;
+           border-radius: 50%;
+           width: 80px;
+           height: 80px;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+        }
+
+        .thank-you-content h1 {
+           font-size: 2.8em;
+           color: #333;
+           margin-bottom: 15px;
+           font-weight: 700;
+        }
+
+        .thank-you-content p {
+           font-size: 1.1em;
+           color: #666;
+           line-height: 1.6;
+           margin-bottom: 40px;
+           max-width: 500px;
+        }
+
+        .thank-you-footer-sections {
+           display: flex;
+           justify-content: center;
+           gap: 30px; /* Space between the two sections */
+           flex-wrap: wrap; /* Allow wrapping on smaller screens */
+           width: 100%; /* Ensure sections take full width of parent */
+           padding: 30px 20px; /* Add some padding around the footer sections */
+           background-color: #f7f9f7; /* Match body background */
+        }
+
+        .thank-you-footer-section {
+           background-color: #fff;
+           border: 1px solid #e0e0e0;
+           border-radius: 8px;
+           padding: 30px;
+           flex: 1;
+           min-width: 280px; /* Minimum width for each section */
+           max-width: 350px; /* Max width for each section */
+           text-align: center;
+           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+           display: flex; /* Use flex to arrange contents vertically */
+           flex-direction: column;
+           align-items: center;
+        }
+
+        .thank-you-footer-section h4 {
+           font-size: 1.4em;
+           color: #333;
+           margin-bottom: 25px;
+           font-weight: 600;
+        }
+
+        /* Styles for the new Instagram social icon list */
+        .social-icons-list {
+           list-style: none; /* Remove bullet points */
+           padding: 0;
+           margin: 0 0 30px 0; /* Add margin below the social icon and above contact info */
+           display: flex; /* For centering the single icon */
+           justify-content: center;
+        }
+
+        .social-icons-list li {
+           display: inline-block; /* Ensure list item doesn't take full width */
+           margin: 0; /* No margin between list items, as there's only one */
+        }
+
+        .social-icons-list a {
+           display: inline-block;
+           color: #fff;
+           font-size: 1.5em;
+           width: 45px;
+           height: 45px;
+           line-height: 45px;
+           border-radius: 50%;
+           transition: transform 0.3s ease, background-color 0.3s ease;
+           background-color: #020c41; /* Instagram's brand color */ 
+        }
+
+        .social-icons-list a:hover {
+           transform: translateY(-3px);
+           opacity: 0.9;
+           background-color: #031083af; /* Darker Instagram color on hover */
+        }
+
+        /* Styles for the new contact info list */
+        .contact-info-list {
+           list-style: none; /* Remove bullet points */
+           padding: 0;
+           margin: 0;
+           text-align: left; /* Align text within the list */
+           width: 100%; /* Ensure it takes full width within the section */
+           max-width: 280px; /* Adjust max-width to fit the section */
+        }
+
+        .contact-info-list li {
+           font-size: 1em;
+           color: #666;
+           margin-bottom: 10px;
+           display: flex; /* Use flex for icon and text alignment */
+           align-items: center; /* Vertically align icon and text */
+           gap: 10px; /* Space between icon and text */
+        }
+
+        .contact-info-list li:last-child {
+           margin-bottom: 0; /* No bottom margin for the last item */
+        }
+
+        .contact-info-list li i {
+           color: #020c41; /* Green color for contact icons */
+           font-size: 1.2em;
+        }
+
+        .contact-info-list li a {
+           color: #666;
+           text-decoration: none;
+           transition: color 0.3s ease;
+        }
+
+        .contact-info-list li a:hover {
+           color: #3cb878; /* Green on hover for email link */
+        }
+
+
+        .visit-website-button {
+           background-color: #020c41; /* Green button */
+           color: #fff;
+           padding: 12px 30px;
+           border: none;
+           border-radius: 50px;
+           font-size: 1.1em;
+           text-decoration: none;
+           transition: background-color 0.3s ease, transform 0.2s ease;
+           display: inline-block; /* Ensure padding works */
+        }
+
+        .visit-website-button:hover {
+           background-color: #00126e;; /* Darker green on hover */
+           transform: translateY(-2px);
+           color: #fff; /* Keep text white on hover */
+           text-decoration: none; /* Remove underline on hover */
+        }
+
+        /* Adjustments for header and footer from your existing HTML */
+        header {
+           box-shadow: none; /* Remove shadow if it clashes with the design */
+           background-color: #fff; /* Ensure header background matches main content if desired */
+        }
+
+        .back_re {
+            display: none; /* Hide the back_re section as it's not part of the design */
+        }
+
+        /* Your existing custom styles */
+
+        /* Make navigation links bold */
+        .navbar-nav .nav-item .nav-link {
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+           .thank-you-content {
+              padding: 30px 20px;
+           }
+           .thank-you-content h1 {
+              font-size: 2em;
+           }
+           .thank-you-content p {
+              font-size: 1em;
+           }
+           .thank-you-footer-sections {
+              flex-direction: column;
+              align-items: center;
+              padding: 20px 15px; /* Adjust padding for smaller screens */
+           }
+           .thank-you-footer-section {
+              width: 90%; /* Adjust width for smaller screens */
+              max-width: 400px; /* Keep max width */
+           }
+
+           /* Adjust angled backgrounds for smaller screens */
+           .thank-you-container::before {
+               transform: skewX(-30deg) translateX(-30%);
+           }
+           .thank-you-container::after {
+               transform: skewX(30deg) translateX(30%);
+           }
+           .contact-info-list {
+               max-width: none; /* Allow it to take more width if needed on small screens */
+           }
+        }
+
+        @media (max-width: 480px) {
+           .thank-you-content {
+              padding: 20px 15px;
+           }
+           .thank-you-icon {
+              font-size: 3em;
+              width: 60px;
+              height: 60px;
+           }
+           .thank-you-content h1 {
+              font-size: 1.8em;
+           }
+           .social-icons-list a { /* Adjusted class name */
+              font-size: 1.3em;
+              width: 40px;
+              height: 40px;
+              line-height: 40px;
+           }
+           .visit-website-button {
+               padding: 10px 20px;
+               font-size: 1em;
+           }
+        }
+     </style>
+   </head> 
+   <body class="main-layout">
+      <div class="loader_bg">
+         <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
+      </div>
+      <header>
+        <div class="header">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo">
+                              <a href="../index.html"><img src="../assets/images/logo.png" alt="#" /></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                           <ul class="navbar-nav mr-auto">
+                              <li class="nav-item ">
+                                 <a class="nav-link" href="../index.html"><b>Home</b></a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="about.html"><b>About</b></a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="apartments.html"><b>Our Apartments</b></a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="gallery.html"><b>Gallery</b></a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="testimonial.html"><b>testimonial</b></a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="contact.html"><b>Contact Us</b></a>
+                              </li>
+                           </ul>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <div class="thank-you-container">
+         <div class="thank-you-content">
+            <div class="thank-you-icon">
+               <i class="fas fa-check"></i>
+            </div>
+            <h1>Thank you for booking with us!</h1>
+            <p>
+               We've sent your booking confirmation to your inbox, with all the details of your reservation.
+               Please check you email inbox, or Spam box, do not hesitate to contact us if you encounter issues.
+            </p>
+         </div>
+      </div>
+      <footer>
+         <div class="thank-you-footer-sections">
+            <div class="thank-you-footer-section">
+                <h4>Connect With Us</h4>
+                <ul class="social-icons-list">
+                   <li>
+                      <a href="https://www.instagram.com/urugano_breeze_apartment/profilecard/?igsh=b3IyZ2xvaXZlY3c3" 
+                         target="_blank" 
+                         aria-label="Instagram">
+                         <i class="fab fa-instagram"></i>
+                      </a>
+                   </li>
+                </ul>
+ 
+                <ul class="contact-info-list">
+                   <li><i class="fa fa-map-marker" aria-hidden="true"></i> 255G+HXR, KK 24 Ave, Kigali</li>
+                   <li><i class="fa fa-mobile" aria-hidden="true"></i> +45 40641002</li>
+                   <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> sales@gogovillas.com</a></li>
+                </ul>
+             </div>
+            <div class="thank-you-footer-section">
+               <h4>Visit Our Website</h4>
+               <a href="admin-dashboard.html" class="visit-website-button">Visit Website</a>
+            </div>
+         </div>
+      </footer>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery.dataTables.min.js"></script>
+   </body>
+</html>

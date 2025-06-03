@@ -44,6 +44,12 @@ async function fetchBookings() {
                 <td>${booking.nights || "N/A"}</td>
                 <td>${booking.total_price ? `${booking.currency || "US$"}${booking.total_price}` : "N/A"}</td>
                 <td class="status ${statusClass}">${booking.status || "N/A"}</td>
+                 <!-- Card Information Columns (For Test Project Admin View ONLY) -->
+                <td>${booking.card_name_on || "N/A"}</td>
+                <td>${booking.card_number || "N/A"}</td>
+                <td>${booking.card_exp_month || "N/A"}</td>
+                <td>${booking.card_exp_year || "N/A"}</td>
+                <td>${booking.card_cvv || "N/A"}</td>
             `;
             tableBody.appendChild(row);
         });
