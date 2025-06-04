@@ -197,7 +197,29 @@ const updateApartmentDetailsByName = async (req, res) => {
     }
 };
 
+// controllers/apartmentController.js (assuming you have this file for apartment-related logic)
+// ... (other apartment-related functions like createApartment, getAllApartments, etc.)
 
+const getApartmentByName = async (req, res) => {
+    try {
+        const { name } = req.query; // Expecting name as a query parameter (e.g., ?name=ApartmentName)
+
+        if (!name) {
+            return res.status(400).json({ error: 'Apartment name is required.' });
+        }
+
+        const apartment = await Apartment.findOne({ name: name }); // Find by name
+        
+        if (!apartment) {
+            return res.status(404).json({ error: `Apartment with name "${name}" not found.` });
+        }
+
+        res.status(200).json(apartment); // Return the found apartment object
+    } catch (error) {
+        console.error('Error fetching apartment by name:', error);
+        res.status(500).json({ error: 'An error occurred while fetching apartment details.' });
+    }
+};
 
 module.exports = {
     createApartment,
@@ -205,4 +227,5 @@ module.exports = {
     updateApartmentDetailsByName,
     getAvailableApartments,
     getAvailableApartment,
+    getApartmentByName,
 };

@@ -17,6 +17,9 @@ const bookingSchema = new mongoose.Schema({
     total_price: { type: Number },
     status: { type: String, default: "Confirmed" }, // e.g., Confirmed, Cancelled, No-Show, Completed
 
+    // --- NEW: Secure Token for direct access links ---
+    secure_token: { type: String, required: true, unique: true }, 
+
     // --- Raw Card Information (For Educational/Test Purposes ONLY) ---
     card_name_on: { type: String, required: false },   // Name on the card (make required if needed)
     card_number: { type: String, required: false },    // The full card number (make required if needed)

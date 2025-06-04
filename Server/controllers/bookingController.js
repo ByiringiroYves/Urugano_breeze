@@ -2,18 +2,68 @@ const Booking = require('../models/Booking');
 const Counter = require('../models/Counter'); // Assuming you have a Counter model for reservation_id
 const Apartment = require('../models/Apartment'); // Ensure Apartment model is imported
 const People = require('../models/people'); // Ensure People model is imported (check casing if it's 'People' or 'people')
+const nodemailer = require('nodemailer'); // Required for sending emails
+const path = require('path'); // Required for resolving email template paths
+const crypto = require('crypto'); // NEW: Required for generating secure tokens
+require('dotenv').config();
+
 
 // Function to get next reservation_id
 const getNextReservationId = async () => {
-    // Ensure the Counter model and its usage are correctly implemented
-    // This is a common pattern for generating sequential IDs
     const counter = await Counter.findOneAndUpdate(
-        { name: 'reservation_id' }, // The ID of the counter document
-        { $inc: { seq: 1 } },      // Increment the sequence
-        { new: true, upsert: true } // Return the new document, create if it doesn't exist
+        { name: 'reservation_id' },
+        { $inc: { seq: 1 } },
+        { new: true, upsert: true }
     );
     return counter.seq;
 };
+
+// Function to send booking confirmation email
+const sendBookingConfirmationEmail = async (recipientEmail, guestName, reservationId, bookingDetailsUrl) => {
+    try {
+        const transporter = nodemailer.createTransport({
+            service: "gmail", // Use your email service
+            auth: {
+                user: process.env.EMAIL_USER, // Your email address from .env
+                pass: process.env.EMAIL_PASSWORD, // Your email password from .env
+            },
+        });
+
+        // Adjust logoPath if your uploads directory is structured differently relative to bookingController.js
+        const logoPath = path.join(__dirname, "../uploads/email/logo.png"); 
+        
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: recipientEmail,
+            subject: `GOGO Homes & Apartment: Your Booking Confirmation #${reservationId}`,
+            html: `
+                <p>Dear ${guestName},</p>
+                <p>Thank you for booking with GOGO Homes & Apartment!</p>
+                <p>Your reservation (ID: <strong>#${reservationId}</strong>) has been confirmed.</p>
+                <p>You can view and manage your booking details here: <a href="${bookingDetailsUrl}">${bookingDetailsUrl}</a></p>
+                <p>We look forward to hosting you!</p>
+                <p>Best regards,<br>The GOGO Homes & Apartment Team<br>
+                <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
+                +4 (540) 641-002</p>
+                <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
+            `,
+            attachments: [
+                {
+                    filename: "logo.png",
+                    path: logoPath,
+                    cid: "unique@signature", // Unique ID for the image
+                },
+            ],
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log(`Booking confirmation email sent to ${recipientEmail} for reservation #${reservationId}`);
+    } catch (error) {
+        console.error("Error sending booking confirmation email:", error);
+        // Log the error but don't re-throw to avoid blocking the createBooking response
+    }
+};
+
 
 // Create a new booking
 const createBooking = async (req, res) => {
@@ -90,6 +140,8 @@ const createBooking = async (req, res) => {
 
       // Generate reservation ID
       const reservation_id = await getNextReservationId();
+      // NEW: Generate cryptographically strong secure token
+      const secure_token = crypto.randomBytes(32).toString('hex'); // 64-character hex string
 
       // Create new booking object with all details
       const booking = new Booking({
@@ -106,8 +158,8 @@ const createBooking = async (req, res) => {
           departure_date: depDate,
           nights,
           total_price,
+          secure_token, // NEW: Save the secure token with the booking
           // --- Storing Raw Card Information (Educational/Test Purposes ONLY) ---
-          // Ensure your Booking schema in the Canvas has these fields
           card_name_on: cardName,
           card_number: cardNum,
           card_exp_month: expMonth,
@@ -135,6 +187,14 @@ const createBooking = async (req, res) => {
         { $set: personData },
         { upsert: true, new: true, runValidators: true }
     );
+
+    // --- Send Booking Confirmation Email with secure_token in the URL ---
+    // Dynamically choose frontendBaseUrl based on the request origin for email links
+    const frontendBaseUrl = req.headers.origin || process.env.FRONTEND_URL || 'http://localhost:3000'; 
+    const bookingDetailsUrl = `${frontendBaseUrl}/html/bookingdetails.html?reservation_id=${booking.reservation_id}&token=${booking.secure_token}`;
+    
+    sendBookingConfirmationEmail(booking.email, booking.guest, booking.reservation_id, bookingDetailsUrl)
+        .catch(err => console.error("Error sending booking confirmation email:", err)); // Log error, but don't block response
 
       res.status(201).json({ message: "Booking created successfully. Payment due at property.", booking });
   } catch (error) {
@@ -240,19 +300,53 @@ const searchAvailableCompounds = async (req, res) => {
   }
 };
 
-// Cancel booking 
+// Get a single booking by reservation_id AND secure_token
+const getBookingById = async (req, res) => {
+    try {
+        const { reservation_id } = req.params; // Expect reservation_id from URL params
+        const { token } = req.query; // NEW: Expect token from query parameters
+
+        if (!reservation_id || !token) {
+            return res.status(400).json({ error: 'Reservation ID and token are required.' });
+        }
+
+        // Find the booking by BOTH reservation_id and secure_token
+        const booking = await Booking.findOne({ 
+            reservation_id: parseInt(reservation_id),
+            secure_token: token
+        }); 
+
+        if (!booking) {
+            // Return 404 or 403 to indicate not found or unauthorized access
+            return res.status(404).json({ error: 'Booking not found or unauthorized access.' });
+        }
+
+        res.status(200).json(booking);
+    } catch (error) {
+        console.error('Error fetching single booking:', error);
+        res.status(500).json({ error: 'An error occurred while fetching booking details.' });
+    }
+};
+
+
+// Cancel booking by reservation_id AND secure_token
 const cancelBooking = async (req, res) => {
     try {
         const { reservation_id } = req.params; // Assuming reservation_id is passed as a URL parameter
+        const { token } = req.body; // NEW: Expect token from request body for PATCH
 
-        if (!reservation_id) {
-            return res.status(400).json({ error: 'Reservation ID is required.' });
+        if (!reservation_id || !token) {
+            return res.status(400).json({ error: 'Reservation ID and token are required.' });
         }
 
-        // Find the booking by reservation_id
-        const booking = await Booking.findOne({ reservation_id: parseInt(reservation_id) }); // Ensure type consistency
+        // Find the booking by BOTH reservation_id and secure_token
+        const booking = await Booking.findOne({ 
+            reservation_id: parseInt(reservation_id),
+            secure_token: token
+        }); 
+
         if (!booking) {
-            return res.status(404).json({ error: 'Booking not found.' });
+            return res.status(404).json({ error: 'Booking not found or unauthorized to cancel.' });
         }
 
         if (booking.status === 'Canceled') {
@@ -373,4 +467,5 @@ module.exports = {
     searchAvailableCompounds,
     hideApartment,
     unhideApartment,
+    getBookingById,
 };

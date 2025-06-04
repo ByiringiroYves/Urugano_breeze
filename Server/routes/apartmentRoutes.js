@@ -7,6 +7,7 @@ const {
     updateApartmentDetailsByName,
     getAvailableApartments,
     getAvailableApartment,
+    getApartmentByName
 } = require('../controllers/apartmentController');
 
 // Route to create a new apartment (with image upload)
@@ -22,5 +23,9 @@ router.put('/update/:apartmentName', upload.single('image'), updateApartmentDeta
 
 router.post('/available-apartments', getAvailableApartments);
 router.post('/available-apartment', getAvailableApartment);
+
+// GET route to fetch an apartment by name (using query parameter)
+router.get('/', getApartmentByName); // This route will now handle /api/apartments?name=...
+
 
 module.exports = router;
