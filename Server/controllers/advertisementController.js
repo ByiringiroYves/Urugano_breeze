@@ -1,23 +1,34 @@
 const nodemailer = require('nodemailer');
 const People = require('../models/people');
 const path = require('path');
-const twilio = require('twilio');
-const cloudinary = require('cloudinary').v2;
+// const twilio = require('twilio'); // Twilio library import
+// const cloudinary = require('cloudinary').v2; // Cloudinary library import
 const axios = require('axios'); // For making HTTP requests
 const FormData = require('form-data');
-const fs = require('fs');
+const fs = require('fs'); // Required for file system operations (like deleting temp files)
+require('dotenv').config(); 
 
-// Twilio setup
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const fromWhatsAppNumber = process.env.TWILIO_WHATSAPP_FROM;
+// COMMENTED OUT: Cloudinary Configuration (as per user's request to not use it)
+// cloudinary.config({
+//     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+//     api_key: process.env.CLOUDINARY_API_KEY,
+//     api_secret: process.env.CLOUDINARY_API_SECRET,
+//     secure: true
+// });
 
-// Validate Twilio environment variables
-if (!accountSid || !authToken || !fromWhatsAppNumber) {
-    console.error('Twilio configuration is missing. Ensure TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_WHATSAPP_FROM are set.');
-}
-const client = twilio(accountSid, authToken);
-// Email setup
+
+// COMMENTED OUT: Twilio setup (leaving commented as per previous instruction)
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const fromWhatsAppNumber = process.env.TWILIO_WHATSAPP_FROM;
+
+// COMMENTED OUT: Twilio validation
+// if (!accountSid || !authToken || !fromWhatsAppNumber) {
+//     console.error('Twilio configuration is missing. Ensure TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_WHATSAPP_FROM are set.');
+// }
+// const client = twilio(accountSid, authToken);
+
+// Email setup (remains active)
 const transporter = nodemailer.createTransport({
     service: 'gmail', // or your preferred service
     auth: {
@@ -30,24 +41,30 @@ const transporter = nodemailer.createTransport({
 const sendAdvertisement = async (req, res) => {
     try {
         const { advertisementText } = req.body;
-        const uploadedFile = req.file;
+        const uploadedFile = req.file; // This is the temporary file info from Multer
 
         if (!advertisementText) {
+            // NEW: Ensure temporary file is deleted even on early exit
+            if (uploadedFile && uploadedFile.path) {
+                fs.unlink(uploadedFile.path, (err) => {
+                    if (err) console.error('Error deleting temporary file (early exit):', err);
+                });
+            }
             return res.status(400).json({ error: 'Advertisement text is required.' });
         }
 
-        // Upload image to Cloudinary if provided
-        let imageUrl = null;
-        if (uploadedFile) {
-            try {
-                const uploadResponse = await cloudinary.uploader.upload(uploadedFile.path, {
-                    folder: 'advertisements',
-                });
-                imageUrl = uploadResponse.secure_url;
-            } catch (error) {
-                console.error('Error uploading to Cloudinary:', error);
-                return res.status(500).json({ error: 'Failed to upload image to Cloudinary.' });
-            }
+        // IMPORTANT: When not using Cloudinary, you attach the local file directly.
+        // However, this file MUST exist and be accessible when Nodemailer sends the email.
+        // And you MUST ensure it's cleaned up afterwards.
+        let attachments = [];
+        if (uploadedFile && uploadedFile.path) {
+            attachments.push({
+                filename: uploadedFile.originalname, // Original name from client
+                path: uploadedFile.path // Path to the temporary file on your server
+            });
+            console.log(`Attaching local file: ${uploadedFile.path}`); // Debugging
+        } else {
+            console.warn('No uploaded file found for attachment.');
         }
 
         // Fetch people from the database
@@ -62,7 +79,8 @@ const sendAdvertisement = async (req, res) => {
                     to: email,
                     subject: 'Check updates on GOGO Homes & Apartments',
                     text: advertisementText,
-                    attachments: imageUrl ? [{ filename: path.basename(imageUrl), path: imageUrl }] : [],
+                    // Attach the local file path if available
+                    attachments: attachments.length > 0 ? attachments : [], 
                 };
                 return transporter.sendMail(mailOptions).catch((error) => {
                     console.error(`Failed to send email to ${email}:`, error.message);
@@ -71,38 +89,25 @@ const sendAdvertisement = async (req, res) => {
             return Promise.resolve();
         });
 
-        // WhatsApp sending with Twilio API
-        const whatsappPromises = people.map(async (person) => {
-            const phone = person.Phones?.trim(); // The recipient's phone number
-            if (phone && /^\+\d+$/.test(phone)) { // Ensure the phone number is valid and includes a country code
-                const messageBody = `*Check updates on GOGO Homes & Apartments*\n\n${advertisementText}`;
+        // COMMENTED OUT: WhatsApp sending logic (leaving commented)
+        // const whatsappPromises = people.map(async (person) => { /* ... */ });
 
-                try {
-                    // If there's an uploaded image, send the message with media
-                    const message = await client.messages.create({
-                        from: `whatsapp:${fromWhatsAppNumber}`, // Twilio WhatsApp sender number
-                        to: `whatsapp:${phone}`, // Recipient's phone number in WhatsApp format
-                        body: messageBody, // Text message
-                        mediaUrl: imageUrl ? [imageUrl] : undefined, // Attach the uploaded image URL
-                    });
+        // Wait for all email promises to settle
+        await Promise.allSettled(emailPromises); 
 
-                    console.log(`WhatsApp message sent to ${phone}:`, message.sid);
-                } catch (error) {
-                    console.error(`Failed to send WhatsApp message to ${phone}:`, error.message || error);
-                }
-            } else {
-                console.warn(`Invalid phone number format for WhatsApp: ${phone}`);
-            }
-            return Promise.resolve(); // Skip invalid phone numbers
-        });
-
-        // Wait for all promises
-        await Promise.all([...emailPromises, ...whatsappPromises]);
-
-        res.status(200).json({ message: 'Advertisement sent successfully via email and WhatsApp!' });
+        res.status(200).json({ message: 'Advertisement sent successfully via email!' }); 
     } catch (error) {
-        console.error('Error sending advertisement:', error);
+        console.error('Error sending advertisement (general catch):', error);
         res.status(500).json({ error: 'An error occurred while sending the advertisement.' });
+    } finally {
+        // NEW: Always delete the temporary file created by multer in the finally block
+        // This ensures cleanup even if email sending fails or a general error occurs.
+        if (req.file && req.file.path) {
+            fs.unlink(req.file.path, (err) => {
+                if (err) console.error('Error deleting temporary file in finally block:', err);
+                // else console.log('Temporary file deleted in finally block:', req.file.path);
+            });
+        }
     }
 };
 
