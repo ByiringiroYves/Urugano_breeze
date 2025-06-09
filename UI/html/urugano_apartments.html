@@ -5,24 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>GOGO Home & Apartment</title>
-    <link rel="icon" href="../assets/images/tablogo.png" type="image/png">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <link rel="icon" href="/assets/images/tablogo.png" type="image/png"> <!-- Corrected Path -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> <!-- Corrected Path -->
+    <link rel="stylesheet" href="/css/style.css"> <!-- Corrected Path -->
+    <link rel="stylesheet" href="/css/responsive.css"> <!-- Corrected Path -->
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css"> <!-- Corrected Path -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-     <!-- Tweaks for older IEs-->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body class="main-layout">
 
    <!-- Loader -->
    <div class="loader_bg">
-        <div class="loader"><img src="../assets/images/loading.gif" alt="Loading" /></div>
+        <div class="loader"><img src="/assets/images/loading.gif" alt="Loading" /></div> <!-- Corrected Path -->
    </div>
 
    <!-- Header -->
@@ -32,7 +30,9 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 logo_section">
                         <div class="logo">
-                            <a href="../index.html"><img src="../assets/images/logo.png" alt="Logo" class="img-fluid"></a>
+                            <a href="/">
+                                <img src="/assets/images/logo.png" alt="Logo" class="img-fluid"> <!-- Corrected Path -->
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -42,12 +42,12 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                                    <li class="nav-item active"><a class="nav-link" href="apartments.html">Our Apartments</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="testimonial.html">testimonial</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li> <!-- Changed to clean URL -->
+                                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li> <!-- Changed to clean URL -->
+                                    <li class="nav-item active"><a class="nav-link" href="/apartments">Our Apartments</a></li> <!-- Changed to clean URL -->
+                                    <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li> <!-- Changed to clean URL -->
+                                    <li class="nav-item"><a class="nav-link" href="/testimonial">testimonial</a></li> <!-- Changed to clean URL -->
+                                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li> <!-- Changed to clean URL -->
                                 </ul>
                             </div>
                         </nav>
@@ -67,13 +67,14 @@
         <div class="search-bar-wrapper">
             <div class="search-bar">
                 <div class="search-item location">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon-location" width="16" height="16">
-                        <path fill="currentColor" d="M192 0C86 0 0 86 0 192c0 77.1 27.6 99.6 172.8 306.7 10.1 14.2 32.3 14.2 42.4 0C356.4 291.6 384 269.1 384 192 384 86 298 0 192 0zm0 272c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"/>
-                    </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon-location" width="16" height="16">
+                     <path fill="currentColor" d="M192 0C86 0 0 86 0 192c0 77.1 27.6 99.6 172.8 306.7 10.1 14.2 32.3 14.2 42.4 0C356.4 291.6 384 269.1 384 192 384 86 298 0 192 0zm0 272c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"/>
+                 </svg>
+                 
                     <input type="text" placeholder="Enter location">
                 </div>
                 <div class="search-item dates">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon-location" width="30px" height="30px">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon-location" width="30px" height="30px">
                         <path fill="currentColor" d="M152 64c0 13.3-10.7 24-24 24s-24-10.7-24-24V16c0-13.3 10.7-24 24-24s24 10.7 24 24v48zm192 0c0 13.3-10.7 24-24 24s-24-10.7-24-24V16c0-13.3 10.7-24 24-24s24 10.7 24 24v48zM0 80C0 53.5 21.5 32 48 32h48V16c0-8.84 7.2-16 16-16h32c8.8 0 16 7.16 16 16v16h128V16c0-8.84 7.2-16 16-16h32c8.8 0 16 7.16 16 16v16h48c26.5 0 48 21.5 48 48v48H0V80zm0 96v272c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V176H0zm128 80c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm0 128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm128-128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm0 128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm128-128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48zm0 128c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16h48z"></path>
                     </svg>
                     <input type="date" id="checkin-date" placeholder="Check-in date">
@@ -108,12 +109,12 @@
                  <div class="col-md-4">
                     <h3>Menu Link</h3>
                     <ul class="link_menu">
-                       <li class="active"><a href="#">Home</a></li>
-                       <li><a href="html/about.html"> about</a></li>
-                       <li><a href="html/apartments.html">Our Apartments</a></li>
-                       <li><a href="html/gallery.html">Gallery</a></li>
-                       <li><a href="html/testimonial.html">testimonial</a></li>
-                       <li><a href="html/contact.html">Contact Us</a></li>
+                       <li class="active"><a href="/">Home</a></li>
+                       <li><a href="/about"> about</a></li>
+                       <li><a href="/apartments">Our Apartments</a></li>
+                       <li><a href="/gallery">Gallery</a></li>
+                       <li><a href="/testimonial">testimonial</a></li>
+                       <li><a href="/contact">Contact Us</a></li>
                     </ul>
                  </div>
                  <div class="col-md-4">
@@ -143,12 +144,12 @@
      </footer>
 
     <!-- Javascript files -->
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/jquery-3.0.0.min.js"></script>
-    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="../js/custom.js"></script>
-    <script src="../js/flatpkr.js"></script>
-    <script src="../js/urugano-apartments-api-conect.js"></script>    
+    <script src="/js/jquery.min.js"></script> <!-- Corrected Path -->
+    <script src="/js/bootstrap.bundle.min.js"></script> <!-- Corrected Path -->
+    <script src="/js/jquery-3.0.0.min.js"></script> <!-- Corrected Path -->
+    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script> <!-- Corrected Path -->
+    <script src="/js/custom.js"></script> <!-- Corrected Path -->
+    <script src="/js/flatpkr.js"></script> <!-- Corrected Path -->
+    <script src="/js/urugano-apartments-api-conect.js"></script> <!-- Corrected Path -->
 </body>
 </html>

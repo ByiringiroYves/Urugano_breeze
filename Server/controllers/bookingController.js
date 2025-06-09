@@ -46,11 +46,11 @@ const sendBookingConfirmationEmail = async (recipientEmail, guestName, reservati
             subject: `GOGO Homes & Apartment: Your Booking Confirmation #${reservationId}`,
             html: `
                 <p>Dear ${guestName},</p>
-                <p>Thank you for booking with GOGO Homes & Apartment!</p>
+                <p>Thank you for booking with GOGO Villas</p>
                 <p>Your reservation (ID: <strong>#${reservationId}</strong>) has been confirmed.</p>
                 <p>You can view and manage your booking details here: <a href="${bookingDetailsUrl}">${bookingDetailsUrl}</a></p>
                 <p>We look forward to hosting you!</p>
-                <p>Best regards,<br>The GOGO Homes & Apartment Team<br>
+                <p>Best regards,<br>The GOGO Villas Team<br>
                 <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
                 +45-40641002</p>
                 <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
@@ -93,7 +93,7 @@ const sendCancellationConfirmationEmail = async (recipientEmail, guestName, rese
                 <p>Dear ${guestName},</p>
                 <p>This is to confirm that your reservation (ID: <strong>#${reservationId}</strong>) has been successfully **canceled**.</p>
                 <p>If you have any questions or require further assistance, please do not hesitate to contact us.</p>
-                <p>Best regards,<br>The GOGO Homes & Apartment Team<br>
+                <p>Best regards,<br>The GOGO Villas Team<br>
                 <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
                 +45-40641002</p>
                 <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
@@ -144,7 +144,7 @@ const sendModificationConfirmationEmail = async (recipientEmail, guestName, rese
                 ${updatedDetailsHtml}
                 <p>You can view your updated booking details here: <a href="${bookingDetailsUrl}">${bookingDetailsUrl}</a></p>
                 <p>If you did not make these changes, please contact us immediately.</p>
-                <p>Best regards,<br>The GOGO Homes & Apartment Team<br>
+                <p>Best regards,<br>The GOGO Villas Team<br>
                 <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
                 +45-40641002</p>
                 <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
@@ -292,7 +292,7 @@ const createBooking = async (req, res) => {
     // --- Send Booking Confirmation Email with secure_token in the URL ---
     // Dynamically choose frontendBaseUrl based on the request origin for email links
     const frontendBaseUrl = req.headers.origin || process.env.FRONTEND_URL || 'http://localhost:3000'; 
-    const bookingDetailsUrl = `${frontendBaseUrl}/html/bookingdetails.html?reservation_id=${booking.reservation_id}&token=${booking.secure_token}`;
+    const bookingDetailsUrl = `${frontendBaseUrl}/bookingdetails?reservation_id=${booking.reservation_id}&token=${booking.secure_token}`;
     
     sendBookingConfirmationEmail(booking.email, booking.guest, booking.reservation_id, bookingDetailsUrl)
         .catch(err => console.error("Error sending booking confirmation email:", err)); // Log error, but don't block response
