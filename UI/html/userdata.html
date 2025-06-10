@@ -9,12 +9,12 @@
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="Yves Byiringiro" content="">
-      <link rel="icon" href="/assets/images/tablogo.png" type="image/png"/> <!-- Corrected Path -->
-      <link rel="stylesheet" href="/css/bootstrap.min.css"> <!-- Corrected Path -->
-      <link rel="stylesheet" href="/css/style.css"> <!-- Corrected Path -->
-      <link rel="stylesheet" href="/css/responsive.css"> <!-- Corrected Path -->
-      <link rel="icon" href="/assets/images/fevicon.png" type="image/gif" /> <!-- Corrected Path -->
-      <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css"> <!-- Corrected Path -->
+      <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="../css/responsive.css">
+      <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
+      <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
       <style>
@@ -39,10 +39,6 @@
             background-color: rgba(0,0,0,0.5); /* Black w/ opacity - this is the backdrop */
         }
 
-        .custom-modal-content h2{
-          color: white;
-        }
-
         /* Modal Content Box */
         .custom-modal-content {
             background-color: #fefefe;
@@ -56,6 +52,10 @@
             animation-duration: 0.4s;
             border-radius: 5px;
             position: relative;
+        }
+
+        .custom-modal-content h2{
+          color: white;
         }
 
         /* Add Animation (fade in from top) */
@@ -211,7 +211,7 @@
       </head>
    <body class="main-layout">
       <div class="loader_bg">
-         <div class="loader"><img src="/assets/images/loading.gif" alt="#"/></div> <!-- Corrected Path -->
+         <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
       </div>
       <header>
          <div class="header">
@@ -221,9 +221,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="/">
-                                 <img src="/assets/images/logo.png" alt="#" /> <!-- Corrected Path -->
-                              </a>
+                              <a href="../index.html"><img src="../assets/images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -236,22 +234,22 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item ">
-                                 <a class="nav-link" href="/">Home</a> <!-- Corrected Link -->
+                                 <a class="nav-link" href="../index.html">Home</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="/about">About</a> <!-- Corrected Link -->
+                                 <a class="nav-link" href="about.html">About</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="/apartments">Our Apartments</a> <!-- Corrected Link -->
+                                 <a class="nav-link" href="apartments.html">Our Apartments</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="/gallery">Gallery</a> <!-- Corrected Link -->
+                                 <a class="nav-link" href="gallery.html">Gallery</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="/testimonial">testimonial</a> <!-- Corrected Link -->
+                                 <a class="nav-link" href="testimonial.html">testimonial</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="/contact">Contact Us</a> <!-- Corrected Link -->
+                                 <a class="nav-link" href="contact.html">Contact Us</a>
                               </li>
                            </ul>
                         </div>
@@ -317,7 +315,7 @@
                          <h3 class="title">Payment Card Details</h3> <!-- Clarified title -->
                          <div class="inputBox">
                              <label for="cardAccepted">Card Accepted:</label>
-                             <img src="/assets/images/card.png" alt="credit/debit card image" id="cardAccepted" style="height: 25px;"> <!-- Corrected Path -->
+                             <img src="../assets/images/card.png" alt="credit/debit card image" id="cardAccepted" style="height: 25px;">
                          </div>
                          <div class="inputBox">
                              <label for="cardName">Name On Card:</label>
@@ -420,12 +418,11 @@
                   <div class="col-md-4">
                      <h3>Menu Link</h3>
                      <ul class="link_menu">
-                        <li><a href="/">Home</a></li> <!-- Corrected Link -->
-                        <li><a href="/about">About</a></li> <!-- Corrected Link -->
-                        <li><a href="/apartments">Our Apartments</a></li> <!-- Corrected Link -->
-                        <li><a href="/gallery">Gallery</a></li> <!-- Corrected Link -->
-                        <li><a href="/testimonial">testimonial</a></li> <!-- Corrected Link -->
-                        <li><a href="/contact">Contact Us</a></li> <!-- Corrected Link -->
+                        <li><a href="../index.html">Home</a></li> <li><a href="about.html"> about</a></li>
+                        <li><a href="apartments.html">Our Apartments</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="testimonial.html">testimonial</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                      </ul>
                   </div>
                   <div class="col-md-4">
@@ -452,221 +449,215 @@
          </div>
        </footer>
        
-       <script src="/js/jquery.min.js"></script> <!-- Corrected Path -->
-       <script src="/js/bootstrap.bundle.min.js"></script> <!-- Corrected Path -->
-       <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script> <!-- Corrected Path --> 
-       <script src="/js/custom.js"></script> <!-- Corrected Path -->
+       <script src="../js/jquery.min.js"></script>
+       <script src="../js/bootstrap.bundle.min.js"></script>
+       <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script> 
+       <script src="../js/custom.js"></script>
 
        <script>
            // Card Number Formatting
-           (function() { // IIFE to scope variables
-               let cardNumInput = document.querySelector('#cardNum');
-               if(cardNumInput) {
-                 cardNumInput.addEventListener('input', () => { // Changed to 'input' for better responsiveness
-                     let cNumber = cardNumInput.value.replace(/\s/g, "").replace(/\D/g,'');
-                     let formattedNumber = cNumber.match(/.{1,4}/g);
-                     if (formattedNumber) {
-                         cardNumInput.value = formattedNumber.join(" ");
-                     } else {
-                         cardNumInput.value = cNumber; // Handle case where input is less than 4 digits
-                     }
-                     // Limit length after formatting (16 digits + 3 spaces = 19 chars)
-                     if (cardNumInput.value.length > 19) { 
-                       cardNumInput.value = cardNumInput.value.slice(0, 19);
-                    }
-                 });
-               }
-           })(); // End of IIFE
+           let cardNumInput = document.querySelector('#cardNum');
+           if(cardNumInput) {
+             cardNumInput.addEventListener('input', () => { // Changed to 'input' for better responsiveness
+                 let cNumber = cardNumInput.value.replace(/\s/g, "").replace(/\D/g,'');
+                 let formattedNumber = cNumber.match(/.{1,4}/g);
+                 if (formattedNumber) {
+                     cardNumInput.value = formattedNumber.join(" ");
+                 } else {
+                     cardNumInput.value = cNumber; // Handle case where input is less than 4 digits
+                 }
+                 // Limit length after formatting (16 digits + 3 spaces = 19 chars)
+                 if (cardNumInput.value.length > 19) { 
+                   cardNumInput.value = cardNumInput.value.slice(0, 19);
+                }
+             });
+           }
 
            // CVV Length Limiting
-           (function() { // IIFE to scope variables
-               let cvvInput = document.querySelector('#cvv');
-               if(cvvInput) {
-                 cvvInput.addEventListener('input', () => {
-                     cvvInput.value = cvvInput.value.replace(/\D/g,''); // Allow only digits
-                     if (cvvInput.value.length > 4) {
-                         cvvInput.value = cvvInput.value.slice(0, 4);
-                     }
-                 });
-               }
-           })(); // End of IIFE
+           let cvvInput = document.querySelector('#cvv');
+           if(cvvInput) {
+             cvvInput.addEventListener('input', () => {
+                 cvvInput.value = cvvInput.value.replace(/\D/g,''); // Allow only digits
+                 if (cvvInput.value.length > 4) {
+                     cvvInput.value = cvvInput.value.slice(0, 4);
+                 }
+             });
+           }
        </script>
 
        <script>
-           (function() { // IIFE to scope variables and prevent re-declaration issues
-               // Determine API Base URL for creating bookings
-               const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
-               const CREATE_BOOKING_API_URL = isProduction
-                   ? "https://backend-service-432219336422.us-central1.run.app/api/bookings/create" // Production Backend for creating
-                   : "http://localhost:8080/api/bookings/create"; // Development Backend for creating
+           // Determine API Base URL for creating bookings
+           const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+           const CREATE_BOOKING_API_URL = isProduction
+               ? "https://backend-service-432219336422.us-central1.run.app/api/bookings/create" // Production Backend for creating
+               : "http://localhost:8080/api/bookings/create"; // Development Backend for creating
 
-               document.addEventListener('DOMContentLoaded', () => {
-                   const params = new URLSearchParams(window.location.search);
-                   const propertyNameValue = params.get('apartmentName');
-                   const totalAmountValue = params.get('totalAmount');
-                   // Retrieve arrival and departure dates from URL params
-                   const arrivalDateValue = params.get('arrival_date'); // Corrected param name
-                   const departureDateValue = params.get('departure_date'); // Corrected param name
+           document.addEventListener('DOMContentLoaded', () => {
+               const params = new URLSearchParams(window.location.search);
+               const propertyNameValue = params.get('apartmentName');
+               const totalAmountValue = params.get('totalAmount');
+               // Retrieve arrival and departure dates from URL params
+               const arrivalDateValue = params.get('arrivalDate');
+               const departureDateValue = params.get('departureDate');
 
-                   const propertyInput = document.getElementById('propertyName');
-                   const amountInput = document.getElementById('TotalAmount');
-                   const apiMessageDiv = document.getElementById('apiMessage');
+               const propertyInput = document.getElementById('propertyName');
+               const amountInput = document.getElementById('TotalAmount');
+               const apiMessageDiv = document.getElementById('apiMessage');
 
 
-                   if (propertyInput && propertyNameValue) {
-                       propertyInput.value = decodeURIComponent(propertyNameValue);
-                       propertyInput.readOnly = true;
-                       propertyInput.style.backgroundColor = '#e9ecef';
-                       // propertyInput.style.cursor = 'not-allowed'; // Optional: keep if you want visual cue
+               if (propertyInput && propertyNameValue) {
+                   propertyInput.value = decodeURIComponent(propertyNameValue);
+                   propertyInput.readOnly = true;
+                   propertyInput.style.backgroundColor = '#e9ecef';
+                   // propertyInput.style.cursor = 'not-allowed'; // Optional: keep if you want visual cue
+               }
+
+               if (amountInput && totalAmountValue) {
+                   amountInput.value = `RWF ${parseFloat(totalAmountValue).toLocaleString()}`; // Assuming RWF and formatting
+                   amountInput.readOnly = true;
+                   amountInput.style.backgroundColor = '#e9ecef';
+                   // amountInput.style.cursor = 'not-allowed';
+               }
+
+               // Modal elements
+               const modal = document.getElementById("consentModal");
+               const openBtn = document.querySelector(".submit_btn"); // This is your "Proceed to Checkout" button
+               const closeBtn = document.getElementById("vanillaCloseBtn");
+               const cancelBtn = document.getElementById("vanillaCancelBtn");
+               const confirmBtn = document.getElementById("confirmSubmitBtn");
+               const paymentForm = document.getElementById("paymentForm");
+
+               function showApiMessage(message, type) {
+                   if (apiMessageDiv) {
+                       apiMessageDiv.textContent = message;
+                       apiMessageDiv.className = type; // 'success' or 'error'
+                       apiMessageDiv.style.display = 'block';
                    }
+               }
 
-                   if (amountInput && totalAmountValue) {
-                       amountInput.value = `RWF ${parseFloat(totalAmountValue).toLocaleString()}`; // Assuming RWF and formatting
-                       amountInput.readOnly = true;
-                       amountInput.style.backgroundColor = '#e9ecef';
-                       // amountInput.style.cursor = 'not-allowed';
-                   }
-
-                   // Modal elements
-                   const modal = document.getElementById("consentModal");
-                   const openBtn = document.querySelector(".submit_btn"); // This is your "Proceed to Checkout" button
-                   const closeBtn = document.getElementById("vanillaCloseBtn");
-                   const cancelBtn = document.getElementById("vanillaCancelBtn");
-                   const confirmBtn = document.getElementById("confirmSubmitBtn");
-                   const paymentForm = document.getElementById("paymentForm");
-
-                   function showApiMessage(message, type) {
-                       if (apiMessageDiv) {
-                           apiMessageDiv.textContent = message;
-                           apiMessageDiv.className = type; // 'success' or 'error'
-                           apiMessageDiv.style.display = 'block';
-                       }
-                   }
-
-                   function showModal() {
-                       if (modal) {
-                           modal.style.display = "block";
-                           document.body.classList.add("custom-modal-open");
-                       }
-                   }
-
-                   function hideModal() {
-                       if (modal) {
-                           modal.style.display = "none";
-                           document.body.classList.remove("custom-modal-open");
-                       }
-                   }
-
-                   if (openBtn) {
-                       openBtn.addEventListener('click', function(event) {
-                           event.preventDefault();
-                           if (paymentForm && typeof paymentForm.checkValidity === 'function') {
-                               if (!paymentForm.checkValidity()) {
-                                   paymentForm.classList.add('form-validated');
-                                   const firstInvalidField = paymentForm.querySelector(':invalid');
-                                   if (firstInvalidField && typeof firstInvalidField.focus === 'function') {
-                                       firstInvalidField.focus();
-                                   }
-                                   if (typeof paymentForm.reportValidity === 'function') {
-                                       paymentForm.reportValidity();
-                                   }
-                                   return;
-                               }
-                               paymentForm.classList.remove('form-validated');
-                           }
-                           showModal();
-                       });
-                   }
-
-                   if (closeBtn) {
-                       closeBtn.addEventListener('click', hideModal);
-                   }
-                   if (cancelBtn) {
-                       cancelBtn.addEventListener('click', hideModal);
-                   }
-
-                   if (confirmBtn) {
-                       confirmBtn.addEventListener('click', async function() {
-                           // Disable button to prevent multiple submissions
-                           confirmBtn.disabled = true;
-                           confirmBtn.textContent = 'Processing...';
-                           showApiMessage('Processing your booking...', 'info'); // Optional info class
-
-                           try {
-                               const formData = {
-                                   apartment_name: document.getElementById('propertyName').value,
-                                   guest: document.getElementById('name').value,
-                                   email: document.getElementById('email').value,
-                                   phone: document.getElementById('mobile').value,
-                                   country: document.getElementById('country').value, // Get country from input
-                                   city: document.getElementById('city').value,
-                                   street_address: document.getElementById('address').value,
-                                   arrival_date: arrivalDateValue, // From URL param
-                                   departure_date: departureDateValue, // From URL param
-                                   cardName: document.getElementById('cardName').value,
-                                   cardNum: document.getElementById('cardNum').value.replace(/\s/g, ''), // Remove spaces
-                                   expMonth: document.getElementById('expMonth').value,
-                                   expYear: document.getElementById('expYear').value,
-                                   cvv: document.getElementById('cvv').value
-                               };
-
-                               // Validate that arrival and departure dates were found
-                               if (!formData.arrival_date || !formData.departure_date) {
-                                   throw new Error("Booking dates are missing. Please go back and select your dates.");
-                               }
-                               
-                               // --- REAL API CALL ---
-                               const response = await fetch(CREATE_BOOKING_API_URL, {
-                                   method: 'POST',
-                                   headers: {
-                                       'Content-Type': 'application/json',
-                                   },
-                                   body: JSON.stringify(formData),
-                               });
-
-                               const result = await response.json();
-                               console.log('Backend createBooking response:', result); // ADDED FOR DEBUGGING
-
-                               if (response.ok) { // Typically 200-299 status codes
-                                   const reservationId = result.booking.reservation_id;
-                                   const secureToken = result.booking.secure_token; // NEW: Get the secure_token from the response
-                                   
-                                   // Construct the booking details link with both reservationId and secureToken
-                                   const bookingDetailsLink = `/bookingdetails?reservation_id=${reservationId}&token=${secureToken}`; // Corrected Path
-                                   
-                                   showApiMessage(`Booking successful! Reservation ID: ${reservationId}. You will receive a confirmation email.`, 'success');
-                                   paymentForm.reset(); // Clear the form
-
-                                   // Redirect to thankyou.html after a short delay
-                                   setTimeout(() => {
-                                       window.location.href = '/thankyou'; // Corrected Path
-                                   }, 2000); // Redirect after 2 seconds
-                               } else {
-                                   // Handle API errors (e.g., apartment booked, validation errors)
-                                   throw new Error(result.error || `Request failed with status ${response.status}`);
-                               }
-
-                           } catch (error) {
-                               console.error('Error submitting booking:', error);
-                               showApiMessage(`Booking failed: ${error.message}`, 'error');
-                           } finally {
-                               hideModal(); // Hide modal regardless of outcome
-                               // Re-enable button
-                               confirmBtn.disabled = false;
-                               confirmBtn.textContent = 'Confirm and Proceed';
-                           }
-                       });
-                   }
-
+               function showModal() {
                    if (modal) {
-                       window.addEventListener('click', function(event) {
-                           if (event.target === modal) {
-                               hideModal();
-                           }
-                       });
+                       modal.style.display = "block";
+                       document.body.classList.add("custom-modal-open");
                    }
-               });
-           })(); // End of IIFE
+               }
+
+               function hideModal() {
+                   if (modal) {
+                       modal.style.display = "none";
+                       document.body.classList.remove("custom-modal-open");
+                   }
+               }
+
+               if (openBtn) {
+                   openBtn.addEventListener('click', function(event) {
+                       event.preventDefault();
+                       if (paymentForm && typeof paymentForm.checkValidity === 'function') {
+                           if (!paymentForm.checkValidity()) {
+                               paymentForm.classList.add('form-validated');
+                               const firstInvalidField = paymentForm.querySelector(':invalid');
+                               if (firstInvalidField && typeof firstInvalidField.focus === 'function') {
+                                   firstInvalidField.focus();
+                               }
+                               if (typeof paymentForm.reportValidity === 'function') {
+                                   paymentForm.reportValidity();
+                               }
+                               return;
+                           }
+                           paymentForm.classList.remove('form-validated');
+                       }
+                       showModal();
+                   });
+               }
+
+               if (closeBtn) {
+                   closeBtn.addEventListener('click', hideModal);
+               }
+               if (cancelBtn) {
+                   cancelBtn.addEventListener('click', hideModal);
+               }
+
+               if (confirmBtn) {
+                   confirmBtn.addEventListener('click', async function() {
+                       // Disable button to prevent multiple submissions
+                       confirmBtn.disabled = true;
+                       confirmBtn.textContent = 'Processing...';
+                       showApiMessage('Processing your booking...', 'info'); // Optional info class
+
+                       try {
+                           const formData = {
+                               apartment_name: document.getElementById('propertyName').value,
+                               guest: document.getElementById('name').value,
+                               email: document.getElementById('email').value,
+                               phone: document.getElementById('mobile').value,
+                               country: document.getElementById('country').value, // Get country from input
+                               city: document.getElementById('city').value,
+                               street_address: document.getElementById('address').value,
+                               arrival_date: arrivalDateValue, // From URL param
+                               departure_date: departureDateValue, // From URL param
+                               cardName: document.getElementById('cardName').value,
+                               cardNum: document.getElementById('cardNum').value.replace(/\s/g, ''), // Remove spaces
+                               expMonth: document.getElementById('expMonth').value,
+                               expYear: document.getElementById('expYear').value,
+                               cvv: document.getElementById('cvv').value
+                           };
+
+                           // Validate that arrival and departure dates were found
+                           if (!formData.arrival_date || !formData.departure_date) {
+                               throw new Error("Booking dates are missing. Please go back and select your dates.");
+                           }
+                           
+                           // --- REAL API CALL ---
+                           const response = await fetch(CREATE_BOOKING_API_URL, {
+                               method: 'POST',
+                               headers: {
+                                   'Content-Type': 'application/json',
+                               },
+                               body: JSON.stringify(formData),
+                           });
+
+                           const result = await response.json();
+                           console.log('Backend createBooking response:', result); // ADDED FOR DEBUGGING
+
+                           if (response.ok) { // Typically 200-299 status codes
+                               const reservationId = result.booking.reservation_id;
+                               const secureToken = result.booking.secure_token; // NEW: Get the secure_token from the response
+                               
+                               // Construct the booking details link with both reservationId and secureToken
+                               const bookingDetailsLink = `bookingdetails.html?reservation_id=${reservationId}&token=${secureToken}`;
+                               
+                               showApiMessage(`Booking successful! Reservation ID: ${reservationId}. You will receive a confirmation email.`, 'success');
+                               paymentForm.reset(); // Clear the form
+
+                               // Redirect to thankyou.html after a short delay
+                               setTimeout(() => {
+                                   window.location.href = 'thankyou.html';
+                               }, 2000); // Redirect after 2 seconds
+                           } else {
+                               // Handle API errors (e.g., apartment booked, validation errors)
+                               throw new Error(result.error || `Request failed with status ${response.status}`);
+                           }
+
+                       } catch (error) {
+                           console.error('Error submitting booking:', error);
+                           showApiMessage(`Booking failed: ${error.message}`, 'error');
+                       } finally {
+                           hideModal(); // Hide modal regardless of outcome
+                           // Re-enable button
+                           confirmBtn.disabled = false;
+                           confirmBtn.textContent = 'Confirm and Proceed';
+                       }
+                   });
+               }
+
+               if (modal) {
+                   window.addEventListener('click', function(event) {
+                       if (event.target === modal) {
+                           hideModal();
+                       }
+                   });
+               }
+           });
        </script>
    </body>
 </html>

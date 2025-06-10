@@ -2,31 +2,33 @@ const isProduction = window.location.hostname === 'gogovillas.com' || window.loc
 
 // Set the base URL accordingly
 const API_BASE_URL = isProduction
-    ? "https://backend-service-432219336422.us-central1.run.app/api/" // Production Backend
-    : "http://localhost:8080/api/"; 
+    ? "https://backend-service-432219336422.us-central1.run.app/api/compounds/search" // Production Backend
+    : "http://localhost:8080/api/compounds/search";
+//const API_BASE_URL = "https://backend-service-432219336422.us-central1.run.app/api/compounds/search"; 
 
 // Utility function to get query parameters from the URL
 function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
     return {
-        arrivalDate: params.get('arrival_date'),
-        departureDate: params.get('departure_date'),
+        arrival_date: params.get('arrival_date'),
+        departure_date: params.get('departure_date'),
     };
 }
 
 // Function to fetch and render available compounds
-async function fetchAndRenderAvailableCompounds(arrivalDate, departureDate) { // Renamed for clarity
+async function fetchAvailableCompounds(arrivalDate, departureDate) {
     try {
-        // API call to search compounds
-        const response = await fetch(`${API_BASE_URL}compounds/search`, {
+        // API call
+        const response = await fetch(`${API_BASE_URL}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ arrival_date: arrivalDate, departure_date: departureDate }),
         });
 
         if (!response.ok) {
+            // Log and handle API errors
             const errorResponse = await response.json();
-            console.error('API Error Response (Compounds):', errorResponse);
+            console.error('API Error Response:', errorResponse);
             throw new Error(errorResponse.message || "Failed to fetch available compounds.");
         }
 
@@ -38,7 +40,7 @@ async function fetchAndRenderAvailableCompounds(arrivalDate, departureDate) { //
     }
 }
 
-// Function to render available compounds (used on /apartments page)
+// Function to render available compounds
 function renderAvailableCompounds(compounds, arrivalDate, departureDate) {
     const apartmentList = document.getElementById('apartmentList');
     apartmentList.innerHTML = ""; // Clear existing content
@@ -51,8 +53,6 @@ function renderAvailableCompounds(compounds, arrivalDate, departureDate) {
     const totalNights = Math.ceil((new Date(departureDate) - new Date(arrivalDate)) / (1000 * 60 * 60 * 24));
 
     compounds.forEach(compound => {
-        // Ensure compound.compound exists and has image before rendering
-        const compoundImage = compound.compound.image || '/assets/images/default.png'; // Fallback image if missing
         const finalPrice = compound.compound.price_per_night * totalNights;
 
         const compoundHTML = `
@@ -61,7 +61,7 @@ function renderAvailableCompounds(compounds, arrivalDate, departureDate) {
                <div class="room_img">
                    <figure>
                       <a href="javascript:void(0);" onclick="redirectToCompound('${compound.compound._id}', '${encodeURIComponent(JSON.stringify(compound.apartments))}')">
-                         <img src="${compoundImage}" alt="${compound.compound.name}">
+                         <img src="${compound.compound.image}" alt="${compound.compound.name}">
                       </a>
                    </figure>
                 </div>
@@ -79,28 +79,27 @@ function renderAvailableCompounds(compounds, arrivalDate, departureDate) {
     });
 }
 
-// Redirect to compound page (This function will be triggered by "View Availability" from a compound card)
-function redirectToCompound(compoundId, apartmentsJson) {
+// Redirect to compound page
+function redirectToCompound(compoundId, apartments) {
     try {
         const params = new URLSearchParams();
         params.append('compoundId', compoundId);
-        params.append('apartments', apartmentsJson);
+        params.append('apartments', apartments);
 
-        // Include arrival and departure dates from the current URL if available (from /apartments?...)
-        const { arrivalDate: globalArrivalDate, departureDate: globalDepartureDate } = getQueryParams(); 
-        if (globalArrivalDate && globalDepartureDate) {
-            params.append('arrival_date', globalArrivalDate);
-            params.append('departure_date', globalDepartureDate);
+        // Include arrival and departure dates
+        const { arrival_date, departure_date } = getQueryParams();
+        if (arrival_date && departure_date) {
+            params.append('arrival_date', arrival_date);
+            params.append('departure_date', departure_date);
         }
 
-        // CORRECTED: Use the clean URL for urugano-apartments
-        window.location.href = `/urugano-apartments?${params.toString()}`;
+        window.location.href = `urugano_apartments.html?${params.toString()}`;
     } catch (error) {
         console.error('Error redirecting to compound page:', error);
     }
 }
 
-// Handle search button click on /apartments page
+// Handle search form submission
 document.getElementById('search-btn').addEventListener('click', () => {
     const arrivalDate = document.getElementById('checkin-date').value;
     const departureDate = document.getElementById('checkout-date').value;
@@ -110,27 +109,18 @@ document.getElementById('search-btn').addEventListener('click', () => {
         return;
     }
 
-    // Redirect to the clean URL /apartments with new dates
-    const newUrl = `/apartments?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
+    const newUrl = `apartments.html?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
     window.location.href = newUrl;
 });
 
-// Initialize page for /apartments (main compounds listing page)
+// Initialize page
 document.addEventListener('DOMContentLoaded', () => {
-    // This script should only run its main logic if on the /apartments page
-    if (window.location.pathname === '/apartments') {
-        const { arrivalDate, departureDate } = getQueryParams();
+    const { arrival_date, departure_date } = getQueryParams();
 
-        // Populate the search/date inputs
-        if (arrivalDate) document.getElementById('checkin-date').value = arrivalDate;
-        if (departureDate) document.getElementById('checkout-date').value = departureDate;
+    if (arrival_date) document.getElementById('checkin-date').value = arrival_date;
+    if (departure_date) document.getElementById('checkout-date').value = departure_date;
 
-        // Fetch and render available compounds
-        if (arrivalDate && departureDate) {
-            fetchAndRenderAvailableCompounds(arrivalDate, departureDate);
-        } else {
-            // If no dates, clear the apartment list or show a message
-            document.getElementById('apartmentList').innerHTML = '<p>Please select dates to find available compounds.</p>';
-        }
+    if (arrival_date && departure_date) {
+        fetchAvailableCompounds(arrival_date, departure_date);
     }
 });

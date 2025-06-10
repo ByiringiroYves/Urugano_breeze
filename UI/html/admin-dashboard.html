@@ -12,18 +12,18 @@
  <meta name="keywords" content="">
  <meta name="description" content="">
  <meta name="Yves Byiringiro" content="">
- <link rel="icon" href="/assets/images/tablogo.png" type="image/png"/> <!-- Corrected Path -->
+ <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
  <!-- bootstrap css -->
- <link rel="stylesheet" href="/css/bootstrap.min.css"> <!-- Corrected Path -->
+ <link rel="stylesheet" href="../css/bootstrap.min.css">
  <!-- style css -->
- <link rel="stylesheet" href="/css/style.css"> <!-- Corrected Path -->
+ <link rel="stylesheet" href="../css/style.css">
  
  <!-- Responsive-->
- <link rel="stylesheet" href="/css/responsive.css"> <!-- Corrected Path -->
+ <link rel="stylesheet" href="../css/responsive.css">
  <!-- fevicon -->
- <link rel="icon" href="/assets/images/fevicon.png" type="image/gif" /> <!-- Corrected Path -->
+ <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
  <!-- Scrollbar Custom CSS -->
- <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css"> <!-- Corrected Path -->
+ <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
   <!-- External Libraries -->
  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
@@ -36,7 +36,7 @@
  <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
- <link rel="stylesheet" href="/css/dashboard.css"> <!-- Corrected Path -->
+ <link rel="stylesheet" href="../css/dashboard.css">
 <style>
     @media (max-width: 430px) {
         /* Center-align the logo */
@@ -71,7 +71,7 @@
         }
     
         .navigation.navbar-dark .navbar-toggler-icon {
-            background: url(/assets/images/menu_icon.png); /* Corrected Path */
+            background: url(../assets/images/menu_icon.png);
             background-repeat: no-repeat;
             height: 20px;
             width: 20px;
@@ -197,7 +197,7 @@
         }
     
         .navigation.navbar-dark .navbar-toggler-icon {
-            background: url(/assets/images/menu_icon.png); /* Corrected Path */
+            background: url(../assets/images/menu_icon.png);
             background-repeat: no-repeat;
             height: 18px; /* Smaller icon */
             width: 18px;
@@ -271,7 +271,7 @@
     
         .user-dropdown .dropdown-item strong {
             display: block;
-            font-size: 12px; /* Reduce font size */
+            font-size: 12px; /* Smaller font size */
         }
     
         /* Adjust navigation and dropdown alignment */
@@ -288,12 +288,136 @@
         }
     }
     
+    @media (max-width: 320px) {
+        /* Center-align the logo */
+        .logo {
+            text-align: left !important; /* Move logo to the left */
+            padding-bottom: 0px;
+            float: left;
+            margin-left: 15px; /* Reduce margin for smaller screens */
+        }
+    
+        .logo img {
+            margin-top: -8px; /* Adjust spacing above logo */
+            width: 120px; /* Reduce logo width */
+            height: auto;
+        }
+    
+        .header {
+            height: 45px; /* Reduce header height */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px; /* Reduce padding for smaller screens */
+        }
+    
+        /* Adjust navigation toggle button */
+        .navigation.navbar-dark .navbar-toggler {
+            border: none;
+            background-color: transparent;
+            position: absolute;
+            top: 8px; /* Adjust position */
+            right: 8px; /* Adjust position */
+        }
+    
+        .navigation.navbar-dark .navbar-toggler-icon {
+            background: url(../assets/images/menu_icon.png);
+            background-repeat: no-repeat;
+            height: 18px; /* Reduce icon size */
+            width: 18px;
+        }
+    
+        /* Navigation Bar Adjustments */
+        .navigation.navbar {
+            float: none;
+            display: flex !important;
+            flex-direction: column;
+            padding: 0;
+            width: 100%;
+        }
+    
+        .navigation .navbar-collapse {
+            background: #ffffff;
+            padding: 15px; /* Reduce padding for dropdown */
+            margin-top: -10px;
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            font-size: 12px; /* Reduce font size */
+            top: 0;
+            right: 0;
+        }
+    
+        .navigation.navbar-dark .navbar-nav .nav-link {
+            padding: 8px 0; /* Adjust padding */
+            color: #000;
+        }
+    
+        /* User profile adjustments */
+        .user-circle {
+            width: 30px; /* Reduce avatar size */
+            height: 30px;
+            font-size: 12px; /* Adjust font size for avatar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: 5px; /* Reduce spacing */
+        }
+    
+        /* User dropdown styles */
+        .user-dropdown {
+            position: relative; /* Relative to stay inside navbar */
+            width: 100%; /* Extend dropdown to full navbar width */
+            margin-top: 8px; /* Space below avatar */
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+            z-index: 998; /* Below navbar items */
+            padding: 10px; /* Reduce padding */
+        }
+    
+        .user-dropdown.active {
+            display: block; /* Show dropdown when avatar is clicked */
+        }
+    
+        .user-dropdown .dropdown-item {
+            padding: 8px 10px; /* Reduce padding */
+            cursor: pointer;
+            text-align: left; /* Align text to the left */
+        }
+    
+        .user-dropdown .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+    
+        .user-dropdown .dropdown-item strong {
+            display: block;
+            font-size: 12px; /* Reduce font size */
+        }
+    
+        /* Adjust navigation and dropdown alignment */
+        .navigation .user-dropdown {
+            position: relative; /* Ensure it stays below the navbar */
+            top: auto;
+            right: auto;
+            margin: 0;
+            margin-top: 8px; /* Place dropdown below other content */
+        }
+    
+        .navbar-collapse {
+            position: relative;
+        }
+    }
+    
 </style>
  <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
  <![endif]-->   
- <link rel="stylesheet" href="/css/admic-nav-bar.css"> <!-- Corrected Path -->
+ <link rel="stylesheet" href="../css/admic-nav-bar.css">
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">    
     
     
@@ -306,7 +430,7 @@
 
     <!-- loader  -->
     <div class="loader_bg">
-        <div class="loader"><img src="/assets/images/loading.gif" alt="#"/></div> <!-- Corrected Path -->
+        <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
      </div>
      <!-- end loader -->
     <!-- Header -->
@@ -318,9 +442,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="/admin-dashboard"> <!-- Changed to Clean URL -->
-                                 <img src="/assets/images/logo.png" alt="#" /> <!-- Corrected Path -->
-                              </a>
+                              <a href="../html/admin-dashboard.html"><img src="../assets/images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -333,32 +455,32 @@
                            <div class="collapse navbar-collapse" id="navbarsExample04">
                               <ul class="navbar-nav mr-auto">
                                  <li class="nav-item active">
-                                     <a class="nav-link" href="/admin-dashboard"> <!-- Changed to Clean URL -->
+                                     <a class="nav-link" href="admin-dashboard.html">
                                          <i class="fas fa-home"></i> Home
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="/people"> <!-- Changed to Clean URL -->
+                                     <a class="nav-link" href="people.html">
                                          <i class="fas fa-bullhorn"></i> Advertise
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="/booking"> <!-- Changed to Clean URL -->
+                                     <a class="nav-link" href="booking.html">
                                          <i class="fas fa-calendar-alt"></i> Booking
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="/testimonial-admin"> <!-- Changed to Clean URL -->
+                                     <a class="nav-link" href="testimonial-admin.html">
                                          <i class="fas fa-comment-alt"></i> Testimonial
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="/co-admins"> <!-- Changed to Clean URL -->
+                                     <a class="nav-link" href="co-admins.html">
                                          <i class="fas fa-users"></i> Accounts Manager
                                      </a>
                                  </li>
                                  <li class="nav-item">
-                                     <a class="nav-link" href="/modify-Apartment"> <!-- Changed to Clean URL -->
+                                     <a class="nav-link" href="modify-Apartment.html">
                                          <i class="fas fa-edit"></i> Modify Properties
                                      </a>
                                  </li>
@@ -429,13 +551,13 @@
             </div>
         </div>
     </div>    
-    <script src="/js/jquery.min.js"></script> <!-- Corrected Path -->
-    <script src="/js/bootstrap.bundle.min.js"></script> <!-- Corrected Path -->
-    <script src="/js/jquery-3.0.0.min.js"></script> <!-- Corrected Path -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.0.0.min.js"></script>
     <!-- sidebar -->
-    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script> <!-- Corrected Path -->
-    <script src="/js/custom.js"></script> <!-- Corrected Path -->
+    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../js/custom.js"></script>
    <!-- <script src="../js/dashboard.js" ></script> -->
-    <script src="/js/dash-api.js"></script> <!-- Corrected Path -->
+    <script src="../js/dash-api.js"></script>
 </body>
 </html>

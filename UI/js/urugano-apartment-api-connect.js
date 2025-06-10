@@ -47,11 +47,7 @@ async function checkApartmentAvailability(apartmentName, arrivalDate, departureD
             body: JSON.stringify({ arrival_date: arrivalDate, departure_date: departureDate }),
         });
 
-        if (!response.ok) {
-            const errorResponse = await response.json();
-            console.error('API Error Response:', errorResponse);
-            throw new Error(errorResponse.message || "Failed to fetch apartment availability.");
-        }
+        if (!response.ok) throw new Error('Failed to fetch apartment availability.');
 
         const data = await response.json();
 
@@ -64,7 +60,7 @@ async function checkApartmentAvailability(apartmentName, arrivalDate, departureD
             const pricePerNight = data.availableApartments.find(apartment => apartment.name === apartmentName).price_per_night;
             const totalPrice = pricePerNight * nights;
 
-            document.getElementById('final-price').textContent = `RWF${totalPrice.toFixed(0)}`;
+            document.getElementById('final-price').textContent = `US$${totalPrice.toFixed(0)}`;
             document.querySelector('.nights').textContent = ` / ${nights} nights`;
             
             // Additioal codes 
@@ -74,8 +70,10 @@ async function checkApartmentAvailability(apartmentName, arrivalDate, departureD
                 const currentArrivalDate = document.getElementById('checkin-date').value;
                 const currentDepartureDate = document.getElementById('checkout-date').value;
 
-                // CORRECTED: Update the link's href with clean URL for userdata
-                bookLink.href = `/userdata?apartmentName=${encodeURIComponent(apartmentName)}&totalAmount=${totalPrice.toFixed(0)}&arrival_date=${encodeURIComponent(currentArrivalDate)}&departure_date=${encodeURIComponent(currentDepartureDate)}`;
+                // Update the link's href with query parameters
+               // Corrected line:
+               // Corrected line:
+bookLink.href = `userdata.html?apartmentName=${encodeURIComponent(apartmentName)}&totalAmount=${totalPrice.toFixed(0)}&arrivalDate=${encodeURIComponent(currentArrivalDate)}&departureDate=${encodeURIComponent(currentDepartureDate)}`;
             }
 
         } else {
@@ -89,7 +87,7 @@ async function checkApartmentAvailability(apartmentName, arrivalDate, departureD
         }
     } catch (error) {
         console.error('Error checking apartment availability:', error);
-        alert('An error occurred while checking availability.');
+        alert('An error occurred while checking availability.');2
     }
 }
 
@@ -102,12 +100,11 @@ document.getElementById('search-btn').addEventListener('click', () => {
         return;
     }
 
-    // Extract the apartment name from the current page title (H1)
+    // Extract the apartment name from the current page
     const apartmentName = document.querySelector("h1").textContent.trim();
-    // No need for formattedName for the URL path itself, just for param values if needed
-    
-    // CORRECTED: Redirect to the clean URL for the specific apartment details page
-    // Example: /apartment-details?apartmentName=Karisimbi%20Apartment&arrival_date=...&departure_date=...
-    const url = `/apartment-details?apartmentName=${encodeURIComponent(apartmentName)}&arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
-    window.location.href = url;
+    const formattedName = apartmentName.replace(/\s+/g, '%20'); // Replace spaces with underscores or other valid characters
+    // Redirect with query params
+    const targetFile = `${formattedName}.html`;
+    window.location.href = `${targetFile}?apartmentName=${encodeURIComponent(apartmentName)}&arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
 });
+

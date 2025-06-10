@@ -5,8 +5,10 @@ const API_BASE_URL = isProduction
     ? "https://backend-service-432219336422.us-central1.run.app/api/" // Production Backend
     : "http://localhost:8080/api/"; 
 
-// Utility function to get query parameters from the URL
-function getQueryParams() {
+   //const API_BASE_URL = "https://backend-service-432219336422.us-central1.run.app/api/";
+  // Utility function to get query parameters from the URL
+  
+  function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
     return {
         compoundId: params.get('compoundId'),
@@ -31,8 +33,6 @@ function renderApartments(apartments, arrivalDate, departureDate) {
 
     apartments.forEach(apartment => {
         const price = apartment.price_per_night * totalNights;
-        // Construct the base URL for the individual apartment details page
-        const apartmentDetailsCleanUrl = `/apartment-details?apartmentName=${encodeURIComponent(apartment.name)}&arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
 
         let apartmentHTML;
 
@@ -44,7 +44,7 @@ function renderApartments(apartments, arrivalDate, departureDate) {
                 <div class="room">
                     <div class="room_img">
                         <figure>
-                            <a href="${apartmentDetailsCleanUrl}">
+                            <a href="javascript:void(0);" onclick="redirectToApartment('${apartment.name}')">
                                 <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
                             </a>
                         </figure>
@@ -65,7 +65,7 @@ function renderApartments(apartments, arrivalDate, departureDate) {
                         <p class="description-text">A perfect space for Small parties like Kitchen party, bridal shower, birthdays with a beautiful view over the Lake</p>
                         <p class="price"><span class="final-pric"> Only Booked at the property!</span></p>
                         <div class="bt-div">
-                            <button class="btn btn-primary" onclick="window.location.href='${apartmentDetailsCleanUrl}'">See Availability</button>
+                            <button class="btn btn-primary" onclick="redirectToApartment('${apartment.name}')">See Availability</button>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@ function renderApartments(apartments, arrivalDate, departureDate) {
                 <div class="room">
                     <div class="room_img">
                         <figure>
-                            <a href="${apartmentDetailsCleanUrl}">
+                            <a href="javascript:void(0);" onclick="redirectToApartment('${apartment.name}')">
                                 <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
                             </a>
                         </figure>
@@ -98,9 +98,9 @@ function renderApartments(apartments, arrivalDate, departureDate) {
                         <p class="description-title">${apartment.rooms} Bedrooms Apartment</p>
                         <p class="description-text">Entire apartment · ${apartment.rooms} bedrooms · ${apartment.bathrooms} bathrooms</p>
                         <p class="nights">${totalNights} nights</p>
-                        <p class="price"><span class="final-price">RWF${price.toFixed(0)}</span></p>
+                        <p class="price"><span class="final-price">US$${price.toFixed(0)}</span></p>
                         <div class="bt-div">
-                            <button class="btn btn-primary" onclick="window.location.href='${apartmentDetailsCleanUrl}'">See Availability</button>
+                            <button class="btn btn-primary" onclick="redirectToApartment('${apartment.name}')">See Availability</button>
                         </div>
                     </div>
                 </div>
@@ -122,11 +122,7 @@ async function fetchAvailableApartments(compoundId, arrivalDate, departureDate) 
             body: JSON.stringify({ compoundId, arrival_date: arrivalDate, departure_date: departureDate })
         });
 
-        if (!response.ok) {
-            const errorResponse = await response.json();
-            console.error('API Error Response:', errorResponse);
-            throw new Error(errorResponse.message || "Failed to fetch available apartments.");
-        }
+        if (!response.ok) throw new Error('Failed to fetch available apartments.');
 
         const data = await response.json();
         renderApartments(data.availableApartments, arrivalDate, departureDate);
@@ -136,87 +132,63 @@ async function fetchAvailableApartments(compoundId, arrivalDate, departureDate) 
     }
 }
 
-// Redirect to compound page (This function will be triggered by "View Availability" from gogo-compounds.js)
-// Now handles redirection to a clean URL for urugano_apartments
-function redirectToCompound(compoundId, apartmentsJson) {
-    try {
-        const params = new URLSearchParams();
-        params.append('compoundId', compoundId);
-        params.append('apartments', apartmentsJson);
-
-        // Include arrival and departure dates
-        const { arrivalDate: globalArrivalDate, departureDate: globalDepartureDate } = getQueryParams(); // Use getQueryParams for current page's dates
-        if (globalArrivalDate && globalDepartureDate) {
-            params.append('arrival_date', globalArrivalDate);
-            params.append('departure_date', globalDepartureDate);
-        }
-
-        // CORRECTED: Use the clean URL for urugano_apartments
-        window.location.href = `/urugano-apartments?${params.toString()}`;
-    } catch (error) {
-        console.error('Error redirecting to compound page:', error);
-    }
-}
-
-// Redirect to individual apartment page (This function is called by onclick from renderApartments)
-// Now uses a clean URL for single apartment details
-function redirectToApartment(apartmentName) {
-    // Get the check-in and check-out dates from the current URL's query parameters
-    const { arrivalDate, departureDate } = getQueryParams(); 
+// Initialize the page
+document.addEventListener('DOMContentLoaded', () => {
+    const { compoundId, arrivalDate, departureDate } = getQueryParams();
 
     if (!arrivalDate || !departureDate) {
-        console.error("Arrival and departure dates are missing for redirectToApartment.");
-        alert("Booking dates are required. Please go back and select your dates.");
+        console.error('Missing arrival or departure date in URL parameters.');
         return;
     }
 
-    // Replace spaces with `%20` (URL-encoded spaces) for the URL parameter
-    const encodedApartmentName = encodeURIComponent(apartmentName.trim());
-    
-    // CORRECTED: Use a clean URL for the single apartment details page
-    // Example: /apartment-details?apartmentName=Karisimbi%20Apartment&arrival_date=...&departure_date=...
-    const url = `/apartment-details?apartmentName=${encodedApartmentName}&arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
+    // Populate the search form with arrival and departure dates
+    document.getElementById('checkin-date').value = arrivalDate;
+    document.getElementById('checkout-date').value = departureDate;
+
+    // Fetch and render available apartments on page load
+    fetchAvailableApartments(compoundId, arrivalDate, departureDate);
+});
+
+// Event listener for the search button
+document.getElementById('search-btn').addEventListener('click', () => {
+    const arrivalDate = document.getElementById('checkin-date').value;
+    const departureDate = document.getElementById('checkout-date').value;
+    const { compoundId } = getQueryParams();
+
+    if (!arrivalDate || !departureDate) {
+        alert('Please select both check-in and check-out dates.');
+        return;
+    }
+    const newUrl = `urugano_apartments.html?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
+    window.location.href = newUrl;
+    // Fetch and display available apartments based on new dates
+   // fetchAvailableApartments(compoundId, arrivalDate, departureDate);
+});
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', () => {
+   const { arrival_date, departure_date } = getQueryParams();
+
+   if (arrival_date) document.getElementById('checkin-date').value = arrival_date;
+   if (departure_date) document.getElementById('checkout-date').value = departure_date;
+
+   if (arrival_date && departure_date) {
+      // fetchAvailableCompounds(arrival_date, departure_date);
+       // Fetch and display available apartments based on new dates
+    fetchAvailableApartments(compoundId, arrivalDate, departureDate);
+   }
+});
+
+function redirectToApartment(apartmentName) {
+    // Get the check-in and check-out dates
+    const arrivalDate = document.getElementById('checkin-date').value;
+    const departureDate = document.getElementById('checkout-date').value;
+
+    // Replace spaces with `%20` (URL-encoded spaces) for the filename
+    const formattedName = encodeURIComponent(apartmentName.trim());
+    const url = `${formattedName}.html?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}&apartmentName=${formattedName}`;
 
     // Redirect to the specific apartment page with dates in the URL
     window.location.href = url;
 }
 
-
-// Handle search button click on this page (apartments.html)
-document.getElementById('search-btn').addEventListener('click', () => {
-    const arrivalDate = document.getElementById('checkin-date').value;
-    const departureDate = document.getElementById('checkout-date').value;
-
-    if (!arrivalDate || !departureDate) {
-        alert("Please select both check-in and check-out dates.");
-        return;
-    }
-    
-    // CORRECTED: Redirect to its own clean URL, with updated dates
-    const newUrl = `/apartments?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
-    window.location.href = newUrl;
-});
-
-
-// Initialize page (fetches apartments based on URL params on load)
-document.addEventListener('DOMContentLoaded', () => {
-    const { compoundId, arrivalDate, departureDate } = getQueryParams(); // Use getQueryParams to get dates from URL
-
-    // Populate the search form with dates from URL
-    if (arrivalDate) document.getElementById('checkin-date').value = arrivalDate;
-    if (departureDate) document.getElementById('checkout-date').value = departureDate;
-
-    // Only fetch if compoundId and dates are present
-    if (compoundId && arrivalDate && departureDate) {
-        fetchAvailableApartments(compoundId, arrivalDate, departureDate);
-    } else if (arrivalDate && departureDate) {
-        // If only dates are present (e.g., coming from homepage search, without compoundId)
-        // You might want to fetch all apartments or show a general search result page.
-        // For now, if no compoundId, it will log an error in fetchAvailableApartments, which is fine.
-        console.warn("Compound ID is missing. Cannot fetch apartments for a specific compound.");
-        // Optional: Add logic here to fetch all apartments if compoundId is not expected.
-    } else {
-        // If no dates, clear the apartment list
-        document.getElementById('apartmentList').innerHTML = '<p>Please select dates to find available apartments.</p>';
-    }
-});

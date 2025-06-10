@@ -12,17 +12,17 @@
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="Yves Byiringiro" content="">
-      <link rel="icon" href="/assets/images/tablogo.png" type="image/png"/> <!-- Corrected Path -->
+      <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
       <!-- bootstrap css -->
-      <link rel="stylesheet" href="/css/bootstrap.min.css"> <!-- Corrected Path -->
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
       <!-- style css -->
-      <link rel="stylesheet" href="/css/style.css"> <!-- Corrected Path -->
+      <link rel="stylesheet" href="../css/style.css">
       <!-- Responsive-->
-      <link rel="stylesheet" href="/css/responsive.css"> <!-- Corrected Path -->
+      <link rel="stylesheet" href="../css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="/assets/images/fevicon.png" type="image/gif" /> <!-- Corrected Path -->
+      <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
       <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css"> <!-- Corrected Path -->
+      <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
@@ -38,7 +38,7 @@
 
     <!-- Loader -->
    <div class="loader_bg">
-    <div class="loader"><img src="/assets/images/loading.gif" alt="Loading" /></div> <!-- Corrected Path -->
+    <div class="loader"><img src="../assets/images/loading.gif" alt="Loading" /></div>
 </div>
 
 <body class="main-layout">
@@ -49,9 +49,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 logo_section">
                         <div class="logo">
-                            <a href="/">
-                                <img src="/assets/images/logo.png" alt="Logo" class="img-fluid"> <!-- Corrected Path -->
-                            </a>
+                            <a href="../index.html"><img src="../assets/images/logo.png" alt="Logo" class="img-fluid"></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -61,12 +59,12 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li> <!-- Changed to clean URL -->
-                                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li> <!-- Changed to clean URL -->
-                                    <li class="nav-item active"><a class="nav-link" href="/apartments">Our Apartments</a></li> <!-- Changed to clean URL -->
-                                    <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li> <!-- Changed to clean URL -->
-                                    <li class="nav-item"><a class="nav-link" href="/testimonial">testimonial</a></li> <!-- Changed to clean URL -->
-                                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li> <!-- Changed to clean URL -->
+                                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="apartments.html">Our Apartments</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="testimonial.html">testimonial</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -96,20 +94,21 @@
             <div class="align-items-center">
                 <p class="availability-message text-danger"></p>
                 <div class="price-box" style="border-radius: 5px;">
-                    <p class="price"><span class="final-price" id="final-price">RWF</span><span class="nights"> / nights</span></p>
+                    <p class="price"><span class="final-price" id="final-price">US$</span><span class="nights"> / nights</span></p>
                 </div>
-                <a href="/userdata" id="book-now-link" class="btn btn-danger">Book This Apartment</a> <!-- Corrected to Clean URL -->
+                <!-- <a href="userdata.html" class="btn btn-danger">Book This Apartment</a> -->
+                <a href="userdata.html" id="book-now-link" class="btn btn-danger">Book This Apartment</a>
             </div>
         </div>          
         <div class="image-gallery">
-            <img src="/assets/images/11.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
-            <img src="/assets/images/12.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
-            <img src="/assets/images/6.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
-            <img src="/assets/images/9.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
-            <img src="/assets/images/2.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
-            <img src="/assets/images/1.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
-            <img src="/assets/images/5.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
-            <img src="/assets/images/31.webp" alt="KARISIMBI Apartment"> <!-- Corrected Path, removed onclick -->
+            <img src="../assets/images/11.webp" alt="KARISIMBI Apartment" onclick="window.location='../assets/images/11.webp'">
+            <img src="../assets/images/12.webp" alt="KARISIMBI Apartment" onclick="window.location='../assets/images/12.webp'" >
+            <img src="../assets/images/6.webp" alt="KARISIMBI Apartment"  onclick="window.location='../assets/images/6.webp'" >
+            <img src="../assets/images/9.webp" alt="KARISIMBI Apartment"  onclick="window.location='../assets/images/9.webp'">
+            <img src="../assets/images/2.webp" alt="KARISIMBI Apartment"  onclick="window.location='../assets/images/2.webp'">
+            <img src="../assets/images/1.webp" alt="KARISIMBI Apartment"  onclick="window.location='../assets/images/1.webp'">
+            <img src="../assets/images/5.webp" alt="KARISIMBI Apartment"  onclick="window.location='../assets/images/5.webp'"  >
+            <img src="../assets/images/31.webp" alt="KARISIMBI Apartment" onclick="window.location='../assets/images/31.webp'">
             <!-- Add more images as needed -->
         </div>
         <div class="description">
@@ -117,6 +116,14 @@
         </div>
     </div>
     
+    
+
+
+
+    <!-- Javascript files -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/custom.js"></script>
     <!-- Footer -->
     <footer>
         <div class="footer">
@@ -133,12 +140,12 @@
                  <div class="col-md-4">
                     <h3>Menu Link</h3>
                     <ul class="link_menu">
-                       <li class="active"><a href="/">Home</a></li>
-                       <li><a href="/about">About</a></li>
-                       <li><a href="/apartments">Our Apartments</a></li>
-                       <li><a href="/gallery">Gallery</a></li>
-                       <li><a href="/testimonial">testimonial</a></li>
-                       <li><a href="/contact">Contact Us</a></li>
+                       <li class="active"><a href="#">Home</a></li>
+                       <li><a href="html/about.html"> about</a></li>
+                       <li><a href="html/apartments.html">Our Apartments</a></li>
+                       <li><a href="html/gallery.html">Gallery</a></li>
+                       <li><a href="html/testimonial.html">testimonial</a></li>
+                       <li><a href="html/contact.html">Contact Us</a></li>
                     </ul>
                  </div>
                  <div class="col-md-4">
@@ -168,11 +175,11 @@
      </footer>
 
     <!-- JavaScript Files -->
-    <script src="/js/jquery.min.js"></script> <!-- Corrected Path -->
-    <script src="/js/bootstrap.bundle.min.js"></script> <!-- Corrected Path -->
-    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script> <!-- Corrected Path -->
-    <script src="/js/custom.js"></script> <!-- Corrected Path -->
-    <script src="/js/flatpkr.js"></script> <!-- Corrected Path -->
-    <script src="/js/urugano-apartment-api-connect.js" ></script> <!-- Corrected Path -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="../js/flatpkr.js"></script>
+    <script src="../js/urugano-apartment-api-connect.js" ></script>
 </body>
 </html>

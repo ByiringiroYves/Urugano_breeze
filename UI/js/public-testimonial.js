@@ -42,8 +42,7 @@ async function loadTestimonials() {
             const slide = document.createElement("div");
             slide.classList.add("swiper-slide");
 
-            // Default image path for frontend, now root-relative
-            let imageUrl = '/assets/icons/default.png'; 
+            let imageUrl = '../assets/icons/default.png'; // Default image path
 
             if (testimonial.client_photo) {
                 if (testimonial.client_photo.startsWith('http://') || testimonial.client_photo.startsWith('https://')) {
@@ -62,7 +61,7 @@ async function loadTestimonials() {
                     <div class="testimonial-image">
                         <img src="${imageUrl}" 
                              alt="${testimonial.client_name || 'Client photo'}" 
-                             onerror="this.onerror=null; this.src='/assets/icons/default.png';"> <!-- Corrected onerror fallback path -->
+                             onerror="this.onerror=null; this.src='../assets/icons/default.png';">
                     </div>
                     <div class="testimonial-content">
                         <h3>${testimonial.client_name || "Anonymous"}</h3>
@@ -75,8 +74,6 @@ async function loadTestimonials() {
         });
 
         // Initialize Swiper after content is added
-        // Ensure Swiper library is loaded in testimonial.html head.
-        // Also ensure testimonial.html has the swiper-container structure correctly.
         if (typeof Swiper !== 'undefined' && document.querySelector(".swiper-container")) {
             new Swiper(".swiper-container", {
                 slidesPerView: 3,

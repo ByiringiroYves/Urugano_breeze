@@ -36,7 +36,7 @@ const sendVerificationEmail = async (email, verificationCode) => {
         <p>This code is valid for the next 10 minutes.</p>
         <p>If you did not request this code, please ignore this email or contact our support team if you suspect any issues.</p>
         <p>Best regards,<br>The GOGO Homes & Apartment Support Team<br>
-        <a href="mailto:sales@gogovillas.com">sales@gogovillas.com</a><br>
+        <a href="mailto:gogohomesapartment@gmail.com">gogohomesapartment@gmail.com</a><br>
         +4 (540) 641-002</p>
         <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />`,
       attachments: [
