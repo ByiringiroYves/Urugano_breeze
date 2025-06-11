@@ -524,3 +524,47 @@ function scrollToForm() {
         reservationForm.scrollIntoView({ behavior: 'smooth' });
     }
 }
+document.addEventListener('DOMContentLoaded', async () => {
+    const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+    const API_BASE_URL = isProduction
+        ? "https://backend-service-432219336422.us-central1.run.app/api"
+        : "http://localhost:8080/api";
+
+    async function verifyAdminSession() {
+        try {
+            // Make an authenticated API call to check session validity
+            // The 'authenticateJWT' middleware on the backend will check the cookie.
+            const response = await fetch(`${API_BASE_URL}/admin/profile`, { // Using /admin/profile as a protected endpoint
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // JWT will be sent automatically via HTTP-only cookie by browser
+                }
+            });
+
+            if (response.ok) {
+                // Session is valid, allow access to the page
+                document.body.style.display = ''; // Show content if initially hidden
+                // console.log('Admin session active.');
+            } else if (response.status === 401 || response.status === 403) {
+                // Not authenticated or token expired/invalid, redirect to login
+                // console.log('Admin session invalid or expired. Redirecting to login.');
+                window.location.href = '/html/admin.html'; // Redirect to login page
+            } else {
+                // Other API error, handle as needed
+                // console.error('Error verifying admin session:', response.status);
+                // Optionally show a generic error page or message
+                window.location.href = '/html/admin.html'; // Redirect for unexpected errors
+            }
+        } catch (error) {
+            // Network error or unexpected client-side error
+            // console.error('Failed to verify admin session:', error);
+            window.location.href = '/html/admin.html'; // Redirect to login
+        }
+    }
+
+    // Call the session verification when the page loads
+    // Initially hide content to prevent flicker if user is unauthenticated
+    document.body.style.display = 'none'; 
+    verifyAdminSession();
+});

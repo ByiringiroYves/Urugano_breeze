@@ -3,12 +3,12 @@ const isProduction = window.location.hostname === 'gogovillas.com' || window.loc
 // Set the base URL accordingly
 const API_BASE_URL = isProduction
     ? "https://backend-service-432219336422.us-central1.run.app/api/" // Production Backend
-    : "http://localhost:8080/api/"; 
+    : "http://localhost:8080/api/";
 
-   //const API_BASE_URL = "https://backend-service-432219336422.us-central1.run.app/api/";
-  // Utility function to get query parameters from the URL
-  
-  function getQueryParams() {
+
+// Utility function to get query parameters from the URL
+
+function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
     return {
         compoundId: params.get('compoundId'),
@@ -98,7 +98,7 @@ function renderApartments(apartments, arrivalDate, departureDate) {
                         <p class="description-title">${apartment.rooms} Bedrooms Apartment</p>
                         <p class="description-text">Entire apartment · ${apartment.rooms} bedrooms · ${apartment.bathrooms} bathrooms</p>
                         <p class="nights">${totalNights} nights</p>
-                        <p class="price"><span class="final-price">US$${price.toFixed(0)}</span></p>
+                        <p class="price"><span class="final-price">RWF${price.toFixed(0)}</span></p>
                         <div class="bt-div">
                             <button class="btn btn-primary" onclick="redirectToApartment('${apartment.name}')">See Availability</button>
                         </div>
@@ -107,7 +107,6 @@ function renderApartments(apartments, arrivalDate, departureDate) {
             </div>
             `;
         }
-    
         // Append each apartment's HTML to the apartment list
         apartmentList.innerHTML += apartmentHTML;
     });
@@ -175,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
    if (arrival_date && departure_date) {
       // fetchAvailableCompounds(arrival_date, departure_date);
        // Fetch and display available apartments based on new dates
-    fetchAvailableApartments(compoundId, arrivalDate, departureDate);
+    fetchAvailableApartments(compoundId, arrival_date, departure_date);
    }
 });
 
@@ -191,4 +190,3 @@ function redirectToApartment(apartmentName) {
     // Redirect to the specific apartment page with dates in the URL
     window.location.href = url;
 }
-

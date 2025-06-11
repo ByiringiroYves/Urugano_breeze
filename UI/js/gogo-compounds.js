@@ -17,6 +17,7 @@ function getQueryParams() {
 
 // Function to fetch and render available compounds
 async function fetchAvailableCompounds(arrivalDate, departureDate) {
+    const apartmentList = document.getElementById('apartmentList'); // Get a reference to the element
     try {
         // API call
         const response = await fetch(`${API_BASE_URL}`, {
@@ -29,14 +30,18 @@ async function fetchAvailableCompounds(arrivalDate, departureDate) {
             // Log and handle API errors
             const errorResponse = await response.json();
             console.error('API Error Response:', errorResponse);
-            throw new Error(errorResponse.message || "Failed to fetch available compounds.");
+            // Throw an error with the specific message from the backend
+            throw new Error(errorResponse.error || "Failed to fetch available compounds.");
         }
 
         const { compounds } = await response.json();
         renderAvailableCompounds(compounds, arrivalDate, departureDate);
     } catch (error) {
         console.error('Error Fetching Compounds:', error);
-        document.getElementById('apartmentList').innerHTML = "<p>An error occurred while fetching available compounds.</p>";
+        // Display the specific error message to the user
+        if (apartmentList) { // Check if the element exists before manipulating
+            apartmentList.innerHTML = `<p style="color:red;">${error.message}</p>`;
+        }
     }
 }
 
@@ -69,7 +74,7 @@ function renderAvailableCompounds(compounds, arrivalDate, departureDate) {
                    <h3>${compound.compound.name}</h3>
                    <p class="location">${compound.compound.location}</p>
                    <p class="night">${totalNights} nights</p>
-                   <p class="price-o"><span class="final-price">US$${finalPrice.toFixed(0)}</span></p>
+                   <p class="price-o"><span class="final-price">RWF${finalPrice.toFixed(0)}</span></p>
                    <button class="av-btn" onclick="redirectToCompound('${compound.compound._id}', '${encodeURIComponent(JSON.stringify(compound.apartments))}')"> View Availability</button>
                 </div>
              </div>
@@ -93,6 +98,7 @@ function redirectToCompound(compoundId, apartments) {
             params.append('departure_date', departure_date);
         }
 
+        // REVERTED: Using original .html path
         window.location.href = `urugano_apartments.html?${params.toString()}`;
     } catch (error) {
         console.error('Error redirecting to compound page:', error);
@@ -109,6 +115,7 @@ document.getElementById('search-btn').addEventListener('click', () => {
         return;
     }
 
+    // REVERTED: Using original .html path
     const newUrl = `apartments.html?arrival_date=${encodeURIComponent(arrivalDate)}&departure_date=${encodeURIComponent(departureDate)}`;
     window.location.href = newUrl;
 });
