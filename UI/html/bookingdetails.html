@@ -1,1010 +1,2588 @@
 <!DOCTYPE html>
+
 <html lang="en">
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
-      <title>Your Booking Details - GOGO Home & Apartment</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="Yves Byiringiro" content="">
-      <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
-      <!-- bootstrap css -->
-      <link rel="stylesheet" href="../css/bootstrap.min.css">
-      <!-- Optional: Font Awesome for icons -->
-      <link rel="stylesheet" href="../css/font-awesome.min.css">
-      <!-- style css -->
-      <link rel="stylesheet" href="../css/style.css">
-      <!-- Responsive-->
-      <link rel="stylesheet" href="../css/responsive.css">
-      <!-- fevicon -->
-      <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
-      <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
-      <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>      
-      
-      
-      <!-- jQuery Library -->
-      <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-      <script src="../js/jquery.min.js"></script>
-      <!--<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>-->
-      
-      <!-- DataTables -->
-      <script src="../js/datatables.min.js"></script>
-      <script src="../js/datatables.js"></script>  
 
-      <!-- Emoji Picker CSS -->
-      <link rel="stylesheet" href="../assets/emoji-picker-main/lib/css/emoji.css">
+<head>
 
-      <!-- Emoji Picker JavaScript -->
-      <script src="../assets/emoji-picker-main/lib/js/config.js"></script> 
-      <script src="../assets/emoji-picker-main/lib/js/util.js"></script>
-      <script src="../assets/emoji-picker-main/lib/js/jquery.emojiarea.js"></script>
-      <script src="../assets/emoji-picker-main/lib/js/emoji-picker.js"></script>
+<!-- basic -->
 
-      
-      <script src="../js/custom.js"></script>
+<meta charset="utf-8">
 
-      <!--[if lt IE 9]>
-         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]--> 
-      <link rel="stylesheet" href="../css/admic-nav-bar.css">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <!-- Custom CSS for Booking Details Page -->
-      <style>
-        /* Universal box-sizing for easier layout calculations */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+<!-- mobile metas -->
 
-        html {
-           height: 100%; /* Ensure html takes full viewport height */
-           overflow-x: hidden; /* Prevent horizontal scrollbar from angled backgrounds */
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        body {
-           height: 100%; /* Ensure body takes full viewport height */
-           margin: 0;
-           padding: 0; /* Explicitly remove default body padding */
-           background-color: #f7f9f7; /* Light background for the main body */
-           font-family: 'Arial', sans-serif;
-           display: flex;
-           flex-direction: column; /* Make body a flex container for vertical stacking */
-           min-height: 100vh; /* Ensure full viewport height */
-        }
-   
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-        /* Custom Modal Styles for this page (from userdata.html, ensuring consistency) */
-body.custom-modal-open {
-    overflow: hidden !important; /* Added !important to ensure it overrides other styles */
+<!-- site metas -->
+
+<title>Your Booking Details - GOGO Home & Apartment</title>
+
+<meta name="keywords" content="">
+
+<meta name="description" content="">
+
+<meta name="Yves Byiringiro" content="">
+
+<link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
+
+<!-- bootstrap css -->
+
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Optional: Font Awesome for icons -->
+
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+
+<!-- style css -->
+
+<link rel="stylesheet" href="../css/style.css">
+
+<!-- Responsive-->
+
+<link rel="stylesheet" href="../css/responsive.css">
+
+<!-- fevicon -->
+
+<link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
+
+<!-- Scrollbar Custom CSS -->
+
+<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+
+<!-- Tweaks for older IEs-->
+
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+
+<!-- jQuery Library -->
+
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+
+<script src="../js/jquery.min.js"></script>
+
+<!--<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>-->
+
+
+<!-- DataTables -->
+
+<script src="../js/datatables.min.js"></script>
+
+<script src="../js/datatables.js"></script>
+
+
+
+<!-- Emoji Picker CSS -->
+
+<link rel="stylesheet" href="../assets/emoji-picker-main/lib/css/emoji.css">
+
+
+
+<!-- Emoji Picker JavaScript -->
+
+<script src="../assets/emoji-picker-main/lib/js/config.js"></script>
+
+<script src="../assets/emoji-picker-main/lib/js/util.js"></script>
+
+<script src="../assets/emoji-picker-main/lib/js/jquery.emojiarea.js"></script>
+
+<script src="../assets/emoji-picker-main/lib/js/emoji-picker.js"></script>
+
+
+
+
+<script src="../js/custom.js"></script>
+
+
+
+<!--[if lt IE 9]>
+
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+
+<link rel="stylesheet" href="../css/admic-nav-bar.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
+
+<!-- Custom CSS for Booking Details Page -->
+
+<style>
+
+/* Universal box-sizing for easier layout calculations */
+
+*, *::before, *::after {
+
+box-sizing: border-box;
+
 }
+
+
+
+html {
+
+height: 100%; /* Ensure html takes full viewport height */
+
+overflow-x: hidden; /* Prevent horizontal scrollbar from angled backgrounds */
+
+}
+
+
+
+body {
+
+height: 100%; /* Ensure body takes full viewport height */
+
+margin: 0;
+
+padding: 0; /* Explicitly remove default body padding */
+
+background-color: #f7f9f7; /* Light background for the main body */
+
+font-family: 'Arial', sans-serif;
+
+display: flex;
+
+flex-direction: column; /* Make body a flex container for vertical stacking */
+
+min-height: 100vh; /* Ensure full viewport height */
+
+}
+
+
+
+
+/* Custom Modal Styles for this page (from userdata.html, ensuring consistency) */
+
+body.custom-modal-open {
+
+overflow: hidden !important; /* Added !important to ensure it overrides other styles */
+
+}
+
+
 
 /* The Modal (background overlay) */
+
 .custom-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity - this is the backdrop */
+
+display: none; /* Hidden by default */
+
+position: fixed; /* Stay in place */
+
+z-index: 1000; /* Sit on top */
+
+left: 0;
+
+top: 0;
+
+width: 100%; /* Full width */
+
+height: 100%; /* Full height */
+
+overflow: auto; /* Enable scroll if needed */
+
+background-color: rgba(0,0,0,0.5); /* Black w/ opacity - this is the backdrop */
+
 }
+
+
 
 /* Modal Content Box */
+
 .custom-modal-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* 10% from the top and centered */
-    padding: 0;
-    border: 1px solid #888;
-    width: 60%; /* Could be more or less, or a fixed px value */
-    max-width: 500px; /* Max width for responsiveness */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: animatetopRealistic; /* Using the more realistic animation */
-    animation-duration: 0.4s;
-    border-radius: 5px;
-    position: relative;
-}
-.custom-modal-content h2 {
-    color: white;
+
+background-color: #fefefe;
+
+margin: 10% auto; /* 10% from the top and centered */
+
+padding: 0;
+
+border: 1px solid #888;
+
+width: 60%; /* Could be more or less, or a fixed px value */
+
+max-width: 500px; /* Max width for responsiveness */
+
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+
+animation-name: animatetopRealistic; /* Using the more realistic animation */
+
+animation-duration: 0.4s;
+
+border-radius: 5px;
+
+position: relative;
+
 }
 
+.custom-modal-content h2 {
+
+color: white;
+
+}
+
+
+
 /* Add Animation (fade in from top) */
+
 @keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1} /* This will be relative to its natural position from margin: 10% auto; */
+
+from {top: -300px; opacity: 0}
+
+to {top: 0; opacity: 1} /* This will be relative to its natural position from margin: 10% auto; */
+
 }
+
 /* Adjusting animation for margin: 10% auto centering */
+
 @keyframes animatetopRealistic {
-    from {margin-top: -50px; opacity: 0} /* Start off-screen adjusted for margin */
-    to {margin-top: 10%; opacity: 1}
+
+from {margin-top: -50px; opacity: 0} /* Start off-screen adjusted for margin */
+
+to {margin-top: 10%; opacity: 1}
+
 }
+
+
+
 
 
 /* Modal Header */
+
 .custom-modal-header {
-    padding: 10px 16px;
-    background-color: #0f1521; /* Example color - match your theme */
-    color: white;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+padding: 10px 16px;
+
+background-color: #0f1521; /* Example color - match your theme */
+
+color: white;
+
+border-top-left-radius: 5px;
+
+border-top-right-radius: 5px;
+
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
 }
+
 .custom-modal-header h2 {
-    margin: 0;
-    font-size: 1.2em;
+
+margin: 0;
+
+font-size: 1.2em;
+
 }
+
+
 
 /* Modal Body */
+
 .custom-modal-body {
-    padding: 15px 16px;
-    line-height: 1.6;
+
+padding: 15px 16px;
+
+line-height: 1.6;
+
 }
 
+
+
 /* Modal Footer */
+
 .custom-modal-footer {
-    padding: 10px 16px;
-    background-color: #f9f9f9; /* Example color */
-    text-align: right;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-top: 1px solid #eee;
+
+padding: 10px 16px;
+
+background-color: #f9f9f9; /* Example color */
+
+text-align: right;
+
+border-bottom-left-radius: 5px;
+
+border-bottom-right-radius: 5px;
+
+border-top: 1px solid #eee;
+
 }
+
 .custom-modal-footer button { /* Applied to custom-btn */
-    padding: 8px 12px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 5px;
+
+padding: 8px 12px;
+
+border: none;
+
+border-radius: 3px;
+
+cursor: pointer;
+
+margin-left: 5px;
+
 }
+
 .custom-modal-footer .custom-btn-primary { /* Was .btn-primary */
-    background-color: #007bff; /* Example primary color - match your theme */
-    color: white;
+
+background-color: #007bff; /* Example primary color - match your theme */
+
+color: white;
+
 }
+
 .custom-modal-footer .custom-btn-secondary { /* Was .btn-secondary */
-    background-color: #6c757d; /* Example secondary color - match your theme */
-    color: white;
+
+background-color: #6c757d; /* Example secondary color - match your theme */
+
+color: white;
+
 }
+
+
+
 
 
 /* The Close Button */
+
 .custom-modal-close-btn {
-    color: white;
-    font-size: 28px;
-    font-weight: bold;
-    line-height: 1; 
+
+color: white;
+
+font-size: 28px;
+
+font-weight: bold;
+
+line-height: 1;
+
 }
+
+
 
 .custom-modal-close-btn:hover,
+
 .custom-modal-close-btn:focus {
-    color: #bbb; /* Lighter color on hover for dark background */
-    text-decoration: none;
-    cursor: pointer;
+
+color: #bbb; /* Lighter color on hover for dark background */
+
+text-decoration: none;
+
+cursor: pointer;
+
 }
 
 
 
 
 
-        /* Generic container for pages with angled backgrounds */
-        .page-container {
-           flex-grow: 1; /* Allows content to take up available space between header and footer */
-           position: relative;
-           background-color: #f7f9f7; /* Keep the central content light */
-           padding: 50px 20px; /* Padding around the content box */
-           text-align: center;
-           /* overflow: hidden; /* Removed as overflow-x on html should handle it */
-           display: flex;
-           flex-direction: column;
-           justify-content: center; /* Center content box vertically */
-           align-items: center; /* Center content box horizontally */
-        }
-
-        /* Angled background elements - adjusted for full coverage and screenshot match */
-        .page-container::before {
-           content: '';
-           position: absolute;
-           top: 0;
-           left: 0;
-           width: 100%; /* Ensure full width for transformation */
-           height: 100%;
-           background-color: #0f1521; /* Black from Thank You page */
-           transform: skewX(-20deg) translateX(-50%); /* Increased translateX for full coverage */
-           transform-origin: top left;
-           z-index: 0;
-        }
-
-        .page-container::after {
-           content: '';
-           position: absolute;
-           top: 0;
-           right: 0;
-           width: 100%; /* Ensure full width for transformation */
-           height: 100%;
-           background-color: rgb(182, 42, 42); /* Red/Orange from Thank You page */
-           transform: skewX(20deg) translateX(50%); /* Increased translateX for full coverage */
-           transform-origin: top right;
-           z-index: 0;
-        }
-
-        /* Generic content box for pages */
-        .content-box {
-           position: relative;
-           z-index: 1; /* Bring content to front */
-           background-color: #ffffff; /* White background for the central box */
-           padding: 40px;
-           border-radius: 10px;
-           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-           max-width: 1000px; /* Increased max-width to accommodate image */
-           width: 90%; /* Added width to ensure it doesn't get too wide on very large screens */
-           box-sizing: border-box; /* Include padding in width calculation */
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           text-align: left; /* Align text within the box to left */
-        }
-
-        .content-box h1 {
-           font-size: 2.5em;
-           color: #333;
-           margin-bottom: 30px;
-           font-weight: 700;
-           width: 100%; /* Ensure heading takes full width */
-           text-align: center; /* Center the heading */
-        }
-
-        /* New flex container for details and image */
-        .booking-content-wrapper {
-           display: flex;
-           flex-direction: row; /* Arrange items in a row */
-           gap: 40px; /* Space between details and image */
-           width: 100%;
-           justify-content: center; /* Center content horizontally */
-           align-items: flex-start; /* Align items to the top as in screenshot */
-        }
-
-        .booking-details-section {
-           flex: 1; /* Allow details section to grow */
-           min-width: 300px; /* Minimum width for details */
-           max-width: 55%; /* Allow details to take more space as in screenshot */
-        }
-
-        .apartment-image-section {
-           flex: 1; /* Allow image section to grow */
-           display: flex;
-           justify-content: center;
-           align-items: flex-start; /* Align image to the top */
-           min-width: 300px; /* Minimum width for image */
-           max-width: 45%; /* Control image section width */
-        }
-
-        .apartment-image-section img {
-           max-width: 100%;
-           height: auto;
-           border-radius: 8px; /* Rounded corners for the image */
-           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image */
-           object-fit: cover; /* Ensure image covers its area without distortion */
-           width: 100%; /* Ensure image takes full width of its container */
-           height: 300px; /* Fixed height for consistency, adjust as needed */
-        }
-
-        /* Styles for booking details grid */
-        .booking-details-grid {
-           display: grid;
-           grid-template-columns: repeat(2, 1fr); /* Two columns for details */
-           gap: 10px 30px; /* Reduced row-gap, maintained column-gap */
-           width: 100%;
-           margin-bottom: 40px; /* Space below the grid */
-        }
-
-        .detail-item {
-           display: flex;
-           flex-direction: column;
-           gap: 5px;
-           text-align: left; /* Explicitly left align content within each item */
-        }
-
-        .detail-label {
-           font-size: 0.9em;
-           color: #888;
-           font-weight: 600;
-           text-transform: uppercase;
-           margin-bottom: 2px;
-        }
-
-        .detail-value {
-           font-size: 1.1em;
-           color: #333;
-           font-weight: 500;
-        }
-
-        .cancel-button {
-           background-color: #dc3545; /* Red for cancel */
-           color: #fff;
-           padding: 12px 30px;
-           border: none;
-           border-radius: 50px;
-           font-size: 1.1em;
-           text-decoration: none;
-           transition: background-color 0.3s ease, transform 0.2s ease;
-           cursor: pointer;
-           margin-top: 20px; /* Space above the button */
-        }
-
-        .cancel-button:hover {
-           background-color: #c82333; /* Darker red on hover */
-           transform: translateY(-2px);
-        }
-
-        /* Footer sections from image */
-        footer {
-           margin-top: auto; /* Pushes the footer to the bottom when body is flex column */
-           z-index: 1; /* Keep z-index for safety if other elements overlap */
-        }
-
-        .page-footer-sections {
-           display: flex;
-           justify-content: center;
-           gap: 30px; /* Space between the two sections */
-           flex-wrap: wrap; /* Allow wrapping on smaller screens */
-           width: 100%; /* Ensure sections take full width of parent */
-           padding: 30px 20px; /* Add some padding around the footer sections */
-           background-color: #f7f9f7; /* Match body background */
-        }
-
-        .page-footer-section {
-           background-color: #fff;
-           border: 1px solid #e0e0e0;
-           border-radius: 8px;
-           padding: 30px;
-           flex: 1;
-           min-width: 280px; /* Minimum width for each section */
-           max-width: 350px; /* Max width for each section */
-           text-align: center;
-           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-           display: flex; /* Use flex to arrange contents vertically */
-           flex-direction: column;
-           align-items: center; /* Center items horizontally within the section */
-        }
-
-        .page-footer-section h4 {
-           font-size: 1.4em;
-           color: #333;
-           margin-bottom: 25px;
-           font-weight: 600;
-        }
-
-        /* Styles for the Instagram social icon list */
-        .social-icons-list {
-           list-style: none; /* Remove bullet points */
-           padding: 0;
-           margin: 0 0 30px 0; /* Add margin below the social icon and above contact info */
-           display: flex; /* For centering the single icon */
-           justify-content: center; /* Center the icon */
-           width: 100%; /* Ensure it takes full width for centering */
-        }
-
-        .social-icons-list li {
-           display: inline-block; /* Ensure list item doesn't take full width */
-           margin: 0; /* No margin between list items, as there's only one */
-        }
-
-        .social-icons-list a {
-           display: inline-block;
-           color: #fff;
-           font-size: 1.5em;
-           width: 45px;
-           height: 45px;
-           line-height: 45px;
-           border-radius: 50%;
-           transition: transform 0.3s ease, background-color 0.3s ease;
-           background-color: #020c41; /* Dark blue/black from Thank You page */ 
-       }
-
-       .social-icons-list a:hover {
-          transform: translateY(-3px);
-          opacity: 0.9;
-          background-color: #031083af; /* Darker blue/black on hover */
-       }
-
-        /* Styles for the contact info list */
-        .contact-info-list {
-           list-style: none; /* Remove bullet points */
-           padding: 0;
-           margin: 0;
-           text-align: left; /* Align text within the list to left as in screenshot */
-           width: 100%; /* Ensure it takes full width within the section */
-        }
-
-        .contact-info-list li {
-           font-size: 1em;
-           color: #666;
-           margin-bottom: 10px;
-           display: flex; /* Use flex for icon and text alignment */
-           align-items: center; /* Vertically align icon and text */
-           justify-content: flex-start; /* Align content to the start (left) as in screenshot */
-           gap: 10px; /* Space between icon and text */
-        }
-
-        .contact-info-list li:last-child {
-           margin-bottom: 0; /* No bottom margin for the last item */
-        }
-
-        .contact-info-list li i {
-           color: #020c41; /* Dark blue/black from Thank You page */
-           font-size: 1.2em;
-        }
-
-        .contact-info-list li a {
-           color: #666;
-           text-decoration: none;
-           transition: color 0.3s ease;
-        }
-
-        .contact-info-list li a:hover {
-           color: #020c41; /* Dark blue/black on hover for email link */
-        }
-
-        .visit-website-button {
-           background-color: #020c41; /* Dark blue/black from Thank You page */
-           color: #fff;
-           padding: 12px 30px;
-           border: none;
-           border-radius: 50px;
-           font-size: 1.1em;
-           text-decoration: none;
-           transition: background-color 0.3s ease, transform 0.2s ease;
-           display: inline-block; /* Ensure padding works */
-        }
-
-        .visit-website-button:hover {
-          background-color: #00126e; /* Darker blue/black on hover */
-          transform: translateY(-2px);
-          color: #fff; /* Keep text white on hover */
-          text-decoration: none; /* Remove underline on hover */
-       }
-
-        /* Adjustments for header and footer from your existing HTML */
-        header {
-           box-shadow: none; /* Remove shadow if it clashes with the design */
-           background-color: #fff; /* Ensure header background matches main content if desired */
-        }
-
-        .back_re {
-            display: none; /* Hide the back_re section as it's not part of the design */
-        }
-        
-        /* Make navigation links bold */
-        .navbar-nav .nav-item .nav-link {
-            font-weight: bold;
-        }
-
-
-        /* Responsive adjustments */
-        @media (min-width: 769px) { /* Apply 2-column grid on larger screens */
-           .booking-details-grid {
-               grid-template-columns: repeat(2, 1fr); /* Two columns for details */
-           }
-        }
-
-        @media (max-width: 768px) {
-           .content-box {
-              padding: 30px 20px;
-           }
-           .content-box h1 {
-              font-size: 2em;
-           }
-           .booking-content-wrapper {
-               flex-direction: column; /* Stack details and image on small screens */
-               gap: 30px; /* Adjust gap when stacked */
-           }
-           .booking-details-section, .apartment-image-section {
-               min-width: unset; /* Remove min-width when stacked */
-               max-width: 100%; /* Take full width when stacked */
-           }
-           .apartment-image-section img {
-               height: 250px; /* Adjust height for smaller screens */
-           }
-           .page-footer-sections {
-              flex-direction: column;
-              align-items: center;
-              padding: 20px 15px; /* Adjust padding for smaller screens */
-           }
-           .page-footer-section {
-              width: 90%; /* Adjust width for smaller screens */
-              max-width: 400px; /* Keep max width */
-           }
-           .page-container::before {
-               transform: skewX(-30deg) translateX(-30%);
-           }
-           .page-container::after {
-               transform: skewX(30deg) translateX(30%);
-           }
-        }
-
-        @media (max-width: 480px) {
-           .content-box {
-              padding: 20px 15px;
-           }
-           .content-box h1 {
-              font-size: 1.8em;
-           }
-           .detail-label {
-               font-size: 0.8em;
-           }
-           .detail-value {
-               font-size: 1em;
-           }
-           .social-icons-list a {
-              font-size: 1.3em;
-              width: 40px;
-              height: 40px;
-              line-height: 40px;
-           }
-           .cancel-button {
-               padding: 10px 20px;
-               font-size: 1em;
-           }
-        }
-     </style>
-   </head> 
-   <!-- body -->
-   <body class="main-layout">
-       <!-- loader  -->
-      <!-- <div class="loader_bg">
-        <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
-     </div> -->
-     <!-- end loader -->
-      <!-- header -->
-      <header>
-         <!-- header inner -->
-         <div class="header">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                     <div class="full">
-                        <div class="center-desk">
-                           <div class="logo">
-                              <a href="admin-dashboard.html"><img src="../assets/images/logo.png" alt="#" /></a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarsExample04">
-                            <ul class="navbar-nav mr-auto">
-                               <li class="nav-item ">
-                                  <a class="nav-link" href="../index.html"><b>Home</b></a>
-                               </li>
-                               <li class="nav-item">
-                                  <a class="nav-link" href="about.html"><b>About</b></a>
-                               </li>
-                               <li class="nav-item">
-                                  <a class="nav-link" href="apartments.html"><b>Our Apartments</b></a>
-                               </li>
-                               <li class="nav-item">
-                                  <a class="nav-link" href="gallery.html"><b>Gallery</b></a>
-                               </li>
-                               <li class="nav-item">
-                                  <a class="nav-link" href="testimonial.html"><b>testimonial</b></a>
-                               </li>
-                               <li class="nav-item">
-                                  <a class="nav-link" href="contact.html"><b>Contact Us</b></a>
-                               </li>
-                            </ul>
-                        </div>
-                     </nav>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </header>
-      <!-- end header inner -->
-      <!-- end header -->
-
-      <!-- Booking Details Content Section -->
-      <div class="page-container">
-         <div class="content-box">
-            <h1>Your Reservation Details</h1>
-            <div id="apiMessage" class="api-message"></div> <!-- Message div for API responses -->
-
-            <div class="booking-content-wrapper">
-                <div class="booking-details-section">
-                    <div class="booking-details-grid">
-                        <div class="detail-item">
-                            <span class="detail-label">Reservation ID</span>
-                            <span class="detail-value" id="reservationIdValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Property</span>
-                            <span class="detail-value" id="propertyValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Guest Name</span>
-                            <span class="detail-value" id="guestNameValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Email</span>
-                            <span class="detail-value" id="emailValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Phone</span>
-                            <span class="detail-value" id="phoneValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Country</span>
-                            <span class="detail-value" id="countryValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">City</span>
-                            <span class="detail-value" id="cityValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Book Date</span>
-                            <span class="detail-value" id="bookDateValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Arrival Date</span>
-                            <span class="detail-value" id="arrivalDateValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Departure Date</span>
-                            <span class="detail-value" id="departureDateValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Nights</span>
-                            <span class="detail-value" id="nightsValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Total Price</span>
-                            <span class="detail-value" id="totalPriceValue">Loading...</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Status</span>
-                            <span class="detail-value" id="statusValue">Loading...</span>
-                        </div>
-                    </div>
-                    <button class="cancel-button" id="cancelBookingBtn">Cancel Booking</button>
-                </div>
-                <div class="apartment-image-section">
-                    <img src="https://placehold.co/400x300/e0e0e0/333333?text=Apartment+Image" 
-                         alt="Apartment Photo" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/400x300/e0e0e0/333333?text=Image+Not+Found';">
-                </div>
-            </div>
-         </div>
-      </div>
-      <!-- End Booking Details Content Section -->
-     
-      <!-- Custom Modal for Cancellation Confirmation -->
-      <div id="cancelConfirmModal" class="custom-modal"> 
-        <div class="custom-modal-content">
-            <div class="custom-modal-header">
-                <h2>Confirm Cancellation</h2>
-                <span id="cancelModalCloseBtn" class="custom-modal-close-btn">&times;</span> 
-            </div>
-            <div class="custom-modal-body">
-                <p>Are you sure you want to cancel this booking?</p>
-                <p>This action cannot be undone.</p>
-            </div>
-            <div class="custom-modal-footer">
-                <button type="button" id="cancelModalNoBtn" class="custom-btn custom-btn-secondary">No, Keep Booking</button>
-                <button type="button" id="cancelModalYesBtn" class="custom-btn custom-btn-primary">Yes, Cancel Booking</button>
-            </div>
-        </div>
-      </div>
-
-      <!-- Footer sections from image -->
-      <footer>
-         <div class="page-footer-sections">
-            <div class="page-footer-section">
-               <h4>Connect With Us</h4>
-               <!-- Social Icons for Instagram only -->
-               <ul class="social-icons-list">
-                  <li>
-                     <a href="https://www.instagram.com/urugano_breeze_apartment/profilecard/?igsh=b3IyZ2xvaXZlY3c3" 
-                        target="_blank" 
-                        aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                     </a>
-                  </li>
-               </ul>
-
-               <!-- Contact Information -->
-               <ul class="contact-info-list">
-                  <li><i class="fa fa-map-marker" aria-hidden="true"></i> 255G+HXR, KK 24 Ave, Kigali</li>
-                  <li><i class="fa fa-mobile" aria-hidden="true"></i> +45 40641002</li>
-                  <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> sales@gogovillas.com</a></li>
-               </ul>
-            </div>
-            <div class="page-footer-section">
-               <h4>Visit Our Website</h4>
-               <a href="../index.html" class="visit-website-button">Visit Website</a>
-            </div>
-         </div>
-      </footer>
-      <!-- End footer sections from image -->
-
-      <!-- Javascript files-->
-      <script src="../js/bootstrap.bundle.min.js"></script>
-      <script src="../js/jquery.dataTables.min.js"></script>
-
-      <script>
-        // Helper function to format dates
-        function formatDate(dateString) {
-            if (!dateString) return 'N/A';
-            const date = new Date(dateString);
-            if (isNaN(date.getTime())) return 'Invalid Date';
-            return date.toISOString().split('T')[0]; // Formats to dilengkapi-MM-DD
-        }
-
-        // Helper function to format currency
-        function formatPrice(amount) {
-            if (typeof amount !== 'number') return 'N/A';
-            return `RWF ${amount.toLocaleString('en-RW', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-        }
-
-        // Helper function to show API messages
-        function showApiMessage(message, type) {
-            const apiMessageDiv = document.getElementById('apiMessage');
-            if (apiMessageDiv) {
-                apiMessageDiv.textContent = message;
-                apiMessageDiv.className = `api-message ${type}`; // 'success', 'error', 'info'
-                apiMessageDiv.style.display = 'block';
-                // Hide message after a few seconds
-                setTimeout(() => {
-                    apiMessageDiv.style.display = 'none';
-                }, 5000);
-            }
-        }
-
-        // API URLs
-        const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
-        const GET_BOOKING_API_BASE_URL = isProduction
-            ? "https://backend-service-432219336422.us-central1.run.app/api/bookings" // Production Backend
-            : "http://localhost:8080/api/bookings"; // Development Backend
-
-        const GET_APARTMENT_API_BASE_URL = isProduction
-            ? "https://backend-service-432219336422.us-central1.run.app/api/apartments" // Production Backend
-            : "http://localhost:8080/api/apartments"; // Development Backend
-
-        // Function to fetch booking details (now accepts token)
-        async function fetchBookingDetails(reservationId, token) {
-            const contentBox = document.querySelector('.content-box');
-            const bookingContentWrapper = document.querySelector('.booking-content-wrapper');
-            const loader = document.querySelector('.loader_bg'); // Assuming this is your global loader
-
-            // Show loader and hide content initially
-            if (loader) loader.style.display = 'flex';
-            if (bookingContentWrapper) bookingContentWrapper.style.display = 'none';
-            if (contentBox) {
-                contentBox.querySelector('h1').textContent = 'Loading Reservation Details...';
-                const apiMessageDiv = document.getElementById('apiMessage');
-                if (apiMessageDiv) apiMessageDiv.style.display = 'none'; // Clear previous messages
-            }
-
-            try {
-                // Fetch using both reservationId and token
-                const response = await fetch(`${GET_BOOKING_API_BASE_URL}/${reservationId}?token=${token}`);
-                const booking = await response.json();
-
-                if (response.ok) {
-                    // Populate details
-                    document.getElementById('reservationIdValue').textContent = `#GOGO-${booking.reservation_id}`;
-                    document.getElementById('propertyValue').textContent = booking.apartment_name;
-                    document.getElementById('guestNameValue').textContent = booking.guest;
-                    document.getElementById('emailValue').textContent = booking.email;
-                    document.getElementById('phoneValue').textContent = booking.phone;
-                    document.getElementById('countryValue').textContent = booking.country;
-                    document.getElementById('cityValue').textContent = booking.city;
-                    document.getElementById('bookDateValue').textContent = formatDate(booking.book_date);
-                    document.getElementById('arrivalDateValue').textContent = formatDate(booking.arrival_date);
-                    document.getElementById('departureDateValue').textContent = formatDate(booking.departure_date);
-                    document.getElementById('nightsValue').textContent = booking.nights;
-                    document.getElementById('totalPriceValue').textContent = formatPrice(booking.total_price);
-                    
-                    const statusElement = document.getElementById('statusValue');
-                    statusElement.textContent = booking.status;
-                    if (booking.status === 'Canceled') {
-                        statusElement.classList.add('status-canceled');
-                        document.getElementById('cancelBookingBtn').disabled = true;
-                        document.getElementById('cancelBookingBtn').textContent = 'Booking Canceled';
-                        document.getElementById('cancelBookingBtn').style.backgroundColor = '#6c757d'; // Grey out button
-                    } else {
-                        statusElement.classList.remove('status-canceled');
-                        document.getElementById('cancelBookingBtn').disabled = false; // Ensure it's enabled if not canceled
-                        document.getElementById('cancelBookingBtn').textContent = 'Cancel Booking';
-                        document.getElementById('cancelBookingBtn').style.backgroundColor = ''; // Reset background
-                    }
-
-                    // Fetch apartment image
-                    await fetchApartmentImage(booking.apartment_name);
-
-                    // Show content after all data is loaded
-                    if (bookingContentWrapper) bookingContentWrapper.style.display = 'flex';
-                    if (contentBox) contentBox.querySelector('h1').textContent = 'Your Reservation Details'; // Reset title
-                } else {
-                    // Handle booking not found or other API errors (e.g., 404 from backend)
-                    showApiMessage(booking.error || `Failed to load booking details for ID: ${reservationId}. Unauthorized or Not Found.`, 'error');
-                    if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Hide content on error
-                    if (contentBox) contentBox.innerHTML = `<h1>Booking Not Found</h1><p>${booking.error || 'The reservation ID or token provided is invalid or the booking does not exist.'}</p>`;
-                }
-            } catch (error) {
-                console.error('Error fetching booking details:', error);
-                showApiMessage(`An unexpected error occurred: ${error.message}`, 'error');
-                if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Hide content on error
-                if (contentBox) contentBox.innerHTML = `<h1>Error</h1><p>Could not load booking details. Please try again later.</p>`;
-            } finally {
-                if (loader) loader.style.display = 'none'; // Hide loader
-            }
-        }
-
-        // Function to fetch apartment image by name
-        async function fetchApartmentImage(apartmentName) {
-            const apartmentImageElement = document.querySelector('.apartment-image-section img');
-            if (!apartmentImageElement) return;
-
-            try {
-                // Assuming an endpoint like /api/apartments?name=ApartmentName
-                const response = await fetch(`${GET_APARTMENT_API_BASE_URL}?name=${encodeURIComponent(apartmentName)}`);
-                const apartment = await response.json(); 
-
-                console.log('Apartment API Response (raw):', apartment); // Debugging: log the raw response
-
-                if (response.ok && apartment && apartment.image) {
-                    // Ensure the image URL is absolute if it's relative
-                    const imageUrl = apartment.image;
-                    if (imageUrl.startsWith('/uploads')) {
-                        const backendBase = isProduction 
-                            ? "https://backend-service-432219336422.us-central1.run.app" 
-                            : "http://localhost:8080";
-                        apartmentImageElement.src = `${backendBase}${imageUrl}`;
-                        console.log('Setting image src to (absolute):', `${backendBase}${imageUrl}`);
-                    } else {
-                        apartmentImageElement.src = imageUrl;
-                        console.log('Setting image src to (as-is):', imageUrl);
-                    }
-                } else {
-                    console.warn(`No 'image' property found for apartment "${apartmentName}" or API error. Response:`, apartment);
-                    apartmentImageElement.src = 'https://placehold.co/400x300/e0e0e0/333333?text=Image+Not+Found'; // Fallback
-                }
-            } catch (error) {
-                console.error('Error fetching apartment image:', error);
-                apartmentImageElement.src = 'https://placehold.co/400x300/e0e0e0/333333?text=Image+Error'; // Fallback on fetch error
-            }
-        }
-
-        // Function to handle booking cancellation (now accepts token)
-        async function cancelBooking(reservationId, token) {
-            const cancelModalYesBtn = document.getElementById('cancelModalYesBtn');
-            const cancelBookingBtn = document.getElementById('cancelBookingBtn');
-            
-            cancelModalYesBtn.disabled = true;
-            cancelModalYesBtn.textContent = 'Canceling...';
-            showApiMessage('Attempting to cancel booking...', 'info');
-
-            try {
-                const response = await fetch(`${GET_BOOKING_API_BASE_URL}/cancel/${reservationId}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ token: token }), // NEW: Send token in the request body
-                });
-                const result = await response.json();
-
-                if (response.ok) {
-                    showApiMessage(result.message || 'Booking canceled successfully!', 'success');
-                    document.getElementById('statusValue').textContent = 'Canceled';
-                    document.getElementById('statusValue').classList.add('status-canceled');
-                    cancelBookingBtn.disabled = true;
-                    cancelBookingBtn.textContent = 'Booking Canceled';
-                    cancelBookingBtn.style.backgroundColor = '#6c757d'; // Grey out button
-                } else {
-                    throw new Error(result.error || `Cancellation failed with status ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error canceling booking:', error);
-                showApiMessage(`Cancellation failed: ${error.message}`, 'error');
-            } finally {
-                // Hide modal
-                document.getElementById('cancelConfirmModal').style.display = 'none';
-                document.body.classList.remove("custom-modal-open");
-                // Reset modal button state
-                cancelModalYesBtn.disabled = false;
-                cancelModalYesBtn.textContent = 'Yes, Cancel Booking';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const reservationId = params.get('reservation_id');
-            const token = params.get('token'); // NEW: Get the token from URL
-            const cancelBookingBtn = document.getElementById('cancelBookingBtn');
-
-            // Modal elements for cancellation confirmation
-            const cancelConfirmModal = document.getElementById('cancelConfirmModal');
-            const cancelModalCloseBtn = document.getElementById('cancelModalCloseBtn');
-            const cancelModalNoBtn = document.getElementById('cancelModalNoBtn');
-            const cancelModalYesBtn = document.getElementById('cancelModalYesBtn');
-
-            // Hide content wrapper initially until data is loaded
-            const bookingContentWrapper = document.querySelector('.booking-content-wrapper');
-            if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Ensure it's hidden on load
-
-            // Show global loader at the very beginning of DOMContentLoaded
-            const loader = document.querySelector('.loader_bg');
-            if (loader) loader.style.display = 'flex';
-
-
-            if (reservationId && token) { // Check for both reservationId AND token
-                fetchBookingDetails(reservationId, token); // Pass token to fetch
-            } else {
-                // If no reservation ID or token, hide loader and display error immediately
-                if (loader) loader.style.display = 'none'; // Hide loader if no ID
-                showApiMessage('No Reservation ID or token found in the URL. Please provide a valid booking link.', 'error');
-                const contentBox = document.querySelector('.content-box');
-                if (contentBox) contentBox.innerHTML = `<h1>Error</h1><p>No Reservation ID or token provided. Please check the URL.</p>`;
-            }
-
-            // Event listener for the main Cancel Booking button
-            if (cancelBookingBtn) {
-                cancelBookingBtn.addEventListener('click', () => {
-                    if (reservationId && token) { // Check for both before opening modal
-                        cancelConfirmModal.style.display = 'block';
-                        document.body.classList.add("custom-modal-open");
-                    } else {
-                        showApiMessage('Cannot cancel: No Reservation ID or token available.', 'error');
-                    }
-                });
-            }
-
-            // Event listeners for the cancellation confirmation modal
-            if (cancelModalCloseBtn) {
-                cancelModalCloseBtn.addEventListener('click', () => {
-                    cancelConfirmModal.style.display = 'none';
-                    document.body.classList.remove("custom-modal-open");
-                });
-            }
-            if (cancelModalNoBtn) {
-                cancelModalNoBtn.addEventListener('click', () => {
-                    cancelConfirmModal.style.display = 'none';
-                    document.body.classList.remove("custom-modal-open");
-                });
-            }
-            if (cancelModalYesBtn) {
-                cancelModalYesBtn.addEventListener('click', () => {
-                    cancelBooking(reservationId, token); // Pass token to cancel function
-                });
-            }
-
-            // Close modal if clicking outside
-            if (cancelConfirmModal) {
-                window.addEventListener('click', function(event) {
-                    if (event.target === cancelConfirmModal) {
-                        cancelConfirmModal.style.display = 'none';
-                        document.body.classList.remove("custom-modal-open");
-                    }
-                });
-            }
-        });
-      </script>
-
-   </body>
+
+
+
+
+
+
+/* Generic container for pages with angled backgrounds */
+
+.page-container {
+
+flex-grow: 1; /* Allows content to take up available space between header and footer */
+
+position: relative;
+
+background-color: #f7f9f7; /* Keep the central content light */
+
+padding: 50px 20px; /* Padding around the content box */
+
+text-align: center;
+
+/* overflow: hidden; /* Removed as overflow-x on html should handle it */
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center; /* Center content box vertically */
+
+align-items: center; /* Center content box horizontally */
+
+}
+
+
+
+/* Angled background elements - adjusted for full coverage and screenshot match */
+
+.page-container::before {
+
+content: '';
+
+position: absolute;
+
+top: 0;
+
+left: 0;
+
+width: 100%; /* Ensure full width for transformation */
+
+height: 100%;
+
+background-color: #0f1521; /* Black from Thank You page */
+
+transform: skewX(-20deg) translateX(-50%); /* Increased translateX for full coverage */
+
+transform-origin: top left;
+
+z-index: 0;
+
+}
+
+
+
+.page-container::after {
+
+content: '';
+
+position: absolute;
+
+top: 0;
+
+right: 0;
+
+width: 100%; /* Ensure full width for transformation */
+
+height: 100%;
+
+background-color: rgb(182, 42, 42); /* Red/Orange from Thank You page */
+
+transform: skewX(20deg) translateX(50%); /* Increased translateX for full coverage */
+
+transform-origin: top right;
+
+z-index: 0;
+
+}
+
+
+
+/* Generic content box for pages */
+
+.content-box {
+
+position: relative;
+
+z-index: 1; /* Bring content to front */
+
+background-color: #ffffff; /* White background for the central box */
+
+padding: 40px;
+
+border-radius: 10px;
+
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+max-width: 1000px; /* Increased max-width to accommodate image */
+
+width: 90%; /* Added width to ensure it doesn't get too wide on very large screens */
+
+box-sizing: border-box; /* Include padding in width calculation */
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+text-align: left; /* Align text within the box to left */
+
+}
+
+
+
+.content-box h1 {
+
+font-size: 2.5em;
+
+color: #333;
+
+margin-bottom: 30px;
+
+font-weight: 700;
+
+width: 100%; /* Ensure heading takes full width */
+
+text-align: center; /* Center the heading */
+
+}
+
+
+
+/* New flex container for details and image */
+
+.booking-content-wrapper {
+
+display: flex;
+
+flex-direction: row; /* Arrange items in a row */
+
+gap: 40px; /* Space between details and image */
+
+width: 100%;
+
+justify-content: center; /* Center content horizontally */
+
+align-items: flex-start; /* Align items to the top as in screenshot */
+
+}
+
+
+
+.booking-details-section {
+
+flex: 1; /* Allow details section to grow */
+
+min-width: 300px; /* Minimum width for details */
+
+max-width: 55%; /* Allow details to take more space as in screenshot */
+
+}
+
+
+
+.apartment-image-section {
+
+flex: 1; /* Allow image section to grow */
+
+display: flex;
+
+justify-content: center;
+
+align-items: flex-start; /* Align image to the top */
+
+min-width: 300px; /* Minimum width for image */
+
+max-width: 45%; /* Control image section width */
+
+}
+
+
+
+.apartment-image-section img {
+
+max-width: 100%;
+
+height: auto;
+
+border-radius: 8px; /* Rounded corners for the image */
+
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image */
+
+object-fit: cover; /* Ensure image covers its area without distortion */
+
+width: 100%; /* Ensure image takes full width of its container */
+
+height: 300px; /* Fixed height for consistency, adjust as needed */
+
+}
+
+
+
+/* Styles for booking details grid */
+
+.booking-details-grid {
+
+display: grid;
+
+grid-template-columns: repeat(2, 1fr); /* Two columns for details */
+
+gap: 10px 30px; /* Reduced row-gap, maintained column-gap */
+
+width: 100%;
+
+margin-bottom: 40px; /* Space below the grid */
+
+}
+
+
+
+.detail-item {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 5px;
+
+text-align: left; /* Explicitly left align content within each item */
+
+}
+
+
+
+.detail-label {
+
+font-size: 0.9em;
+
+color: #888;
+
+font-weight: 600;
+
+text-transform: uppercase;
+
+margin-bottom: 2px;
+
+}
+
+
+
+.detail-value {
+
+font-size: 1.1em;
+
+color: #333;
+
+font-weight: 500;
+
+}
+
+
+
+/* Styles for editable fields */
+
+.detail-value-editable {
+
+width: 100%;
+
+padding: 8px 12px;
+
+border: 1px solid #ccc;
+
+border-radius: 4px;
+
+font-size: 1.1em;
+
+color: #333;
+
+box-sizing: border-box; /* Include padding in width */
+
+}
+
+.detail-value-editable:focus {
+
+outline: none;
+
+border-color: #007bff; /* Highlight on focus */
+
+box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+
+}
+
+
+
+
+
+.cancel-button {
+
+background-color: #dc3545; /* Red for cancel */
+
+color: #fff;
+
+padding: 12px 30px;
+
+border: none;
+
+border-radius: 50px;
+
+font-size: 1.1em;
+
+text-decoration: none;
+
+transition: background-color 0.3s ease, transform 0.2s ease;
+
+cursor: pointer;
+
+margin-top: 20px; /* Space above the button */
+
+}
+
+.cancel-button:hover {
+
+background-color: #c82333; /* Darker red on hover */
+
+transform: translateY(-2px);
+
+}
+
+
+
+/* Styles for the new Modify button */
+
+.modify-button {
+
+background-color: #007bff; /* Blue for modify */
+
+color: #fff;
+
+padding: 12px 30px;
+
+border: none;
+
+border-radius: 50px;
+
+font-size: 1.1em;
+
+text-decoration: none;
+
+transition: background-color 0.3s ease, transform 0.2s ease;
+
+cursor: pointer;
+
+margin-top: 20px;
+
+float: right; /* Position it to the right */
+
+margin-left: 10px; /* Space from cancel button */
+
+}
+
+.modify-button:hover {
+
+background-color: #0056b3;
+
+transform: translateY(-2px);
+
+}
+
+.booking-action-buttons {
+
+display: flex;
+
+justify-content: flex-end; /* Align buttons to the right */
+
+width: 100%;
+
+margin-top: 20px;
+
+}
+
+
+
+
+
+/* Footer sections from image */
+
+footer {
+
+margin-top: auto; /* Pushes the footer to the bottom when body is flex column */
+
+z-index: 1; /* Keep z-index for safety if other elements overlap */
+
+}
+
+
+
+.page-footer-sections {
+
+display: flex;
+
+justify-content: center;
+
+gap: 30px; /* Space between the two sections */
+
+flex-wrap: wrap; /* Allow wrapping on smaller screens */
+
+width: 100%; /* Ensure sections take full width of parent */
+
+padding: 30px 20px; /* Add some padding around the footer sections */
+
+background-color: #f7f9f7; /* Match body background */
+
+}
+
+
+
+.page-footer-section {
+
+background-color: #fff;
+
+border: 1px solid #e0e0e0;
+
+border-radius: 8px;
+
+padding: 30px;
+
+flex: 1;
+
+min-width: 280px; /* Minimum width for each section */
+
+max-width: 350px; /* Max width for each section */
+
+text-align: center;
+
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+display: flex; /* Use flex to arrange contents vertically */
+
+flex-direction: column;
+
+align-items: center; /* Center items horizontally within the section */
+
+}
+
+
+
+.page-footer-section h4 {
+
+font-size: 1.4em;
+
+color: #333;
+
+margin-bottom: 25px;
+
+font-weight: 600;
+
+}
+
+
+
+/* Styles for the Instagram social icon list */
+
+.social-icons-list {
+
+list-style: none; /* Remove bullet points */
+
+padding: 0;
+
+margin: 0 0 30px 0; /* Add margin below the social icon and above contact info */
+
+display: flex; /* For centering the single icon */
+
+justify-content: center; /* Center the icon */
+
+width: 100%; /* Ensure it takes full width for centering */
+
+}
+
+
+
+.social-icons-list li {
+
+display: inline-block; /* Ensure list item doesn't take full width */
+
+margin: 0; /* No margin between list items, as there's only one */
+
+}
+
+
+
+.social-icons-list a {
+
+display: inline-block;
+
+color: #fff;
+
+font-size: 1.5em;
+
+width: 45px;
+
+height: 45px;
+
+line-height: 45px;
+
+border-radius: 50%;
+
+transition: transform 0.3s ease, background-color 0.3s ease;
+
+background-color: #020c41; /* Dark blue/black from Thank You page */
+
+}
+
+
+
+.social-icons-list a:hover {
+
+transform: translateY(-3px);
+
+opacity: 0.9;
+
+background-color: #031083af; /* Darker blue/black on hover */
+
+}
+
+
+
+/* Styles for the contact info list */
+
+.contact-info-list {
+
+list-style: none; /* Remove bullet points */
+
+padding: 0;
+
+margin: 0;
+
+text-align: left; /* Align text within the list to left as in screenshot */
+
+width: 100%; /* Ensure it takes full width within the section */
+
+}
+
+
+
+.contact-info-list li {
+
+font-size: 1em;
+
+color: #666;
+
+margin-bottom: 10px;
+
+display: flex; /* Use flex for icon and text alignment */
+
+align-items: center; /* Vertically align icon and text */
+
+justify-content: flex-start; /* Align content to the start (left) as in screenshot */
+
+gap: 10px; /* Space between icon and text */
+
+}
+
+
+
+.contact-info-list li:last-child {
+
+margin-bottom: 0; /* No bottom margin for the last item */
+
+}
+
+
+
+.contact-info-list li i {
+
+color: #020c41; /* Dark blue/black from Thank You page */
+
+font-size: 1.2em;
+
+}
+
+
+
+.contact-info-list li a {
+
+color: #666;
+
+text-decoration: none;
+
+transition: color 0.3s ease;
+
+}
+
+
+
+.contact-info-list li a:hover {
+
+color: #020c41; /* Dark blue/black on hover for email link */
+
+}
+
+
+
+.visit-website-button {
+
+background-color: #020c41; /* Dark blue/black from Thank You page */
+
+color: #fff;
+
+padding: 12px 30px;
+
+border: none;
+
+border-radius: 50px;
+
+font-size: 1.1em;
+
+text-decoration: none;
+
+transition: background-color 0.3s ease, transform 0.2s ease;
+
+display: inline-block; /* Ensure padding works */
+
+}
+
+
+
+.visit-website-button:hover {
+
+background-color: #00126e; /* Darker blue/black on hover */
+
+transform: translateY(-2px);
+
+color: #fff; /* Keep text white on hover */
+
+text-decoration: none; /* Remove underline on hover */
+
+}
+
+
+
+/* Adjustments for header and footer from your existing HTML */
+
+header {
+
+box-shadow: none; /* Remove shadow if it clashes with the design */
+
+background-color: #fff; /* Ensure header background matches main content if desired */
+
+}
+
+
+
+.back_re {
+
+display: none; /* Hide the back_re section as it's not part of the design */
+
+}
+
+
+/* Make navigation links bold */
+
+.navbar-nav .nav-item .nav-link {
+
+font-weight: bold;
+
+}
+
+
+
+
+
+/* Responsive adjustments */
+
+@media (min-width: 769px) { /* Apply 2-column grid on larger screens */
+
+.booking-details-grid {
+
+grid-template-columns: repeat(2, 1fr); /* Two columns for details */
+
+}
+
+}
+
+
+
+@media (max-width: 768px) {
+
+.content-box {
+
+padding: 30px 20px;
+
+}
+
+.content-box h1 {
+
+font-size: 2em;
+
+}
+
+.booking-content-wrapper {
+
+flex-direction: column; /* Stack details and image on small screens */
+
+gap: 30px; /* Adjust gap when stacked */
+
+}
+
+.booking-details-section, .apartment-image-section {
+
+min-width: unset; /* Remove min-width when stacked */
+
+max-width: 100%; /* Take full width when stacked */
+
+}
+
+.apartment-image-section img {
+
+height: 250px; /* Adjust height for smaller screens */
+
+}
+
+.page-footer-sections {
+
+flex-direction: column;
+
+align-items: center;
+
+padding: 20px 15px; /* Adjust padding for smaller screens */
+
+}
+
+.page-footer-section {
+
+width: 90%; /* Adjust width for smaller screens */
+
+max-width: 400px; /* Keep max width */
+
+}
+
+.page-container::before {
+
+transform: skewX(-30deg) translateX(-30%);
+
+}
+
+.page-container::after {
+
+transform: skewX(30deg) translateX(30%);
+
+}
+
+}
+
+
+
+@media (max-width: 480px) {
+
+.content-box {
+
+padding: 20px 15px;
+
+}
+
+.content-box h1 {
+
+font-size: 1.8em;
+
+}
+
+.detail-label {
+
+font-size: 0.8em;
+
+}
+
+.detail-value {
+
+font-size: 1em;
+
+}
+
+.social-icons-list a {
+
+font-size: 1.3em;
+
+width: 40px;
+
+height: 40px;
+
+line-height: 40px;
+
+}
+
+.cancel-button {
+
+padding: 10px 20px;
+
+font-size: 1em;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<!-- body -->
+
+<body class="main-layout">
+
+<!-- loader -->
+
+<!-- <div class="loader_bg">
+
+<div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
+
+</div> -->
+
+<!-- end loader -->
+
+<!-- header -->
+
+<header>
+
+<!-- header inner -->
+
+<div class="header">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+
+<div class="full">
+
+<div class="center-desk">
+
+<div class="logo">
+
+<a href="admin-dashboard.html"><img src="../assets/images/logo.png" alt="#" /></a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+
+<nav class="navigation navbar navbar-expand-md navbar-dark ">
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarsExample04">
+
+<ul class="navbar-nav mr-auto">
+
+<li class="nav-item ">
+
+<a class="nav-link" href="../index.html"><b>Home</b></a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="about.html"><b>About</b></a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="apartments.html"><b>Our Apartments</b></a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="gallery.html"><b>Gallery</b></a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="testimonial.html"><b>testimonial</b></a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="contact.html"><b>Contact Us</b></a>
+
+</li>
+
+</ul>
+
+</div>
+
+</nav>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- end header inner -->
+
+<!-- end header -->
+
+
+
+<!-- Booking Details Content Section -->
+
+<div class="page-container">
+
+<div class="content-box">
+
+<h1>Your Reservation Details</h1>
+
+<div id="apiMessage" class="api-message"></div> <!-- Message div for API responses -->
+
+
+
+<div class="booking-content-wrapper">
+
+<div class="booking-details-section">
+
+<div class="booking-details-grid">
+
+<div class="detail-item">
+
+<span class="detail-label">Reservation ID</span>
+
+<span class="detail-value" id="reservationIdValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Property</span>
+
+<span class="detail-value" id="propertyValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Guest Name</span>
+
+<span class="detail-value" id="guestNameValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Email</span>
+
+<span class="detail-value" id="emailValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Phone</span>
+
+<span class="detail-value" id="phoneValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Country</span>
+
+<span class="detail-value" id="countryValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">City</span>
+
+<span class="detail-value" id="cityValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Book Date</span>
+
+<span class="detail-value" id="bookDateValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Arrival Date</span>
+
+<span class="detail-value" id="arrivalDateValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Departure Date</span>
+
+<span class="detail-value" id="departureDateValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Nights</span>
+
+<span class="detail-value" id="nightsValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Total Price</span>
+
+<span class="detail-value" id="totalPriceValue">Loading...</span>
+
+</div>
+
+<div class="detail-item">
+
+<span class="detail-label">Status</span>
+
+<span class="detail-value" id="statusValue">Loading...</span>
+
+</div>
+
+</div>
+
+<div class="booking-action-buttons">
+
+<button class="modify-button" id="modifyBookingBtn">Modify Booking</button>
+
+<button class="cancel-button" id="cancelBookingBtn">Cancel Booking</button>
+
+</div>
+
+</div>
+
+<div class="apartment-image-section">
+
+<img src="https://placehold.co/400x300/e0e0e0/333333?text=Apartment+Image"
+
+alt="Apartment Photo"
+
+onerror="this.onerror=null; this.src='https://placehold.co/400x300/e0e0e0/333333?text=Image+Not+Found';">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- End Booking Details Content Section -->
+
+
+<!-- Custom Modal for Cancellation Confirmation -->
+
+<div id="cancelConfirmModal" class="custom-modal">
+
+<div class="custom-modal-content">
+
+<div class="custom-modal-header">
+
+<h2>Confirm Cancellation</h2>
+
+<span id="cancelModalCloseBtn" class="custom-modal-close-btn">&times;</span>
+
+</div>
+
+<div class="custom-modal-body">
+
+<p>Are you sure you want to cancel this booking?</p>
+
+<p>This action cannot be undone.</p>
+
+</div>
+
+<div class="custom-modal-footer">
+
+<button type="button" id="cancelModalNoBtn" class="custom-btn custom-btn-secondary">No, Keep Booking</button>
+
+<button type="button" id="cancelModalYesBtn" class="custom-btn custom-btn-primary">Yes, Cancel Booking</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- NEW: Custom Modal for Modify Booking -->
+
+<div id="modifyBookingModal" class="custom-modal">
+
+<div class="custom-modal-content">
+
+<div class="custom-modal-header">
+
+<h2>Modify Reservation</h2>
+
+<span id="modifyModalCloseBtn" class="custom-modal-close-btn">&times;</span>
+
+</div>
+
+<div class="custom-modal-body">
+
+<form id="modifyBookingForm">
+
+<div class="inputBox">
+
+<label for="newArrivalDate">New Arrival Date:</label>
+
+<input type="text" id="newArrivalDate" class="date-picker-flatpickr" placeholder="Select new arrival date" required>
+
+</div>
+
+<div class="inputBox">
+
+<label for="newDepartureDate">New Departure Date:</label>
+
+<input type="text" id="newDepartureDate" class="date-picker-flatpickr" placeholder="Select new departure date" required>
+
+</div>
+
+<div class="inputBox">
+
+<label for="newApartmentName">New Property Name:</label>
+
+<select id="newApartmentName" name="apartment_name" required>
+
+<option value="">Select an apartment</option>
+
+<option value="Karisimbi Apartment">Karisimbi Apartment</option>
+
+<option value="Muhabura Apartment">Muhabura Apartment</option>
+
+<option value="Sabyinyo Apartment">Sabyinyo Apartment</option>
+
+<option value="Gahinga Apartment">Gahinga Apartment</option>
+
+<option value="Bisoke Apartment">Bisoke Apartment</option>
+
+</select>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="custom-modal-footer">
+
+<button type="button" id="modifyModalCancelBtn" class="custom-btn custom-btn-secondary">Cancel</button>
+
+<button type="button" id="confirmUpdateBtn" class="custom-btn custom-btn-primary">Confirm Update</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Footer sections from image -->
+
+<footer>
+
+<div class="page-footer-sections">
+
+<div class="page-footer-section">
+
+<h4>Connect With Us</h4>
+
+<!-- Social Icons for Instagram only -->
+
+<ul class="social-icons-list">
+
+<li>
+
+<a href="https://www.instagram.com/urugano_breeze_apartment/profilecard/?igsh=b3IyZ2xvaXZlY3c3"
+
+target="_blank"
+
+aria-label="Instagram">
+
+<i class="fab fa-instagram"></i>
+
+</a>
+
+</li>
+
+</ul>
+
+
+
+<!-- Contact Information -->
+
+<ul class="contact-info-list">
+
+<li><i class="fa fa-map-marker" aria-hidden="true"></i> 255G+HXR, KK 24 Ave, Kigali</li>
+
+<li><i class="fa fa-mobile" aria-hidden="true"></i> +45 40641002</li>
+
+<li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> sales@gogovillas.com</a></li>
+
+</ul>
+
+</div>
+
+<div class="page-footer-section">
+
+<h4>Visit Our Website</h4>
+
+<a href="https://www.gogovillas.com" class="visit-website-button">Visit Website</a>
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- End footer sections from image -->
+
+
+
+<!-- Javascript files-->
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/jquery.dataTables.min.js"></script>
+
+
+
+<script>
+
+// Global variable to store the fetched booking data
+
+let currentBookingData = null;
+
+
+
+// Helper function to format dates
+
+function formatDate(dateString) {
+
+if (!dateString) return 'N/A';
+
+const date = new Date(dateString);
+
+if (isNaN(date.getTime())) return 'Invalid Date';
+
+return date.toISOString().split('T')[0]; // Formats to dilengkapi-MM-DD
+
+}
+
+
+
+// Helper function to format currency
+
+function formatPrice(amount) {
+
+if (typeof amount !== 'number') return 'N/A';
+
+return `RWF ${amount.toLocaleString('en-RW', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+}
+
+
+
+// Helper function to show API messages
+
+function showApiMessage(message, type) {
+
+const apiMessageDiv = document.getElementById('apiMessage');
+
+if (apiMessageDiv) {
+
+apiMessageDiv.textContent = message;
+
+apiMessageDiv.className = `api-message ${type}`; // 'success', 'error', 'info'
+
+apiMessageDiv.style.display = 'block';
+
+// Hide message after a few seconds
+
+setTimeout(() => {
+
+apiMessageDiv.style.display = 'none';
+
+}, 5000);
+
+}
+
+}
+
+
+
+// API URLs
+
+const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
+
+const GET_BOOKING_API_BASE_URL = isProduction
+
+? "https://backend-service-432219336422.us-central1.run.app/api/bookings" // Production Backend
+
+: "http://localhost:8080/api/bookings"; // Development Backend
+
+
+
+const GET_APARTMENT_API_BASE_URL = isProduction
+
+? "https://backend-service-432219336422.us-central1.run.app/api/apartments" // Production Backend
+
+: "http://localhost:8080/api/apartments"; // Development Backend
+
+
+const UPDATE_BOOKING_API_BASE_URL = isProduction
+
+? "https://backend-service-432219336422.us-central1.run.app/api/bookings" // Production Backend
+
+: "http://localhost:8080/api/bookings"; // Development Backend
+
+
+
+
+
+// Function to fetch booking details (now accepts token)
+
+async function fetchBookingDetails(reservationId, token) {
+
+const contentBox = document.querySelector('.content-box');
+
+const bookingContentWrapper = document.querySelector('.booking-content-wrapper');
+
+const loader = document.querySelector('.loader_bg'); // Assuming this is your global loader
+
+
+
+// Show loader and hide content initially
+
+if (loader) loader.style.display = 'flex';
+
+if (bookingContentWrapper) bookingContentWrapper.style.display = 'none';
+
+if (contentBox) {
+
+contentBox.querySelector('h1').textContent = 'Loading Reservation Details...';
+
+const apiMessageDiv = document.getElementById('apiMessage');
+
+if (apiMessageDiv) apiMessageDiv.style.display = 'none'; // Clear previous messages
+
+}
+
+
+
+try {
+
+// Fetch using both reservationId and token
+
+const response = await fetch(`${GET_BOOKING_API_BASE_URL}/${reservationId}?token=${token}`);
+
+const booking = await response.json();
+
+
+
+if (response.ok) {
+
+currentBookingData = booking; // Store fetched data globally
+
+
+
+// Populate details
+
+document.getElementById('reservationIdValue').textContent = `#GOGO-${booking.reservation_id}`;
+
+document.getElementById('propertyValue').textContent = booking.apartment_name;
+
+document.getElementById('guestNameValue').textContent = booking.guest;
+
+document.getElementById('emailValue').textContent = booking.email;
+
+document.getElementById('phoneValue').textContent = booking.phone;
+
+document.getElementById('countryValue').textContent = booking.country;
+
+document.getElementById('cityValue').textContent = booking.city;
+
+document.getElementById('bookDateValue').textContent = formatDate(booking.book_date);
+
+document.getElementById('arrivalDateValue').textContent = formatDate(booking.arrival_date);
+
+document.getElementById('departureDateValue').textContent = formatDate(booking.departure_date);
+
+document.getElementById('nightsValue').textContent = booking.nights;
+
+document.getElementById('totalPriceValue').textContent = formatPrice(booking.total_price);
+
+
+const statusElement = document.getElementById('statusValue');
+
+statusElement.textContent = booking.status;
+
+if (booking.status === 'Canceled') {
+
+statusElement.classList.add('status-canceled');
+
+document.getElementById('cancelBookingBtn').disabled = true;
+
+document.getElementById('cancelBookingBtn').textContent = 'Booking Canceled';
+
+document.getElementById('cancelBookingBtn').style.backgroundColor = '#6c757d'; // Grey out button
+
+// Disable modify button if canceled
+
+const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // Get reference here
+
+if (modifyBookingBtn) {
+
+modifyBookingBtn.disabled = true;
+
+modifyBookingBtn.style.backgroundColor = '#6c757d';
+
+}
+
+} else {
+
+statusElement.classList.remove('status-canceled');
+
+document.getElementById('cancelBookingBtn').disabled = false; // Ensure it's enabled if not canceled
+
+document.getElementById('cancelBookingBtn').textContent = 'Cancel Booking';
+
+document.getElementById('cancelBookingBtn').style.backgroundColor = ''; // Reset background
+
+// Enable modify button if not canceled
+
+const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // Get reference here
+
+if (modifyBookingBtn) {
+
+modifyBookingBtn.disabled = false;
+
+modifyBookingBtn.style.backgroundColor = '';
+
+}
+
+}
+
+
+
+// Fetch apartment image
+
+await fetchApartmentImage(booking.apartment_name);
+
+
+
+// Show content after all data is loaded
+
+if (bookingContentWrapper) bookingContentWrapper.style.display = 'flex';
+
+if (contentBox) contentBox.querySelector('h1').textContent = 'Your Reservation Details'; // Reset title
+
+} else {
+
+currentBookingData = null; // Clear data on error
+
+// Handle booking not found or other API errors (e.g., 404 from backend)
+
+showApiMessage(booking.error || `Failed to load booking details for ID: ${reservationId}. Unauthorized or Not Found.`, 'error');
+
+if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Hide content on error
+
+if (contentBox) contentBox.innerHTML = `<h1>Booking Not Found</h1><p>${booking.error || 'The reservation ID or token provided is invalid or the booking does not exist.'}</p>`;
+
+}
+
+} catch (error) {
+
+currentBookingData = null; // Clear data on error
+
+console.error('Error fetching booking details:', error);
+
+showApiMessage(`An unexpected error occurred: ${error.message}`, 'error');
+
+if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Hide content on error
+
+if (contentBox) contentBox.innerHTML = `<h1>Error</h1><p>Could not load booking details. Please try again later.</p>`;
+
+} finally {
+
+if (loader) loader.style.display = 'none'; // Hide loader
+
+}
+
+}
+
+
+
+// Function to fetch apartment image by name
+
+async function fetchApartmentImage(apartmentName) {
+
+const apartmentImageElement = document.querySelector('.apartment-image-section img');
+
+if (!apartmentImageElement) return;
+
+
+
+try {
+
+// Assuming an endpoint like /api/apartments?name=ApartmentName
+
+const response = await fetch(`${GET_APARTMENT_API_BASE_URL}?name=${encodeURIComponent(apartmentName)}`);
+
+const apartment = await response.json();
+
+
+
+console.log('Apartment API Response (raw):', apartment); // Debugging: log the raw response
+
+
+
+if (response.ok && apartment && apartment.image) {
+
+// Ensure the image URL is absolute if it's relative
+
+const imageUrl = apartment.image;
+
+if (imageUrl.startsWith('/uploads')) {
+
+const backendBase = isProduction
+
+? "https://backend-service-432219336422.us-central1.run.app"
+
+: "http://localhost:8080";
+
+apartmentImageElement.src = `${backendBase}${imageUrl}`;
+
+console.log('Setting image src to (absolute):', `${backendBase}${imageUrl}`);
+
+} else {
+
+apartmentImageElement.src = imageUrl;
+
+console.log('Setting image src to (as-is):', imageUrl);
+
+}
+
+} else {
+
+console.warn(`No 'image' property found for apartment "${apartmentName}" or API error. Response:`, apartment);
+
+apartmentImageElement.src = 'https://placehold.co/400x300/e0e0e0/333333?text=Image+Not+Found'; // Fallback
+
+}
+
+} catch (error) {
+
+console.error('Error fetching apartment image:', error);
+
+apartmentImageElement.src = 'https://placehold.co/400x300/e0e0e0/333333?text=Image+Error'; // Fallback on fetch error
+
+}
+
+}
+
+
+
+// Function to handle booking cancellation (now accepts token)
+
+async function cancelBooking(reservationId, token) {
+
+const cancelModalYesBtn = document.getElementById('cancelModalYesBtn');
+
+const cancelBookingBtn = document.getElementById('cancelBookingBtn');
+
+const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // Get reference here
+
+
+cancelModalYesBtn.disabled = true;
+
+cancelModalYesBtn.textContent = 'Canceling...';
+
+showApiMessage('Attempting to cancel booking...', 'info');
+
+
+
+try {
+
+const response = await fetch(`${GET_BOOKING_API_BASE_URL}/cancel/${reservationId}`, {
+
+method: 'PATCH',
+
+headers: {
+
+'Content-Type': 'application/json',
+
+},
+
+body: JSON.stringify({ token: token }), // NEW: Send token in the request body
+
+});
+
+const result = await response.json();
+
+
+
+if (response.ok) {
+
+showApiMessage(result.message || 'Booking canceled successfully!', 'success');
+
+document.getElementById('statusValue').textContent = 'Canceled';
+
+document.getElementById('statusValue').classList.add('status-canceled');
+
+cancelBookingBtn.disabled = true;
+
+cancelBookingBtn.textContent = 'Booking Canceled';
+
+cancelBookingBtn.style.backgroundColor = '#6c757d'; // Grey out button
+
+// Also disable modify button if canceled
+
+if (modifyBookingBtn) {
+
+modifyBookingBtn.disabled = true;
+
+modifyBookingBtn.style.backgroundColor = '#6c757d';
+
+}
+
+} else {
+
+throw new Error(result.error || `Cancellation failed with status ${response.status}`);
+
+}
+
+} catch (error) {
+
+console.error('Error canceling booking:', error);
+
+showApiMessage(`Cancellation failed: ${error.message}`, 'error');
+
+} finally {
+
+// Hide modal
+
+document.getElementById('cancelConfirmModal').style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+// Reset modal button state
+
+cancelModalYesBtn.disabled = false;
+
+cancelModalYesBtn.textContent = 'Yes, Cancel Booking';
+
+}
+
+}
+
+
+
+// NEW: Function to open the Modify Booking Modal
+
+function openModifyModal() {
+
+const modifyBookingModal = document.getElementById('modifyBookingModal');
+
+const newArrivalDateInput = document.getElementById('newArrivalDate');
+
+const newDepartureDateInput = document.getElementById('newDepartureDate');
+
+const newApartmentNameSelect = document.getElementById('newApartmentName');
+
+
+
+if (!currentBookingData) {
+
+showApiMessage('No booking data loaded to modify.', 'error');
+
+return;
+
+}
+
+
+
+// Populate modal fields with current booking data
+
+if (newArrivalDateInput) newArrivalDateInput.value = formatDate(currentBookingData.arrival_date);
+
+if (newDepartureDateInput) newDepartureDateInput.value = formatDate(currentBookingData.departure_date);
+
+if (newApartmentNameSelect) {
+
+newApartmentNameSelect.value = currentBookingData.apartment_name; // Set selected option
+
+}
+
+
+
+// Initialize Flatpickr instances for dates in the modal
+
+flatpickr("#newArrivalDate", {
+
+dateFormat: "Y-m-d",
+
+minDate: "today",
+
+defaultDate: newArrivalDateInput.value,
+
+onChange: function(selectedDates, dateStr, instance) {
+
+// Update minDate for departureDate to ensure it's after arrivalDate
+
+if (selectedDates.length > 0 && newDepartureDateInput) {
+
+const departureFlatpickr = newDepartureDateInput._flatpickr;
+
+if (departureFlatpickr) {
+
+departureFlatpickr.set('minDate', selectedDates[0]);
+
+}
+
+}
+
+}
+
+});
+
+flatpickr("#newDepartureDate", {
+
+dateFormat: "Y-m-d",
+
+minDate: newArrivalDateInput.value || "today", // Ensure departure is after initial arrival
+
+defaultDate: newDepartureDateInput.value
+
+});
+
+
+
+// Show the modal
+
+if (modifyBookingModal) {
+
+modifyBookingModal.style.display = 'block';
+
+document.body.classList.add("custom-modal-open");
+
+}
+
+}
+
+
+
+// NEW: Function to handle booking update submission
+
+async function handleUpdateBooking() {
+
+const confirmUpdateBtn = document.getElementById('confirmUpdateBtn');
+
+const modifyBookingModal = document.getElementById('modifyBookingModal');
+
+
+if (!currentBookingData) {
+
+showApiMessage('No booking data available to update.', 'error');
+
+return;
+
+}
+
+
+
+confirmUpdateBtn.disabled = true;
+
+confirmUpdateBtn.textContent = 'Updating...';
+
+showApiMessage('Attempting to update booking...', 'info');
+
+
+
+const reservationId = currentBookingData.reservation_id;
+
+const token = currentBookingData.secure_token;
+
+
+
+const newArrivalDate = document.getElementById('newArrivalDate').value;
+
+const newDepartureDate = document.getElementById('newDepartureDate').value;
+
+const newApartmentName = document.getElementById('newApartmentName').value; // Get value from select
+
+
+
+// Basic validation for new dates
+
+if (!newArrivalDate || !newDepartureDate) {
+
+showApiMessage('New arrival and departure dates are required.', 'error');
+
+confirmUpdateBtn.disabled = false;
+
+confirmUpdateBtn.textContent = 'Confirm Update';
+
+return;
+
+}
+
+if (new Date(newDepartureDate) <= new Date(newArrivalDate)) {
+
+showApiMessage('New departure date must be after new arrival date.', 'error');
+
+confirmUpdateBtn.disabled = false;
+
+confirmUpdateBtn.textContent = 'Confirm Update';
+
+return;
+
+}
+
+// Basic validation for new apartment name
+
+if (!newApartmentName) {
+
+showApiMessage('New property name is required.', 'error');
+
+confirmUpdateBtn.disabled = false;
+
+confirmUpdateBtn.textContent = 'Confirm Update';
+
+return;
+
+}
+
+
+
+try {
+
+const response = await fetch(`${GET_BOOKING_API_BASE_URL}/${reservationId}`, { // PATCH to /api/bookings/:id
+
+method: 'PATCH',
+
+headers: {
+
+'Content-Type': 'application/json',
+
+},
+
+body: JSON.stringify({
+
+token: token,
+
+new_arrival_date: newArrivalDate,
+
+new_departure_date: newDepartureDate,
+
+new_apartment_name: newApartmentName
+
+}),
+
+});
+
+const result = await response.json();
+
+
+
+if (response.ok) {
+
+showApiMessage(result.message || 'Booking updated successfully!', 'success');
+
+// Re-fetch booking details to update the main page with fresh data
+
+await fetchBookingDetails(reservationId, token);
+
+} else {
+
+throw new Error(result.error || `Update failed with status ${response.status}`);
+
+}
+
+} catch (error) {
+
+console.error('Error updating booking:', error);
+
+showApiMessage(`Update failed: ${error.message}`, 'error');
+
+} finally {
+
+// Hide modal
+
+if (modifyBookingModal) {
+
+modifyBookingModal.style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+}
+
+// Reset modal button state
+
+confirmUpdateBtn.disabled = false;
+
+confirmUpdateBtn.textContent = 'Confirm Update';
+
+}
+
+}
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+const params = new URLSearchParams(window.location.search);
+
+const reservationId = params.get('reservation_id');
+
+const token = params.get('token'); // Get the token from URL
+
+const cancelBookingBtn = document.getElementById('cancelBookingBtn');
+
+const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // New Modify button
+
+
+
+// Modal elements for cancellation confirmation
+
+const cancelConfirmModal = document.getElementById('cancelConfirmModal');
+
+const cancelModalCloseBtn = document.getElementById('cancelModalCloseBtn');
+
+const cancelModalNoBtn = document.getElementById('cancelModalNoBtn');
+
+const cancelModalYesBtn = document.getElementById('cancelModalYesBtn');
+
+
+
+// Modal elements for modification
+
+const modifyBookingModal = document.getElementById('modifyBookingModal');
+
+const modifyModalCloseBtn = document.getElementById('modifyModalCloseBtn');
+
+const modifyModalCancelBtn = document.getElementById('modifyModalCancelBtn');
+
+const confirmUpdateBtn = document.getElementById('confirmUpdateBtn');
+
+
+
+
+
+// Hide content wrapper initially until data is loaded
+
+const bookingContentWrapper = document.querySelector('.booking-content-wrapper');
+
+if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Ensure it's hidden on load
+
+
+
+// Show global loader at the very beginning of DOMContentLoaded
+
+const loader = document.querySelector('.loader_bg');
+
+if (loader) loader.style.display = 'flex';
+
+
+
+
+
+if (reservationId && token) { // Check for both reservationId AND token
+
+fetchBookingDetails(reservationId, token); // Pass token to fetch
+
+} else {
+
+// If no reservation ID or token, hide loader and display error immediately
+
+if (loader) loader.style.display = 'none'; // Hide loader if no ID
+
+showApiMessage('No Reservation ID or token found in the URL. Please provide a valid booking link.', 'error');
+
+const contentBox = document.querySelector('.content-box');
+
+if (contentBox) contentBox.innerHTML = `<h1>Error</h1><p>No Reservation ID or token provided. Please check the URL.</p>`;
+
+}
+
+
+
+// Event listener for the main Cancel Booking button
+
+if (cancelBookingBtn) {
+
+cancelBookingBtn.addEventListener('click', () => {
+
+if (reservationId && token) { // Check for both before opening modal
+
+cancelConfirmModal.style.display = 'block';
+
+document.body.classList.add("custom-modal-open");
+
+} else {
+
+showApiMessage('Cannot cancel: No Reservation ID or token available.', 'error');
+
+}
+
+});
+
+}
+
+
+
+// Event listeners for the cancellation confirmation modal
+
+if (cancelModalCloseBtn) {
+
+cancelModalCloseBtn.addEventListener('click', () => {
+
+cancelConfirmModal.style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+});
+
+}
+
+if (cancelModalNoBtn) {
+
+cancelModalNoBtn.addEventListener('click', () => {
+
+cancelConfirmModal.style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+});
+
+}
+
+if (cancelModalYesBtn) {
+
+cancelModalYesBtn.addEventListener('click', () => {
+
+cancelBooking(reservationId, token); // Pass token to cancel function
+
+});
+
+}
+
+
+
+// Close modal if clicking outside (for cancellation modal)
+
+if (cancelConfirmModal) {
+
+window.addEventListener('click', function(event) {
+
+if (event.target === cancelConfirmModal) {
+
+cancelConfirmModal.style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+}
+
+});
+
+}
+
+
+
+// NEW: Event listener for the Modify Booking button
+
+if (modifyBookingBtn) {
+
+modifyBookingBtn.addEventListener('click', () => {
+
+if (currentBookingData) { // Only open if booking data is loaded
+
+openModifyModal();
+
+} else {
+
+showApiMessage('Booking data not loaded. Cannot modify.', 'error');
+
+}
+
+});
+
+}
+
+
+
+// NEW: Event listeners for the Modify Booking modal
+
+if (modifyModalCloseBtn) {
+
+modifyModalCloseBtn.addEventListener('click', () => {
+
+if (modifyBookingModal) {
+
+modifyBookingModal.style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+}
+
+});
+
+}
+
+if (modifyModalCancelBtn) {
+
+modifyModalCancelBtn.addEventListener('click', () => {
+
+if (modifyBookingModal) {
+
+modifyBookingModal.style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+}
+
+});
+
+}
+
+if (confirmUpdateBtn) {
+
+confirmUpdateBtn.addEventListener('click', handleUpdateBooking); // This calls the function
+
+}
+
+
+
+// NEW: Close modal if clicking outside (for modify modal)
+
+if (modifyBookingModal) {
+
+window.addEventListener('click', function(event) {
+
+if (event.target === modifyBookingModal) {
+
+modifyBookingModal.style.display = 'none';
+
+document.body.classList.remove("custom-modal-open");
+
+}
+
+});
+
+}
+
+});
+
+</script>
+
+
+
+</body>
+
 </html>

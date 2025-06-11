@@ -156,7 +156,7 @@ const sendModificationConfirmationEmail = async (recipientEmail, guestName, rese
         // Use formatDateForEmail here, which is now defined in this controller
         if (updatedFields.new_arrival_date) updatedDetailsHtml += `<p><strong>New Arrival Date:</strong> ${formatDateForEmail(updatedFields.new_arrival_date)}</p>`;
         if (updatedFields.new_departure_date) updatedDetailsHtml += `<p><strong>New Departure Date:</strong> ${formatDateForEmail(updatedFields.new_departure_date)}</pاهرة`;
-        if (updatedFields.new_apartment_name) updatedDetailsHtml += `<p><strong>New Apartment:</strong> ${updatedFields.new_apartment_name}</p>`;
+        if (updatedFields.new_apartment_name) updatedDetailsHtml += `<p><strong> New Apartment: </strong> ${updatedFields.new_apartment_name}</p>`;
 
 
         const mailOptions = {

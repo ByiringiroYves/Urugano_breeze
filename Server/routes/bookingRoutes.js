@@ -8,7 +8,8 @@ const {
     searchAvailableCompounds, 
     hideApartment, 
     unhideApartment,
-    getBookingById // Ensure getBookingById is imported from your controller
+    getBookingById, 
+    updateBooking // Ensure updateBooking is imported
 } = require('../controllers/bookingController');
 
 // POST route for creating a booking
@@ -17,11 +18,15 @@ router.post('/create', createBooking);
 // PATCH route for canceling a booking by reservation_id
 router.patch('/cancel/:reservation_id', cancelBooking);
 
+// PATCH route for updating a booking by reservation_id (and token in body)
+router.patch('/:reservation_id', updateBooking); // <--- NEW ROUTE FOR UPDATES
+
 // GET route for fetching all bookings
 router.get('/', getAllBookings);
 
 // GET route for fetching a single booking by reservation_id
-router.get('/:reservation_id', getBookingById); // <--- THIS IS THE NEWLY ADDED ROUTE
+router.get('/:reservation_id', getBookingById); 
+
 
 // Search available compounds
 router.post('/search', searchAvailableCompounds);
