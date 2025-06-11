@@ -330,43 +330,8 @@ body.custom-modal-open {
            font-weight: 500;
         }
 
-        /* Styles for editable fields */
-        .detail-value-editable {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1.1em;
-            color: #333;
-            box-sizing: border-box; /* Include padding in width */
-        }
-        .detail-value-editable:focus {
-            outline: none;
-            border-color: #007bff; /* Highlight on focus */
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
-
-
         .cancel-button {
-          background-color: #dc3545; /* Red for cancel */
-          color: #fff;
-          padding: 12px 30px;
-          border: none;
-          border-radius: 50px;
-          font-size: 1.1em;
-          text-decoration: none;
-          transition: background-color 0.3s ease, transform 0.2s ease;
-          cursor: pointer;
-          margin-top: 20px; /* Space above the button */
-       }
-       .cancel-button:hover {
-          background-color: #c82333; /* Darker red on hover */
-          transform: translateY(-2px);
-       }
-
-       /* Styles for the new Modify button */
-       .modify-button {
-           background-color: #007bff; /* Blue for modify */
+           background-color: #dc3545; /* Red for cancel */
            color: #fff;
            padding: 12px 30px;
            border: none;
@@ -375,21 +340,13 @@ body.custom-modal-open {
            text-decoration: none;
            transition: background-color 0.3s ease, transform 0.2s ease;
            cursor: pointer;
-           margin-top: 20px;
-           float: right; /* Position it to the right */
-           margin-left: 10px; /* Space from cancel button */
-       }
-       .modify-button:hover {
-           background-color: #0056b3;
-           transform: translateY(-2px);
-       }
-       .booking-action-buttons {
-           display: flex;
-           justify-content: flex-end; /* Align buttons to the right */
-           width: 100%;
-           margin-top: 20px;
-       }
+           margin-top: 20px; /* Space above the button */
+        }
 
+        .cancel-button:hover {
+           background-color: #c82333; /* Darker red on hover */
+           transform: translateY(-2px);
+        }
 
         /* Footer sections from image */
         footer {
@@ -723,10 +680,7 @@ body.custom-modal-open {
                             <span class="detail-value" id="statusValue">Loading...</span>
                         </div>
                     </div>
-                    <div class="booking-action-buttons">
-                        <button class="modify-button" id="modifyBookingBtn">Modify Booking</button>
-                        <button class="cancel-button" id="cancelBookingBtn">Cancel Booking</button>
-                    </div>
+                    <button class="cancel-button" id="cancelBookingBtn">Cancel Booking</button>
                 </div>
                 <div class="apartment-image-section">
                     <img src="https://placehold.co/400x300/e0e0e0/333333?text=Apartment+Image" 
@@ -752,43 +706,6 @@ body.custom-modal-open {
             <div class="custom-modal-footer">
                 <button type="button" id="cancelModalNoBtn" class="custom-btn custom-btn-secondary">No, Keep Booking</button>
                 <button type="button" id="cancelModalYesBtn" class="custom-btn custom-btn-primary">Yes, Cancel Booking</button>
-            </div>
-        </div>
-      </div>
-
-      <!-- NEW: Custom Modal for Modify Booking -->
-      <div id="modifyBookingModal" class="custom-modal"> 
-        <div class="custom-modal-content">
-            <div class="custom-modal-header">
-                <h2>Modify Reservation</h2>
-                <span id="modifyModalCloseBtn" class="custom-modal-close-btn">&times;</span> 
-            </div>
-            <div class="custom-modal-body">
-                <form id="modifyBookingForm">
-                    <div class="inputBox">
-                        <label for="newArrivalDate">New Arrival Date:</label>
-                        <input type="text" id="newArrivalDate" class="date-picker-flatpickr" placeholder="Select new arrival date" required>
-                    </div>
-                    <div class="inputBox">
-                        <label for="newDepartureDate">New Departure Date:</label>
-                        <input type="text" id="newDepartureDate" class="date-picker-flatpickr" placeholder="Select new departure date" required>
-                    </div>
-                    <div class="inputBox">
-                        <label for="newApartmentName">New Property Name:</label>
-                        <select id="newApartmentName" name="apartment_name" required>
-                            <option value="">Select an apartment</option>
-                            <option value="Karisimbi Apartment">Karisimbi Apartment</option>
-                            <option value="Muhabura Apartment">Muhabura Apartment</option>
-                            <option value="Sabyinyo Apartment">Sabyinyo Apartment</option>
-                            <option value="Gahinga Apartment">Gahinga Apartment</option>
-                            <option value="Bisoke Apartment">Bisoke Apartment</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="custom-modal-footer">
-                <button type="button" id="modifyModalCancelBtn" class="custom-btn custom-btn-secondary">Cancel</button>
-                <button type="button" id="confirmUpdateBtn" class="custom-btn custom-btn-primary">Confirm Update</button>
             </div>
         </div>
       </div>
@@ -829,9 +746,6 @@ body.custom-modal-open {
       <script src="../js/jquery.dataTables.min.js"></script>
 
       <script>
-        // Global variable to store the fetched booking data
-        let currentBookingData = null;
-
         // Helper function to format dates
         function formatDate(dateString) {
             if (!dateString) return 'N/A';
@@ -869,11 +783,6 @@ body.custom-modal-open {
         const GET_APARTMENT_API_BASE_URL = isProduction
             ? "https://backend-service-432219336422.us-central1.run.app/api/apartments" // Production Backend
             : "http://localhost:8080/api/apartments"; // Development Backend
-        
-        const UPDATE_BOOKING_API_BASE_URL = isProduction
-            ? "https://backend-service-432219336422.us-central1.run.app/api/bookings" // Production Backend
-            : "http://localhost:8080/api/bookings"; // Development Backend
-
 
         // Function to fetch booking details (now accepts token)
         async function fetchBookingDetails(reservationId, token) {
@@ -896,8 +805,6 @@ body.custom-modal-open {
                 const booking = await response.json();
 
                 if (response.ok) {
-                    currentBookingData = booking; // Store fetched data globally
-
                     // Populate details
                     document.getElementById('reservationIdValue').textContent = `#GOGO-${booking.reservation_id}`;
                     document.getElementById('propertyValue').textContent = booking.apartment_name;
@@ -919,23 +826,11 @@ body.custom-modal-open {
                         document.getElementById('cancelBookingBtn').disabled = true;
                         document.getElementById('cancelBookingBtn').textContent = 'Booking Canceled';
                         document.getElementById('cancelBookingBtn').style.backgroundColor = '#6c757d'; // Grey out button
-                        // Disable modify button if canceled
-                        const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // Get reference here
-                        if (modifyBookingBtn) {
-                            modifyBookingBtn.disabled = true;
-                            modifyBookingBtn.style.backgroundColor = '#6c757d'; 
-                        }
                     } else {
                         statusElement.classList.remove('status-canceled');
                         document.getElementById('cancelBookingBtn').disabled = false; // Ensure it's enabled if not canceled
                         document.getElementById('cancelBookingBtn').textContent = 'Cancel Booking';
                         document.getElementById('cancelBookingBtn').style.backgroundColor = ''; // Reset background
-                        // Enable modify button if not canceled
-                        const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // Get reference here
-                        if (modifyBookingBtn) {
-                            modifyBookingBtn.disabled = false;
-                            modifyBookingBtn.style.backgroundColor = '';
-                        }
                     }
 
                     // Fetch apartment image
@@ -945,14 +840,12 @@ body.custom-modal-open {
                     if (bookingContentWrapper) bookingContentWrapper.style.display = 'flex';
                     if (contentBox) contentBox.querySelector('h1').textContent = 'Your Reservation Details'; // Reset title
                 } else {
-                    currentBookingData = null; // Clear data on error
                     // Handle booking not found or other API errors (e.g., 404 from backend)
                     showApiMessage(booking.error || `Failed to load booking details for ID: ${reservationId}. Unauthorized or Not Found.`, 'error');
                     if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Hide content on error
                     if (contentBox) contentBox.innerHTML = `<h1>Booking Not Found</h1><p>${booking.error || 'The reservation ID or token provided is invalid or the booking does not exist.'}</p>`;
                 }
             } catch (error) {
-                currentBookingData = null; // Clear data on error
                 console.error('Error fetching booking details:', error);
                 showApiMessage(`An unexpected error occurred: ${error.message}`, 'error');
                 if (bookingContentWrapper) bookingContentWrapper.style.display = 'none'; // Hide content on error
@@ -1001,7 +894,6 @@ body.custom-modal-open {
         async function cancelBooking(reservationId, token) {
             const cancelModalYesBtn = document.getElementById('cancelModalYesBtn');
             const cancelBookingBtn = document.getElementById('cancelBookingBtn');
-            const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // Get reference here
             
             cancelModalYesBtn.disabled = true;
             cancelModalYesBtn.textContent = 'Canceling...';
@@ -1024,11 +916,6 @@ body.custom-modal-open {
                     cancelBookingBtn.disabled = true;
                     cancelBookingBtn.textContent = 'Booking Canceled';
                     cancelBookingBtn.style.backgroundColor = '#6c757d'; // Grey out button
-                    // Also disable modify button if canceled
-                    if (modifyBookingBtn) {
-                        modifyBookingBtn.disabled = true;
-                        modifyBookingBtn.style.backgroundColor = '#6c757d';
-                    }
                 } else {
                     throw new Error(result.error || `Cancellation failed with status ${response.status}`);
                 }
@@ -1045,152 +932,17 @@ body.custom-modal-open {
             }
         }
 
-        // NEW: Function to open the Modify Booking Modal
-        function openModifyModal() {
-            const modifyBookingModal = document.getElementById('modifyBookingModal');
-            const newArrivalDateInput = document.getElementById('newArrivalDate');
-            const newDepartureDateInput = document.getElementById('newDepartureDate');
-            const newApartmentNameSelect = document.getElementById('newApartmentName'); 
-
-            if (!currentBookingData) {
-                showApiMessage('No booking data loaded to modify.', 'error');
-                return;
-            }
-
-            // Populate modal fields with current booking data
-            if (newArrivalDateInput) newArrivalDateInput.value = formatDate(currentBookingData.arrival_date);
-            if (newDepartureDateInput) newDepartureDateInput.value = formatDate(currentBookingData.departure_date);
-            if (newApartmentNameSelect) {
-                newApartmentNameSelect.value = currentBookingData.apartment_name; // Set selected option
-            }
-
-            // Initialize Flatpickr instances for dates in the modal
-            flatpickr("#newArrivalDate", {
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                defaultDate: newArrivalDateInput.value,
-                onChange: function(selectedDates, dateStr, instance) {
-                    // Update minDate for departureDate to ensure it's after arrivalDate
-                    if (selectedDates.length > 0 && newDepartureDateInput) {
-                        const departureFlatpickr = newDepartureDateInput._flatpickr;
-                        if (departureFlatpickr) {
-                            departureFlatpickr.set('minDate', selectedDates[0]);
-                        }
-                    }
-                }
-            });
-            flatpickr("#newDepartureDate", {
-                dateFormat: "Y-m-d",
-                minDate: newArrivalDateInput.value || "today", // Ensure departure is after initial arrival
-                defaultDate: newDepartureDateInput.value
-            });
-
-            // Show the modal
-            if (modifyBookingModal) {
-                modifyBookingModal.style.display = 'block';
-                document.body.classList.add("custom-modal-open");
-            }
-        }
-
-        // NEW: Function to handle booking update submission
-        async function handleUpdateBooking() {
-            const confirmUpdateBtn = document.getElementById('confirmUpdateBtn');
-            const modifyBookingModal = document.getElementById('modifyBookingModal');
-            
-            if (!currentBookingData) {
-                showApiMessage('No booking data available to update.', 'error');
-                return;
-            }
-
-            confirmUpdateBtn.disabled = true;
-            confirmUpdateBtn.textContent = 'Updating...';
-            showApiMessage('Attempting to update booking...', 'info');
-
-            const reservationId = currentBookingData.reservation_id;
-            const token = currentBookingData.secure_token;
-
-            const newArrivalDate = document.getElementById('newArrivalDate').value;
-            const newDepartureDate = document.getElementById('newDepartureDate').value;
-            const newApartmentName = document.getElementById('newApartmentName').value; // Get value from select
-
-            // Basic validation for new dates
-            if (!newArrivalDate || !newDepartureDate) {
-                showApiMessage('New arrival and departure dates are required.', 'error');
-                confirmUpdateBtn.disabled = false;
-                confirmUpdateBtn.textContent = 'Confirm Update';
-                return;
-            }
-            if (new Date(newDepartureDate) <= new Date(newArrivalDate)) {
-                showApiMessage('New departure date must be after new arrival date.', 'error');
-                confirmUpdateBtn.disabled = false;
-                confirmUpdateBtn.textContent = 'Confirm Update';
-                return;
-            }
-            // Basic validation for new apartment name
-            if (!newApartmentName) {
-                showApiMessage('New property name is required.', 'error');
-                confirmUpdateBtn.disabled = false;
-                confirmUpdateBtn.textContent = 'Confirm Update';
-                return;
-            }
-
-            try {
-                const response = await fetch(`${GET_BOOKING_API_BASE_URL}/${reservationId}`, { // PATCH to /api/bookings/:id
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        token: token,
-                        new_arrival_date: newArrivalDate,
-                        new_departure_date: newDepartureDate,
-                        new_apartment_name: newApartmentName 
-                    }),
-                });
-                const result = await response.json();
-
-                if (response.ok) {
-                    showApiMessage(result.message || 'Booking updated successfully!', 'success');
-                    // Re-fetch booking details to update the main page with fresh data
-                    await fetchBookingDetails(reservationId, token); 
-                } else {
-                    throw new Error(result.error || `Update failed with status ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error updating booking:', error);
-                showApiMessage(`Update failed: ${error.message}`, 'error');
-            } finally {
-                // Hide modal
-                if (modifyBookingModal) {
-                    modifyBookingModal.style.display = 'none';
-                    document.body.classList.remove("custom-modal-open");
-                }
-                // Reset modal button state
-                confirmUpdateBtn.disabled = false;
-                confirmUpdateBtn.textContent = 'Confirm Update';
-            }
-        }
-
-
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const reservationId = params.get('reservation_id');
-            const token = params.get('token'); // Get the token from URL
+            const token = params.get('token'); // NEW: Get the token from URL
             const cancelBookingBtn = document.getElementById('cancelBookingBtn');
-            const modifyBookingBtn = document.getElementById('modifyBookingBtn'); // New Modify button
 
             // Modal elements for cancellation confirmation
             const cancelConfirmModal = document.getElementById('cancelConfirmModal');
             const cancelModalCloseBtn = document.getElementById('cancelModalCloseBtn');
             const cancelModalNoBtn = document.getElementById('cancelModalNoBtn');
             const cancelModalYesBtn = document.getElementById('cancelModalYesBtn');
-
-            // Modal elements for modification
-            const modifyBookingModal = document.getElementById('modifyBookingModal');
-            const modifyModalCloseBtn = document.getElementById('modifyModalCloseBtn');
-            const modifyModalCancelBtn = document.getElementById('modifyModalCancelBtn');
-            const confirmUpdateBtn = document.getElementById('confirmUpdateBtn');
-
 
             // Hide content wrapper initially until data is loaded
             const bookingContentWrapper = document.querySelector('.booking-content-wrapper');
@@ -1242,7 +994,7 @@ body.custom-modal-open {
                 });
             }
 
-            // Close modal if clicking outside (for cancellation modal)
+            // Close modal if clicking outside
             if (cancelConfirmModal) {
                 window.addEventListener('click', function(event) {
                     if (event.target === cancelConfirmModal) {
@@ -1251,50 +1003,8 @@ body.custom-modal-open {
                     }
                 });
             }
-
-            // NEW: Event listener for the Modify Booking button
-            if (modifyBookingBtn) {
-                modifyBookingBtn.addEventListener('click', () => {
-                    if (currentBookingData) { // Only open if booking data is loaded
-                        openModifyModal();
-                    } else {
-                        showApiMessage('Booking data not loaded. Cannot modify.', 'error');
-                    }
-                });
-            }
-
-            // NEW: Event listeners for the Modify Booking modal
-            if (modifyModalCloseBtn) {
-                modifyModalCloseBtn.addEventListener('click', () => {
-                    if (modifyBookingModal) {
-                        modifyBookingModal.style.display = 'none';
-                        document.body.classList.remove("custom-modal-open");
-                    }
-                });
-            }
-            if (modifyModalCancelBtn) {
-                modifyModalCancelBtn.addEventListener('click', () => {
-                    if (modifyBookingModal) {
-                        modifyBookingModal.style.display = 'none';
-                        document.body.classList.remove("custom-modal-open");
-                    }
-                });
-            }
-            if (confirmUpdateBtn) {
-                confirmUpdateBtn.addEventListener('click', handleUpdateBooking); // This calls the function
-            }
-
-            // NEW: Close modal if clicking outside (for modify modal)
-            if (modifyBookingModal) {
-                window.addEventListener('click', function(event) {
-                    if (event.target === modifyBookingModal) {
-                        modifyBookingModal.style.display = 'none';
-                        document.body.classList.remove("custom-modal-open");
-                    }
-                });
-            }
         });
       </script>
 
-      </body>
-      </html>
+   </body>
+</html>
