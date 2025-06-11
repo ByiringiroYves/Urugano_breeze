@@ -1,18 +1,18 @@
 const Booking = require('../models/Booking');
-const Counter = require('../models/Counter'); // Assuming you have a Counter model for reservation_id
-const Apartment = require('../models/Apartment'); // Ensure Apartment model is imported
-const People = require('../models/people'); // Ensure People model is imported (check casing if it's 'People' or 'people')
-const nodemailer = require('nodemailer'); // Required for sending emails
-const path = require('path'); // Required for resolving email template paths
-const crypto = require('crypto'); // Required for generating secure tokens
+const Counter = require('../models/Counter');
+const Apartment = require('../models/Apartment');
+const People = require('../models/people');
+const nodemailer = require('nodemailer');
+const path = require('path');
+const crypto = require('crypto');
 require('dotenv').config();
 
-// Helper function to format dates for emails (NEW: Defined on backend)
+// Helper function to format dates for emails
 const formatDateForEmail = (dateString) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return 'Invalid Date';
-    return date.toISOString().split('T')[0]; // Formats to YYYY-MM-DD
+    return date.toISOString().split('T')[0]; // Formats to dilengkapi-MM-DD
 };
 
 
@@ -27,30 +27,52 @@ const getNextReservationId = async () => {
 };
 
 // Function to send booking confirmation email
-const sendBookingConfirmationEmail = async (recipientEmail, guestName, reservationId, bookingDetailsUrl) => {
+// MODIFIED: Added pricePerNight and arrivalDate (as Date object) parameters
+const sendBookingConfirmationEmail = async (recipientEmail, guestName, reservationId, bookingDetailsUrl, arrivalDate, pricePerNight) => {
     try {
         const transporter = nodemailer.createTransport({
-            service: "gmail", // Use your email service
+            service: "gmail",
             auth: {
-                user: process.env.EMAIL_USER, // Your email address from .env
-                pass: process.env.EMAIL_PASSWORD, // Your email password from .env
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASSWORD,
             },
         });
 
-        // Adjust logoPath if your uploads directory is structured differently relative to bookingController.js
         const logoPath = path.join(__dirname, "../uploads/email/logo.png"); 
         
+        // Calculate free cancellation deadline (midnight of arrival date)
+        const freeCancellationDeadline = new Date(arrivalDate);
+        freeCancellationDeadline.setHours(23, 59, 59, 999); // Set to end of day
+        const formattedDeadline = freeCancellationDeadline.toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+            timeZoneName: 'short' // E.g., 'EST'
+        });
+
+        const lateCancellationFee = pricePerNight;
+
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: recipientEmail,
-            subject: `GOGO Homes & Apartment: Your Booking Confirmation #${reservationId}`,
+            subject: `Gogo Villas: Your Booking Confirmation #${reservationId}`,
             html: `
                 <p>Dear ${guestName},</p>
-                <p>Thank you for booking with GOGO Homes & Apartment!</p>
+                <p>Thank you for booking with Gogo Villas!</p>
                 <p>Your reservation (ID: <strong>#${reservationId}</strong>) has been confirmed.</p>
                 <p>You can view and manage your booking details here: <a href="${bookingDetailsUrl}">${bookingDetailsUrl}</a></p>
                 <p>We look forward to hosting you!</p>
-                <p>Best regards,<br>The GOGO Homes & Apartment Team<br>
+
+                <p style="margin-top: 20px; font-weight: bold;">NOTICE: Cancellation Policy</p>
+                <p>You have a free cancellation fee until **midnight of ${formatDateForEmail(arrivalDate)}** (${formattedDeadline}).</p>
+                <p>After this deadline, a late cancellation fee of **RWF ${lateCancellationFee.toLocaleString()}** (equal to one night's price of the booked apartment) will be charged.</p>
+
+                <p>should you have any questions or need assistance, please do not hesitate to contact us</p>
+                
+                <p>Best regards,<br>The GOGO Villas Team<br>
                 <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
                 +45-40641002</p>
                 <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
@@ -59,7 +81,7 @@ const sendBookingConfirmationEmail = async (recipientEmail, guestName, reservati
                 {
                     filename: "logo.png",
                     path: logoPath,
-                    cid: "unique@signature", // Unique ID for the image
+                    cid: "unique@signature",
                 },
             ],
         };
@@ -88,12 +110,15 @@ const sendCancellationConfirmationEmail = async (recipientEmail, guestName, rese
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: recipientEmail,
-            subject: `GOGO Homes & Apartment: Your Booking Cancellation Confirmation #${reservationId}`,
+            subject: `Gogo Villas: Your Booking Cancellation Confirmation #${reservationId}`,
             html: `
                 <p>Dear ${guestName},</p>
                 <p>This is to confirm that your reservation (ID: <strong>#${reservationId}</strong>) has been successfully **canceled**.</p>
                 <p>If you have any questions or require further assistance, please do not hesitate to contact us.</p>
-                <p>Best regards,<br>The GOGO Homes & Apartment Team<br>
+                <p>Best regards,<br>The GOGO Villas Team<br>
+
+                <p>should you have any questions or need assistance, please do not hesitate to contact us</p>
+
                 <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
                 +45-40641002</p>
                 <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
@@ -130,21 +155,21 @@ const sendModificationConfirmationEmail = async (recipientEmail, guestName, rese
         let updatedDetailsHtml = '';
         // Use formatDateForEmail here, which is now defined in this controller
         if (updatedFields.new_arrival_date) updatedDetailsHtml += `<p><strong>New Arrival Date:</strong> ${formatDateForEmail(updatedFields.new_arrival_date)}</p>`;
-        if (updatedFields.new_departure_date) updatedDetailsHtml += `<p><strong>New Departure Date:</strong> ${formatDateForEmail(updatedFields.new_departure_date)}</p>`;
+        if (updatedFields.new_departure_date) updatedDetailsHtml += `<p><strong>New Departure Date:</strong> ${formatDateForEmail(updatedFields.new_departure_date)}</pاهرة`;
         if (updatedFields.new_apartment_name) updatedDetailsHtml += `<p><strong>New Apartment:</strong> ${updatedFields.new_apartment_name}</p>`;
 
 
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: recipientEmail,
-            subject: `GOGO Homes & Apartment: Your Reservation Update Confirmation #${reservationId}`,
+            subject: `Gogo Villas: Your Reservation Update Confirmation #${reservationId}`,
             html: `
                 <p>Dear ${guestName},</p>
                 <p>This is to confirm that your reservation (ID: <strong>#${reservationId}</strong>) has been successfully **updated**.</p>
                 ${updatedDetailsHtml}
                 <p>You can view your updated booking details here: <a href="${bookingDetailsUrl}">${bookingDetailsUrl}</a></p>
                 <p>If you did not make these changes, please contact us immediately.</p>
-                <p>Best regards,<br>The GOGO Homes & Apartment Team<br>
+                <p>Best regards,<br>The GOGO Villa Team<br>
                 <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
                 +45-40641002</p>
                 <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
@@ -265,7 +290,7 @@ const createBooking = async (req, res) => {
           card_number: cardNum,
           card_exp_month: expMonth,
           card_exp_year: expYear,
-          card_cvv: cvv,
+          cvv: cvv,
           // status: "Confirmed" // Default is set in schema
       });
 
@@ -294,7 +319,8 @@ const createBooking = async (req, res) => {
     const frontendBaseUrl = req.headers.origin || process.env.FRONTEND_URL || 'http://localhost:3000'; 
     const bookingDetailsUrl = `${frontendBaseUrl}/html/bookingdetails.html?reservation_id=${booking.reservation_id}&token=${booking.secure_token}`;
     
-    sendBookingConfirmationEmail(booking.email, booking.guest, booking.reservation_id, bookingDetailsUrl)
+    // MODIFIED CALL: Pass apartment.price_per_night and arrivalDate (as Date object)
+    sendBookingConfirmationEmail(booking.email, booking.guest, booking.reservation_id, bookingDetailsUrl, arrDate, apartment.price_per_night)
         .catch(err => console.error("Error sending booking confirmation email:", err)); // Log error, but don't block response
 
       res.status(201).json({ message: "Booking created successfully. Payment due at property.", booking });
@@ -323,13 +349,18 @@ const searchAvailableCompounds = async (req, res) => {
       const arrival = new Date(arrival_date);
       const departure = new Date(departure_date);
 
+      // ADDED: Ensure arrival date is strictly less than departure date
       if (arrival >= departure) {
-          return res.status(400).json({ error: "Departure date must be later than arrival date." });
+          return res.status(400).json({ error: "Departure date must be strictly after arrival date." });
       }
+      if (isNaN(arrival.getTime()) || isNaN(departure.getTime())) { // Check for valid date objects after parsing
+        return res.status(400).json({ error: "Invalid arrival or departure date format." });
+      }
+
 
       // Find apartments with conflicting bookings
       const unavailableApartmentIds = await Booking.find({
-          status: "Confirmed", // Only consider confirmed bookings (not 'Canceled')
+          status: { $ne: 'Canceled' }, // Only consider non-canceled bookings
           $or: [
               {
                   arrival_date: { $lt: departure }, // Booking starts before the requested departure

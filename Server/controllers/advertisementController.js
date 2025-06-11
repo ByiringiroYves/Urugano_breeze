@@ -77,7 +77,7 @@ const sendAdvertisement = async (req, res) => {
                 const mailOptions = {
                     from: process.env.EMAIL_USER,
                     to: email,
-                    subject: 'Check updates on GOGO Homes & Apartments',
+                    subject: 'Check updates on Gogo Villas',
                     text: advertisementText,
                     // Attach the local file path if available
                     attachments: attachments.length > 0 ? attachments : [], 

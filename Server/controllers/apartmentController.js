@@ -73,11 +73,27 @@ const getAvailableApartments = async (req, res) => {
             return res.status(400).json({ error: "Arrival and departure dates are required." });
         }
 
+        const arrival = new Date(arrival_date);
+        const departure = new Date(departure_date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Normalize today to midnight for comparison
+
+        // NEW VALIDATION: Ensure dates are valid and arrival is strictly before departure
+        if (isNaN(arrival.getTime()) || isNaN(departure.getTime())) {
+            return res.status(400).json({ error: "Invalid arrival or departure date format." });
+        }
+        if (arrival < today) { // NEW: Arrival date cannot be in the past
+            return res.status(400).json({ error: "Arrival date cannot be in the past." });
+        }
+        if (arrival >= departure) {
+            return res.status(400).json({ error: "Departure date must be strictly after arrival date." });
+        }
+
         const unavailableApartmentIds = await Booking.find({
             status: "Confirmed", // Ensure correct case
             $and: [
-                { arrival_date: { $lt: new Date(departure_date) } },
-                { departure_date: { $gt: new Date(arrival_date) } }
+                { arrival_date: { $lt: departure } }, // Use parsed Date objects
+                { departure_date: { $gt: arrival } }  // Use parsed Date objects
             ]
         }).distinct("apartment_id");
 
@@ -104,13 +120,30 @@ const getAvailableApartment = async (req, res) => {
             return res.status(400).json({ error: "Arrival date, departure date, and apartment name are required." });
         }
 
+        // Parse dates here for consistency and validation
+        const arrival = new Date(arrival_date);
+        const departure = new Date(departure_date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Normalize today to midnight for comparison
+
+        // NEW VALIDATION: Ensure dates are valid and arrival is strictly before departure
+        if (isNaN(arrival.getTime()) || isNaN(departure.getTime())) {
+            return res.status(400).json({ error: "Invalid arrival or departure date format." });
+        }
+        if (arrival < today) { // NEW: Arrival date cannot be in the past
+            return res.status(400).json({ error: "Arrival date cannot be in the past." });
+        }
+        if (arrival >= departure) {
+            return res.status(400).json({ error: "Departure date must be strictly after arrival date." });
+        }
+
         // Check if the apartment is unavailable
         const unavailableApartments = await Booking.find({
             apartment_name,
             status: "Confirmed",
             $and: [
-                { arrival_date: { $lt: new Date(departure_date) } },
-                { departure_date: { $gt: new Date(arrival_date) } }
+                { arrival_date: { $lt: departure } }, // Use parsed Date objects
+                { departure_date: { $gt: arrival } }  // Use parsed Date objects
             ]
         });
 
@@ -147,7 +180,8 @@ const getApartmentsByCompound = async (req, res) => {
                 price_per_night: compound.price_per_night
             },
             apartments: compound.apartments.map(apartment => ({
-                id: apartment._id,
+                apartment_id: apartment.apartment_id, // Ensure apartment_id is included
+                _id: apartment._id,
                 name: apartment.name,
                 price_per_night: apartment.price_per_night,
                 rooms: apartment.rooms,
@@ -202,24 +236,31 @@ const updateApartmentDetailsByName = async (req, res) => {
 
 const getApartmentByName = async (req, res) => {
     try {
-        const { name } = req.query; // Expecting name as a query parameter (e.g., ?name=ApartmentName)
+        const { name } = req.query; // e.g., ?name=Muhabura%20Apartment
 
         if (!name) {
             return res.status(400).json({ error: 'Apartment name is required.' });
         }
 
-        const apartment = await Apartment.findOne({ name: name }); // Find by name
-        
+        const decodedName = decodeURIComponent(name); // Decode in case %20 etc. are used
+        console.log("Requested apartment name:", decodedName);
+
+        // Use case-insensitive search
+        const apartment = await Apartment.findOne({
+            name: { $regex: new RegExp(`^${decodedName}$`, 'i') }
+        });
+
         if (!apartment) {
-            return res.status(404).json({ error: `Apartment with name "${name}" not found.` });
+            return res.status(404).json({ error: `Apartment with name "${decodedName}" not found.` });
         }
 
-        res.status(200).json(apartment); // Return the found apartment object
+        res.status(200).json(apartment); // Send full apartment object
     } catch (error) {
         console.error('Error fetching apartment by name:', error);
         res.status(500).json({ error: 'An error occurred while fetching apartment details.' });
     }
 };
+
 
 module.exports = {
     createApartment,
