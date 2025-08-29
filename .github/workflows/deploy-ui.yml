@@ -1,0 +1,41 @@
+# .github/workflows/deploy-ui.yml
+name: Deploy UI to Cloud Storage
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the 'main' branch
+
+env:
+  PROJECT_ID: your-gcp-project-id # <-- REPLACE WITH YOUR GCP PROJECT ID
+  BUCKET_NAME: gs://urugano-ui-bucket # <-- REPLACE WITH YOUR UI BUCKET NAME
+  WORKDIR: ./UI # UI working directory
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Authenticate to Google Cloud
+      - name: Google Cloud Authentication
+        id: "auth"
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+
+      # Set up gcloud CLI (includes gsutil)
+      - name: Set up gcloud SDK
+        uses: "google-github-actions/setup-gcloud@v2"
+        with:
+          project_id: ${{ env.PROJECT_ID }} # Explicitly set project_id for gsutil
+
+      # Deploy UI files to Cloud Storage from the 'UI' directory
+      - name: Sync UI to Cloud Storage
+        run: |
+          gsutil rsync -r ${{ env.WORKDIR }} ${{ env.BUCKET_NAME }} # <--- Uses the WORKDIR variable

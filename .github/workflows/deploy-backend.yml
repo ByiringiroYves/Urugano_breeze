@@ -1,0 +1,60 @@
+# .github/workflows/deploy-backend.yml
+name: Deploy Backend to Cloud Run
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the 'main' branch
+
+env:
+  PROJECT_ID: gogo-445911
+  SERVICE_NAME: backend-service
+  REGION: us-central1
+  WORKDIR: ./Server # backend code
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write" # Required for Workload Identity Federation (preferred)
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Authenticate to Google Cloud using the service account key stored in GitHub Secrets
+      - name: Google Cloud Authentication
+        id: "auth"
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+
+      # Set up gcloud CLI
+      - name: Set up gcloud SDK
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      # Deploy to Cloud Run from the 'Server' directory
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --source ${{ env.WORKDIR }} \
+            --platform managed \
+            --region ${{ env.REGION }} \
+            --allow-unauthenticated \
+            --project ${{ env.PROJECT_ID }} \
+            --set-env-vars \
+              MONGO_URI="${{ secrets.MONGO_URI }}", \
+              EMAIL_USER="${{ secrets.EMAIL_USER }}", \
+              EMAIL_PASSWORD="${{ secrets.EMAIL_PASSWORD }}", \
+              SESSION_SECRET="${{ secrets.SESSION_SECRET }}", \
+              JWT_SECRET="${{ secrets.JWT_SECRET }}", \
+              BASE_URL="${{ secrets.BASE_URL }}", \
+              FRONTEND_URL="${{ secrets.FRONTEND_URL }}", \
+              FRONTEND_WWW="${{ secrets.FRONTEND_WWW }}", \
+              STRIPE_SECRET_KEY="${{ secrets.STRIPE_SECRET_KEY }}", \
+              STRIPE_WEBHOOK_SECRET="${{ secrets.STRIPE_WEBHOOK_SECRET }}", \
+              MAILGUN_API_KEY="${{ secrets.MAILGUN_API_KEY }}", \
+              MAILGUN_DOMAIN="${{ secrets.MAILGUN_DOMAIN }}", \
+              MAILGUN_API_BASE_URL="${{ secrets.MAILGUN_API_BASE_URL }}", \
+              EMAIL_FROM_ADDRESS="${{ secrets.EMAIL_FROM_ADDRESS }}"
