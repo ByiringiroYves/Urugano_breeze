@@ -38,12 +38,22 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
-            --source ${{ env.WORKDIR }} \ # Specifies the source directory for the build
+            --source ${{ env.WORKDIR }} \
             --platform managed \
             --region ${{ env.REGION }} \
-            --allow-unauthenticated \ # Allows public access to your Cloud Run service
+            --allow-unauthenticated \
             --project ${{ env.PROJECT_ID }} \
             --set-env-vars="MONGO_URI=${{ secrets.MONGO_URI }},
             EMAIL_USER=${{ secrets.EMAIL_USER }},
             EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }},
-            SESSION_SECRET=${{ secrets.SESSION_SECRET }},JWT_SECRET=${{ secrets.JWT_SECRET }},BASE_URL=${{ secrets.BASE_URL }},FRONTEND_URL=${{ secrets.FRONTEND_URL }},FRONTEND_WWW=${{ secrets.FRONTEND_WWW }},STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }},STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }},MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }},MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }},MAILGUN_API_BASE_URL=${{ secrets.MAILGUN_API_BASE_URL }},EMAIL_FROM_ADDRESS=${{ secrets.EMAIL_FROM_ADDRESS }}"
+            SESSION_SECRET=${{ secrets.SESSION_SECRET }},
+            JWT_SECRET=${{ secrets.JWT_SECRET }},
+            BASE_URL=${{ secrets.BASE_URL }},
+            FRONTEND_URL=${{ secrets.FRONTEND_URL }},
+            FRONTEND_WWW=${{ secrets.FRONTEND_WWW }},
+            STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }},
+            STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }},
+            MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }},
+            MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }},
+            MAILGUN_API_BASE_URL=${{ secrets.MAILGUN_API_BASE_URL }},
+            EMAIL_FROM_ADDRESS=${{ secrets.EMAIL_FROM_ADDRESS }}"
