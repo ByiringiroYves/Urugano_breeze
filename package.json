@@ -29,6 +29,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
-    "@types/morgan": "^1.9.9"
+    "@types/morgan": "^1.9.9",
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
   }
 }

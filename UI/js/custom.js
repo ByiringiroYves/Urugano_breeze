@@ -10,7 +10,7 @@ $(function () {
     
     /* Preloader
     ---------------------------------------------------------------------*/
-    setTimeout(function () { $('.loader_bg').fadeToggle(); }, 1500);
+    setTimeout(function () { $('.loader_bg').fadeToggle(); }, 200);
     // The preloader is now managed by individual page scripts (e.g., bookingdetails.html)
     // to avoid conflicts and ensure it hides only after data is loaded.
     

@@ -16,38 +16,33 @@ mongoose.connect(MONGO_URI, {})
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
 // Middleware
-// Middleware
-
-// --- START CORRECTED CORS CONFIG ---
-// Read allowed origins from environment variables
 const allowedOrigins = [
-    process.env.FRONTEND_URL,  // Should be "https://gogovillas.com"
+    process.env.FRONTEND_URL,
     process.env.FRONTEND_WWW, 
-    process.env.LOCAL_TEST   // Should be "https://www.gogovillas.com"
-    // Add 'http://localhost:xxxx' if you need it for local testing
-].filter(Boolean); // Removes undefined entries if env vars aren't set
+    process.env.LOCAL_TEST
+].filter(Boolean);
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like curl/Postman/mobile apps)
-    // OR allow requests from origins in the allowedOrigins list
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      // Block requests from other origins
-      console.error(`CORS blocked for origin: ${origin}`); // Log blocked origins
+      console.error(`CORS blocked for origin: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true // Allow credentials (cookies, auth headers)
+  credentials: true
 };
 
-app.use(cors(corsOptions)); // Apply the corrected CORS middleware
-// --- END CORRECTED CORS CONFIG --
+app.use(cors(corsOptions));
+app.use(morgan('combined'));
 
+// Stripe Webhook Middleware
+// This route needs the raw body for signature verification, so it's defined before `express.json()`
+app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
 
-app.use(morgan('combined')); // Combined format is better for production logging
-app.use(express.json()); // For parsing JSON request bodies
+// Regular JSON Middleware for other routes
+app.use(express.json());
 
 // Debug: Log incoming requests and cookies (for development only)
 if (process.env.NODE_ENV !== 'production') {

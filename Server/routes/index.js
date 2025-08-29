@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const stripeRoutes = require('./stripeRoutes'); // Import Stripe routes
 const adminRoutes = require('./adminRoutes');
 const apartmentRoutes = require('./apartmentRoutes');
 const compoundRoutes = require('./compoundRoutes');
@@ -16,6 +17,7 @@ const contactRoute = require('./contactRoute');
 
 
 // Attach each route to its respective path
+router.use('/stripe-webhook', stripeRoutes); // Use the Stripe routes
 router.use('/admin', adminRoutes);
 router.use('/apartments', apartmentRoutes);
 router.use('/compounds', compoundRoutes);

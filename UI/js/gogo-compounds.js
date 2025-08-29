@@ -17,7 +17,8 @@ function getQueryParams() {
 
 // Function to fetch and render available compounds
 async function fetchAvailableCompounds(arrivalDate, departureDate) {
-    const apartmentList = document.getElementById('apartmentList'); // Get a reference to the element
+    const apartmentList = document.getElementById('apartmentList');
+
     try {
         // API call
         const response = await fetch(`${API_BASE_URL}`, {
@@ -27,23 +28,60 @@ async function fetchAvailableCompounds(arrivalDate, departureDate) {
         });
 
         if (!response.ok) {
-            // Log and handle API errors
             const errorResponse = await response.json();
             console.error('API Error Response:', errorResponse);
-            // Throw an error with the specific message from the backend
             throw new Error(errorResponse.error || "Failed to fetch available compounds.");
         }
 
         const { compounds } = await response.json();
+
+        // ✅ Preload all images before rendering
+        await preloadCompoundImages(compounds);
+
+        // Now render (images will already be cached and appear instantly)
         renderAvailableCompounds(compounds, arrivalDate, departureDate);
+
     } catch (error) {
         console.error('Error Fetching Compounds:', error);
-        // Display the specific error message to the user
-        if (apartmentList) { // Check if the element exists before manipulating
+        if (apartmentList) {
             apartmentList.innerHTML = `<p style="color:red;">${error.message}</p>`;
         }
     }
 }
+
+function preloadImage(url) {
+    return new Promise((resolve, reject) => {
+        if (!url) return resolve(); // skip empty
+
+        const img = new Image();
+        img.src = url;
+
+        img.onload = () => resolve(url);
+        img.onerror = () => {
+            console.warn("Failed to preload:", url);
+            resolve(url); // don’t block rendering
+        };
+    });
+}
+
+async function preloadCompoundImages(compounds) {
+    const promises = [];
+
+    compounds.forEach(c => {
+        if (c.compound.image) {
+            promises.push(preloadImage(c.compound.image));
+        }
+        c.apartments.forEach(a => {
+            if (a.image) {
+                promises.push(preloadImage(a.image));
+            }
+        });
+    });
+
+    return Promise.all(promises); // wait until all are loaded or errored
+}
+
+
 
 // Function to render available compounds
 function renderAvailableCompounds(compounds, arrivalDate, departureDate) {

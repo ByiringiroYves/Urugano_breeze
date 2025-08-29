@@ -1,59 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!-- mobile metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
       <title>Bookings record</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="Yves Byiringiro" content="">
-      <link rel="icon" href="../assets/images/tablogo.png" type="image/png"/>
-      <!-- bootstrap css -->
-      <link rel="stylesheet" href="../css/bootstrap.min.css">
-      <!-- style css -->
-      <link rel="stylesheet" href="../css/style.css">
-      <link rel="stylesheet" href="../css/reserve.css">
-      <!-- Responsive-->
-      <link rel="stylesheet" href="../css/responsive.css">
-      <!-- fevicon -->
-      <link rel="icon" href="../assets/images/fevicon.png" type="image/gif" />
-      <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
-       <!-- External Libraries -->
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      <link rel="icon" href="/assets/images/tablogo.png" type="image/png"/> <link rel="stylesheet" href="/css/bootstrap.min.css"> <link rel="stylesheet" href="/css/style.css"> <link rel="stylesheet" href="/css/reserve.css"> <link rel="stylesheet" href="/css/responsive.css"> <link rel="icon" href="/assets/images/fevicon.png" type="image/gif" /> <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css"> <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
       <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-      <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-      <!--bookin paggination --> 
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
       <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
       <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-      <!--[if lt IE 9]>
-         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->   
-      <link rel="stylesheet" href="../css/admic-nav-bar.css">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="/css/admic-nav-bar.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+      <style>
+         /* New styles for the Cancel Selected button */
+         .cancel-selected-button {
+             background-color: #dc3545; /* Red color, similar to direct cancel */
+             color: white;
+             border: none;
+             padding: 10px 15px;
+             border-radius: 5px;
+             cursor: pointer;
+             margin-left: 10px; /* Space from other buttons */
+             transition: background-color 0.3s ease;
+         }
+         .cancel-selected-button:hover {
+             background-color: #c82333;
+         }
+         /* Style for disabled button */
+         .cancel-selected-button:disabled {
+             background-color: #a0a0a0;
+             cursor: not-allowed;
+         }
+         /* Optional: Style for checkboxes if default is not good */
+         input[type="checkbox"] {
+             transform: scale(1.2); /* Make checkboxes slightly larger */
+             margin-left: 5px;
+             margin-right: 5px;
+         }
+         .mark-as-paid-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+         }
+         .mark-as-paid-button:hover {
+             background-color: #218838;
+         }
+         .mark-as-paid-button:disabled {
+             background-color: #6c757d;
+             cursor: not-allowed;
+         }
+      </style>
    </head>
-   <!-- body -->
    <body class="main-layout">
-      <!-- loader  -->
       <div class="loader_bg">
-         <div class="loader"><img src="../assets/images/loading.gif" alt="#"/></div>
-      </div>
-      <!-- end loader -->
-      <!-- header -->
+         <div class="loader"><img src="/assets/images/loading.gif" alt="#"/></div> </div>
       <header>
-         <!-- header inner -->
          <div class="header">
             <div class="container">
                <div class="row">
@@ -61,7 +75,8 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="../html/admin-dashboard.html"><img src="../assets/images/logo.png" alt="#" /></a>
+                              <a href="/html/admin-dashboard.html">
+                                 <img src="/assets/images/logo.png" alt="#" /> </a>
                            </div>
                         </div>
                      </div>
@@ -74,32 +89,32 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                  <a class="nav-link" href="admin-dashboard.html">
+                                  <a class="nav-link" href="/html/admin-dashboard.html">
                                       <i class="fas fa-home"></i> Home
                                   </a>
                               </li>
                               <li class="nav-item">
-                                  <a class="nav-link" href="people.html">
+                                  <a class="nav-link" href="/html/people.html">
                                       <i class="fas fa-bullhorn"></i> Advertise
                                   </a>
                               </li>
                               <li class="nav-item active">
-                                  <a class="nav-link" href="booking.html">
+                                  <a class="nav-link" href="/html/booking.html">
                                       <i class="fas fa-calendar-alt"></i> Booking
                                   </a>
                               </li>
                               <li class="nav-item">
-                                  <a class="nav-link" href="testimonial-admin.html">
+                                  <a class="nav-link" href="/html/testimonial-admin.html">
                                       <i class="fas fa-comment-alt"></i> Testimonial
                                   </a>
                               </li>
                               <li class="nav-item">
-                                  <a class="nav-link" href="co-admins.html">
+                                  <a class="nav-link" href="/html/co-admins.html">
                                       <i class="fas fa-users"></i> Accounts Manager
                                   </a>
                               </li>
                               <li class="nav-item">
-                                  <a class="nav-link" href="modify-Apartment.html">
+                                  <a class="nav-link" href="/html/modify-Apartment.html">
                                       <i class="fas fa-edit"></i> Modify Properties
                                   </a>
                               </li>
@@ -111,8 +126,6 @@
             </div>
          </div>
       </header>
-      <!-- end header inner -->
-      <!-- end header -->
       <div class="back_re">
          <div class="container">
             <div class="row">
@@ -124,36 +137,31 @@
             </div>
          </div>
       </div>
-      <!-- Search box above the apartments section -->
-    <!-- our_room -->
-    <section class="search-filters">
+      <section class="search-filters">
       <div class="search-container">
           <label for="statusFilter">Status:</label>
           <select id="statusFilter">
               <option value="all">All Statuses</option>
-              <option value="confirmed">Confirmed</option>
-              <option value="pending">Pending</option>
-          </select>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Pending">Pending</option>
+              <option value="Canceled">Canceled</option> </select>
           
-          <!-- Date Picker for Date Range -->
           <label for="dateRange">Date Range:</label>
           <input type="text" id="dateRange" placeholder="Select date range">
           
           <button id="applyFiltersBtn" class="filter-buttons" onclick="applyFilters()">Apply</button>
           <button class="filter-buttons" onclick="exportToCSV()">Export to CSV</button>
           <button class="filter-buttons" onclick="scrollToForm()">Reserve Apartment</button>
-
-      </div>
+          <button id="cancelSelectedBtn" class="filter-buttons cancel-selected-button">Cancel Selected</button> </div>
    </section>
   
-  <!-- Bookings Table -->
   <section class="booking-results">
    <p id="error-message" class="booking-error">No Booking Data available on date and status selected, please select another date or change status</p>
    <div class="table-wrapper">
        <table id="bookingsTable">
            <thead>
                <tr>
-                   <th>Reservation ID</th>
+                   <th><input type="checkbox" id="selectAllBookings"></th> <th>Reservation ID</th>
                    <th>Property</th>
                    <th>Guest</th>
                    <th>Email</th>
@@ -166,18 +174,10 @@
                    <th>Nights</th>
                    <th>Total Price</th>
                    <th>Status</th>
-                   <th>Card Name</th>
-                   <th>Card Number</th>
-                   <th>Exp. Month</th>
-                   <th>Exp. Year</th>
-                   <th>CVV</th>
-               </tr>
+                   <th>Actions</th> </tr>
            </thead>
            <tbody>
-               <!-- Sample data rows (for testing purposes) -->
-               
-               <!-- Additional rows as needed -->
-           </tbody>
+               </tbody>
        </table>
    </div>
    <div id="pagination" class="pagination-controls"></div>
@@ -235,10 +235,7 @@
      </div>                                   
   </div>
    </section>
-   <!--end our_room -->
-     
-      <!--  footer -->
-      <footer>
+   <footer>
         <div class="footer">
            <div class="container">
               <div class="row">
@@ -253,8 +250,7 @@
                  <div class="col-md-4">
                     <h3>Menu Link</h3>
                     <ul class="link_menu">
-                       <li class="active"><a href="#">Home</a></li>
-                       <li><a href="html/about.html"> about</a></li>
+                       <li class="active"><a href="/">Home</a></li> <li><a href="html/about.html"> about</a></li>
                        <li><a href="html/apartments.html">Our Apartments</a></li>
                        <li><a href="html/gallery.html">Gallery</a></li>
                        <li><a href="html/testimonial.html">testimonial</a></li>
@@ -286,15 +282,11 @@
            </div>
         </div>
      </footer>
-      <!-- end footer -->
-      <!-- Javascript files-->
       <script src="../js/jquery.min.js"></script>
       <script src="../js/bootstrap.bundle.min.js"></script>
       <script src="../js/jquery-3.0.0.min.js"></script>
-      <!-- sidebar -->
       <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="../js/custom.js"></script>
-      <!--<script src="../js/bookings.js"></script>-->
       <script src="../js/flatpkr.js"></script>
       <script>
           const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
@@ -334,6 +326,7 @@
                      if (response.ok) {
                          document.getElementById('responseMessage').innerText = 'Booking created successfully!';
                          form.reset(); // Clear the form
+                         fetchBookings(); // Re-fetch bookings to update table
                      } else {
                          document.querySelector('.admin-error-message').innerText = result.error || 'An error occurred.';
                          document.querySelector('.admin-error-message').style.display = 'block';
@@ -353,6 +346,7 @@
                      if (response.ok) {
                          alert(result.message || 'Apartment hidden successfully!');
                          form.reset(); // Clear the form
+                         fetchBookings(); // Re-fetch bookings to update table (if hides affect visibility)
                      } else {
                          alert(result.error || 'Failed to hide the apartment.');
                      }
@@ -371,6 +365,7 @@
                      if (response.ok) {
                          alert(result.message || 'Apartment unhidden successfully!');
                          form.reset(); // Clear the form
+                         fetchBookings(); // Re-fetch bookings to update table (if unhides affect visibility)
                      } else {
                          alert(result.error || 'Failed to unhide the apartment.');
                      }
@@ -383,9 +378,6 @@
          });
 
          // Function to fetch and display bookings
-//const isProduction = window.location.hostname === 'gogovillas.com' || window.location.hostname === 'www.gogovillas.com';
-
-// Set the base URL accordingly
 const API_BASE_URLO = isProduction
     ? "https://backend-service-432219336422.us-central1.run.app/api/bookings" // Production Backend
     : "http://localhost:8080/api/bookings"; 
@@ -394,27 +386,36 @@ async function fetchBookings() {
     try {
         const response = await fetch(`${API_BASE_URLO}`);
         if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+                window.location.href = '/html/admin.html'; // Redirect to login page
+                return;
+            }
             throw new Error("Failed to fetch bookings.");
         }
 
         const bookings = await response.json();
         const tableBody = document.querySelector("#bookingsTable tbody");
-
-        // Clear existing rows
         tableBody.innerHTML = "";
 
-        // Populate table with booking data
         bookings.forEach((booking) => {
             const row = document.createElement("tr");
-
-            // Determine the status color class
+            row.dataset.reservationId = booking.reservation_id;
+            
             const statusClass = booking.status === "Confirmed"
                 ? "status-confirmed"
                 : booking.status === "Canceled"
                 ? "status-canceled"
                 : "";
 
+            // Determine if the "Mark as Paid" button should be enabled
+            const isPaidOrCanceled = booking.status === 'Paid' || booking.status === 'Canceled' || booking.status === 'Canceled (Late Fee Charged)';
+            const buttonHtml = isPaidOrCanceled 
+                               ? `<button class="mark-as-paid-button" disabled>Paid</button>`
+                               : `<button class="mark-as-paid-button" onclick="markAsPaid(${booking.reservation_id})">Mark as Paid</button>`;
+
+
             row.innerHTML = `
+                <td><input type="checkbox" class="booking-checkbox"></td>
                 <td>${booking.reservation_id || "N/A"}</td>
                 <td>${booking.apartment_name || "N/A"}</td>
                 <td>${booking.guest || "N/A"}</td>
@@ -426,27 +427,132 @@ async function fetchBookings() {
                 <td>${formatDate(booking.arrival_date) || "N/A"}</td>
                 <td>${formatDate(booking.departure_date) || "N/A"}</td>
                 <td>${booking.nights || "N/A"}</td>
-                <td>${booking.total_price ? `${booking.currency || "US$"}${booking.total_price}` : "N/A"}</td>
+                <td>${booking.total_price ? `RWF ${booking.total_price.toLocaleString()}` : "N/A"}</td>
                 <td class="status ${statusClass}">${booking.status || "N/A"}</td>
-                 <!-- Card Information Columns (For Test Project Admin View ONLY) -->
-                <td>${booking.card_name_on || "N/A"}</td>
-                <td>${booking.card_number || "N/A"}</td>
-                <td>${booking.card_exp_month || "N/A"}</td>
-                <td>${booking.card_exp_year || "N/A"}</td>
-                <td>${booking.card_cvv || "N/A"}</td>
+                <td>${buttonHtml}</td>
             `;
             tableBody.appendChild(row);
         });
+
+        document.querySelectorAll('.booking-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', updateCancelSelectedButtonState);
+        });
+        document.getElementById('selectAllBookings').addEventListener('change', toggleAllCheckboxes);
+
+        updateCancelSelectedButtonState();
     } catch (error) {
         console.error("Error fetching bookings:", error);
         alert("Failed to load bookings. Please try again later.");
     }
 }
 
-// Fetch bookings when the page loads
+// NEW: Function to mark a booking as paid
+async function markAsPaid(reservationId) {
+    if (!confirm(`Are you sure you want to mark reservation #${reservationId} as Paid? This will release the pre-authorization hold.`)) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}bookings/${reservationId}/mark-as-paid`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message);
+            fetchBookings(); // Reload the table to reflect the change
+        } else {
+            alert(result.error || 'Failed to mark booking as paid.');
+        }
+    } catch (error) {
+        console.error('Error marking booking as paid:', error);
+        alert('An error occurred. Please try again.');
+    }
+}
+
+function toggleAllCheckboxes() {
+    const selectAllCheckbox = document.getElementById('selectAllBookings');
+    const checkboxes = document.querySelectorAll('.booking-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+    });
+    updateCancelSelectedButtonState();
+}
+
+function updateCancelSelectedButtonState() {
+    const cancelSelectedBtn = document.getElementById('cancelSelectedBtn');
+    const selectedCheckboxes = document.querySelectorAll('.booking-checkbox:checked');
+    if (cancelSelectedBtn) {
+        cancelSelectedBtn.disabled = selectedCheckboxes.length === 0;
+    }
+    const selectAllCheckbox = document.getElementById('selectAllBookings');
+    const allCheckboxes = document.querySelectorAll('.booking-checkbox');
+    if (selectAllCheckbox && allCheckboxes.length > 0) {
+        selectAllCheckbox.checked = selectedCheckboxes.length === allCheckboxes.length;
+    }
+}
+
+
+// Handle "Cancel Selected" button click
+document.getElementById('cancelSelectedBtn').addEventListener('click', async () => {
+    const selectedBookingIds = [];
+    document.querySelectorAll('.booking-checkbox:checked').forEach(checkbox => {
+        const row = checkbox.closest('tr');
+        if (row) {
+            selectedBookingIds.push(row.dataset.reservationId);
+        }
+    });
+
+    if (selectedBookingIds.length === 0) {
+        alert("Please select at least one booking to cancel.");
+        return;
+    }
+
+    if (!confirm(`Are you sure you want to cancel ${selectedBookingIds.length} selected booking(s)? This action cannot be undone.`)) {
+        return;
+    }
+
+    const cancelSelectedBtn = document.getElementById('cancelSelectedBtn');
+    cancelSelectedBtn.disabled = true;
+    cancelSelectedBtn.textContent = 'Canceling...';
+
+    const API_CANCEL_MULTIPLE_URL = isProduction
+        ? "https://backend-service-432219336422.us-central1.run.app/api/bookings/cancel-multiple"
+        : "http://localhost:8080/api/bookings/cancel-multiple";
+    
+    try {
+        const response = await fetch(API_CANCEL_MULTIPLE_URL, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ reservationIds: selectedBookingIds }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message || "Selected bookings cancelled successfully!");
+            fetchBookings();
+        } else {
+            alert(result.error || `Failed to cancel selected bookings. Status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error("Error canceling multiple bookings:", error);
+        alert("An error occurred while canceling bookings. Please try again.");
+    } finally {
+        cancelSelectedBtn.disabled = false;
+        cancelSelectedBtn.textContent = 'Cancel Selected';
+        document.getElementById('selectAllBookings').checked = false;
+    }
+});
+
 document.addEventListener("DOMContentLoaded", fetchBookings);
 
-// Utility functions for formatting dates
 function formatDateTime(dateString) {
     const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     return new Date(dateString).toLocaleDateString('en-US', options);
@@ -458,7 +564,6 @@ function formatDate(dateString) {
 }
 
      </script>
-     
          
    </body>
 </html>

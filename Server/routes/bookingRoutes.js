@@ -2,37 +2,48 @@
 const express = require('express');
 const router = express.Router();
 const { 
-    createBooking,  
+    initiateBooking,  
     cancelBooking,  
     getAllBookings, 
     searchAvailableCompounds, 
     hideApartment, 
     unhideApartment,
     getBookingById, 
-    updateBooking // Ensure updateBooking is imported
+    updateBooking,
+    markBookingAsPaid, // NEW import for marking booking as paid
+    cancelMultipleBookings // Ensure cancelMultipleBookings is imported
 } = require('../controllers/bookingController');
 
-// POST route for creating a booking
-router.post('/create', createBooking);
+// For admin route protection (from AdminController)
+//const { authenticateJWT } = require('../controllers/adminController'); 
 
-// PATCH route for canceling a booking by reservation_id
+// POST route for creating a booking (public)
+router.post('/create', initiateBooking);
+
+// PATCH route for canceling multiple bookings by IDs (admin action)
+// This MUST come BEFORE the general :reservation_id route to prevent conflicts.
+router.patch('/cancel-multiple', cancelMultipleBookings); 
+
+// PATCH route for canceling a single booking by reservation_id (public link)
 router.patch('/cancel/:reservation_id', cancelBooking);
 
-// PATCH route for updating a booking by reservation_id (and token in body)
-router.patch('/:reservation_id', updateBooking); // <--- NEW ROUTE FOR UPDATES
+// PATCH route for updating a booking by reservation_id (public link)
+router.patch('/:reservation_id', updateBooking);
 
-// GET route for fetching all bookings
-router.get('/', getAllBookings);
+// GET route for fetching all bookings (THIS ROUTE MUST BE PROTECTED IF ADMIN-ONLY)
+router.get('/', getAllBookings); 
 
-// GET route for fetching a single booking by reservation_id
+// GET route for fetching a single booking by reservation_id (public link)
 router.get('/:reservation_id', getBookingById); 
 
 
-// Search available compounds
+// Search available compounds (public)
 router.post('/search', searchAvailableCompounds);
 
-// Block/Unblock apartment's availability
-router.post('/hide-apartment', hideApartment);
-router.post('/unhide-apartment', unhideApartment);
+// NEW route for marking a booking as paid (admin action)
+router.patch('/:reservation_id/mark-as-paid', markBookingAsPaid)
 
+// Block/Unblock apartment's availability (admin actions)
+router.post('/hide-apartment', hideApartment); 
+router.post('/unhide-apartment', unhideApartment); 
 module.exports = router;

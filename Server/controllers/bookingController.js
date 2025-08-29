@@ -6,13 +6,14 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 const crypto = require('crypto');
 require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe
 
 // Helper function to format dates for emails
 const formatDateForEmail = (dateString) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return 'Invalid Date';
-    return date.toISOString().split('T')[0]; // Formats to dilengkapi-MM-DD
+    return date.toISOString().split('T')[0]; // Formats to YYYY-MM-DD
 };
 
 
@@ -26,89 +27,94 @@ const getNextReservationId = async () => {
     return counter.seq;
 };
 
-// Function to send booking confirmation email
-// MODIFIED: Added pricePerNight and arrivalDate (as Date object) parameters
-const sendBookingConfirmationEmail = async (recipientEmail, guestName, reservationId, bookingDetailsUrl, arrivalDate, pricePerNight) => {
-    try {
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASSWORD,
-            },
-        });
+// Nodemailer Transporter Configuration (Using Gmail SMTP with App Password)
+const transporter = nodemailer.createTransport({
+    service: "gmail", // Explicitly use 'gmail' service
+    auth: {
+        user: process.env.EMAIL_USER,    // Your Gmail address from .env
+        pass: process.env.EMAIL_PASSWORD, // Your Gmail App Password from .env
+    },
+});
 
+// Function to send a welcome email after payment is confirmed
+const sendWelcomeEmail = async (recipientEmail, guestName, reservationId) => {
+    try {
+        const logoPath = path.join(__dirname, "../uploads/email/logo.png");
+        const mailOptions = {
+            from: process.env.EMAIL_FROM_ADDRESS,
+            to: recipientEmail,
+            subject: `Welcome to Gogo Villas! Your Reservation #${reservationId}'s Payment is Confirmed.`,
+            html: `
+                <p>Dear ${guestName},</p>
+                <p>We are delighted to confirm that your payment for reservation #${reservationId} has been successfully processed.</p>
+                <p>We look forward to welcoming you to Gogo Villas!</p>
+                <p>Best regards,<br>The GOGO Villas Team</p>
+                <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
+            `,
+            attachments: [{ filename: "logo.png", path: logoPath, cid: "unique@signature" }],
+        };
+        await transporter.sendMail(mailOptions);
+        console.log(`Welcome email sent to ${recipientEmail} for reservation #${reservationId}`);
+    } catch (error) {
+        console.error("Error sending welcome email:", error);
+    }
+};
+
+// Function to send booking confirmation email
+const sendBookingConfirmationEmail = async (recipientEmail, guestName, reservationId, bookingDetailsUrl, arrivalDate, pricePerNight, nights, total_price) => {
+    try {
         const logoPath = path.join(__dirname, "../uploads/email/logo.png"); 
         
-        // Calculate free cancellation deadline (midnight of arrival date)
         const freeCancellationDeadline = new Date(arrivalDate);
-        freeCancellationDeadline.setHours(23, 59, 59, 999); // Set to end of day
+        freeCancellationDeadline.setHours(23, 59, 59, 999);
         const formattedDeadline = freeCancellationDeadline.toLocaleString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true,
-            timeZoneName: 'short' // E.g., 'EST'
+            year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true, timeZoneName: 'short'
         });
 
         const lateCancellationFee = pricePerNight;
 
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: process.env.EMAIL_FROM_ADDRESS,
             to: recipientEmail,
             subject: `Gogo Villas: Your Booking Confirmation #${reservationId}`,
             html: `
                 <p>Dear ${guestName},</p>
                 <p>Thank you for booking with Gogo Villas!</p>
                 <p>Your reservation (ID: <strong>#${reservationId}</strong>) has been confirmed.</p>
+                <p>A hold has been placed on your card for RWF ${lateCancellationFee.toLocaleString()} (equal to one night's price of the booked apartment) as a cancellation fee guarantee.</p>
+                <p>The total amount of RWF ${total_price.toLocaleString()} is due upon arrival at the property.</p>
                 <p>You can view and manage your booking details here: <a href="${bookingDetailsUrl}">${bookingDetailsUrl}</a></p>
                 <p>We look forward to hosting you!</p>
 
                 <p style="margin-top: 20px; font-weight: bold;">NOTICE: Cancellation Policy</p>
                 <p>You have a free cancellation fee until **midnight of ${formatDateForEmail(arrivalDate)}** (${formattedDeadline}).</p>
-                <p>After this deadline, a late cancellation fee of **RWF ${lateCancellationFee.toLocaleString()}** (equal to one night's price of the booked apartment) will be charged.</p>
+                <p>After this deadline, the held amount of **RWF ${lateCancellationFee.toLocaleString()}** will be charged.</p>
 
-                <p>should you have any questions or need assistance, please do not hesitate to contact us</p>
+                <p>Should you have any questions or need assistance, please do not hesitate to contact us</p>
                 
                 <p>Best regards,<br>The GOGO Villas Team<br>
                 <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a><br>
                 +45-40641002</p>
                 <img src="cid:unique@signature" alt="GOGO Logo" style="width: 250px; height: 50px;" />
             `,
-            attachments: [
-                {
-                    filename: "logo.png",
-                    path: logoPath,
-                    cid: "unique@signature",
-                },
-            ],
+            attachments: [{ filename: "logo.png", path: logoPath, cid: "unique@signature" }],
         };
 
         await transporter.sendMail(mailOptions);
         console.log(`Booking confirmation email sent to ${recipientEmail} for reservation #${reservationId}`);
     } catch (error) {
         console.error("Error sending booking confirmation email:", error);
-        // Log the error but don't re-throw to avoid blocking the createBooking response
     }
 };
+
 
 // Function to send booking cancellation email
 const sendCancellationConfirmationEmail = async (recipientEmail, guestName, reservationId) => {
     try {
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASSWORD,
-            },
-        });
-
         const logoPath = path.join(__dirname, "../uploads/email/logo.png"); 
         
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: process.env.EMAIL_FROM_ADDRESS, // Use consistent EMAIL_FROM_ADDRESS
             to: recipientEmail,
             subject: `Gogo Villas: Your Booking Cancellation Confirmation #${reservationId}`,
             html: `
@@ -140,27 +146,23 @@ const sendCancellationConfirmationEmail = async (recipientEmail, guestName, rese
 };
 
 // Function to send booking modification email
-const sendModificationConfirmationEmail = async (recipientEmail, guestName, reservationId, bookingDetailsUrl, updatedFields) => {
+// MODIFIED: Added total_price and nights parameters to the function signature
+const sendModificationConfirmationEmail = async (recipientEmail, guestName, reservationId, bookingDetailsUrl, updatedFields, nights, total_price) => {
     try {
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASSWORD,
-            },
-        });
-
         const logoPath = path.join(__dirname, "../uploads/email/logo.png"); 
         
         let updatedDetailsHtml = '';
-        // Use formatDateForEmail here, which is now defined in this controller
         if (updatedFields.new_arrival_date) updatedDetailsHtml += `<p><strong>New Arrival Date:</strong> ${formatDateForEmail(updatedFields.new_arrival_date)}</p>`;
-        if (updatedFields.new_departure_date) updatedDetailsHtml += `<p><strong>New Departure Date:</strong> ${formatDateForEmail(updatedFields.new_departure_date)}</pاهرة`;
-        if (updatedFields.new_apartment_name) updatedDetailsHtml += `<p><strong> New Apartment: </strong> ${updatedFields.new_apartment_name}</p>`;
+        if (updatedFields.new_departure_date) updatedDetailsHtml += `<p><strong>New Departure Date:</strong> ${formatDateForEmail(updatedFields.new_departure_date)}</p>`; 
+        if (updatedFields.new_apartment_name) updatedDetailsHtml += `<p><strong>New Apartment:</strong> ${updatedFields.new_apartment_name}</p>`;
+        
+        // NEW: Add total nights and total amount to modification email
+        updatedDetailsHtml += `<p><strong>Total Nights:</strong> ${nights}</p>`;
+        updatedDetailsHtml += `<p><strong>Total Amount:</strong> RWF ${total_price.toLocaleString()} (Payment Handled via Stripe)</p>`; // Modified line
 
 
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: process.env.EMAIL_FROM_ADDRESS, 
             to: recipientEmail,
             subject: `Gogo Villas: Your Reservation Update Confirmation #${reservationId}`,
             html: `
@@ -191,153 +193,76 @@ const sendModificationConfirmationEmail = async (recipientEmail, guestName, rese
 };
 
 
-// Create a new booking
-const createBooking = async (req, res) => {
-  try {
-      // Destructure all expected fields from req.body, including new ones
-      const {
-          apartment_name,
-          guest,          // Full Name from billing
-          email,
-          phone,
-          country,        // Billing country
-          city,           // Billing city
-          street_address, // New: Billing street address
-          arrival_date,
-          departure_date,
-          // --- Raw Card Information (for educational/test purposes ONLY) ---
-          cardName,       // Name on card from your form
-          cardNum,        // Card number from your form
-          expMonth,       // Expiry month from your form
-          expYear,        // Expiry year from your form
-          cvv             // CVV from your form
-      } = req.body;
+// NEW: Function to initiate a booking and create a Stripe session
+const initiateBooking = async (req, res) => {
+    try {
+        const {
+            apartment_name, guest, email, phone, country, city, street_address, arrival_date, departure_date
+        } = req.body;
 
-      // --- Basic Input Validation (Expand as needed for all fields) ---
-      const requiredFields = {
-          apartment_name, guest, email, phone, country, city,
-          arrival_date, departure_date
-      };
-      for (const [field, value] of Object.entries(requiredFields)) {
-          if (!value) {
-              return res.status(400).json({ error: `Missing required field: ${field}` });
-          }
-      }
-      // Add more specific validation (e.g., email format, date validity, card number format)
+        const requiredFields = { apartment_name, guest, email, phone, country, city, arrival_date, departure_date };
+        for (const [field, value] of Object.entries(requiredFields)) {
+            if (!value) {
+                return res.status(400).json({ error: `Missing required field: ${field}` });
+            }
+        }
 
-      // Fetch apartment details based on the name
-      const apartment = await Apartment.findOne({ name: apartment_name });
-      if (!apartment) {
-          return res.status(404).json({ error: `Apartment with name "${apartment_name}" not found.` });
-      }
+        const apartment = await Apartment.findOne({ name: apartment_name });
+        if (!apartment) {
+            return res.status(404).json({ error: `Apartment with name "${apartment_name}" not found.` });
+        }
 
-      // --- Check for overlapping bookings for the same apartment ---
-      const arrDate = new Date(arrival_date);
-      const depDate = new Date(departure_date);
-      if (isNaN(arrDate.getTime()) || isNaN(depDate.getTime()) || depDate <= arrDate) {
-          return res.status(400).json({ error: "Invalid arrival or departure date." });
-      }
+        const arrDate = new Date(arrival_date);
+        const depDate = new Date(departure_date);
+        if (isNaN(arrDate.getTime()) || isNaN(depDate.getTime()) || depDate <= arrDate) {
+            return res.status(400).json({ error: "Invalid arrival or departure date." });
+        }
 
-      const overlappingBooking = await Booking.findOne({
-          apartment_id: apartment._id,
-          status: { $ne: 'Canceled' }, // Consider only non-canceled bookings
-          $or: [
-              {
-                  arrival_date: { $lt: depDate },
-                  departure_date: { $gt: arrDate },
-              },
-          ],
-      });
+        const overlappingBooking = await Booking.findOne({
+            apartment_id: apartment._id,
+            status: { $nin: ['Canceled', 'Paid'] },
+            $or: [
+                { arrival_date: { $lt: depDate }, departure_date: { $gt: arrDate } },
+            ],
+        });
 
-      if (overlappingBooking) {
-          return res.status(400).json({
-              error: `The apartment "${apartment_name}" is already booked between ${overlappingBooking.arrival_date.toISOString().split('T')[0]} and ${overlappingBooking.departure_date.toISOString().split('T')[0]}.`,
-          });
-      }
+        if (overlappingBooking) {
+            return res.status(400).json({
+                error: `The apartment "${apartment_name}" is already booked between ${overlappingBooking.arrival_date.toISOString().split('T')[0]} and ${overlappingBooking.departure_date.toISOString().split('T')[0]}.`,
+            });
+        }
 
-      // Calculate nights and total price
-      const nights = Math.ceil(
-          (depDate - arrDate) / (1000 * 60 * 60 * 24)
-      );
-      if (nights <= 0) {
-        return res.status(400).json({ error: "Departure date must be after arrival date, resulting in at least 1 night." });
-      }
-      const total_price = nights * apartment.price_per_night;
+        const nights = Math.ceil((depDate - arrDate) / (1000 * 60 * 60 * 24));
+        if (nights <= 0) {
+            return res.status(400).json({ error: "Departure date must be after arrival date, resulting in at least 1 night." });
+        }
+        const total_price = nights * apartment.price_per_night;
 
-      // Generate reservation ID
-      const reservation_id = await getNextReservationId();
-      // NEW: Generate cryptographically strong secure token
-      const secure_token = crypto.randomBytes(32).toString('hex'); // 64-character hex string
+        const frontendBaseUrl = process.env.FRONTEND_URL || process.env.FRONTEND_WWW || process.env.LOCAL_TEST || 'http://localhost:3000';
+        const successUrl = `${frontendBaseUrl}/html/thankyou.html`;
+        const cancelUrl = `${frontendBaseUrl}/html/userdata.html?apartmentName=${encodeURIComponent(apartment_name)}&totalAmount=${total_price}&arrivalDate=${arrival_date}&departureDate=${departure_date}`;
 
-      // Create new booking object with all details
-      const booking = new Booking({
-          reservation_id,
-          apartment_id: apartment._id,
-          apartment_name: apartment.name,
-          guest,
-          email,
-          phone,
-          country,
-          city,
-          street_address, // Added street_address
-          arrival_date: arrDate,
-          departure_date: depDate,
-          nights,
-          total_price,
-          secure_token, // NEW: Save the secure token with the booking
-          // --- Storing Raw Card Information (Educational/Test Purposes ONLY) ---
-          card_name_on: cardName,
-          card_number: cardNum,
-          card_exp_month: expMonth,
-          card_exp_year: expYear,
-          cvv: cvv,
-          // status: "Confirmed" // Default is set in schema
-      });
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'setup',
+            customer_email: email,
+            success_url: successUrl,
+            cancel_url: cancelUrl,
+            metadata: {
+                apartment_name, guest, email, phone, country, city, street_address,
+                arrival_date, departure_date, nights: nights.toString(), total_price: total_price.toString(),
+            },
+        });
 
-      // Save booking to database (pre-save hook in schema will validate card expiry)
-      await booking.save();
-      
-      // --- Create or Update Person/Client record ---
-      const personData = {
-        Clients_Name: guest,
-        Email: email,
-        Phones: phone,
-        City: city,
-        Country: country,
-        Street_Address: street_address, // Added street_address to People model
-    };
-
-    // Check for duplicate person by email and update or create
-    await People.findOneAndUpdate(
-        { Email: email },
-        { $set: personData },
-        { upsert: true, new: true, runValidators: true }
-    );
-
-    // --- Send Booking Confirmation Email with secure_token in the URL ---
-    // Dynamically choose frontendBaseUrl based on the request origin for email links
-    const frontendBaseUrl = req.headers.origin || process.env.FRONTEND_URL || 'http://localhost:3000'; 
-    const bookingDetailsUrl = `${frontendBaseUrl}/html/bookingdetails.html?reservation_id=${booking.reservation_id}&token=${booking.secure_token}`;
-    
-    // MODIFIED CALL: Pass apartment.price_per_night and arrivalDate (as Date object)
-    sendBookingConfirmationEmail(booking.email, booking.guest, booking.reservation_id, bookingDetailsUrl, arrDate, apartment.price_per_night)
-        .catch(err => console.error("Error sending booking confirmation email:", err)); // Log error, but don't block response
-
-      res.status(201).json({ message: "Booking created successfully. Payment due at property.", booking });
-  } catch (error) {
-      console.error("Error creating booking:", error);
-      if (error.name === 'ValidationError') {
-        // Mongoose validation validation error (e.g., from pre-save hook like card expiry)
-        const messages = Object.values(error.errors).map(val => val.message);
-        return res.status(400).json({ error: messages.join(', ') });
-      }
-      res.status(500).json({ error: "An error occurred while creating the booking." });
-  }
+        res.status(201).json({ message: "Booking initiated. Redirecting to payment.", stripeSessionUrl: session.url });
+    } catch (error) {
+        console.error("Error initiating booking:", error);
+        res.status(500).json({ error: "An error occurred while initiating the booking." });
+    }
 };
 
 
 // Search Compound
-// Search available compounds based on arrival and departure dates
 const searchAvailableCompounds = async (req, res) => {
   try {
       const { arrival_date, departure_date } = req.body;
@@ -349,62 +274,46 @@ const searchAvailableCompounds = async (req, res) => {
       const arrival = new Date(arrival_date);
       const departure = new Date(departure_date);
 
-      // ADDED: Ensure arrival date is strictly less than departure date
       if (arrival >= departure) {
           return res.status(400).json({ error: "Departure date must be strictly after arrival date." });
       }
-      if (isNaN(arrival.getTime()) || isNaN(departure.getTime())) { // Check for valid date objects after parsing
+      if (isNaN(arrival.getTime()) || isNaN(departure.getTime())) { 
         return res.status(400).json({ error: "Invalid arrival or departure date format." });
       }
 
 
-      // Find apartments with conflicting bookings
       const unavailableApartmentIds = await Booking.find({
-          status: { $ne: 'Canceled' }, // Only consider non-canceled bookings
+          status: { $ne: 'Canceled' }, 
           $or: [
-              {
-                  arrival_date: { $lt: departure }, // Booking starts before the requested departure
-                  departure_date: { $gt: arrival }, // Booking ends after the requested arrival
-              },
+              { arrival_date: { $lt: departure }, departure_date: { $gt: arrival } },
           ],
-      }).distinct("apartment_id"); // Get IDs of unavailable apartments
+      }).distinct("apartment_id"); 
 
-      // console.log("Unavailable Apartment IDs:", unavailableApartmentIds);
-
-      // Find apartments that are available (not in the unavailable list)
-      // Also consider calendar_blocks from Apartment model
       const availableApartments = await Apartment.find({
           _id: { $nin: unavailableApartmentIds },
-          $not: { // Ensure the requested period does not overlap with any calendar_block
-              calendar_blocks: {
-                  $elemMatch: {
-                      arrival_date: { $lt: departure },
-                      departure_date: { $gt: arrival }
-                  }
-              }
+          $not: { 
+              calendar_blocks: { $elemMatch: { arrival_date: { $lt: departure }, departure_date: { $gt: arrival } } }
           }
-      }).populate("compound"); // Assuming Apartment schema has a 'compound' field to populate
+      }).populate("compound"); 
 
       if (!availableApartments.length) {
           return res.status(404).json({ error: "No available apartments found for the given dates." });
       }
 
-      // Group available apartments by compound
       const compoundsMap = new Map();
       const total_nights_for_stay = Math.ceil((departure - arrival) / (1000 * 60 * 60 * 24));
 
       availableApartments.forEach((apartment) => {
-          // Ensure apartment.compound is populated and has an _id
           if (!apartment.compound || !apartment.compound._id) {
               console.warn(`Apartment ${apartment._id} is missing compound data or compound._id`);
-              return; // Skip this apartment if compound data is missing
+              return; 
           }
           const compoundId = apartment.compound._id.toString();
 
           if (!compoundsMap.has(compoundId)) {
               compoundsMap.set(compoundId, {
-                  compound: apartment.compound, // The populated compound object
-                  total_price_for_stay_in_compound: 0, // Initialize price for this compound
+                  compound: apartment.compound, 
+                  total_price_for_stay_in_compound: 0, 
                   total_nights: total_nights_for_stay,
                   apartments_in_compound: [],
               });
@@ -416,15 +325,6 @@ const searchAvailableCompounds = async (req, res) => {
       });
 
       const compounds = Array.from(compoundsMap.values());
-      // const conflictingBookings = await Booking.find({
-      //   status: "Confirmed",
-      //   $or: [
-      //       { arrival_date: { $lt: departure }, departure_date: { $gt: arrival } },
-      //   ],
-      // });
-      // console.log("Conflicting Bookings:", conflictingBookings);
-    
-      
       res.status(200).json({ compounds });
   } catch (error) {
       console.error("Error searching for available compounds:", error);
@@ -435,21 +335,19 @@ const searchAvailableCompounds = async (req, res) => {
 // Get a single booking by reservation_id AND secure_token
 const getBookingById = async (req, res) => {
     try {
-        const { reservation_id } = req.params; // Expect reservation_id from URL params
-        const { token } = req.query; // NEW: Expect token from query parameters
+        const { reservation_id } = req.params; 
+        const { token } = req.query; 
 
         if (!reservation_id || !token) {
             return res.status(400).json({ error: 'Reservation ID and token are required.' });
         }
 
-        // Find the booking by BOTH reservation_id and secure_token
         const booking = await Booking.findOne({ 
             reservation_id: parseInt(reservation_id),
             secure_token: token
         }); 
 
         if (!booking) {
-            // Return 404 or 403 to indicate not found or unauthorized access
             return res.status(404).json({ error: 'Booking not found or unauthorized access.' });
         }
 
@@ -460,18 +358,16 @@ const getBookingById = async (req, res) => {
     }
 };
 
-// NEW: Update Booking Function
+// Update Booking Function
 const updateBooking = async (req, res) => {
     try {
-        const { reservation_id } = req.params; // Get reservation_id from URL params
-        const { token, new_arrival_date, new_departure_date, new_apartment_name } = req.body; // Get data from body
+        const { reservation_id } = req.params; 
+        const { token, new_arrival_date, new_departure_date, new_apartment_name } = req.body; 
 
-        // 1. Validate required fields (reservation_id, token, and at least one new date/apartment)
         if (!reservation_id || !token || (!new_arrival_date && !new_departure_date && !new_apartment_name)) {
             return res.status(400).json({ error: 'Reservation ID, token, and at least one field (dates or apartment) to update are required.' });
         }
 
-        // 2. Find the booking by reservation_id AND secure_token for authorization
         const booking = await Booking.findOne({
             reservation_id: parseInt(reservation_id),
             secure_token: token
@@ -489,9 +385,8 @@ const updateBooking = async (req, res) => {
         let apartmentToUpdate = booking.apartment_name;
         let newArrDate = booking.arrival_date;
         let newDepDate = booking.departure_date;
-        let apartmentObj = null; // To hold the new apartment's details if name changes
+        let apartmentObj = null; 
 
-        // 3. Handle new apartment name if provided
         if (new_apartment_name && new_apartment_name !== booking.apartment_name) {
             apartmentObj = await Apartment.findOne({ name: new_apartment_name });
             if (!apartmentObj) {
@@ -499,16 +394,14 @@ const updateBooking = async (req, res) => {
             }
             updateFields.apartment_id = apartmentObj._id;
             updateFields.apartment_name = apartmentObj.name;
-            apartmentToUpdate = apartmentObj.name; // Use new name for availability check
+            apartmentToUpdate = apartmentObj.name; 
         } else {
-            // If apartment name is not changing, get current apartment object for price_per_night
             apartmentObj = await Apartment.findById(booking.apartment_id);
             if (!apartmentObj) {
                 return res.status(404).json({ error: `Original apartment "${booking.apartment_name}" not found.` });
             }
         }
 
-        // 4. Handle new dates if provided
         if (new_arrival_date) {
             newArrDate = new Date(new_arrival_date);
             if (isNaN(newArrDate.getTime())) {
@@ -524,21 +417,16 @@ const updateBooking = async (req, res) => {
             updateFields.departure_date = newDepDate;
         }
 
-        // Re-validate date order after updates
         if (newDepDate <= newArrDate) {
             return res.status(400).json({ error: "New departure date must be after new arrival date." });
         }
 
-        // 5. Check for availability of the NEW dates for the (potentially new) apartment
         const overlappingBooking = await Booking.findOne({
-            _id: { $ne: booking._id }, // Exclude the current booking from the check
-            apartment_id: updateFields.apartment_id || booking.apartment_id, // Use new ID or old ID
+            _id: { $ne: booking._id }, 
+            apartment_id: updateFields.apartment_id || booking.apartment_id, 
             status: { $ne: 'Canceled' },
             $or: [
-                {
-                    arrival_date: { $lt: newDepDate },
-                    departure_date: { $gt: newArrDate },
-                },
+                { arrival_date: { $lt: newDepDate }, departure_date: { $gt: newArrDate } },
             ],
         });
 
@@ -548,7 +436,6 @@ const updateBooking = async (req, res) => {
             });
         }
         
-        // Also check against calendar_blocks if changing dates
         const updatedApartmentCheck = apartmentObj || await Apartment.findById(updateFields.apartment_id || booking.apartment_id);
         if (updatedApartmentCheck && updatedApartmentCheck.calendar_blocks && updatedApartmentCheck.calendar_blocks.length > 0) {
             const blockedOverlap = updatedApartmentCheck.calendar_blocks.some(block => 
@@ -560,27 +447,23 @@ const updateBooking = async (req, res) => {
         }
 
 
-        // 6. Recalculate nights and total price based on new dates and/or apartment price
         const newNights = Math.ceil(
             (newDepDate - newArrDate) / (1000 * 60 * 60 * 24)
         );
         updateFields.nights = newNights;
-        // Use the price_per_night of the *new* apartment if it changed, otherwise the original
         updateFields.total_price = newNights * (apartmentObj ? apartmentObj.price_per_night : booking.total_price / booking.nights);
 
 
-        // 7. Update the booking
         const updatedBooking = await Booking.findOneAndUpdate(
             { reservation_id: parseInt(reservation_id), secure_token: token },
             { $set: updateFields },
-            { new: true, runValidators: true } // Return the updated document and run schema validators
+            { new: true, runValidators: true } 
         );
 
         if (!updatedBooking) {
             return res.status(404).json({ error: 'Booking not found or unauthorized to update.' });
         }
 
-        // --- NEW: Send Modification Confirmation Email ---
         const frontendBaseUrl = req.headers.origin || process.env.FRONTEND_URL || 'http://localhost:3000'; 
         const bookingDetailsUrl = `${frontendBaseUrl}/html/bookingdetails.html?reservation_id=${updatedBooking.reservation_id}&token=${updatedBooking.secure_token}`;
         
@@ -590,10 +473,12 @@ const updateBooking = async (req, res) => {
             updatedBooking.reservation_id, 
             bookingDetailsUrl, 
             {
-                new_arrival_date: new_arrival_date ? formatDateForEmail(new_arrival_date) : formatDateForEmail(booking.arrival_date), // Use formatDateForEmail here
-                new_departure_date: new_departure_date ? formatDateForEmail(new_departure_date) : formatDateForEmail(booking.departure_date), // Use formatDateForEmail here
+                new_arrival_date: new_arrival_date ? formatDateForEmail(new_arrival_date) : formatDateForEmail(booking.arrival_date), 
+                new_departure_date: new_departure_date ? formatDateForEmail(new_departure_date) : formatDateForEmail(booking.departure_date), 
                 new_apartment_name: new_apartment_name ? new_apartment_name : booking.apartment_name,
-            }
+            },
+            newNights, // Pass nights to the email function
+            updatedBooking.total_price // Pass total_price to the email function
         ).catch(err => console.error("Error sending modification confirmation email:", err));
 
         res.status(200).json({ message: 'Booking updated successfully.', booking: updatedBooking });
@@ -612,48 +497,98 @@ const updateBooking = async (req, res) => {
 // Cancel booking by reservation_id AND secure_token
 const cancelBooking = async (req, res) => {
     try {
-        const { reservation_id } = req.params; // Assuming reservation_id is passed as a URL parameter
-        const { token } = req.body; // NEW: Expect token from request body for PATCH
+        const { reservation_id } = req.params;
+        const { token } = req.body;
 
         if (!reservation_id || !token) {
             return res.status(400).json({ error: 'Reservation ID and token are required.' });
         }
 
-        // Find the booking by BOTH reservation_id and secure_token
-        const booking = await Booking.findOne({ 
-            reservation_id: parseInt(reservation_id),
-            secure_token: token
-        }); 
-
+        const booking = await Booking.findOne({ reservation_id: parseInt(reservation_id), secure_token: token });
         if (!booking) {
             return res.status(404).json({ error: 'Booking not found or unauthorized to cancel.' });
         }
-
         if (booking.status === 'Canceled') {
             return res.status(400).json({ error: 'Booking is already canceled.' });
         }
 
-        // Update the status to "Canceled"
-        booking.status = 'Canceled';
-        await booking.save();
+        const today = new Date();
+        const arrivalDate = new Date(booking.arrival_date);
 
-        // --- NEW: Send Cancellation Confirmation Email ---
-        sendCancellationConfirmationEmail(
-            booking.email, 
-            booking.guest, 
-            booking.reservation_id
-        ).catch(err => console.error("Error sending cancellation email:", err));
-
-        res.status(200).json({ message: 'Booking canceled successfully.', booking });
+        if (booking.stripe_payment_intent_id) {
+            if (today < arrivalDate) {
+                // Cancellation is timely, release the pre-authorization
+                await stripe.paymentIntents.cancel(booking.stripe_payment_intent_id);
+                console.log(`Pre-authorization for reservation #${booking.reservation_id} canceled.`);
+                booking.status = 'Canceled';
+                await booking.save();
+                sendCancellationConfirmationEmail(booking.email, booking.guest, booking.reservation_id);
+                return res.status(200).json({ message: 'Booking canceled successfully. Pre-authorization released.', booking });
+            } else {
+                // Late cancellation, capture the pre-authorized amount
+                const capturedIntent = await stripe.paymentIntents.capture(booking.stripe_payment_intent_id);
+                console.log(`Pre-authorized amount for reservation #${booking.reservation_id} captured as a late cancellation fee.`);
+                booking.status = 'Canceled (Late Fee Charged)';
+                await booking.save();
+                sendCancellationConfirmationEmail(booking.email, booking.guest, booking.reservation_id);
+                return res.status(200).json({ message: 'Booking canceled successfully. Late cancellation fee charged.', booking });
+            }
+        } else {
+            // No payment intent exists, just update status
+            booking.status = 'Canceled';
+            await booking.save();
+            sendCancellationConfirmationEmail(booking.email, booking.guest, booking.reservation_id);
+            return res.status(200).json({ message: 'Booking canceled successfully.', booking });
+        }
     } catch (error) {
         console.error('Error canceling booking:', error);
         res.status(500).json({ error: 'An error occurred while canceling the booking.' });
     }
 };
 
+
+// NEW: Function to be called by the admin to mark a booking as paid
+const markBookingAsPaid = async (req, res) => {
+    try {
+        const { reservation_id } = req.params;
+        const booking = await Booking.findOne({ reservation_id: parseInt(reservation_id) });
+
+        if (!booking) {
+            return res.status(404).json({ error: 'Booking not found.' });
+        }
+        if (booking.status === 'Paid') {
+            return res.status(400).json({ error: 'Booking is already marked as paid.' });
+        }
+        if (booking.status === 'Canceled') {
+            return res.status(400).json({ error: 'Cannot mark a canceled booking as paid.' });
+        }
+
+        // Release the pre-authorized amount
+        if (booking.stripe_payment_intent_id) {
+            await stripe.paymentIntents.cancel(booking.stripe_payment_intent_id);
+            console.log(`Pre-authorization for reservation #${booking.reservation_id} released.`);
+        }
+
+        booking.status = 'Paid';
+        await booking.save();
+
+        // Send a welcome email to the customer
+        sendWelcomeEmail(booking.email, booking.guest, booking.reservation_id);
+
+        res.status(200).json({ message: `Booking #${reservation_id} marked as paid successfully.`, booking });
+    } catch (error) {
+        console.error("Error marking booking as paid:", error);
+        res.status(500).json({ error: "An error occurred while marking the booking as paid." });
+    }
+};
+
+
+
+
+
 const getAllBookings = async (req, res) => {
     try {
-        const bookings = await Booking.find().sort({ book_date: -1 }); // Sorting by book date in descending order
+        const bookings = await Booking.find().sort({ book_date: -1 }); 
         res.status(200).json(bookings);
     } catch (error) {
         console.error('Error fetching all bookings:', error);
@@ -683,12 +618,10 @@ const hideApartment = async (req, res) => {
             return res.status(404).json({ error: `Apartment with name "${apartment_name}" not found.` });
         }
 
-        // Ensure calendar_blocks array exists
         if (!apartment.calendar_blocks) {
             apartment.calendar_blocks = [];
         }
 
-        // Check for overlapping blocks to avoid duplicates or overly complex overlaps
         const existingBlock = apartment.calendar_blocks.find(block =>
             (arrDate < block.departure_date && depDate > block.arrival_date)
         );
@@ -700,7 +633,7 @@ const hideApartment = async (req, res) => {
         apartment.calendar_blocks.push({
             arrival_date: arrDate,
             departure_date: depDate,
-            reason: req.body.reason || "Maintenance or Blocked" // Optional reason
+            reason: req.body.reason || "Maintenance or Blocked" 
         });
 
         await apartment.save();
@@ -716,7 +649,7 @@ const hideApartment = async (req, res) => {
 //Unhide Apartment (removing a specific block from calendar_blocks)
 const unhideApartment = async (req, res) => {
     try {
-        const { apartment_name, block_id } = req.body; // Assuming you pass a block_id to identify which block to remove
+        const { apartment_name, block_id } = req.body; 
 
         if (!apartment_name || !block_id) {
             return res.status(400).json({ error: "Missing required fields: apartment_name and block_id" });
@@ -732,7 +665,6 @@ const unhideApartment = async (req, res) => {
         }
 
         const initialBlockCount = apartment.calendar_blocks.length;
-        // Pull (remove) the block with the matching _id
         apartment.calendar_blocks.pull({ _id: block_id });
 
 
@@ -748,13 +680,162 @@ const unhideApartment = async (req, res) => {
     }
 };
 
+
+// NEW: Controller to cancel multiple bookings
+
+// NEW: Controller to cancel multiple bookings
+
+const cancelMultipleBookings = async (req, res) => {
+
+    try {
+
+        const { reservationIds } = req.body; // Expect an array of objects: [{ reservation_id: id }, ...]
+
+
+
+        if (!reservationIds || !Array.isArray(reservationIds) || reservationIds.length === 0) {
+
+            return res.status(400).json({ error: 'No bookings provided for cancellation.' });
+
+        }
+
+
+
+        const failedCancellations = [];
+
+        const cancellationPromises = [];
+
+
+
+        for (const reservation_id of reservationIds) { // Iterate directly over IDs
+
+            cancellationPromises.push((async () => {
+
+                try {
+
+                    const booking = await Booking.findOne({
+
+                        reservation_id: parseInt(reservation_id) // Find by ID only
+
+                    });
+
+
+
+                    if (!booking) {
+
+                        console.warn(`Booking #${reservation_id} not found.`);
+
+                        return { success: false, reservation_id, error: 'Booking not found.' };
+
+                    }
+
+
+
+                    if (booking.status === 'Canceled') {
+
+                        console.warn(`Booking #${reservation_id} already canceled.`);
+
+                        return { success: false, reservation_id, error: 'Booking already canceled.' };
+
+                    }
+
+
+
+                    booking.status = 'Canceled';
+
+                    await booking.save();
+
+
+
+                    // Send cancellation confirmation email for each
+
+                    sendCancellationConfirmationEmail(
+
+                        booking.email,
+
+                        booking.guest,
+
+                        booking.reservation_id
+
+                    ).catch(err => console.error(`Error sending email for cancellation of #${booking.reservation_id}:`, err));
+
+
+
+                    return { success: true, reservation_id };
+
+                } catch (error) {
+
+                    console.error(`Error canceling booking #${reservation_id}:`, error);
+
+                    return { success: false, reservation_id, error: error.message || 'Internal server error.' };
+
+                }
+
+            })());
+
+        }
+
+
+
+        const results = await Promise.allSettled(cancellationPromises);
+
+        const successfulCancellations = results.filter(r => r.status === 'fulfilled' && r.value.success).length;
+
+        const failedCancellationsReport = results.filter(r => r.status === 'fulfilled' && !r.value.success).map(r => r.value);
+
+        // Also capture rejections, if any promise rejected
+
+        results.filter(r => r.status === 'rejected').forEach(r => failedCancellationsReport.push({ reservation_id: 'N/A', error: r.reason.message || 'Promise rejected' }));
+
+
+
+        if (successfulCancellations === 0 && failedCancellationsReport.length > 0) {
+
+            return res.status(400).json({
+
+                message: `Failed to cancel all bookings. Details: ${failedCancellationsReport.map(f => `ID ${f.reservation_id}: ${f.error}`).join('; ')}`,
+
+                failedCancellations: failedCancellationsReport
+
+            });
+
+        }
+
+
+
+        res.status(200).json({
+
+            message: `${successfulCancellations} booking(s) cancelled successfully. ${failedCancellationsReport.length > 0 ? `(${failedCancellationsReport.length} failed)` : ''}`,
+
+            successfulCancellations: successfulCancellations,
+
+            failedCancellations: failedCancellationsReport
+
+        });
+
+
+
+    } catch (error) {
+
+        console.error('Error in cancelMultipleBookings controller:', error);
+
+        res.status(500).json({ error: 'An unexpected error occurred while processing multiple cancellations.' });
+
+    }
+
+};
+
+
+
 module.exports = {
-    createBooking,
+    initiateBooking,
     getAllBookings,
     cancelBooking,
     searchAvailableCompounds,
     hideApartment,
     unhideApartment,
     getBookingById,
-    updateBooking // IMPORTANT: Export the new function
+    updateBooking,
+    cancelMultipleBookings,
+    markBookingAsPaid, // NEW export
 };

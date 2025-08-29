@@ -71,20 +71,20 @@ const getAvailableCompounds = async (req, res) => {
     const arrivalDate = new Date(arrival_date);
     const departureDate = new Date(departure_date);
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Normalize today to midnight for comparison
+    today.setHours(0, 0, 0, 0);
 
-    // Date Validation:
+    // Date validation
     if (isNaN(arrivalDate.getTime()) || isNaN(departureDate.getTime())) {
-        return res.status(400).json({ error: "Invalid arrival or departure date format." });
+      return res.status(400).json({ error: 'Invalid arrival or departure date format.' });
     }
-    if (arrivalDate < today) { // NEW: Arrival date cannot be in the past
-        return res.status(400).json({ error: "Arrival date cannot be in the past." });
+    if (arrivalDate < today) {
+      return res.status(400).json({ error: 'Arrival date cannot be in the past.' });
     }
-    if (arrivalDate >= departureDate) { // Departure must be strictly after arrival
-        return res.status(400).json({ error: "Departure date must be strictly after arrival date." });
+    if (arrivalDate >= departureDate) {
+      return res.status(400).json({ error: 'Departure date must be strictly after arrival date.' });
     }
 
-    // Step 1: Find booked apartments
+    // Step 1: Find booked apartment IDs
     const bookedApartmentIds = await Booking.find({
       status: 'Confirmed',
       $and: [
@@ -93,70 +93,79 @@ const getAvailableCompounds = async (req, res) => {
       ],
     }).distinct('apartment_id');
 
-    // Step 2: Find available apartments and their compounds
-    const availableApartments = await Apartment.find({
-      _id: { $nin: bookedApartmentIds },
-    }).populate('compound');
-
-    if (!availableApartments.length) {
-      return res.status(200).json({ compounds: [] });
-    }
-
-    // Determine the base URL for images from your backend's perspective
-    // This should match how your Node.js server serves the /uploads directory.
-    const IMAGE_SERVE_BASE_URL = process.env.BASE_URL || `http://localhost:${process.env.PORT || 8080}`;
-
-
-    const compoundsMap = new Map();
-
-    for (const apartment of availableApartments) {
-      const compound = apartment.compound;
-      if (!compound) { // Skip if compound population failed for some reason
-        console.warn(`Apartment ${apartment._id} has no associated compound.`);
-        continue;
-      }
-      const compoundId = compound._id.toString();
-
-      if (!compoundsMap.has(compoundId)) {
-        // Construct the full absolute URL for compound image
-        let compoundImageUrl = null;
-        if (compound.image) {
-            if (compound.image.startsWith('http://') || compound.image.startsWith('https://')) {
-                compoundImageUrl = compound.image; // Already an absolute URL (e.g., from Cloudinary)
-            } else {
-                // Assume it's a relative path (e.g., /uploads/compounds/image.jpg) and prepend BASE_URL
-                const imagePath = compound.image.startsWith('/') ? compound.image : `/${compound.image}`;
-                compoundImageUrl = `${IMAGE_SERVE_BASE_URL}${imagePath}`;
-            }
-        }
-        
-        compoundsMap.set(compoundId, {
-          compound: {
-            _id: compound._id,
-            name: compound.name,
-            location: compound.location,
-            price_per_night: compound.price_per_night,
-            image: compoundImageUrl, // Use the correctly formatted URL
-            compound_id: compound.compound_id,
+    // Step 2: Use MongoDB Aggregation to find and group available apartments
+    const compounds = await Apartment.aggregate([
+      // Filter out booked apartments
+      {
+        $match: {
+          _id: { $nin: bookedApartmentIds },
+        },
+      },
+      // Join with the 'compounds' collection
+      {
+        $lookup: {
+          from: 'compounds', // The collection name in your DB
+          localField: 'compound', // Field on the Apartment schema (ObjectId)
+          foreignField: '_id', // Field on the Compound schema
+          as: 'compoundDetails',
+        },
+      },
+      // The lookup returns an array, so we must destructure it
+      {
+        $unwind: '$compoundDetails',
+      },
+      // Group by compound and add apartments to an array
+      {
+        $group: {
+          _id: '$compoundDetails._id',
+          compound: { $first: '$compoundDetails' },
+          apartments: {
+            $push: {
+              _id: '$_id',
+              apartment_id: '$apartment_id',
+              name: '$name',
+              price_per_night: '$price_per_night',
+              rooms: '$rooms',
+              bathrooms: '$bathrooms',
+              image: '$image',
+            },
           },
-          apartments: [],
-        });
-      }
+        },
+      },
+      // Project to the final desired format
+      {
+        $project: {
+          _id: 0,
+          compound: {
+            _id: '$compound._id',
+            name: '$compound.name',
+            location: '$compound.location',
+            price_per_night: '$compound.price_per_night',
+            image: '$compound.image',
+            compound_id: '$compound.compound_id',
+          },
+          apartments: '$apartments',
+        },
+      },
+    ]);
 
-      // Add apartment details
-      compoundsMap.get(compoundId).apartments.push({
-        _id: apartment._id,
-        apartment_id: apartment.apartment_id,
-        name: apartment.name,
-        price_per_night: apartment.price_per_night,
-        rooms: apartment.rooms,
-        bathrooms: apartment.bathrooms,
-        image: apartment.image, // Apartment image URL is likely already absolute/correct from DB
-      });
-    }
+    // Handle image URLs (This is the only remaining manual step)
+    const BASE_URL = process.env.BASE_URL || `http://localhost:${process.env.PORT || 8080}`;
+    const formattedCompounds = compounds.map(c => {
+        let compoundImageUrl = null;
+        if (c.compound.image) {
+            compoundImageUrl =
+              c.compound.image.startsWith('http://') || c.compound.image.startsWith('https://')
+                ? c.compound.image
+                : `${BASE_URL}${c.compound.image.startsWith('/') ? c.compound.image : '/' + c.compound.image}`;
+        }
+        return {
+            ...c,
+            compound: { ...c.compound, image: compoundImageUrl }
+        };
+    });
 
-    const updatedCompounds = Array.from(compoundsMap.values());
-    res.status(200).json({ compounds: updatedCompounds });
+    res.status(200).json({ compounds: formattedCompounds });
   } catch (error) {
     console.error('Error fetching available compounds:', error);
     res

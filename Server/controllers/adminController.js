@@ -127,23 +127,15 @@ const loginAdmin = async (req, res) => {
 
     await sendVerificationEmail(normalizedEmail, verificationCode);
 
-    // Set the JWT as an HTTP-only cookie
-    // IMPORTANT: Make sure your JWT_SECRET is set in .env
     const token = jwt.sign(
       { adminId: admin._id, email: admin.email },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" } // Token expires in 1 hour
+      { expiresIn: "1d" } // 1-day expiration
     );
-
-    res.cookie('jwt_admin', token, { 
-      httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
-      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production (HTTPS)
-      maxAge: 3600000, // 1 hour (in milliseconds)
-      sameSite: 'Lax' // CSRF protection, adjust as needed (Strict, Lax, None)
-    });
 
     res.status(200).json({
       message: "Login successful. Verification code sent.",
+      token,
       verificationCodeSent: true,
     });
   } catch (error) {
@@ -167,74 +159,52 @@ const verifyCode = (req, res) => {
     return res.status(400).json({ error: "Invalid or expired verification code." });
   }
 
-  // If verification is successful, the jwt_admin cookie from loginAdmin remains valid.
   res.status(200).json({ message: "Verification successful!" });
 };
 
-// Middleware to verify JWT (for API routes only, as it returns JSON errors)
+// Middleware to verify JWT
 const authenticateJWT = (req, res, next) => {
   try {
-    // Prefer cookie token, fallback to Authorization header for API calls
-    const token = req.cookies.jwt_admin || (req.headers.authorization ? req.headers.authorization.split(" ")[1] : null);
+    // Extract the Authorization header
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
-      console.warn("API Auth: Authorization token required (missing from cookie or header).");
+    // Check if the Authorization header is present
+    if (!authHeader) {
+      console.warn("Authorization header missing.");
       return res.status(401).json({ error: "Authorization token required." });
     }
 
+    // Extract the token from the "Bearer <token>" format
+    const token = authHeader.split(" ")[1];
+    if (!token) {
+      console.warn("Token missing from Authorization header.");
+      return res.status(401).json({ error: "Invalid Authorization format." });
+    }
+
+    // Verify the token
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) {
-        console.warn(`API Auth: Token error: ${err.name} - ${err.message}`);
         if (err.name === "TokenExpiredError") {
+          console.warn("Token has expired:", err.message);
           return res.status(403).json({ error: "Token expired. Please log in again." });
-        } else {
+        } else if (err.name === "JsonWebTokenError") {
+          console.warn("Invalid token:", err.message);
           return res.status(403).json({ error: "Invalid token. Please log in again." });
         }
+        console.error("JWT verification error:", err.message);
+        return res.status(403).json({ error: "Authentication failed." });
       }
-      req.user = user; // Attach user information to the request object
-      next(); // Proceed to the API route handler
+
+      // Attach user information to the request object
+      req.user = user;
+
+      // Proceed to the next middleware/route handler
+      next();
     });
   } catch (error) {
-    console.error("Unexpected error during API authentication:", error);
-    return res.status(500).json({ error: "Internal server error during authentication." });
+    console.error("Unexpected error during authentication:", error);
+    return res.status(500).json({ error: "Internal server error." });
   }
-};
-
-
-// NEW MIDDLEWARE: For protecting HTML pages (redirects to login if not authenticated)
-const requireAuthForAdminPages = (req, res, next) => {
-    try {
-        const token = req.cookies.jwt_admin; // Get token from HTTP-only cookie
-
-        if (!token) {
-            console.warn("HTML Page Auth: No JWT token found. Redirecting to admin login.");
-            // Redirect to admin login page if no token
-            return res.redirect('/html/admin.html'); // Use the actual path to your admin login page
-        }
-
-        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-            if (err) {
-                console.warn(`HTML Page Auth: Token invalid or expired (${err.name}). Clearing cookie and redirecting.`);
-                // Clear expired/invalid cookie and redirect
-                res.clearCookie('jwt_admin', { 
-                  httpOnly: true,
-                  secure: process.env.NODE_ENV === 'production',
-                  sameSite: 'Lax'
-                });
-                return res.redirect('/html/admin.html'); // Use the actual path to your admin login page
-            }
-            req.user = user; // Attach user info
-            next(); // Allow access to the page
-        });
-    } catch (error) {
-        console.error("Unexpected error during HTML page authentication:", error);
-        res.clearCookie('jwt_admin', { // Clear cookie on unexpected error
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'Lax'
-        });
-        return res.redirect('/html/admin.html'); // Redirect on internal error
-    }
 };
 
 
@@ -258,13 +228,6 @@ const getProfile = async (req, res) => {
 
 // Logout Admin
 const logoutAdmin = (req, res) => {
-  // Clear the HTTP-only JWT cookie
-  res.clearCookie('jwt_admin', { 
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 0, // Set maxAge to 0 to immediately expire the cookie
-    sameSite: 'Lax'
-  });
   res.status(200).json({ message: "Logged out successfully!" });
 };
 
@@ -275,5 +238,4 @@ module.exports = {
   getProfile,
   logoutAdmin,
   authenticateJWT,
-  requireAuthForAdminPages, // Export the new middleware
 };
