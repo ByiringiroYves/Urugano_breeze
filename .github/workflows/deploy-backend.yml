@@ -7,54 +7,43 @@ on:
       - main # Trigger on pushes to the 'main' branch
 
 env:
-  PROJECT_ID: gogo-445911
+  PROJECT_ID: gogo-445911 # Your GCP project ID - **Make sure this is correct for your project**
   SERVICE_NAME: backend-service
   REGION: us-central1
-  WORKDIR: ./Server # backend code
+  WORKDIR: ./Server # Your backend code is located in the 'Server' subdirectory
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: "read"
-      id-token: "write" # Required for Workload Identity Federation (preferred)
+      id-token: "write" # Required for Workload Identity Federation (preferred for secure authentication)
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Action to clone your repository's code
 
       # Authenticate to Google Cloud using the service account key stored in GitHub Secrets
       - name: Google Cloud Authentication
         id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
-          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+          credentials_json: "${{ secrets.GCP_SA_KEY }}" # Securely retrieve your GCP Service Account Key
 
-      # Set up gcloud CLI
+      # Set up gcloud CLI, which includes commands for Cloud Run
       - name: Set up gcloud SDK
         uses: "google-github-actions/setup-gcloud@v2"
 
-      # Deploy to Cloud Run from the 'Server' directory
+      # Deploy the backend service to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
-            --source ${{ env.WORKDIR }} \
+            --source ${{ env.WORKDIR }} \ # Specifies the source directory for the build
             --platform managed \
             --region ${{ env.REGION }} \
-            --allow-unauthenticated \
+            --allow-unauthenticated \ # Allows public access to your Cloud Run service
             --project ${{ env.PROJECT_ID }} \
-            --set-env-vars \
-              MONGO_URI="${{ secrets.MONGO_URI }}", \
-              EMAIL_USER="${{ secrets.EMAIL_USER }}", \
-              EMAIL_PASSWORD="${{ secrets.EMAIL_PASSWORD }}", \
-              SESSION_SECRET="${{ secrets.SESSION_SECRET }}", \
-              JWT_SECRET="${{ secrets.JWT_SECRET }}", \
-              BASE_URL="${{ secrets.BASE_URL }}", \
-              FRONTEND_URL="${{ secrets.FRONTEND_URL }}", \
-              FRONTEND_WWW="${{ secrets.FRONTEND_WWW }}", \
-              STRIPE_SECRET_KEY="${{ secrets.STRIPE_SECRET_KEY }}", \
-              STRIPE_WEBHOOK_SECRET="${{ secrets.STRIPE_WEBHOOK_SECRET }}", \
-              MAILGUN_API_KEY="${{ secrets.MAILGUN_API_KEY }}", \
-              MAILGUN_DOMAIN="${{ secrets.MAILGUN_DOMAIN }}", \
-              MAILGUN_API_BASE_URL="${{ secrets.MAILGUN_API_BASE_URL }}", \
-              EMAIL_FROM_ADDRESS="${{ secrets.EMAIL_FROM_ADDRESS }}"
+            --set-env-vars="MONGO_URI=${{ secrets.MONGO_URI }},
+            EMAIL_USER=${{ secrets.EMAIL_USER }},
+            EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }},
+            SESSION_SECRET=${{ secrets.SESSION_SECRET }},JWT_SECRET=${{ secrets.JWT_SECRET }},BASE_URL=${{ secrets.BASE_URL }},FRONTEND_URL=${{ secrets.FRONTEND_URL }},FRONTEND_WWW=${{ secrets.FRONTEND_WWW }},STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }},STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }},MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }},MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }},MAILGUN_API_BASE_URL=${{ secrets.MAILGUN_API_BASE_URL }},EMAIL_FROM_ADDRESS=${{ secrets.EMAIL_FROM_ADDRESS }}"
